@@ -168,55 +168,75 @@ export default function QuoteForm() {
       setPcStatus('valid');
 
       const { latitude, longitude, admin_district } = pcData.result;
+      const pc = pcData.result.postcode; // normalised e.g. "NW10 1PX"
 
-      /* Step 2 — fetch addresses from OpenStreetMap Overpass API (free, no key) */
-      const query = `[out:json][timeout:10];
-(node["addr:housenumber"](around:130,${latitude},${longitude});
- way["addr:housenumber"](around:130,${latitude},${longitude}););
+      /* Step 2 — fetch addresses from OpenStreetMap Overpass API (free, no key)
+         Strategy A: search by exact postcode tag (most accurate)
+         Strategy B: fallback proximity search within 300m              */
+      const queryA = `[out:json][timeout:15];
+(node["addr:postcode"="${pc}"]["addr:housenumber"];
+ way["addr:postcode"="${pc}"]["addr:housenumber"];);
 out body;`;
 
-      const ovRes  = await fetch('https://overpass-api.de/api/interpreter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `data=${encodeURIComponent(query)}`,
-      });
-      const ovData = await ovRes.json();
+      const queryB = `[out:json][timeout:15];
+(node["addr:housenumber"](around:300,${latitude},${longitude});
+ way["addr:housenumber"](around:300,${latitude},${longitude}););
+out body;`;
 
-      if (ovData.elements?.length > 0) {
+      const runQuery = async (q) => {
+        const r = await fetch('https://overpass-api.de/api/interpreter', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `data=${encodeURIComponent(q)}`,
+        });
+        return r.json();
+      };
+
+      let ovData = await runQuery(queryA);
+
+      /* fallback to proximity if postcode-tag search returns nothing */
+      if (!ovData.elements?.length) {
+        ovData = await runQuery(queryB);
+      }
+
+      const formatElements = (elements) => {
         const seen = new Set();
-        const list = ovData.elements
+        return elements
           .map(el => {
             const t      = el.tags || {};
             const num    = t['addr:housenumber'] || '';
             const street = t['addr:street']      || '';
             const name   = t['addr:housename']   || '';
             const flat   = t['addr:unit']        || t['addr:flats'] || '';
-            if (!street) return null;
-            const line = flat   ? `Flat ${flat}, ${num} ${street}`
-                        : name  ? `${name}, ${num ? num + ' ' : ''}${street}`
-                        : num   ? `${num} ${street}`
-                        : street;
-            return `${line}, ${admin_district}, ${form.postcode.toUpperCase()}`;
+            if (!street && !name) return null;
+            const line = flat  ? `Flat ${flat}, ${num} ${street}`
+                       : name  ? `${name}${num ? ', ' + num : ''}${street ? ' ' + street : ''}`
+                       : num   ? `${num} ${street}`
+                       : street;
+            return `${line}, ${admin_district}, ${pc}`;
           })
           .filter(a => {
-            if (!a) return false;
+            if (!a || !a.trim()) return false;
             if (seen.has(a)) return false;
             seen.add(a); return true;
           })
           .sort((a, b) => {
-            const na = parseInt(a.match(/^\d+/)?.[0] || '0');
-            const nb = parseInt(b.match(/^\d+/)?.[0] || '0');
-            return na - nb || a.localeCompare(b);
+            const na = parseInt(a.match(/^\d+/)?.[0] ?? '0');
+            const nb = parseInt(b.match(/^\d+/)?.[0] ?? '0');
+            return na !== nb ? na - nb : a.localeCompare(b);
           });
+      };
 
+      if (ovData.elements?.length > 0) {
+        const list = formatElements(ovData.elements);
         if (list.length > 0) {
           setAddrList(list);
           setShowDropdown(true);
         } else {
-          setAddrError('No addresses found for this postcode. Please type your address below.');
+          setAddrError('Addresses found but could not be formatted. Please type your address below.');
         }
       } else {
-        setAddrError('No addresses found for this postcode. Please type your address below.');
+        setAddrError('No addresses found in our map data for this postcode. Please type your address below.');
       }
     } catch {
       setAddrError('Address lookup failed. Please type your address below.');
@@ -378,7 +398,7 @@ out body;`;
               </div>
               {pcStatus === 'valid' && pcInfo && (
                 <p className="text-xs text-green-600 mt-1.5 font-medium">
-                  ✓ {pcInfo.ward}, {pcInfo.admin_district} — we cover this area!
+                  ✓ {[pcInfo.ward, pcInfo.admin_district].filter(Boolean).join(', ')} — we cover this area!
                 </p>
               )}
               {pcStatus === 'invalid' && (
