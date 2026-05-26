@@ -168,36 +168,47 @@ export default function QuoteForm() {
       setPcStatus('valid');
 
       const { latitude, longitude, admin_district } = pcData.result;
-      const pc = pcData.result.postcode; // normalised e.g. "NW10 1PX"
+      const pc = pcData.result.postcode; // normalised e.g. "DA16 2HJ"
 
-      /* Step 2 — fetch addresses from OpenStreetMap Overpass API (free, no key)
-         Strategy A: search by exact postcode tag (most accurate)
-         Strategy B: fallback proximity search within 300m              */
-      const queryA = `[out:json][timeout:15];
+      /* Step 2 — OpenStreetMap Overpass API (free, no key)
+         - runQuery returns { elements: [] } on any error — never throws
+         - tries primary server, then backup server
+         - Strategy A: exact postcode tag match
+         - Strategy B: proximity 500m (catches areas with less OSM tagging) */
+
+      const OVERPASS_SERVERS = [
+        'https://overpass-api.de/api/interpreter',
+        'https://overpass.kumi.systems/api/interpreter',
+      ];
+
+      const runQuery = async (q) => {
+        for (const server of OVERPASS_SERVERS) {
+          try {
+            const r = await fetch(server, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: `data=${encodeURIComponent(q)}`,
+            });
+            if (!r.ok) continue;
+            const d = await r.json();
+            if (d.elements) return d;
+          } catch { /* try next server */ }
+        }
+        return { elements: [] };
+      };
+
+      const queryA = `[out:json][timeout:20];
 (node["addr:postcode"="${pc}"]["addr:housenumber"];
  way["addr:postcode"="${pc}"]["addr:housenumber"];);
 out body;`;
 
-      const queryB = `[out:json][timeout:15];
-(node["addr:housenumber"](around:300,${latitude},${longitude});
- way["addr:housenumber"](around:300,${latitude},${longitude}););
+      const queryB = `[out:json][timeout:20];
+(node["addr:housenumber"](around:500,${latitude},${longitude});
+ way["addr:housenumber"](around:500,${latitude},${longitude}););
 out body;`;
 
-      const runQuery = async (q) => {
-        const r = await fetch('https://overpass-api.de/api/interpreter', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: `data=${encodeURIComponent(q)}`,
-        });
-        return r.json();
-      };
-
       let ovData = await runQuery(queryA);
-
-      /* fallback to proximity if postcode-tag search returns nothing */
-      if (!ovData.elements?.length) {
-        ovData = await runQuery(queryB);
-      }
+      if (!ovData.elements?.length) ovData = await runQuery(queryB);
 
       const formatElements = (elements) => {
         const seen = new Set();
@@ -216,7 +227,7 @@ out body;`;
             return `${line}, ${admin_district}, ${pc}`;
           })
           .filter(a => {
-            if (!a || !a.trim()) return false;
+            if (!a?.trim()) return false;
             if (seen.has(a)) return false;
             seen.add(a); return true;
           })
@@ -233,10 +244,10 @@ out body;`;
           setAddrList(list);
           setShowDropdown(true);
         } else {
-          setAddrError('Addresses found but could not be formatted. Please type your address below.');
+          setAddrError('Could not format addresses. Please type your address below.');
         }
       } else {
-        setAddrError('No addresses found in our map data for this postcode. Please type your address below.');
+        setAddrError('No map data found for this postcode. Please type your address below.');
       }
     } catch {
       setAddrError('Address lookup failed. Please type your address below.');
