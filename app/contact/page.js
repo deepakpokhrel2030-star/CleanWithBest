@@ -36,11 +36,11 @@ export default function ContactPage() {
               <h2 className="section-title mb-6">Reach Us Any Way You Like</h2>
               <div className="space-y-5 mb-10">
                 {[
-                  { icon: Phone, title: 'Call Us', detail: '+44 7789 602945', sub: 'Monday to Friday, 8am – 6pm', href: 'tel:+447789602945' },
+                  { icon: Phone, title: 'Call Us', detail: '+44 7789 602945', sub: 'Available 24/7', href: 'tel:+447789602945' },
                   { icon: Mail, title: 'Email Us', detail: 'cleanwithbest@gmail.com', sub: 'We respond within 2 hours', href: 'mailto:cleanwithbest@gmail.com' },
-                  { icon: MessageCircle, title: 'Live Chat', detail: 'Chat with us online', sub: 'Available during business hours', href: '#' },
+                  { icon: MessageCircle, title: 'Live Chat', detail: 'Chat with us online', sub: 'Available 24/7', href: '#' },
                   { icon: MapPin, title: 'Our Office', detail: '12 Bishopsgate', sub: 'London EC2N 4BQ', href: '#' },
-                  { icon: Clock, title: 'Opening Hours', detail: 'Monday to Friday', sub: '8:00am – 6:00pm', href: null },
+                  { icon: Clock, title: 'Availability', detail: 'Available 24/7', sub: 'We never close', href: null },
                 ].map(({ icon: Icon, title, detail, sub, href }) => (
                   <div key={title} className="flex items-start gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100">
                     <div className="w-10 h-10 bg-brand-100 rounded-xl flex items-center justify-center shrink-0">

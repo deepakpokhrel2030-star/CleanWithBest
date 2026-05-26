@@ -42,7 +42,7 @@ export default function Footer() {
             <div className="space-y-2 mb-6 text-sm">
               <div className="flex items-center gap-2"><Phone size={14} className="text-brand-400" /><a href="tel:+447789602945" className="hover:text-white transition-colors">+44 7789 602945</a></div>
               <div className="flex items-center gap-2"><Mail size={14} className="text-brand-400" /><a href="mailto:cleanwithbest@gmail.com" className="hover:text-white transition-colors">cleanwithbest@gmail.com</a></div>
-              <div className="flex items-center gap-2"><Clock size={14} className="text-brand-400" /><span>Monday to Friday, 8am – 6pm</span></div>
+              <div className="flex items-center gap-2"><Clock size={14} className="text-brand-400" /><span>Available 24/7</span></div>
               <div className="flex items-center gap-2"><MapPin size={14} className="text-brand-400" /><span>12 Bishopsgate, London EC2N 4BQ</span></div>
             </div>
             <div className="flex gap-3">

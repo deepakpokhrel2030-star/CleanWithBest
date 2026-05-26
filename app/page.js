@@ -564,7 +564,7 @@ export default function HomePage() {
               <Phone size={18} /> +44 7789 602945
             </a>
           </div>
-          <p className="text-white/40 text-sm">Mon–Fri 8am–6pm · cleanwithbest@gmail.com</p>
+          <p className="text-white/40 text-sm">Available 24/7 · cleanwithbest@gmail.com</p>
         </div>
       </section>
 

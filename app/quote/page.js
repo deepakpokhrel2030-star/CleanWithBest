@@ -62,7 +62,7 @@ export default function QuotePage() {
                 <a href="tel:+447789602945" className="flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
                   <Phone size={18} /> +44 7789 602945
                 </a>
-                <p className="text-white/50 text-xs mt-2">Mon–Fri: 8am–6pm</p>
+                <p className="text-white/50 text-xs mt-2">Available 24/7</p>
               </div>
 
               {/* Process */}

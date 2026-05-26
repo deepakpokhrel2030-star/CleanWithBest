@@ -106,7 +106,7 @@ export default function Header() {
             </a>
           </div>
           <div className="flex items-center gap-4 text-slate-400">
-            <span>Mon–Fri 8am–6pm</span>
+            <span>Available 24/7</span>
           </div>
         </div>
       </div>
