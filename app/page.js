@@ -1,14 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import TestimonialCarousel from '@/components/TestimonialCarousel';
 import {
   Phone, ArrowRight, CheckCircle, Shield, Star, Clock, Leaf,
-  Award, Users, ThumbsUp, Quote
+  Award, Users, ThumbsUp
 } from 'lucide-react';
 
 export const metadata = {
   title: 'CleanWithBest – Professional Cleaning Services',
-  description: 'Top-rated domestic and commercial cleaning services. 4.9★ rated, fully insured, satisfaction guaranteed. From £15/hr.',
+  description: 'Professional domestic and commercial cleaning services across London. Fully insured, satisfaction guaranteed. From £15/hr.',
 };
 
 /* ─────────────────── DATA ─────────────────── */
@@ -96,13 +95,6 @@ const guarantees = [
   { icon: Users, title: 'Background Checked', desc: 'All staff are fully vetted, referenced and personally interviewed.' },
 ];
 
-const bizTestimonials = [
-  { name: 'Michael Barnes', role: 'Director', company: 'Apex Accountants', text: 'CleanWithBest has transformed our workspace. Employees are more productive and clients always comment on how clean the office looks.' },
-  { name: 'Lisa Chen', role: 'CEO', company: 'Nova Creative Agency', text: 'Reliable, professional, and thorough. We\'ve tried several companies and none come close. Our meeting rooms always look immaculate.' },
-  { name: 'James O\'Brien', role: 'Property Manager', company: 'Keystone Lettings', text: 'Switched to CleanWithBest eight months ago. The difference is night and day. Consistent quality and excellent communication every time.' },
-  { name: 'Sophie Williams', role: 'Operations Manager', company: 'FitLife Gym', text: 'Our members notice and love it. The team are discreet, always on time and leave the gym in perfect condition every single morning.' },
-];
-
 const areaZones = [
   {
     zone: 'Zone 1 — Central London',
@@ -151,11 +143,8 @@ export default function HomePage() {
         <div className="relative max-w-5xl mx-auto px-4 pt-10 pb-16 z-10 w-full text-center">
           {/* Badges */}
           <div className="flex flex-wrap justify-center gap-2 mb-8">
-            <span className="inline-flex items-center gap-1.5 bg-amber-400/15 border border-amber-400/30 text-amber-300 text-xs font-bold px-3 py-1.5 rounded-full">
-              ⭐⭐⭐⭐⭐ Rated 4.9/5 on Google
-            </span>
             <span className="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full">
-              ✓ 1,200+ Verified Reviews
+              ✓ 100% Satisfaction Guaranteed
             </span>
             <span className="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full">
               📍 Serving All London
@@ -173,7 +162,7 @@ export default function HomePage() {
 
           {/* Trust bullets */}
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 mb-12">
-            {['£10M public liability insurance', 'Award-winning cleaning service', '100% background checked staff', 'Top 5% of cleaners — rigorously vetted'].map(item => (
+            {['£10M public liability insurance', 'Eco-friendly cleaning products', '100% background checked staff', 'Top 5% of cleaners — rigorously vetted'].map(item => (
               <span key={item} className="flex items-center gap-2 text-white/80 text-sm font-medium">
                 <span className="w-4 h-4 rounded-full bg-accent-500/25 border border-accent-500/50 flex items-center justify-center text-accent-400 text-xs flex-shrink-0">✓</span>
                 {item}
@@ -258,13 +247,13 @@ export default function HomePage() {
               />
             </div>
             <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-5 border border-slate-100">
-              <div className="font-heading text-4xl font-extrabold text-brand-600">4.9★</div>
-              <div className="text-sm font-semibold text-slate-700">Google Rating</div>
-              <div className="text-xs text-slate-400 mt-0.5">1,200+ verified reviews</div>
+              <div className="font-heading text-4xl font-extrabold text-brand-600">£10M</div>
+              <div className="text-sm font-semibold text-slate-700">Public Liability</div>
+              <div className="text-xs text-slate-400 mt-0.5">Fully insured</div>
             </div>
             <div className="absolute -top-5 -right-5 bg-accent-500 rounded-2xl shadow-xl p-4 text-white text-center">
-              <div className="font-heading text-3xl font-extrabold">15+</div>
-              <div className="text-xs font-semibold">Years Experience</div>
+              <div className="font-heading text-3xl font-extrabold">5%</div>
+              <div className="text-xs font-semibold">Top Cleaners Only</div>
             </div>
           </div>
         </div>
@@ -475,77 +464,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ══════════ GOOGLE REVIEWS ══════════ */}
-      <section id="reviews" className="py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-10">
-            <span className="section-tag">Customer Reviews</span>
-            <h2 className="section-title mb-4">What Our Customers Say</h2>
-          </div>
-
-          {/* Review summary */}
-          <div className="flex flex-wrap items-center justify-center gap-6 mb-12">
-            <div className="flex flex-col items-center bg-white border-2 border-slate-100 rounded-3xl px-10 py-6 shadow-sm">
-              <div className="font-heading text-6xl font-extrabold text-brand-600 leading-none">4.9</div>
-              <div className="text-2xl text-amber-400 my-2">★★★★★</div>
-              <div className="text-slate-500 text-sm font-medium">Based on 1,200+ Google Reviews</div>
-            </div>
-            <div className="space-y-2">
-              {[[5,'85%'],[4,'11%'],[3,'3%'],[2,'1%'],[1,'0%']].map(([stars, pct]) => (
-                <div key={stars} className="flex items-center gap-3">
-                  <span className="text-sm text-slate-500 w-3">{stars}</span>
-                  <span className="text-amber-400 text-sm">★</span>
-                  <div className="w-40 h-2 bg-slate-100 rounded-full overflow-hidden">
-                    <div className="h-full bg-amber-400 rounded-full" style={{ width: pct }} />
-                  </div>
-                  <span className="text-sm text-slate-400">{pct}</span>
-                </div>
-              ))}
-            </div>
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-sm text-slate-600"><CheckCircle size={16} className="text-green-500" />Excellent communication</div>
-              <div className="flex items-center gap-2 text-sm text-slate-600"><CheckCircle size={16} className="text-green-500" />Punctual & reliable</div>
-              <div className="flex items-center gap-2 text-sm text-slate-600"><CheckCircle size={16} className="text-green-500" />Outstanding results</div>
-              <div className="flex items-center gap-2 text-sm text-slate-600"><CheckCircle size={16} className="text-green-500" />Worth every penny</div>
-            </div>
-          </div>
-
-          <TestimonialCarousel />
-        </div>
-      </section>
-
-      {/* ══════════ BUSINESS TESTIMONIALS ══════════ */}
-      <section className="bg-slate-50 py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <span className="section-tag">Business Clients</span>
-            <h2 className="section-title mb-4">Trusted by Businesses</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {bizTestimonials.map(({ name, role, company, text }) => (
-              <div key={name} className="bg-white rounded-2xl p-6 border-l-4 border-brand-600 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <Quote size={20} className="text-brand-200 mb-3" />
-                <p className="text-slate-600 text-sm leading-relaxed italic mb-4">{text}</p>
-                <div className="pt-3 border-t border-slate-50">
-                  <div className="font-semibold text-slate-900 text-sm">{name}</div>
-                  <div className="text-xs text-slate-400">{role}, {company}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ══════════ ACCREDITATIONS ══════════ */}
       <section className="py-16 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-4">
           <p className="text-center text-slate-400 text-xs font-semibold uppercase tracking-widest mb-8">Accreditations & Certifications</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {[
-              { icon: '🏅', title: 'Best Cleaning Company', sub: 'Regional Business Awards 2024 Winner' },
-              { icon: '🌿', title: 'Eco-Friendly Certified', sub: 'Green Cleaning Alliance Member' },
+              { icon: '🌿', title: 'Eco-Friendly Products', sub: 'Non-toxic, safe for kids & pets' },
               { icon: '💼', title: 'Living Wage Employer', sub: 'Paying all staff a fair living wage' },
-              { icon: '🎓', title: 'BICSc Certified', sub: 'British Institute of Cleaning Science' },
+              { icon: '🛡️', title: '£10M Insured', sub: 'Full public liability cover on every clean' },
             ].map(({ icon, title, sub }) => (
               <div key={title} className="flex items-center gap-4 bg-slate-50 rounded-2xl p-5 border border-slate-100 hover:border-brand-200 hover:bg-brand-50 transition-all duration-200">
                 <div className="text-4xl shrink-0">{icon}</div>

@@ -91,7 +91,7 @@ export default function DomesticPage() {
               </h1>
               <p className="text-white/70 text-lg mb-3">Professional home cleaning — from just £15/hour</p>
               <ul className="space-y-2 mb-8">
-                {['£10M public liability insurance', 'Award-winning cleaning service', 'Replacement & sickness cover', '100% background checked cleaners'].map(i => (
+                {['£10M public liability insurance', '100% satisfaction guaranteed', 'Replacement & sickness cover', '100% background checked cleaners'].map(i => (
                   <li key={i} className="flex items-center gap-2.5 text-white/80 text-sm">
                     <span className="w-4 h-4 rounded-full bg-accent-500/30 border border-accent-500/50 flex items-center justify-center text-accent-300 text-xs flex-shrink-0">✓</span>{i}
                   </li>
@@ -110,8 +110,8 @@ export default function DomesticPage() {
                 className="rounded-3xl object-cover w-full h-[360px] shadow-2xl"
               />
               <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-slate-100">
-                <div className="font-heading text-3xl font-extrabold text-brand-600">4.9★</div>
-                <div className="text-xs font-semibold text-slate-600">Google Rated · 1,200+ reviews</div>
+                <div className="font-heading text-3xl font-extrabold text-brand-600">£10M</div>
+                <div className="text-xs font-semibold text-slate-600">Fully Insured</div>
               </div>
             </div>
           </div>
@@ -201,7 +201,7 @@ export default function DomesticPage() {
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="font-heading text-2xl font-bold text-white mb-8">Why Choose Our Domestic Cleaning?</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {[['🛡️', 'Fully Insured'], ['⭐', '4.9★ Rated'], ['✅', 'Vetted Staff'], ['🌿', 'Eco Products'], ['⏰', 'Flexible Hours'], ['💰', 'Fair Pricing']].map(([icon, label]) => (
+            {[['🛡️', 'Fully Insured'], ['✅', 'Vetted Staff'], ['🌿', 'Eco Products'], ['⏰', 'Flexible Hours'], ['💰', 'Fair Pricing'], ['✓', '100% Guaranteed']].map(([icon, label]) => (
               <div key={label} className="bg-white/10 rounded-2xl py-5 px-3">
                 <div className="text-3xl mb-2">{icon}</div>
                 <div className="text-white text-sm font-semibold">{label}</div>

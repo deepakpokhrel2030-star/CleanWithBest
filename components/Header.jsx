@@ -51,7 +51,6 @@ const nav = [
         { label: 'Accreditations', href: '/about#accreditations', tag: null },
       ]},
       { heading: 'Trust', links: [
-        { label: 'Customer Reviews', href: '/#reviews', tag: null },
         { label: 'Why Choose Us', href: '/#why-us', tag: null },
         { label: 'Areas We Cover', href: '/#areas', tag: null },
         { label: 'FAQs', href: '/#faq', tag: null },
@@ -107,7 +106,7 @@ export default function Header() {
             </a>
           </div>
           <div className="flex items-center gap-4 text-slate-400">
-            <span>⭐ 4.9/5 Google Rating</span>
+            <span>✓ 100% Satisfaction Guaranteed</span>
             <span>·</span>
             <span>£10M Public Liability</span>
             <span>·</span>

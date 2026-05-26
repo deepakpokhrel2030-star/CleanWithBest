@@ -37,7 +37,7 @@ export default function AboutPage() {
               We're CleanWithBest
             </h1>
             <p className="text-white/75 text-lg leading-relaxed">
-              Founded over 15 years ago with a simple promise: to deliver cleaning services so good that customers never need to look elsewhere. That promise still drives everything we do today.
+              Founded with a simple promise: to deliver cleaning services so good that customers never need to look elsewhere. That promise drives everything we do today.
             </p>
           </div>
         </div>
@@ -51,13 +51,13 @@ export default function AboutPage() {
               <span className="section-tag">Our Story</span>
               <h2 className="section-title mb-5">Built on a Belief That<br />Cleaning Can Be Done Better</h2>
               <p className="text-slate-600 leading-relaxed mb-4">
-                CleanWithBest was founded in 2009 by Sarah Johnson, who saw firsthand how frustrating it was to find a truly reliable, high-quality cleaning service. Too many providers over-promised and under-delivered — she set out to change that.
+                CleanWithBest was founded by Deepak Pokhrel and Krishna Prasad Sah, who saw firsthand how frustrating it was to find a truly reliable, high-quality cleaning service in London. Too many providers over-promised and under-delivered — they set out to change that.
               </p>
               <p className="text-slate-600 leading-relaxed mb-4">
-                Starting with just three cleaners and a handful of local clients, we grew by doing one simple thing: delivering exceptional results every single time. Word spread. Referrals followed. A decade and a half later, we serve over 10,000 clients across the region with a team of 200+ vetted professionals.
+                We started with a simple belief: that professional cleaning should be done properly, every single time. We invest in the best people, the best products and the best processes — because we believe our clients deserve nothing less.
               </p>
               <p className="text-slate-600 leading-relaxed mb-6">
-                But we've never forgotten our roots. Every clean is still treated with the same care and attention we gave our very first customer — because for them, it matters just as much as it did on day one.
+                Every clean is treated with the same care and attention as the first — because for our customers, it matters just as much every time.
               </p>
               <Link href="/quote" className="btn-primary">Work With Us <ArrowRight size={16} /></Link>
             </div>
@@ -70,16 +70,16 @@ export default function AboutPage() {
                 className="rounded-2xl shadow-2xl object-cover w-full h-[400px]"
               />
               <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-xl p-5 border-2 border-brand-50">
-                <div className="font-heading text-3xl font-extrabold text-brand-600">15+</div>
-                <div className="text-sm font-semibold text-slate-700">Years of Excellence</div>
-                <div className="text-xs text-slate-400">Est. 2009</div>
+                <div className="font-heading text-3xl font-extrabold text-brand-600">£10M</div>
+                <div className="text-sm font-semibold text-slate-700">Public Liability</div>
+                <div className="text-xs text-slate-400">Fully insured</div>
               </div>
             </div>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[['10,000+', 'Happy Clients'], ['200+', 'Professional Cleaners'], ['15+', 'Years Experience'], ['4.9★', 'Google Rating']].map(([num, label]) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {[['£10M', 'Public Liability Cover'], ['Top 5%', 'Cleaners Only Hired'], ['100%', 'Satisfaction Guaranteed']].map(([num, label]) => (
               <div key={label} className="bg-brand-50 rounded-2xl p-6 text-center border border-brand-100">
                 <div className="font-heading text-3xl md:text-4xl font-extrabold text-brand-600 mb-1">{num}</div>
                 <div className="text-slate-500 text-sm font-medium">{label}</div>
@@ -141,12 +141,11 @@ export default function AboutPage() {
             <span className="section-tag-light">Certified & Trusted</span>
             <h2 className="section-title-light mb-3">Our Accreditations</h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { icon: '🏅', title: 'Best Cleaning Co.', sub: 'Regional Business Awards 2024' },
-              { icon: '🌿', title: 'Eco-Friendly Certified', sub: 'Green Cleaning Alliance' },
-              { icon: '💼', title: 'Living Wage Employer', sub: 'Accredited Member' },
-              { icon: '🎓', title: 'BICSc Certified', sub: 'Industry Gold Standard' },
+              { icon: '🌿', title: 'Eco-Friendly Products', sub: 'Non-toxic, safe for children & pets' },
+              { icon: '💼', title: 'Living Wage Employer', sub: 'All staff paid a fair living wage' },
+              { icon: '🛡️', title: '£10M Public Liability', sub: 'Full cover on every single clean' },
             ].map(({ icon, title, sub }) => (
               <div key={title} className="bg-white/10 border border-white/10 rounded-2xl p-5 text-center hover:bg-white/15 transition-colors">
                 <div className="text-4xl mb-3">{icon}</div>

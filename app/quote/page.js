@@ -1,5 +1,5 @@
 import QuoteForm from '@/components/QuoteForm';
-import { CheckCircle, Phone, Shield, Star, Clock } from 'lucide-react';
+import { CheckCircle, Phone, Shield, Clock } from 'lucide-react';
 
 export const metadata = {
   title: 'Get a Free Quote',
@@ -43,7 +43,6 @@ export default function QuotePage() {
                   {[
                     [CheckCircle, '100% Satisfaction Guarantee'],
                     [Shield, '£10M Public Liability Insurance'],
-                    [Star, '4.9★ Average Rating'],
                     [CheckCircle, 'Top 5% Vetted Cleaners'],
                     [Clock, 'Response Within 2 Hours'],
                     [CheckCircle, 'Eco-Friendly Products'],
@@ -64,16 +63,6 @@ export default function QuotePage() {
                   <Phone size={18} /> +44 7789 602945
                 </a>
                 <p className="text-white/50 text-xs mt-2">Mon–Fri: 8am–6pm</p>
-              </div>
-
-              {/* Testimonial */}
-              <div className="bg-brand-50 rounded-2xl p-6 border border-brand-100">
-                <div className="text-lg mb-3">⭐⭐⭐⭐⭐</div>
-                <p className="text-slate-600 text-sm italic leading-relaxed mb-4">
-                  "Got a quote within an hour, the price was fair and transparent, and the clean was absolutely outstanding. Couldn't be happier!"
-                </p>
-                <div className="font-semibold text-slate-900 text-sm">Rachel T.</div>
-                <div className="text-slate-400 text-xs">Verified Google Review</div>
               </div>
 
               {/* Process */}
