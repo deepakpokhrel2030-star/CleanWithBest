@@ -107,7 +107,7 @@ export default function CommercialPage() {
             </p>
             <div className="flex flex-wrap gap-3">
               <Link href="/quote" className="btn-white">Get a Business Quote</Link>
-              <a href="tel:+442036330390" className="btn-outline">Call 020 3633 0390</a>
+              <a href="tel:+447789602945" className="btn-outline">Call +44 7789 602945</a>
             </div>
           </div>
         </div>
@@ -207,7 +207,7 @@ export default function CommercialPage() {
           <p className="text-white/80 mb-8">Get a free commercial cleaning quote. We'll respond within 2 hours.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/quote" className="btn-white">Get a Business Quote</Link>
-            <a href="tel:+442036330390" className="btn-outline">📞 020 3633 0390</a>
+            <a href="tel:+447789602945" className="btn-outline">📞 +44 7789 602945</a>
           </div>
         </div>
       </section>

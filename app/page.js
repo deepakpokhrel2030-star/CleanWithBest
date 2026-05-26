@@ -185,8 +185,8 @@ export default function HomePage() {
             <Link href="/quote" className="btn-white-lg">
               Get a Free Quote — 2 Min Form
             </Link>
-            <a href="tel:+442036330390" className="btn-outline-white-lg flex items-center gap-2">
-              <Phone size={17} /> Call 020 3633 0390
+            <a href="tel:+447789602945" className="btn-outline-white-lg flex items-center gap-2">
+              <Phone size={17} /> Call +44 7789 602945
             </a>
           </div>
 
@@ -615,7 +615,7 @@ export default function HomePage() {
             ))}
           </div>
           <p className="text-center text-slate-400 text-sm mt-8">
-            Still have questions? <a href="tel:+442036330390" className="text-brand-600 font-semibold hover:underline">Call us on 020 3633 0390</a> or <Link href="/contact" className="text-brand-600 font-semibold hover:underline">send a message</Link>.
+            Still have questions? <a href="tel:+447789602945" className="text-brand-600 font-semibold hover:underline">Call us on +44 7789 602945</a> or <Link href="/contact" className="text-brand-600 font-semibold hover:underline">send a message</Link>.
           </p>
         </div>
       </section>
@@ -641,8 +641,8 @@ export default function HomePage() {
             <Link href="/quote" className="inline-flex items-center gap-2 bg-accent-500 hover:bg-accent-600 text-white font-bold text-lg px-8 py-4 rounded-2xl transition-all shadow-lg hover:shadow-xl">
               Get My Free Quote <ArrowRight size={20} />
             </Link>
-            <a href="tel:+442036330390" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/25 text-white font-bold text-lg px-8 py-4 rounded-2xl transition-all">
-              <Phone size={18} /> 020 3633 0390
+            <a href="tel:+447789602945" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/25 text-white font-bold text-lg px-8 py-4 rounded-2xl transition-all">
+              <Phone size={18} /> +44 7789 602945
             </a>
           </div>
           <p className="text-white/40 text-sm">Mon–Fri 8am–6pm · cleanwithbest@gmail.com</p>

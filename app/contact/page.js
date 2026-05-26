@@ -36,7 +36,7 @@ export default function ContactPage() {
               <h2 className="section-title mb-6">Reach Us Any Way You Like</h2>
               <div className="space-y-5 mb-10">
                 {[
-                  { icon: Phone, title: 'Call Us', detail: '020 3633 0390', sub: 'Monday to Friday, 8am – 6pm', href: 'tel:+442036330390' },
+                  { icon: Phone, title: 'Call Us', detail: '+44 7789 602945', sub: 'Monday to Friday, 8am – 6pm', href: 'tel:+447789602945' },
                   { icon: Mail, title: 'Email Us', detail: 'cleanwithbest@gmail.com', sub: 'We respond within 2 hours', href: 'mailto:cleanwithbest@gmail.com' },
                   { icon: MessageCircle, title: 'Live Chat', detail: 'Chat with us online', sub: 'Available during business hours', href: '#' },
                   { icon: MapPin, title: 'Our Office', detail: '12 Bishopsgate', sub: 'London EC2N 4BQ', href: '#' },
@@ -97,7 +97,7 @@ export default function ContactPage() {
           <h2 className="font-heading text-3xl font-bold text-white mb-4">Not sure what you need?</h2>
           <p className="text-white/80 mb-8">Give us a call or fill in a quote request and our team will recommend the perfect cleaning solution for your home or business.</p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="tel:+442036330390" className="btn-white">📞 Call 020 3633 0390</a>
+            <a href="tel:+447789602945" className="btn-white">📞 Call +44 7789 602945</a>
             <Link href="/quote" className="btn-outline">Get a Free Quote</Link>
           </div>
         </div>

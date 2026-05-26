@@ -194,8 +194,8 @@ export default function AboutPage() {
               <div className="space-y-3">
                 <Link href="/quote" className="btn-primary w-full justify-center">Get a Free Quote</Link>
                 <Link href="/contact" className="btn-primary w-full justify-center bg-white text-brand-700 hover:bg-brand-50 border-2 border-brand-200">Contact Us</Link>
-                <a href="tel:+442036330390" className="flex justify-center items-center gap-2 text-brand-600 font-semibold text-sm hover:text-brand-800 transition-colors">
-                  📞 020 3633 0390
+                <a href="tel:+447789602945" className="flex justify-center items-center gap-2 text-brand-600 font-semibold text-sm hover:text-brand-800 transition-colors">
+                  📞 +44 7789 602945
                 </a>
               </div>
             </div>

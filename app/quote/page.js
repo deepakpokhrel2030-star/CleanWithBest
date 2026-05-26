@@ -60,8 +60,8 @@ export default function QuotePage() {
               <div className="bg-brand-600 rounded-2xl p-6 text-white">
                 <h3 className="font-semibold text-lg mb-2">Prefer to Call?</h3>
                 <p className="text-white/75 text-sm mb-4">Speak directly with our friendly team for an instant quote.</p>
-                <a href="tel:+442036330390" className="flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
-                  <Phone size={18} /> 020 3633 0390
+                <a href="tel:+447789602945" className="flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
+                  <Phone size={18} /> +44 7789 602945
                 </a>
                 <p className="text-white/50 text-xs mt-2">Mon–Fri: 8am–6pm</p>
               </div>

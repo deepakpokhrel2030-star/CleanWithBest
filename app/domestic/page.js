@@ -99,7 +99,7 @@ export default function DomesticPage() {
               </ul>
               <div className="flex flex-wrap gap-3">
                 <Link href="/quote" className="btn-white-lg">Book a Cleaner Now!</Link>
-                <a href="tel:+442036330390" className="btn-outline-white-lg"><Phone size={15}/> Call Us</a>
+                <a href="tel:+447789602945" className="btn-outline-white-lg"><Phone size={15}/> Call Us</a>
               </div>
             </div>
             <div className="hidden md:block relative">
@@ -178,7 +178,7 @@ export default function DomesticPage() {
                   <Link href="/quote" className="btn-primary text-sm">
                     Book Now — {price} <ArrowRight size={14} />
                   </Link>
-                  <a href="tel:+442036330390" className="text-sm font-semibold text-brand-600 hover:text-brand-800 flex items-center gap-1.5 transition-colors">
+                  <a href="tel:+447789602945" className="text-sm font-semibold text-brand-600 hover:text-brand-800 flex items-center gap-1.5 transition-colors">
                     <Phone size={13} /> Call for a Quote
                   </a>
                 </div>
@@ -239,7 +239,7 @@ export default function DomesticPage() {
           <p className="text-white/80 mb-8 text-lg">Get a free, no-obligation quote. We'll respond within 2 hours.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/quote" className="btn-white-lg">Book a Cleaner Now!</Link>
-            <a href="tel:+442036330390" className="btn-outline-white-lg"><Phone size={16}/> 020 3633 0390</a>
+            <a href="tel:+447789602945" className="btn-outline-white-lg"><Phone size={16}/> +44 7789 602945</a>
           </div>
         </div>
       </section>

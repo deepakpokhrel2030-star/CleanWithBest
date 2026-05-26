@@ -99,8 +99,8 @@ export default function Header() {
       <div className="bg-brand-950 text-slate-300 text-xs py-2 hidden md:block" style={{ backgroundColor: '#050e1f' }}>
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center gap-5">
-            <a href="tel:+442036330390" className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Phone size={11} /> 020 3633 0390
+            <a href="tel:+447789602945" className="flex items-center gap-1.5 hover:text-white transition-colors">
+              <Phone size={11} /> +44 7789 602945
             </a>
             <a href="mailto:cleanwithbest@gmail.com" className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Mail size={11} /> cleanwithbest@gmail.com
@@ -185,8 +185,8 @@ export default function Header() {
 
           {/* Desktop right */}
           <div className="hidden lg:flex items-center gap-3 ml-auto">
-            <a href="tel:+442036330390" className="text-sm font-semibold text-slate-500 hover:text-brand-600 transition-colors flex items-center gap-1.5">
-              <Phone size={14} /> 020 3633 0390
+            <a href="tel:+447789602945" className="text-sm font-semibold text-slate-500 hover:text-brand-600 transition-colors flex items-center gap-1.5">
+              <Phone size={14} /> +44 7789 602945
             </a>
             <Link href="/quote"
               className="inline-flex items-center gap-2 bg-brand-600 text-white text-sm font-bold px-5 py-2.5 rounded-xl hover:bg-brand-700 transition-all shadow-sm hover:shadow-md">
@@ -242,8 +242,8 @@ export default function Header() {
               ))}
             </div>
             <div className="px-4 pb-5 pt-2 border-t border-slate-100 space-y-2">
-              <a href="tel:+442036330390" className="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-brand-600">
-                <Phone size={15} /> 020 3633 0390
+              <a href="tel:+447789602945" className="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-brand-600">
+                <Phone size={15} /> +44 7789 602945
               </a>
               <Link href="/quote" onClick={closeAll}
                 className="block text-center bg-brand-600 text-white font-bold text-sm py-3 rounded-xl hover:bg-brand-700 transition-colors">

@@ -425,7 +425,7 @@ export default function QuoteForm() {
 
         {status === 'error' && (
           <p className="text-red-500 text-sm bg-red-50 border border-red-200 rounded-xl px-4 py-3">
-            Something went wrong. Please try again or call us on <strong>020 3633 0390</strong>.
+            Something went wrong. Please try again or call us on <strong>+44 7789 602945</strong>.
           </p>
         )}
 
