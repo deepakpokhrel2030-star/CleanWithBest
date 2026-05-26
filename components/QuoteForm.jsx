@@ -46,11 +46,6 @@ const EMPTY_FORM = {
   firstName: '', lastName: '', email: '', phone: '', message: '',
 };
 
-/* ── Helpers ── */
-function cleanAddress(raw) {
-  return raw.split(',').map(s => s.trim()).filter(Boolean).join(', ');
-}
-
 /* ── Pill selector ── */
 function PillSelect({ options, value, onChange, multi = false }) {
   const isSelected = v => multi ? (value || []).includes(v) : value === v;
@@ -130,22 +125,8 @@ export default function QuoteForm() {
 
   const set = (key, val) => setForm(f => ({ ...f, [key]: val }));
 
-  /* ── Postcode validation (postcodes.io — free, no key) ── */
-  const validatePostcode = useCallback(async (pc) => {
-    const clean = pc.replace(/\s+/g, '');
-    if (clean.length < 5) return false;
-    setPcStatus('loading');
-    try {
-      const res  = await fetch(`https://api.postcodes.io/postcodes/${encodeURIComponent(clean)}`);
-      const data = await res.json();
-      if (data.status === 200) { setPcInfo(data.result); setPcStatus('valid'); return true; }
-      else { setPcStatus('invalid'); setPcInfo(null); return false; }
-    } catch { setPcStatus('idle'); return false; }
-  }, []);
-
-  /* ── Address lookup by postcode (getAddress.io) ── */
+  /* ── Postcode validation + address lookup — 100% free, no API key ── */
   const findAddresses = useCallback(async () => {
-    const key   = process.env.NEXT_PUBLIC_GETADDRESS_API_KEY;
     const clean = form.postcode.replace(/\s+/g, '');
     if (clean.length < 5) { setAddrError('Please enter a valid postcode first.'); return; }
 
@@ -153,41 +134,83 @@ export default function QuoteForm() {
     setAddrError('');
     setAddrList([]);
     setShowDropdown(false);
-
-    /* validate postcode while we look up addresses */
-    validatePostcode(form.postcode);
+    setPcStatus('loading');
+    setPcInfo(null);
 
     try {
-      if (key) {
-        const res = await fetch(
-          `https://api.getaddress.io/find/${encodeURIComponent(form.postcode)}?api-key=${key}&sort=true`
-        );
-        if (res.ok) {
-          const data = await res.json();
-          const cleaned = (data.addresses || []).map(cleanAddress).filter(Boolean);
-          if (cleaned.length === 0) {
-            setAddrError('No addresses found for this postcode.');
-          } else {
-            setAddrList(cleaned);
-            setShowDropdown(true);
-          }
-        } else if (res.status === 404) {
-          setAddrError('Postcode not found. Please check and try again.');
+      /* Step 1 — validate postcode & get lat/lng via postcodes.io (free) */
+      const pcRes  = await fetch(`https://api.postcodes.io/postcodes/${encodeURIComponent(clean)}`);
+      const pcData = await pcRes.json();
+
+      if (pcData.status !== 200) {
+        setPcStatus('invalid');
+        setAddrError('Postcode not found. Please check and try again.');
+        setAddrLoading(false);
+        return;
+      }
+
+      setPcInfo(pcData.result);
+      setPcStatus('valid');
+
+      const { latitude, longitude, admin_district } = pcData.result;
+
+      /* Step 2 — fetch addresses from OpenStreetMap Overpass API (free, no key) */
+      const query = `[out:json][timeout:10];
+(node["addr:housenumber"](around:130,${latitude},${longitude});
+ way["addr:housenumber"](around:130,${latitude},${longitude}););
+out body;`;
+
+      const ovRes  = await fetch('https://overpass-api.de/api/interpreter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `data=${encodeURIComponent(query)}`,
+      });
+      const ovData = await ovRes.json();
+
+      if (ovData.elements?.length > 0) {
+        const seen = new Set();
+        const list = ovData.elements
+          .map(el => {
+            const t      = el.tags || {};
+            const num    = t['addr:housenumber'] || '';
+            const street = t['addr:street']      || '';
+            const name   = t['addr:housename']   || '';
+            const flat   = t['addr:unit']        || t['addr:flats'] || '';
+            if (!street) return null;
+            const line = flat   ? `Flat ${flat}, ${num} ${street}`
+                        : name  ? `${name}, ${num ? num + ' ' : ''}${street}`
+                        : num   ? `${num} ${street}`
+                        : street;
+            return `${line}, ${admin_district}, ${form.postcode.toUpperCase()}`;
+          })
+          .filter(a => {
+            if (!a) return false;
+            if (seen.has(a)) return false;
+            seen.add(a); return true;
+          })
+          .sort((a, b) => {
+            const na = parseInt(a.match(/^\d+/)?.[0] || '0');
+            const nb = parseInt(b.match(/^\d+/)?.[0] || '0');
+            return na - nb || a.localeCompare(b);
+          });
+
+        if (list.length > 0) {
+          setAddrList(list);
+          setShowDropdown(true);
         } else {
-          setAddrError('Address lookup failed. Please type your address below.');
+          setAddrError('No addresses found for this postcode. Please type your address below.');
         }
       } else {
-        /* No API key — show helpful message */
-        setAddrError('Address lookup not configured. Please type your address in the box below.');
+        setAddrError('No addresses found for this postcode. Please type your address below.');
       }
     } catch {
-      setAddrError('Could not reach address lookup service. Please type your address below.');
+      setAddrError('Address lookup failed. Please type your address below.');
     } finally {
       setAddrLoading(false);
     }
-  }, [form.postcode, validatePostcode]);
+  }, [form.postcode]);
 
-  const selectAddress = (addr) => {
+  const selectAddress = addr => {
     set('address', addr);
     setShowDropdown(false);
   };
@@ -321,6 +344,7 @@ export default function QuoteForm() {
                     maxLength={8}
                     className="input-field font-mono tracking-widest uppercase pr-9 w-full"
                     required
+                    autoComplete="postal-code"
                   />
                   {pcStatus === 'loading'  && <Loader2 size={15} className="absolute right-3 top-3.5 text-slate-400 animate-spin" />}
                   {pcStatus === 'valid'    && <CheckCircle size={15} className="absolute right-3 top-3.5 text-green-500" />}
