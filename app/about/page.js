@@ -69,17 +69,12 @@ export default function AboutPage() {
                 height={450}
                 className="rounded-2xl shadow-2xl object-cover w-full h-[400px]"
               />
-              <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-xl p-5 border-2 border-brand-50">
-                <div className="font-heading text-3xl font-extrabold text-brand-600">£10M</div>
-                <div className="text-sm font-semibold text-slate-700">Public Liability</div>
-                <div className="text-xs text-slate-400">Fully insured</div>
-              </div>
             </div>
           </div>
 
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            {[['£10M', 'Public Liability Cover'], ['Top 5%', 'Cleaners Only Hired'], ['100%', 'Satisfaction Guaranteed']].map(([num, label]) => (
+            {[['Top 5%', 'Cleaners Only Hired'], ['100%', 'Satisfaction Guaranteed']].map(([num, label]) => (
               <div key={label} className="bg-brand-50 rounded-2xl p-6 text-center border border-brand-100">
                 <div className="font-heading text-3xl md:text-4xl font-extrabold text-brand-600 mb-1">{num}</div>
                 <div className="text-slate-500 text-sm font-medium">{label}</div>
@@ -141,11 +136,10 @@ export default function AboutPage() {
             <span className="section-tag-light">Certified & Trusted</span>
             <h2 className="section-title-light mb-3">Our Accreditations</h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid sm:grid-cols-2 gap-5">
             {[
               { icon: '🌿', title: 'Eco-Friendly Products', sub: 'Non-toxic, safe for children & pets' },
               { icon: '💼', title: 'Living Wage Employer', sub: 'All staff paid a fair living wage' },
-              { icon: '🛡️', title: '£10M Public Liability', sub: 'Full cover on every single clean' },
             ].map(({ icon, title, sub }) => (
               <div key={title} className="bg-white/10 border border-white/10 rounded-2xl p-5 text-center hover:bg-white/15 transition-colors">
                 <div className="text-4xl mb-3">{icon}</div>
@@ -175,7 +169,6 @@ export default function AboutPage() {
                   ['6+ months experience required', 'No beginners. Every cleaner must demonstrate proven professional experience before joining us.'],
                   ['Full background checks', 'Every cleaner is background-checked, reference-verified and personally interviewed by our management team.'],
                   ['Ongoing training', 'Our training never stops. Regular refresher sessions keep our team up to date with best practices and new techniques.'],
-                  ['£10M insured', 'Full public liability cover for complete peace of mind on every single clean.'],
                 ].map(([title, desc]) => (
                   <li key={title} className="flex items-start gap-3">
                     <CheckCircle size={20} className="text-accent-600 shrink-0 mt-0.5" />

@@ -166,7 +166,7 @@ export default function CommercialPage() {
               { icon: '🔑', title: 'Key Holding', desc: 'We can hold your keys securely so we can clean out of hours with zero disruption to your business.' },
               { icon: '📞', title: 'Dedicated Account Manager', desc: 'Every commercial client gets a dedicated point of contact who knows your business needs.' },
               { icon: '⭐', title: 'Consistent Staff', desc: 'We assign the same cleaning team to your premises so you get consistent, reliable results every time.' },
-              { icon: '🛡️', title: '£10M Insured', desc: 'Full public liability insurance for complete peace of mind. Your premises are fully protected.' },
+              { icon: '✅', title: 'Fully Insured Staff', desc: 'All our cleaning staff are fully insured for complete peace of mind. Your premises are fully protected.' },
               { icon: '📊', title: 'Service Reports', desc: 'Regular cleaning reports and quality audits to ensure standards are always maintained.' },
             ].map(({ icon, title, desc }) => (
               <div key={title} className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">

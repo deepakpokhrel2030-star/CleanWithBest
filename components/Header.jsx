@@ -106,10 +106,6 @@ export default function Header() {
             </a>
           </div>
           <div className="flex items-center gap-4 text-slate-400">
-            <span>✓ 100% Satisfaction Guaranteed</span>
-            <span>·</span>
-            <span>£10M Public Liability</span>
-            <span>·</span>
             <span>Mon–Fri 8am–6pm</span>
           </div>
         </div>

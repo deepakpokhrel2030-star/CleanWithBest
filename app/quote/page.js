@@ -1,5 +1,5 @@
 import QuoteForm from '@/components/QuoteForm';
-import { CheckCircle, Phone, Shield, Clock } from 'lucide-react';
+import { CheckCircle, Phone, Clock } from 'lucide-react';
 
 export const metadata = {
   title: 'Get a Free Quote',
@@ -42,7 +42,7 @@ export default function QuotePage() {
                 <ul className="space-y-3">
                   {[
                     [CheckCircle, '100% Satisfaction Guarantee'],
-                    [Shield, '£10M Public Liability Insurance'],
+                    [CheckCircle, 'Fully Insured Cleaners'],
                     [CheckCircle, 'Top 5% Vetted Cleaners'],
                     [Clock, 'Response Within 2 Hours'],
                     [CheckCircle, 'Eco-Friendly Products'],

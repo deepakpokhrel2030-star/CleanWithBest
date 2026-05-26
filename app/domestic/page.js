@@ -71,7 +71,7 @@ const faqs = [
   { q: 'Do I need to be home during the clean?', a: 'Not at all. Many customers provide a key or entry code. All our cleaners are fully vetted, insured and trustworthy. We lock up securely when done.' },
   { q: 'Do your cleaners bring their own equipment?', a: 'Yes — all professional cleaning products and equipment are supplied. If you prefer us to use your own products for allergy reasons, just let us know.' },
   { q: 'What if I\'m not happy with the clean?', a: 'Contact us within 24 hours and we\'ll return to re-clean the affected areas at absolutely no extra charge. Your satisfaction is guaranteed.' },
-  { q: 'Are your cleaners insured?', a: 'Absolutely. All our cleaning staff are covered by £10M public liability insurance. You\'re completely protected against any accidental damage or loss.' },
+  { q: 'Are your cleaners insured?', a: 'Absolutely. All our cleaning staff are fully insured. You\'re completely protected against any accidental damage or loss.' },
   { q: 'Can I have the same cleaner each time?', a: 'Yes — for regular bookings we always try to send the same cleaner. Consistency matters, and your cleaner will learn exactly how you like things done.' },
   { q: 'Do you work evenings and weekends?', a: 'We offer flexible scheduling including early mornings, evenings and some weekend slots. Let us know your preferences when getting a quote.' },
   { q: 'How long does each service take?', a: 'Timings depend on property size. A regular clean for a 2-bed flat takes around 2–3 hours. A deep clean typically takes 4–6 hours. We\'ll give you an estimated time when quoting.' },
@@ -91,7 +91,7 @@ export default function DomesticPage() {
               </h1>
               <p className="text-white/70 text-lg mb-3">Professional home cleaning — from just £15/hour</p>
               <ul className="space-y-2 mb-8">
-                {['£10M public liability insurance', '100% satisfaction guaranteed', 'Replacement & sickness cover', '100% background checked cleaners'].map(i => (
+                {['100% satisfaction guaranteed', 'Replacement & sickness cover', '100% background checked cleaners', 'Eco-friendly products used'].map(i => (
                   <li key={i} className="flex items-center gap-2.5 text-white/80 text-sm">
                     <span className="w-4 h-4 rounded-full bg-accent-500/30 border border-accent-500/50 flex items-center justify-center text-accent-300 text-xs flex-shrink-0">✓</span>{i}
                   </li>
@@ -109,10 +109,6 @@ export default function DomesticPage() {
                 width={550} height={400}
                 className="rounded-3xl object-cover w-full h-[360px] shadow-2xl"
               />
-              <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-slate-100">
-                <div className="font-heading text-3xl font-extrabold text-brand-600">£10M</div>
-                <div className="text-xs font-semibold text-slate-600">Fully Insured</div>
-              </div>
             </div>
           </div>
         </div>

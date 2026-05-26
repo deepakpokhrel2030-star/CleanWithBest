@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  Phone, ArrowRight, CheckCircle, Shield, Star, Clock, Leaf,
+  Phone, ArrowRight, CheckCircle, Star, Clock, Leaf,
   Award, Users, ThumbsUp
 } from 'lucide-react';
 
@@ -12,7 +12,6 @@ export const metadata = {
 
 /* ─────────────────── DATA ─────────────────── */
 const claims = [
-  { icon: '🛡️', label: '£10M Public Liability Cover' },
   { icon: '✅', label: '100% Satisfaction Guarantee' },
   { icon: '⭐', label: 'Top 5% Cleaners Only' },
   { icon: '🔍', label: '100% Background Checked' },
@@ -85,7 +84,6 @@ const commercialServices = [
 ];
 
 const guarantees = [
-  { icon: Shield, title: '£10M Public Liability', desc: 'Every clean is fully insured against accidental damage or loss.' },
   { icon: CheckCircle, title: '100% Satisfaction', desc: 'Not happy? We\'ll return within 24 hours and re-clean at no extra charge.' },
   { icon: Award, title: 'Top 5% Cleaners', desc: 'Rigorous vetting — less than 5% of applicants make our team.' },
   { icon: Star, title: '6+ Months Experience', desc: 'Every cleaner has proven professional experience from day one.' },
@@ -120,7 +118,7 @@ const faqs = [
   { q: 'Do cleaners bring their own equipment and products?', a: 'Yes — we supply all professional cleaning products and equipment. If you prefer us to use your own products (e.g. for allergy reasons), just let us know in advance.' },
   { q: 'What happens if I\'m not happy with the result?', a: 'Your satisfaction is guaranteed. If you\'re not 100% happy, contact us within 24 hours and we\'ll return to re-clean the affected areas completely free of charge.' },
   { q: 'How quickly can you start?', a: 'In most cases we can arrange a clean within 24–48 hours. For regular bookings, we\'ll find the most convenient recurring slot that fits your schedule.' },
-  { q: 'Are your cleaners insured and background checked?', a: 'Absolutely. All staff are covered by £10M public liability insurance, fully background-checked, reference-verified and personally interviewed before joining our team.' },
+  { q: 'Are your cleaners insured and background checked?', a: 'Absolutely. All staff are fully insured, background-checked, reference-verified and personally interviewed before joining our team.' },
   { q: 'Do you offer a regular cleaning service?', a: 'Yes! We offer weekly, fortnightly and monthly regular cleaning contracts. Regular clients benefit from the same assigned cleaner, so they learn your home and preferences perfectly over time.' },
   { q: 'Can I cancel or reschedule a booking?', a: 'Yes. We ask for 48 hours notice for cancellations or rescheduling. We understand plans change and we\'ll always try to accommodate you with a new time that works.' },
 ];
@@ -162,7 +160,7 @@ export default function HomePage() {
 
           {/* Trust bullets */}
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 mb-12">
-            {['£10M public liability insurance', 'Eco-friendly cleaning products', '100% background checked staff', 'Top 5% of cleaners — rigorously vetted'].map(item => (
+            {['Eco-friendly cleaning products', '100% background checked staff', 'Top 5% of cleaners — rigorously vetted', '100% satisfaction guaranteed'].map(item => (
               <span key={item} className="flex items-center gap-2 text-white/80 text-sm font-medium">
                 <span className="w-4 h-4 rounded-full bg-accent-500/25 border border-accent-500/50 flex items-center justify-center text-accent-400 text-xs flex-shrink-0">✓</span>
                 {item}
@@ -225,7 +223,7 @@ export default function HomePage() {
               Whether you need a one-time deep clean or an ongoing regular service, our flexible packages are tailored to fit your schedule and budget. We serve both homes and businesses with the same dedication and high standards.
             </p>
             <ul className="grid grid-cols-2 gap-3 mb-8">
-              {['Top 5% of applicants hired', '6+ months experience required', 'Fully background-checked', 'Living wage employer', '£10M insured', 'Eco-friendly products'].map(item => (
+              {['Top 5% of applicants hired', '6+ months experience required', 'Fully background-checked', 'Living wage employer', 'Eco-friendly products', '100% satisfaction guaranteed'].map(item => (
                 <li key={item} className="flex items-start gap-2 text-sm text-slate-700">
                   <CheckCircle size={15} className="text-accent-600 mt-0.5 shrink-0" />
                   {item}
@@ -245,11 +243,6 @@ export default function HomePage() {
                 width={600} height={460}
                 className="object-cover w-full h-[420px]"
               />
-            </div>
-            <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-5 border border-slate-100">
-              <div className="font-heading text-4xl font-extrabold text-brand-600">£10M</div>
-              <div className="text-sm font-semibold text-slate-700">Public Liability</div>
-              <div className="text-xs text-slate-400 mt-0.5">Fully insured</div>
             </div>
             <div className="absolute -top-5 -right-5 bg-accent-500 rounded-2xl shadow-xl p-4 text-white text-center">
               <div className="font-heading text-3xl font-extrabold">5%</div>
@@ -468,11 +461,10 @@ export default function HomePage() {
       <section className="py-16 border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-4">
           <p className="text-center text-slate-400 text-xs font-semibold uppercase tracking-widest mb-8">Accreditations & Certifications</p>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
             {[
               { icon: '🌿', title: 'Eco-Friendly Products', sub: 'Non-toxic, safe for kids & pets' },
               { icon: '💼', title: 'Living Wage Employer', sub: 'Paying all staff a fair living wage' },
-              { icon: '🛡️', title: '£10M Insured', sub: 'Full public liability cover on every clean' },
             ].map(({ icon, title, sub }) => (
               <div key={title} className="flex items-center gap-4 bg-slate-50 rounded-2xl p-5 border border-slate-100 hover:border-brand-200 hover:bg-brand-50 transition-all duration-200">
                 <div className="text-4xl shrink-0">{icon}</div>
