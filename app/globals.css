@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply text-slate-800 bg-white antialiased; }
+  h1,h2,h3,h4,h5 { @apply font-heading; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-600 text-white font-semibold rounded-lg hover:bg-brand-700 active:bg-brand-800 transition-all duration-200 hover:shadow-lg hover:-translate-y-px cursor-pointer select-none;
+  }
+  .btn-primary-lg {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-600 text-white text-base font-bold rounded-xl hover:bg-brand-700 active:bg-brand-800 transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5 cursor-pointer select-none;
+  }
+  .btn-outline-white {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-white/60 text-white font-semibold rounded-lg hover:bg-white/10 hover:border-white transition-all duration-200 cursor-pointer select-none;
+  }
+  .btn-outline-white-lg {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/60 text-white text-base font-bold rounded-xl hover:bg-white/10 hover:border-white transition-all duration-200 cursor-pointer select-none;
+  }
+  .btn-white {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-brand-700 font-semibold rounded-lg hover:bg-brand-50 active:bg-brand-100 transition-all duration-200 hover:shadow-lg hover:-translate-y-px cursor-pointer select-none;
+  }
+  .btn-white-lg {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-brand-700 text-base font-bold rounded-xl hover:bg-brand-50 transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5 cursor-pointer select-none;
+  }
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-all duration-200 hover:shadow-lg hover:-translate-y-px cursor-pointer select-none;
+  }
+  .section-tag {
+    @apply inline-block bg-brand-50 text-brand-600 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-3;
+  }
+  .section-tag-light {
+    @apply inline-block bg-white/20 text-white text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-3;
+  }
+  .section-tag-amber {
+    @apply inline-block bg-amber-50 text-amber-700 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-3;
+  }
+  .section-title {
+    @apply font-heading text-3xl md:text-4xl font-bold text-slate-900 leading-tight;
+  }
+  .section-title-light {
+    @apply font-heading text-3xl md:text-4xl font-bold text-white leading-tight;
+  }
+  .section-sub {
+    @apply text-slate-500 text-lg leading-relaxed max-w-2xl;
+  }
+  .card {
+    @apply bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300;
+  }
+  .card-flat {
+    @apply bg-white rounded-2xl border border-slate-100;
+  }
+  .input-field {
+    @apply w-full border border-slate-200 rounded-xl px-4 py-3 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all placeholder:text-slate-400;
+  }
+  .label {
+    @apply block text-sm font-semibold text-slate-700 mb-1.5;
+  }
+  .checklist-item {
+    @apply flex items-start gap-2.5 text-sm text-slate-600;
+  }
+  .checklist-item::before {
+    content: '✓';
+    @apply text-accent-600 font-bold shrink-0 mt-0.5;
+  }
+  .price-badge {
+    @apply inline-flex items-center bg-green-50 text-green-700 border border-green-200 text-sm font-bold px-3 py-1.5 rounded-xl;
+  }
+}
+
+/* Smooth fade for carousel items */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-slide { animation: fadeSlideIn .35s ease both; }
+
+/* FAQ details animation */
+details summary::-webkit-details-marker { display: none; }
+details[open] summary .faq-icon { transform: rotate(45deg); }
+.faq-icon { transition: transform .25s ease; }
