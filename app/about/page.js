@@ -8,8 +8,8 @@ export const metadata = {
 };
 
 const team = [
-  { name: 'Sarah Johnson', role: 'Founder & CEO', initials: 'SJ', bio: '15+ years in the cleaning industry. Founded CleanWithBest with a vision to set a new standard for professional cleaning.' },
-  { name: 'Marcus Lee', role: 'Operations Director', initials: 'ML', bio: 'Oversees all cleaning operations and quality control. Former hospitality manager with an obsession for detail.' },
+  { name: 'Deepak Pokhrel', role: 'Co-Founder & CEO', initials: 'DP', bio: 'Co-founded CleanWithBest with a passion for delivering exceptional cleaning services across London. Drives the vision, strategy and growth of the business.' },
+  { name: 'Krishna Prasad Sah', role: 'Co-Founder & Operations Director', initials: 'KS', bio: 'Co-founded CleanWithBest and oversees all day-to-day cleaning operations, quality control and client satisfaction across every service.' },
   { name: 'Emma Clarke', role: 'Head of Commercial', initials: 'EC', bio: 'Manages all B2B client relationships and bespoke commercial contracts. 10 years experience in facilities management.' },
   { name: 'Tom Patel', role: 'Training Manager', initials: 'TP', bio: 'Designs and delivers all cleaner training programs. Ensures every team member meets our exacting standards.' },
   { name: 'Olivia Brown', role: 'Client Experience', initials: 'OB', bio: 'Dedicated to making sure every single customer interaction is exceptional. The voice of the customer internally.' },
