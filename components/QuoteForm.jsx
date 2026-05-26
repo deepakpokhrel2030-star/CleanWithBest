@@ -1,6 +1,6 @@
 'use client';
-import { useState, useRef, useEffect, useCallback } from 'react';
-import { CheckCircle, Loader2, ChevronRight, MapPin } from 'lucide-react';
+import { useState, useCallback } from 'react';
+import { CheckCircle, Loader2, ChevronRight, MapPin, Search } from 'lucide-react';
 
 /* ── Data ── */
 const SERVICES = [
@@ -16,28 +16,28 @@ const PROPERTY_TYPES = [
   { value: 'commercial', label: 'Commercial',        icon: '🏗️' },
 ];
 
-const BEDROOMS = ['Studio', '1', '2', '3', '4', '5', '6+'];
+const BEDROOMS  = ['Studio', '1', '2', '3', '4', '5', '6+'];
 const BATHROOMS = ['1', '2', '3', '4+'];
 
 const EXTRA_ROOMS = [
-  { value: 'kitchen',       label: 'Kitchen',            icon: '🍳' },
-  { value: 'living_room',   label: 'Living Room',         icon: '🛋️' },
-  { value: 'dining_room',   label: 'Dining Room',         icon: '🍴' },
-  { value: 'hallway',       label: 'Hallway / Landing',   icon: '🚪' },
-  { value: 'conservatory',  label: 'Conservatory',        icon: '🌿' },
-  { value: 'study',         label: 'Study / Office',      icon: '💼' },
-  { value: 'utility',       label: 'Utility Room',        icon: '🔧' },
-  { value: 'garage',        label: 'Garage',              icon: '🚗' },
-  { value: 'cellar',        label: 'Cellar / Basement',   icon: '⬇️' },
-  { value: 'loft',          label: 'Loft / Attic',        icon: '⬆️' },
+  { value: 'kitchen',      label: 'Kitchen',           icon: '🍳' },
+  { value: 'living_room',  label: 'Living Room',        icon: '🛋️' },
+  { value: 'dining_room',  label: 'Dining Room',        icon: '🍴' },
+  { value: 'hallway',      label: 'Hallway / Landing',  icon: '🚪' },
+  { value: 'conservatory', label: 'Conservatory',       icon: '🌿' },
+  { value: 'study',        label: 'Study / Office',     icon: '💼' },
+  { value: 'utility',      label: 'Utility Room',       icon: '🔧' },
+  { value: 'garage',       label: 'Garage',             icon: '🚗' },
+  { value: 'cellar',       label: 'Cellar / Basement',  icon: '⬇️' },
+  { value: 'loft',         label: 'Loft / Attic',       icon: '⬆️' },
 ];
 
 const FREQUENCIES = [
-  { value: 'one_off',      label: 'One-Off' },
-  { value: 'weekly',       label: 'Weekly' },
-  { value: 'fortnightly',  label: 'Fortnightly' },
-  { value: 'every3weeks',  label: 'Every 3 Weeks' },
-  { value: 'monthly',      label: 'Monthly' },
+  { value: 'one_off',     label: 'One-Off' },
+  { value: 'weekly',      label: 'Weekly' },
+  { value: 'fortnightly', label: 'Fortnightly' },
+  { value: 'every3weeks', label: 'Every 3 Weeks' },
+  { value: 'monthly',     label: 'Monthly' },
 ];
 
 const EMPTY_FORM = {
@@ -45,6 +45,11 @@ const EMPTY_FORM = {
   frequency: '', postcode: '', address: '', preferredDate: '',
   firstName: '', lastName: '', email: '', phone: '', message: '',
 };
+
+/* ── Helpers ── */
+function cleanAddress(raw) {
+  return raw.split(',').map(s => s.trim()).filter(Boolean).join(', ');
+}
 
 /* ── Pill selector ── */
 function PillSelect({ options, value, onChange, multi = false }) {
@@ -112,89 +117,86 @@ function SectionLabel({ num, title, subtitle }) {
 
 /* ── Main form ── */
 export default function QuoteForm() {
-  const [form, setForm] = useState(EMPTY_FORM);
+  const [form, setForm]     = useState(EMPTY_FORM);
   const [status, setStatus] = useState('idle');
 
-  /* postcode validation state */
-  const [pcStatus, setPcStatus] = useState('idle'); // idle | loading | valid | invalid
-  const [pcInfo, setPcInfo] = useState(null);
-
-  /* address autocomplete */
-  const addressRef = useRef(null);
-  const autocompleteRef = useRef(null);
+  /* postcode + address lookup state */
+  const [pcStatus,   setPcStatus]   = useState('idle'); // idle | loading | valid | invalid
+  const [pcInfo,     setPcInfo]     = useState(null);
+  const [addrList,   setAddrList]   = useState([]);
+  const [addrLoading, setAddrLoading] = useState(false);
+  const [addrError,  setAddrError]  = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const set = (key, val) => setForm(f => ({ ...f, [key]: val }));
 
-  /* ── Load Google Places script (only if API key provided) ── */
-  useEffect(() => {
-    const key = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-    if (!key || typeof window === 'undefined') return;
-    if (document.getElementById('gmaps-places-script')) {
-      if (window.google?.maps?.places && addressRef.current) initAutocomplete();
-      return;
-    }
-    const script = document.createElement('script');
-    script.id = 'gmaps-places-script';
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places&region=GB&language=en`;
-    script.async = true;
-    script.defer = true;
-    script.onload = () => {
-      if (addressRef.current) initAutocomplete();
-    };
-    document.head.appendChild(script);
-  }, []);
-
-  const initAutocomplete = useCallback(() => {
-    if (!window.google?.maps?.places || !addressRef.current || autocompleteRef.current) return;
-    const ac = new window.google.maps.places.Autocomplete(addressRef.current, {
-      componentRestrictions: { country: 'gb' },
-      fields: ['formatted_address', 'address_components'],
-      types: ['address'],
-    });
-    ac.addListener('place_changed', () => {
-      const place = ac.getPlace();
-      if (place.formatted_address) {
-        set('address', place.formatted_address);
-        const pc = place.address_components?.find(c => c.types.includes('postal_code'))?.long_name;
-        if (pc) {
-          const upper = pc.toUpperCase();
-          set('postcode', upper);
-          validatePostcode(upper);
-        }
-      }
-    });
-    autocompleteRef.current = ac;
-  }, []);
-
-  /* ── Postcode validation via postcodes.io (free, no API key) ── */
+  /* ── Postcode validation (postcodes.io — free, no key) ── */
   const validatePostcode = useCallback(async (pc) => {
     const clean = pc.replace(/\s+/g, '');
-    if (clean.length < 5) { setPcStatus('idle'); setPcInfo(null); return; }
+    if (clean.length < 5) return false;
     setPcStatus('loading');
     try {
-      const res = await fetch(`https://api.postcodes.io/postcodes/${encodeURIComponent(clean)}`);
+      const res  = await fetch(`https://api.postcodes.io/postcodes/${encodeURIComponent(clean)}`);
       const data = await res.json();
-      if (data.status === 200) {
-        setPcInfo(data.result);
-        setPcStatus('valid');
-      } else {
-        setPcStatus('invalid');
-        setPcInfo(null);
-      }
-    } catch {
-      setPcStatus('idle');
-    }
+      if (data.status === 200) { setPcInfo(data.result); setPcStatus('valid'); return true; }
+      else { setPcStatus('invalid'); setPcInfo(null); return false; }
+    } catch { setPcStatus('idle'); return false; }
   }, []);
 
-  const handlePostcodeBlur = () => {
-    if (form.postcode.trim()) validatePostcode(form.postcode);
+  /* ── Address lookup by postcode (getAddress.io) ── */
+  const findAddresses = useCallback(async () => {
+    const key   = process.env.NEXT_PUBLIC_GETADDRESS_API_KEY;
+    const clean = form.postcode.replace(/\s+/g, '');
+    if (clean.length < 5) { setAddrError('Please enter a valid postcode first.'); return; }
+
+    setAddrLoading(true);
+    setAddrError('');
+    setAddrList([]);
+    setShowDropdown(false);
+
+    /* validate postcode while we look up addresses */
+    validatePostcode(form.postcode);
+
+    try {
+      if (key) {
+        const res = await fetch(
+          `https://api.getaddress.io/find/${encodeURIComponent(form.postcode)}?api-key=${key}&sort=true`
+        );
+        if (res.ok) {
+          const data = await res.json();
+          const cleaned = (data.addresses || []).map(cleanAddress).filter(Boolean);
+          if (cleaned.length === 0) {
+            setAddrError('No addresses found for this postcode.');
+          } else {
+            setAddrList(cleaned);
+            setShowDropdown(true);
+          }
+        } else if (res.status === 404) {
+          setAddrError('Postcode not found. Please check and try again.');
+        } else {
+          setAddrError('Address lookup failed. Please type your address below.');
+        }
+      } else {
+        /* No API key — show helpful message */
+        setAddrError('Address lookup not configured. Please type your address in the box below.');
+      }
+    } catch {
+      setAddrError('Could not reach address lookup service. Please type your address below.');
+    } finally {
+      setAddrLoading(false);
+    }
+  }, [form.postcode, validatePostcode]);
+
+  const selectAddress = (addr) => {
+    set('address', addr);
+    setShowDropdown(false);
   };
 
   /* ── Submit ── */
   const handleSubmit = async e => {
     e.preventDefault();
-    if (!form.service || !form.propertyType || !form.postcode || !form.firstName || !form.email || !form.phone) {
-      alert('Please fill in all required fields.');
+    if (!form.service || !form.propertyType || !form.postcode || !form.address || !form.firstName || !form.email || !form.phone) {
+      alert('Please fill in all required fields including your address.');
       return;
     }
     setStatus('loading');
@@ -205,17 +207,13 @@ export default function QuoteForm() {
         summary: `${form.propertyType} · ${form.bedrooms} bed · ${form.bathrooms} bath · ${form.rooms.length} extra rooms`,
         postcodeDistrict: pcInfo ? `${pcInfo.ward}, ${pcInfo.admin_district}` : '',
       };
-      const res = await fetch('/api/quotes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
+      const res  = await fetch('/api/quotes', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
       const data = await res.json();
       if (data.success) {
         setStatus('success');
         setForm(EMPTY_FORM);
-        setPcStatus('idle');
-        setPcInfo(null);
+        setPcStatus('idle'); setPcInfo(null);
+        setAddrList([]); setShowDropdown(false); setAddrError('');
       } else setStatus('error');
     } catch { setStatus('error'); }
   };
@@ -235,12 +233,15 @@ export default function QuoteForm() {
   }
 
   const sectionNum = (n) => {
-    if (n === 'rooms') return form.propertyType && form.propertyType !== 'commercial' ? '4' : '3';
-    if (n === 'freq')  return form.propertyType && form.propertyType !== 'commercial' ? '5' : (form.propertyType ? '4' : '3');
-    if (n === 'addr')  return form.propertyType && form.propertyType !== 'commercial' ? '6' : (form.propertyType ? '5' : '4');
-    if (n === 'contact') return form.propertyType && form.propertyType !== 'commercial' ? '7' : (form.propertyType ? '6' : '5');
+    const isResidential = form.propertyType && form.propertyType !== 'commercial';
+    if (n === 'rooms')   return isResidential ? '4' : '3';
+    if (n === 'freq')    return isResidential ? '5' : (form.propertyType ? '4' : '3');
+    if (n === 'addr')    return isResidential ? '6' : (form.propertyType ? '5' : '4');
+    if (n === 'contact') return isResidential ? '7' : (form.propertyType ? '6' : '5');
     return n;
   };
+
+  const postcodeReady = form.postcode.replace(/\s/g, '').length >= 5;
 
   return (
     <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl overflow-hidden">
@@ -279,11 +280,7 @@ export default function QuoteForm() {
         {/* 4 — Extra rooms */}
         {form.propertyType && (
           <div className="pb-6 border-b border-slate-100">
-            <SectionLabel
-              num={sectionNum('rooms')}
-              title="Which rooms need cleaning?"
-              subtitle="Tick all rooms that require attention"
-            />
+            <SectionLabel num={sectionNum('rooms')} title="Which rooms need cleaning?" subtitle="Tick all rooms that require attention" />
             <PillSelect options={EXTRA_ROOMS} value={form.rooms} onChange={v => set('rooms', v)} multi />
             {form.rooms.length > 0 && (
               <p className="text-xs text-brand-600 font-medium mt-3">
@@ -302,73 +299,123 @@ export default function QuoteForm() {
 
         {/* 6 — Address */}
         <div className="pb-6 border-b border-slate-100">
-          <SectionLabel num={sectionNum('addr')} title="Your address" subtitle="We serve all London postcodes" />
+          <SectionLabel num={sectionNum('addr')} title="Your address *" subtitle="Enter your postcode to find your address" />
 
           <div className="space-y-3">
-            {/* Full address with Google Places autocomplete */}
-            <div>
-              <label className="label">Start typing your address</label>
-              <div className="relative">
-                <MapPin size={15} className="absolute left-3 top-3.5 text-slate-400 pointer-events-none" />
-                <input
-                  ref={addressRef}
-                  value={form.address}
-                  onChange={e => set('address', e.target.value)}
-                  placeholder="House number, street name, London..."
-                  className="input-field pl-9"
-                  autoComplete="street-address"
-                />
-              </div>
-              <p className="text-xs text-slate-400 mt-1">Start typing — address suggestions will appear as you type</p>
-            </div>
 
-            <div className="grid sm:grid-cols-2 gap-3">
-              {/* Postcode */}
-              <div>
-                <label className="label">Postcode *</label>
-                <div className="relative">
+            {/* Postcode + Find button */}
+            <div>
+              <label className="label">Postcode *</label>
+              <div className="flex gap-2">
+                <div className="relative flex-1">
                   <input
                     value={form.postcode}
                     onChange={e => {
                       const val = e.target.value.toUpperCase();
                       set('postcode', val);
-                      setPcStatus('idle');
-                      setPcInfo(null);
+                      set('address', '');
+                      setPcStatus('idle'); setPcInfo(null);
+                      setAddrList([]); setShowDropdown(false); setAddrError('');
                     }}
-                    onBlur={handlePostcodeBlur}
                     placeholder="e.g. SW1A 1AA"
                     maxLength={8}
-                    className="input-field font-mono tracking-widest uppercase pr-9"
+                    className="input-field font-mono tracking-widest uppercase pr-9 w-full"
                     required
                   />
-                  {pcStatus === 'loading' && (
-                    <Loader2 size={15} className="absolute right-3 top-3.5 text-slate-400 animate-spin" />
-                  )}
-                  {pcStatus === 'valid' && (
-                    <CheckCircle size={15} className="absolute right-3 top-3.5 text-green-500" />
-                  )}
+                  {pcStatus === 'loading'  && <Loader2 size={15} className="absolute right-3 top-3.5 text-slate-400 animate-spin" />}
+                  {pcStatus === 'valid'    && <CheckCircle size={15} className="absolute right-3 top-3.5 text-green-500" />}
                 </div>
-                {pcStatus === 'valid' && pcInfo && (
-                  <p className="text-xs text-green-600 mt-1 font-medium">
-                    ✓ {pcInfo.ward}, {pcInfo.admin_district} — we cover this area!
-                  </p>
-                )}
-                {pcStatus === 'invalid' && (
-                  <p className="text-xs text-red-500 mt-1">Postcode not found. Please check and try again.</p>
-                )}
+                <button
+                  type="button"
+                  onClick={findAddresses}
+                  disabled={!postcodeReady || addrLoading}
+                  className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 disabled:bg-slate-300 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all shrink-0"
+                >
+                  {addrLoading
+                    ? <><Loader2 size={14} className="animate-spin" /> Searching...</>
+                    : <><Search size={14} /> Find Address</>
+                  }
+                </button>
               </div>
+              {pcStatus === 'valid' && pcInfo && (
+                <p className="text-xs text-green-600 mt-1.5 font-medium">
+                  ✓ {pcInfo.ward}, {pcInfo.admin_district} — we cover this area!
+                </p>
+              )}
+              {pcStatus === 'invalid' && (
+                <p className="text-xs text-red-500 mt-1.5">Postcode not found. Please check and try again.</p>
+              )}
+            </div>
 
-              {/* Preferred date */}
+            {/* Address dropdown */}
+            {showDropdown && addrList.length > 0 && (
               <div>
-                <label className="label">Preferred Start Date</label>
+                <label className="label">Select your address *</label>
+                <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm max-h-52 overflow-y-auto">
+                  <button
+                    type="button"
+                    onClick={() => setShowDropdown(false)}
+                    className="w-full text-left px-4 py-2.5 text-sm text-slate-400 bg-slate-50 border-b border-slate-100 hover:bg-slate-100"
+                  >
+                    — Select an address —
+                  </button>
+                  {addrList.map((addr, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => selectAddress(addr)}
+                      className="w-full text-left px-4 py-2.5 text-sm text-slate-700 hover:bg-brand-50 hover:text-brand-700 border-b border-slate-50 last:border-0 transition-colors"
+                    >
+                      <MapPin size={12} className="inline mr-2 text-slate-400" />
+                      {addr}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Selected address display */}
+            {form.address && (
+              <div className="flex items-start gap-2 bg-green-50 border border-green-200 rounded-xl px-4 py-3">
+                <CheckCircle size={15} className="text-green-500 mt-0.5 shrink-0" />
+                <div className="flex-1">
+                  <p className="text-xs font-semibold text-green-700 mb-0.5">Selected address:</p>
+                  <p className="text-sm text-slate-700">{form.address}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => { set('address', ''); setShowDropdown(addrList.length > 0); }}
+                  className="text-xs text-slate-400 hover:text-red-500 transition-colors shrink-0"
+                >
+                  Change
+                </button>
+              </div>
+            )}
+
+            {/* Error / fallback manual input */}
+            {addrError && (
+              <div>
+                <p className="text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 mb-2">{addrError}</p>
+                <label className="label">Type your address manually</label>
                 <input
-                  type="date"
-                  value={form.preferredDate}
-                  onChange={e => set('preferredDate', e.target.value)}
-                  min={new Date().toISOString().split('T')[0]}
+                  value={form.address}
+                  onChange={e => set('address', e.target.value)}
+                  placeholder="e.g. 12 Baker Street, London"
                   className="input-field"
                 />
               </div>
+            )}
+
+            {/* Preferred date */}
+            <div>
+              <label className="label">Preferred Start Date</label>
+              <input
+                type="date"
+                value={form.preferredDate}
+                onChange={e => set('preferredDate', e.target.value)}
+                min={new Date().toISOString().split('T')[0]}
+                className="input-field"
+              />
             </div>
           </div>
         </div>
@@ -393,7 +440,7 @@ export default function QuoteForm() {
             </div>
             <div>
               <label className="label">Phone Number *</label>
-              <input type="tel" value={form.phone} onChange={e => set('phone', e.target.value)} required placeholder="07700 900000 or 020 7946 0000" className="input-field" />
+              <input type="tel" value={form.phone} onChange={e => set('phone', e.target.value)} required placeholder="07700 900000" className="input-field" />
             </div>
             <div>
               <label className="label">Additional Instructions <span className="text-slate-400 font-normal">(optional)</span></label>
@@ -401,7 +448,7 @@ export default function QuoteForm() {
                 value={form.message}
                 onChange={e => set('message', e.target.value)}
                 rows={3}
-                placeholder="Any special instructions, access notes, pets in the property, areas to focus on..."
+                placeholder="Any special instructions, access notes, pets in the property..."
                 className="input-field resize-none"
               />
             </div>
@@ -412,14 +459,14 @@ export default function QuoteForm() {
         {(form.service || form.propertyType) && (
           <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100 text-xs text-slate-600 space-y-1">
             <p className="font-semibold text-slate-700 mb-2">Your quote summary:</p>
-            {form.service && <p>📋 Service: <strong>{form.service}</strong></p>}
+            {form.service     && <p>📋 Service: <strong>{form.service}</strong></p>}
             {form.propertyType && <p>🏠 Property: <strong>{PROPERTY_TYPES.find(t => t.value === form.propertyType)?.label}</strong></p>}
-            {form.bedrooms && <p>🛏️ Bedrooms: <strong>{form.bedrooms === 'Studio' ? 'Studio' : `${form.bedrooms} Bedroom${form.bedrooms === '1' ? '' : 's'}`}</strong></p>}
-            {form.bathrooms && <p>🚿 Bathrooms: <strong>{form.bathrooms}</strong></p>}
+            {form.bedrooms    && <p>🛏️ Bedrooms: <strong>{form.bedrooms === 'Studio' ? 'Studio' : `${form.bedrooms} Bedroom${form.bedrooms === '1' ? '' : 's'}`}</strong></p>}
+            {form.bathrooms   && <p>🚿 Bathrooms: <strong>{form.bathrooms}</strong></p>}
             {form.rooms.length > 0 && <p>🏡 Extra rooms: <strong>{form.rooms.length} selected</strong></p>}
-            {form.frequency && <p>🗓️ Frequency: <strong>{FREQUENCIES.find(f => f.value === form.frequency)?.label}</strong></p>}
-            {pcStatus === 'valid' && pcInfo && <p>📍 Area: <strong>{pcInfo.ward}, {pcInfo.admin_district}</strong></p>}
-            {form.postcode && <p>📮 Postcode: <strong>{form.postcode}</strong></p>}
+            {form.frequency   && <p>🗓️ Frequency: <strong>{FREQUENCIES.find(f => f.value === form.frequency)?.label}</strong></p>}
+            {form.address     && <p>📍 Address: <strong>{form.address}</strong></p>}
+            {form.postcode    && <p>📮 Postcode: <strong>{form.postcode}</strong></p>}
           </div>
         )}
 
