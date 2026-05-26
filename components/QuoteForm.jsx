@@ -127,7 +127,7 @@ export default function QuoteForm() {
 
   /* ── Postcode validation + address lookup — 100% free, no API key ── */
   const findAddresses = useCallback(async () => {
-    const clean = form.postcode.replace(/\s+/g, '');
+    let clean = form.postcode.replace(/\s+/g, '');
     if (clean.length < 5) { setAddrError('Please enter a valid postcode first.'); return; }
 
     setAddrLoading(true);
@@ -139,12 +139,27 @@ export default function QuoteForm() {
 
     try {
       /* Step 1 — validate postcode & get lat/lng via postcodes.io (free) */
-      const pcRes  = await fetch(`https://api.postcodes.io/postcodes/${encodeURIComponent(clean)}`);
-      const pcData = await pcRes.json();
+      let pcRes  = await fetch(`https://api.postcodes.io/postcodes/${encodeURIComponent(clean)}`);
+      let pcData = await pcRes.json();
+
+      /* Auto-correct: if not found, try replacing letter O with digit 0 (common typo) */
+      if (pcData.status !== 200) {
+        const corrected = clean.replace(/O/gi, '0');
+        if (corrected !== clean) {
+          const retryRes  = await fetch(`https://api.postcodes.io/postcodes/${encodeURIComponent(corrected)}`);
+          const retryData = await retryRes.json();
+          if (retryData.status === 200) {
+            pcData = retryData;
+            clean  = corrected;
+            /* Update the input with the corrected postcode */
+            set('postcode', retryData.result.postcode);
+          }
+        }
+      }
 
       if (pcData.status !== 200) {
         setPcStatus('invalid');
-        setAddrError('Postcode not found. Please check and try again.');
+        setAddrError('Postcode not found. Please double-check — make sure you typed 0 (zero) not the letter O.');
         setAddrLoading(false);
         return;
       }
@@ -417,14 +432,16 @@ out body;`;
             )}
 
             {/* Error / fallback manual input */}
-            {addrError && (
+            {addrError && !addrError.includes('double-check') && (
               <div>
-                <p className="text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 mb-2">{addrError}</p>
-                <label className="label">Type your address manually</label>
+                <p className="text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 mb-2">
+                  {addrError}
+                </p>
+                <label className="label">Enter your house number &amp; street</label>
                 <input
                   value={form.address}
                   onChange={e => set('address', e.target.value)}
-                  placeholder="e.g. 12 Baker Street, London"
+                  placeholder="e.g. 42 High Street, London"
                   className="input-field"
                 />
               </div>
