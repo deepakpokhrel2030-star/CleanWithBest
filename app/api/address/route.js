@@ -6,15 +6,15 @@ export async function GET(request) {
 
   if (!postcode) return NextResponse.json({ addresses: [] });
 
-  const key = process.env.GETADDRESS_API_KEY;
-  if (!key) return NextResponse.json({ addresses: [] });
+  const key = process.env.GETADDRESS_API_KEY || process.env.NEXT_PUBLIC_GETADDRESS_API_KEY;
+  if (!key) return NextResponse.json({ addresses: [], error: 'no_key' });
 
   try {
     const res = await fetch(
       `https://api.getaddress.io/find/${encodeURIComponent(postcode)}?api-key=${key}&expand=true`,
       { next: { revalidate: 86400 } }
     );
-    if (!res.ok) return NextResponse.json({ addresses: [] });
+    if (!res.ok) return NextResponse.json({ addresses: [], error: `api_${res.status}` });
 
     const data = await res.json();
     const addresses = (data.addresses || [])

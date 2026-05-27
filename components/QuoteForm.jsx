@@ -175,8 +175,11 @@ export default function QuoteForm() {
       if (addrData.addresses?.length) {
         setAddrList(addrData.addresses);
         setShowDropdown(true);
+      } else if (addrData.error === 'no_key') {
+        setAddrError('Address lookup not configured — please contact us or enter your address manually.');
+      } else {
+        setAddrError('No addresses found for this postcode. Please enter your address below.');
       }
-      /* If no addresses returned, manual entry field is shown automatically */
 
     } catch {
       setAddrError('Address lookup failed. Please type your address below.');
@@ -394,6 +397,11 @@ export default function QuoteForm() {
             {/* Manual address input — shown when no dropdown available */}
             {pcStatus === 'valid' && !showDropdown && !form.address && (
               <div>
+                {addrError && (
+                  <p className="text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 mb-2">
+                    {addrError}
+                  </p>
+                )}
                 <label className="label">House number &amp; street *</label>
                 <input
                   value={form.address}
@@ -403,11 +411,6 @@ export default function QuoteForm() {
                   autoFocus
                 />
               </div>
-            )}
-
-            {/* Error for invalid postcode only */}
-            {addrError && addrError.includes('double-check') && (
-              <p className="text-xs text-red-500 mt-1">{addrError}</p>
             )}
 
             {/* Preferred date */}
