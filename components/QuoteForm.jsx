@@ -170,7 +170,7 @@ export default function QuoteForm() {
 
       /* Step 2 — fetch full address list from getAddress.io (Royal Mail PAF) */
       const addrRes = await fetch(
-        `https://api.getaddress.io/find/${encodeURIComponent(pc)}?api-key=0o4AI818EEyLkV3wutzE1Q52238&expand=true`
+        `https://api.getaddress.io/find/${pc.replace(/\s/g, '')}?api-key=0o4AI818EEyLkV3wutzE1Q52238&expand=true`
       );
 
       if (!addrRes.ok) throw new Error('api_error');
