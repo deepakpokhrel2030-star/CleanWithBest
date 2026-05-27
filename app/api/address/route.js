@@ -16,7 +16,7 @@ export async function GET(request) {
     const body = await res.text();
 
     if (!res.ok) {
-      return NextResponse.json({ addresses: [], debug: `http_${res.status}`, body });
+      return NextResponse.json({ addresses: [], debug: `http_${res.status}`, body: body || '(empty)', url_used: url });
     }
 
     const data = JSON.parse(body);
