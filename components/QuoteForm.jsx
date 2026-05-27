@@ -168,15 +168,25 @@ export default function QuoteForm() {
 
       const pc = pcData.result.postcode;
 
-      /* Step 2 — fetch addresses via our server-side API route */
-      const addrRes  = await fetch(`/api/address?postcode=${encodeURIComponent(pc)}`);
-      const addrData = await addrRes.json();
+      /* Step 2 — fetch full address list from getAddress.io (Royal Mail PAF) */
+      const addrRes = await fetch(
+        `https://api.getaddress.io/find/${encodeURIComponent(pc)}?api-key=0o4AI818EEyLkV3wutzE1Q52238&expand=true`
+      );
 
-      if (addrData.addresses?.length) {
-        setAddrList(addrData.addresses);
+      if (!addrRes.ok) throw new Error('api_error');
+
+      const addrData = await addrRes.json();
+      const list = (addrData.addresses || [])
+        .map(a => a.formatted_address.filter(Boolean).join(', '))
+        .sort((a, b) => {
+          const na = parseInt(a.match(/^\d+/)?.[0] ?? '0');
+          const nb = parseInt(b.match(/^\d+/)?.[0] ?? '0');
+          return na !== nb ? na - nb : a.localeCompare(b);
+        });
+
+      if (list.length > 0) {
+        setAddrList(list);
         setShowDropdown(true);
-      } else if (addrData.error === 'no_key') {
-        setAddrError('Address lookup not configured — please contact us or enter your address manually.');
       } else {
         setAddrError('No addresses found for this postcode. Please enter your address below.');
       }
