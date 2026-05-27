@@ -125,7 +125,7 @@ export default function QuoteForm() {
 
   const set = (key, val) => setForm(f => ({ ...f, [key]: val }));
 
-  /* ── Postcode validation + address lookup — 100% free, no API key ── */
+  /* ── Postcode validation + address lookup ── */
   const findAddresses = useCallback(async () => {
     let clean = form.postcode.replace(/\s+/g, '');
     if (clean.length < 5) { setAddrError('Please enter a valid postcode first.'); return; }
@@ -138,11 +138,11 @@ export default function QuoteForm() {
     setPcInfo(null);
 
     try {
-      /* Step 1 — validate postcode & get lat/lng via postcodes.io (free) */
+      /* Step 1 — validate postcode via postcodes.io (~100ms, free) */
       let pcRes  = await fetch(`https://api.postcodes.io/postcodes/${encodeURIComponent(clean)}`);
       let pcData = await pcRes.json();
 
-      /* Auto-correct: if not found, try replacing letter O with digit 0 (common typo) */
+      /* Auto-correct: O vs 0 typo */
       if (pcData.status !== 200) {
         const corrected = clean.replace(/O/gi, '0');
         if (corrected !== clean) {
@@ -151,7 +151,6 @@ export default function QuoteForm() {
           if (retryData.status === 200) {
             pcData = retryData;
             clean  = corrected;
-            /* Update the input with the corrected postcode */
             set('postcode', retryData.result.postcode);
           }
         }
@@ -167,88 +166,46 @@ export default function QuoteForm() {
       setPcInfo(pcData.result);
       setPcStatus('valid');
 
-      const { latitude, longitude, admin_district } = pcData.result;
-      const pc = pcData.result.postcode; // normalised e.g. "DA16 2HJ"
+      const pc  = pcData.result.postcode;
+      const key = process.env.NEXT_PUBLIC_GETADDRESS_API_KEY;
 
-      /* Step 2 — OpenStreetMap Overpass API (free, no key)
-         - runQuery returns { elements: [] } on any error — never throws
-         - tries primary server, then backup server
-         - Strategy A: exact postcode tag match
-         - Strategy B: proximity 500m (catches areas with less OSM tagging) */
-
-      const OVERPASS_SERVERS = [
-        'https://overpass-api.de/api/interpreter',
-        'https://overpass.kumi.systems/api/interpreter',
-      ];
-
-      const runQuery = async (q) => {
-        for (const server of OVERPASS_SERVERS) {
-          try {
-            const r = await fetch(server, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-              body: `data=${encodeURIComponent(q)}`,
-            });
-            if (!r.ok) continue;
-            const d = await r.json();
-            if (d.elements) return d;
-          } catch { /* try next server */ }
-        }
-        return { elements: [] };
-      };
-
-      const queryA = `[out:json][timeout:20];
-(node["addr:postcode"="${pc}"]["addr:housenumber"];
- way["addr:postcode"="${pc}"]["addr:housenumber"];);
-out body;`;
-
-      const queryB = `[out:json][timeout:20];
-(node["addr:housenumber"](around:500,${latitude},${longitude});
- way["addr:housenumber"](around:500,${latitude},${longitude}););
-out body;`;
-
-      let ovData = await runQuery(queryA);
-      if (!ovData.elements?.length) ovData = await runQuery(queryB);
-
-      const formatElements = (elements) => {
-        const seen = new Set();
-        return elements
-          .map(el => {
-            const t      = el.tags || {};
-            const num    = t['addr:housenumber'] || '';
-            const street = t['addr:street']      || '';
-            const name   = t['addr:housename']   || '';
-            const flat   = t['addr:unit']        || t['addr:flats'] || '';
-            if (!street && !name) return null;
-            const line = flat  ? `Flat ${flat}, ${num} ${street}`
-                       : name  ? `${name}${num ? ', ' + num : ''}${street ? ' ' + street : ''}`
-                       : num   ? `${num} ${street}`
-                       : street;
-            return `${line}, ${admin_district}, ${pc}`;
-          })
-          .filter(a => {
-            if (!a?.trim()) return false;
-            if (seen.has(a)) return false;
-            seen.add(a); return true;
-          })
-          .sort((a, b) => {
-            const na = parseInt(a.match(/^\d+/)?.[0] ?? '0');
-            const nb = parseInt(b.match(/^\d+/)?.[0] ?? '0');
-            return na !== nb ? na - nb : a.localeCompare(b);
-          });
-      };
-
-      if (ovData.elements?.length > 0) {
-        const list = formatElements(ovData.elements);
-        if (list.length > 0) {
-          setAddrList(list);
-          setShowDropdown(true);
-        } else {
-          setAddrError('Could not format addresses. Please type your address below.');
-        }
-      } else {
-        setAddrError('No map data found for this postcode. Please type your address below.');
+      if (!key) {
+        /* No key configured — skip straight to manual entry, no hanging */
+        setAddrError('Please type your address below.');
+        setAddrLoading(false);
+        return;
       }
+
+      /* Step 2 — fetch full address list from getAddress.io (Royal Mail PAF, ~150ms) */
+      const addrRes = await fetch(
+        `https://api.getaddress.io/find/${encodeURIComponent(pc)}?api-key=${key}&expand=true`
+      );
+
+      if (!addrRes.ok) {
+        setAddrError('Could not load addresses. Please type your address below.');
+        setAddrLoading(false);
+        return;
+      }
+
+      const addrData = await addrRes.json();
+
+      if (!addrData.addresses?.length) {
+        setAddrError('No addresses found for this postcode. Please type your address below.');
+        setAddrLoading(false);
+        return;
+      }
+
+      const list = addrData.addresses
+        .map(a => a.formatted_address.filter(Boolean).join(', '))
+        .sort((a, b) => {
+          const na = parseInt(a.match(/^\d+/)?.[0] ?? '0');
+          const nb = parseInt(b.match(/^\d+/)?.[0] ?? '0');
+          return na !== nb ? na - nb : a.localeCompare(b);
+        });
+
+      setAddrList(list);
+      setShowDropdown(true);
+
     } catch {
       setAddrError('Address lookup failed. Please type your address below.');
     } finally {
