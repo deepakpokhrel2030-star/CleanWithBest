@@ -168,34 +168,12 @@ export default function QuoteForm() {
 
       const pc = pcData.result.postcode;
 
-      /* Step 2 — fetch full address list from getAddress.io (Royal Mail PAF) */
-      const addrRes = await fetch(
-        `https://api.getaddress.io/find/${pc.replace(/\s/g, '')}?api-key=dtoken_hEDzcyiWMr3NB7PUB3NUzI408w823tjfgZvfZjzo3mcLePBPXib8SI1eyhADhPZynvKrSYEvJvknBA-sIxS0C7Qie65HUrOyvs-zi3RY8--MV-liipORWhWPlvr6VY8vKRyKRglm7mVoLZw4Srsc685FPN3IN7Vx7O8AswSOb3w2WiAeFmLIqC3wsiSBrhqF55A4k_6-r-Y&expand=true`
-      );
-
-      if (!addrRes.ok) {
-        const body = await addrRes.json().catch(() => ({}));
-        const msg = addrRes.status === 401
-          ? 'API key unauthorised — please verify your getaddress.io account email.'
-          : addrRes.status === 429
-          ? 'Daily lookup limit reached — try again tomorrow or upgrade at getaddress.io.'
-          : `Address lookup failed (${addrRes.status}${body.Message ? ': ' + body.Message : ''}). Please enter your address below.`;
-        setAddrError(msg);
-        setAddrLoading(false);
-        return;
-      }
-
+      /* Step 2 — fetch addresses via server-side route (avoids CORS/token issues) */
+      const addrRes  = await fetch(`/api/address?postcode=${encodeURIComponent(pc)}`);
       const addrData = await addrRes.json();
-      const list = (addrData.addresses || [])
-        .map(a => a.formatted_address.filter(Boolean).join(', '))
-        .sort((a, b) => {
-          const na = parseInt(a.match(/^\d+/)?.[0] ?? '0');
-          const nb = parseInt(b.match(/^\d+/)?.[0] ?? '0');
-          return na !== nb ? na - nb : a.localeCompare(b);
-        });
 
-      if (list.length > 0) {
-        setAddrList(list);
+      if (addrData.addresses?.length) {
+        setAddrList(addrData.addresses);
         setShowDropdown(true);
       } else {
         setAddrError('No addresses found for this postcode. Please enter your address below.');

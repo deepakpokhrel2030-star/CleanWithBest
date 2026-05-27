@@ -6,7 +6,7 @@ export async function GET(request) {
 
   if (!postcode) return NextResponse.json({ addresses: [] });
 
-  const key = process.env.GETADDRESS_API_KEY || process.env.NEXT_PUBLIC_GETADDRESS_API_KEY;
+  const key = process.env.GETADDRESS_API_KEY || '0o4AI818EEyLkV3wutzE1Q52238';
   if (!key) return NextResponse.json({ addresses: [], error: 'no_key' });
 
   try {
