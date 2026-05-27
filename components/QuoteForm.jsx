@@ -173,7 +173,17 @@ export default function QuoteForm() {
         `https://api.getaddress.io/find/${pc.replace(/\s/g, '')}?api-key=0o4AI818EEyLkV3wutzE1Q52238&expand=true`
       );
 
-      if (!addrRes.ok) throw new Error('api_error');
+      if (!addrRes.ok) {
+        const body = await addrRes.json().catch(() => ({}));
+        const msg = addrRes.status === 401
+          ? 'API key unauthorised — please verify your getaddress.io account email.'
+          : addrRes.status === 429
+          ? 'Daily lookup limit reached — try again tomorrow or upgrade at getaddress.io.'
+          : `Address lookup failed (${addrRes.status}${body.Message ? ': ' + body.Message : ''}). Please enter your address below.`;
+        setAddrError(msg);
+        setAddrLoading(false);
+        return;
+      }
 
       const addrData = await addrRes.json();
       const list = (addrData.addresses || [])
