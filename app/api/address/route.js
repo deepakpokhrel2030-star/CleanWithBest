@@ -11,7 +11,7 @@ export async function GET(request) {
 
   try {
     const res = await fetch(
-      `https://api.getaddress.io/find/${encodeURIComponent(postcode)}?api-key=${key}&expand=true`,
+      `https://api.getaddress.io/find/${postcode.replace(/\s/g, '')}?api-key=${key}&expand=true`,
       { next: { revalidate: 86400 } }
     );
     if (!res.ok) return NextResponse.json({ addresses: [], error: `api_${res.status}` });
