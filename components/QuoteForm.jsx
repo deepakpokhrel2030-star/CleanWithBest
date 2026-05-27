@@ -176,11 +176,12 @@ export default function QuoteForm() {
         setAddrList(addrData.addresses);
         setShowDropdown(true);
       } else {
-        setAddrError('No addresses found for this postcode. Please enter your address below.');
+        const debugInfo = addrData.debug ? ` [debug: ${addrData.debug}${addrData.error ? ' / ' + addrData.error : ''}]` : '';
+        setAddrError(`No addresses found for this postcode. Please enter your address below.${debugInfo}`);
       }
 
-    } catch {
-      setAddrError('Address lookup failed. Please type your address below.');
+    } catch (err) {
+      setAddrError(`Address lookup failed: ${String(err)}`);
     } finally {
       setAddrLoading(false);
     }
