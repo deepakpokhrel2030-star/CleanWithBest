@@ -176,7 +176,7 @@ export default function QuoteForm() {
         setAddrList(addrData.addresses);
         setShowDropdown(true);
       } else {
-        const debugInfo = addrData.debug ? ` [debug: ${addrData.debug} | body: ${addrData.body ?? '?'}]` : '';
+        const debugInfo = addrData.debug ? ` [${addrData.debug} | pc:${addrData.postcode_sent} | key:${addrData.key_prefix} | ${addrData.body}]` : '';
         setAddrError(`No addresses found for this postcode. Please enter your address below.${debugInfo}`);
       }
 

@@ -7,16 +7,27 @@ export async function GET(request) {
   if (!postcode) return NextResponse.json({ addresses: [] });
 
   const key = process.env.GETADDRESS_API_KEY || '0o4AI818EEyLkV3wutzE1Q52238';
-  if (!key) return NextResponse.json({ addresses: [], error: 'no_key' });
-
-  const url = `https://api.getaddress.io/find/${postcode.replace(/\s/g, '')}?api-key=${key}&expand=true`;
+  const clean = postcode.replace(/\s/g, '').toUpperCase();
+  const url = `https://api.getaddress.io/find/${clean}?api-key=${key}&expand=true`;
 
   try {
-    const res = await fetch(url, { cache: 'no-store' });
+    const res = await fetch(url, {
+      cache: 'no-store',
+      headers: {
+        'User-Agent': 'CleanWithBest/1.0',
+        'Accept': 'application/json',
+      },
+    });
     const body = await res.text();
 
     if (!res.ok) {
-      return NextResponse.json({ addresses: [], debug: `http_${res.status}`, body: body || '(empty)', url_used: url });
+      return NextResponse.json({
+        addresses: [],
+        debug: `http_${res.status}`,
+        body: body || '(empty)',
+        postcode_sent: clean,
+        key_prefix: key.slice(0, 6),
+      });
     }
 
     const data = JSON.parse(body);
