@@ -166,44 +166,17 @@ export default function QuoteForm() {
       setPcInfo(pcData.result);
       setPcStatus('valid');
 
-      const pc  = pcData.result.postcode;
-      const key = process.env.NEXT_PUBLIC_GETADDRESS_API_KEY;
+      const pc = pcData.result.postcode;
 
-      if (!key) {
-        /* No key configured — show manual entry immediately */
-        setAddrLoading(false);
-        return;
-      }
-
-      /* Step 2 — fetch full address list from getAddress.io (Royal Mail PAF, ~150ms) */
-      const addrRes = await fetch(
-        `https://api.getaddress.io/find/${encodeURIComponent(pc)}?api-key=${key}&expand=true`
-      );
-
-      if (!addrRes.ok) {
-        setAddrError('Could not load addresses. Please type your address below.');
-        setAddrLoading(false);
-        return;
-      }
-
+      /* Step 2 — fetch addresses via our server-side API route */
+      const addrRes  = await fetch(`/api/address?postcode=${encodeURIComponent(pc)}`);
       const addrData = await addrRes.json();
 
-      if (!addrData.addresses?.length) {
-        setAddrError('No addresses found for this postcode. Please type your address below.');
-        setAddrLoading(false);
-        return;
+      if (addrData.addresses?.length) {
+        setAddrList(addrData.addresses);
+        setShowDropdown(true);
       }
-
-      const list = addrData.addresses
-        .map(a => a.formatted_address.filter(Boolean).join(', '))
-        .sort((a, b) => {
-          const na = parseInt(a.match(/^\d+/)?.[0] ?? '0');
-          const nb = parseInt(b.match(/^\d+/)?.[0] ?? '0');
-          return na !== nb ? na - nb : a.localeCompare(b);
-        });
-
-      setAddrList(list);
-      setShowDropdown(true);
+      /* If no addresses returned, manual entry field is shown automatically */
 
     } catch {
       setAddrError('Address lookup failed. Please type your address below.');
