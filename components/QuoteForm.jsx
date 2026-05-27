@@ -170,8 +170,7 @@ export default function QuoteForm() {
       const key = process.env.NEXT_PUBLIC_GETADDRESS_API_KEY;
 
       if (!key) {
-        /* No key configured — skip straight to manual entry, no hanging */
-        setAddrError('Please type your address below.');
+        /* No key configured — show manual entry immediately */
         setAddrLoading(false);
         return;
       }
@@ -419,20 +418,23 @@ export default function QuoteForm() {
               </div>
             )}
 
-            {/* Error / fallback manual input */}
-            {addrError && !addrError.includes('double-check') && (
+            {/* Manual address input — shown when no dropdown available */}
+            {pcStatus === 'valid' && !showDropdown && !form.address && (
               <div>
-                <p className="text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 mb-2">
-                  {addrError}
-                </p>
-                <label className="label">Enter your house number &amp; street</label>
+                <label className="label">House number &amp; street *</label>
                 <input
                   value={form.address}
                   onChange={e => set('address', e.target.value)}
-                  placeholder="e.g. 42 High Street, London"
+                  placeholder={`e.g. 42 ${pcInfo?.thoroughfare || 'High Street'}`}
                   className="input-field"
+                  autoFocus
                 />
               </div>
+            )}
+
+            {/* Error for invalid postcode only */}
+            {addrError && addrError.includes('double-check') && (
+              <p className="text-xs text-red-500 mt-1">{addrError}</p>
             )}
 
             {/* Preferred date */}
