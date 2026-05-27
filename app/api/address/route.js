@@ -9,14 +9,17 @@ export async function GET(request) {
   const key = process.env.GETADDRESS_API_KEY || '0o4AI818EEyLkV3wutzE1Q52238';
   if (!key) return NextResponse.json({ addresses: [], error: 'no_key' });
 
-  try {
-    const res = await fetch(
-      `https://api.getaddress.io/find/${postcode.replace(/\s/g, '')}?api-key=${key}&expand=true`,
-      { next: { revalidate: 86400 } }
-    );
-    if (!res.ok) return NextResponse.json({ addresses: [], error: `api_${res.status}` });
+  const url = `https://api.getaddress.io/find/${postcode.replace(/\s/g, '')}?api-key=${key}&expand=true`;
 
-    const data = await res.json();
+  try {
+    const res = await fetch(url, { cache: 'no-store' });
+    const body = await res.text();
+
+    if (!res.ok) {
+      return NextResponse.json({ addresses: [], debug: `http_${res.status}`, body });
+    }
+
+    const data = JSON.parse(body);
     const addresses = (data.addresses || [])
       .map(a => a.formatted_address.filter(Boolean).join(', '))
       .sort((a, b) => {
@@ -25,8 +28,8 @@ export async function GET(request) {
         return na !== nb ? na - nb : a.localeCompare(b);
       });
 
-    return NextResponse.json({ addresses });
-  } catch {
-    return NextResponse.json({ addresses: [] });
+    return NextResponse.json({ addresses, count: addresses.length });
+  } catch (err) {
+    return NextResponse.json({ addresses: [], debug: 'fetch_error', error: String(err) });
   }
 }
