@@ -54,14 +54,16 @@ document.getElementById('modalOverlay').addEventListener('click', e => {
 });
 
 // ── Postcode address lookup ──────────────────────────────────────────────────
-// Free API key from https://getaddress.io (100 lookups/day on free plan)
+// Sign up free at https://getaddress.io (100 lookups/day, no credit card)
+// then paste your API key below:
 var GETADDRESS_KEY = '';
 
 (function () {
-  var postcodeInput  = document.getElementById('postcode');
-  var findBtn        = document.getElementById('findAddressBtn');
-  var feedbackEl     = document.getElementById('postcode-feedback');
-  var addressSelect  = document.getElementById('address-select');
+  var postcodeInput = document.getElementById('postcode');
+  var findBtn       = document.getElementById('findAddressBtn');
+  var feedbackEl    = document.getElementById('postcode-feedback');
+  var addrSelect    = document.getElementById('address-select');
+  var addrManual    = document.getElementById('address-manual');
   if (!postcodeInput || !findBtn) return;
 
   function setFeedback(msg, type) {
@@ -74,107 +76,103 @@ var GETADDRESS_KEY = '';
     findBtn.textContent = busy ? 'Searching…' : 'Find Address';
   }
 
-  function showAddresses(addresses) {
-    addressSelect.innerHTML = '';
-    var placeholder = document.createElement('option');
-    placeholder.value = '';
-    placeholder.textContent = '— Select your address (' + addresses.length + ' found) —';
-    addressSelect.appendChild(placeholder);
+  function hideAddressFields() {
+    addrSelect.style.display = 'none';
+    addrSelect.disabled = true;
+    addrManual.style.display = 'none';
+    addrManual.disabled = true;
+  }
 
+  function showDropdown(addresses) {
+    addrManual.style.display = 'none';
+    addrManual.disabled = true;
+    addrSelect.innerHTML = '';
+    var ph = document.createElement('option');
+    ph.value = '';
+    ph.textContent = '— Select your address (' + addresses.length + ' found) —';
+    addrSelect.appendChild(ph);
     addresses.forEach(function (line) {
       var opt = document.createElement('option');
       opt.value = line;
       opt.textContent = line;
-      addressSelect.appendChild(opt);
+      addrSelect.appendChild(opt);
     });
-
-    addressSelect.style.display = 'block';
-    addressSelect.focus();
+    addrSelect.disabled = false;
+    addrSelect.style.display = 'block';
+    addrSelect.focus();
   }
 
-  function lookupWithGetAddress(postcode) {
-    return fetch(
-      'https://api.getaddress.io/find/' + encodeURIComponent(postcode) +
-      '?api-key=' + GETADDRESS_KEY + '&expand=true'
-    )
-    .then(function (r) {
-      if (!r.ok) throw new Error('not_found');
-      return r.json();
-    })
-    .then(function (data) {
-      if (!data.addresses || !data.addresses.length) throw new Error('no_results');
-      return data.addresses.map(function (a) {
-        return a.formatted_address.filter(Boolean).join(', ');
-      });
-    });
-  }
-
-  // Free fallback: postcodes.io validates the postcode, Nominatim finds buildings
-  function lookupFree(postcode) {
-    var clean = postcode.replace(/\s+/g, '').toUpperCase();
-    return fetch('https://api.postcodes.io/postcodes/' + encodeURIComponent(clean))
-      .then(function (r) { return r.json(); })
-      .then(function (pcData) {
-        if (pcData.status !== 200 || !pcData.result) throw new Error('invalid_postcode');
-        var area = [pcData.result.admin_district, pcData.result.admin_county].filter(Boolean).join(', ');
-        // Search Nominatim for buildings/houses at this postcode
-        return fetch(
-          'https://nominatim.openstreetmap.org/search' +
-          '?format=json&addressdetails=1&limit=50&countrycodes=gb' +
-          '&postalcode=' + encodeURIComponent(postcode)
-        )
-        .then(function (r) { return r.json(); })
-        .then(function (results) {
-          var addresses = results
-            .filter(function (r) { return r.address && (r.address.house_number || r.address.building); })
-            .map(function (r) {
-              var parts = [
-                r.address.house_number || r.address.building,
-                r.address.road,
-                r.address.suburb,
-                r.address.town || r.address.city || r.address.village
-              ].filter(Boolean);
-              return parts.join(', ');
-            });
-          return { addresses: addresses, area: area };
-        });
-      });
+  function showManualEntry(hint) {
+    addrSelect.style.display = 'none';
+    addrSelect.disabled = true;
+    addrManual.placeholder = hint ? 'e.g. 42 ' + hint : 'Enter your full address';
+    addrManual.disabled = false;
+    addrManual.style.display = 'block';
+    addrManual.focus();
   }
 
   function doLookup() {
     var postcode = postcodeInput.value.trim().toUpperCase();
     if (postcode.length < 5) {
-      setFeedback('Please enter a valid postcode', 'error');
+      setFeedback('Please enter a valid postcode first', 'error');
       return;
     }
 
     setBusy(true);
-    setFeedback('Finding addresses…', 'loading');
-    addressSelect.style.display = 'none';
+    setFeedback('Searching…', 'loading');
+    hideAddressFields();
 
-    var lookup = GETADDRESS_KEY
-      ? lookupWithGetAddress(postcode).then(function (addresses) { return { addresses: addresses, area: '' }; })
-      : lookupFree(postcode);
-
-    lookup
-      .then(function (result) {
-        setBusy(false);
-        if (result.addresses && result.addresses.length > 0) {
-          var areaText = result.area ? ' in ' + result.area : '';
-          setFeedback('✓ ' + result.addresses.length + ' addresses found' + areaText, 'success');
-          showAddresses(result.addresses);
-        } else {
-          var hint = result.area ? ' — ' + result.area : '';
-          setFeedback('✓ Valid postcode' + hint + ' — no street-level data available, please enter address manually', 'success');
-        }
-      })
-      .catch(function (err) {
-        setBusy(false);
-        var msg = (err.message === 'invalid_postcode' || err.message === 'not_found')
-          ? 'Postcode not found — please check and try again'
-          : 'Could not reach address service — please try again';
-        setFeedback(msg, 'error');
-      });
+    if (GETADDRESS_KEY) {
+      // getAddress.io — Royal Mail PAF data, fast & accurate
+      fetch('https://api.getaddress.io/find/' + encodeURIComponent(postcode) +
+            '?api-key=' + GETADDRESS_KEY + '&expand=true')
+        .then(function (r) {
+          if (r.status === 401) throw new Error('bad_key');
+          if (!r.ok) throw new Error('not_found');
+          return r.json();
+        })
+        .then(function (data) {
+          setBusy(false);
+          if (!data.addresses || !data.addresses.length) throw new Error('no_results');
+          var addresses = data.addresses.map(function (a) {
+            return a.formatted_address.filter(Boolean).join(', ');
+          });
+          setFeedback('✓ ' + addresses.length + ' addresses found', 'success');
+          showDropdown(addresses);
+        })
+        .catch(function (err) {
+          setBusy(false);
+          if (err.message === 'bad_key') {
+            setFeedback('API key invalid — check your getaddress.io key', 'error');
+          } else if (err.message === 'not_found' || err.message === 'no_results') {
+            setFeedback('No addresses found for this postcode', 'error');
+          } else {
+            setFeedback('Could not reach address service — please enter address manually', 'error');
+            showManualEntry('');
+          }
+        });
+    } else {
+      // No API key — validate postcode with postcodes.io (fast, ~100ms)
+      // then ask user to type their address
+      fetch('https://api.postcodes.io/postcodes/' + encodeURIComponent(postcode.replace(/\s+/g, '')))
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          setBusy(false);
+          if (data.status !== 200 || !data.result) {
+            setFeedback('Postcode not found — please check and try again', 'error');
+            return;
+          }
+          var road = data.result.thoroughfare || '';
+          var area = [data.result.admin_district, data.result.admin_county].filter(Boolean).join(', ');
+          setFeedback('✓ ' + postcode + (area ? ' — ' + area : ''), 'success');
+          showManualEntry(road);
+        })
+        .catch(function () {
+          setBusy(false);
+          setFeedback('Could not validate postcode — please enter address manually', 'error');
+          showManualEntry('');
+        });
+    }
   }
 
   findBtn.addEventListener('click', doLookup);
@@ -182,7 +180,7 @@ var GETADDRESS_KEY = '';
     if (e.key === 'Enter') { e.preventDefault(); doLookup(); }
   });
   postcodeInput.addEventListener('input', function () {
-    addressSelect.style.display = 'none';
+    hideAddressFields();
     setFeedback('', '');
   });
 })();
