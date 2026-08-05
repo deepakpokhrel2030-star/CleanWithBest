@@ -175,6 +175,9 @@ export default function HomePage() {
             <a href="tel:+447789602945" className="btn-outline-white-lg flex items-center gap-2">
               <Phone size={17} /> Call +44 7789 602945
             </a>
+            <a href="tel:+447503494242" className="btn-outline-white-lg flex items-center gap-2">
+              <Phone size={17} /> Call 07503 494242
+            </a>
           </div>
 
           {/* Pricing teasers */}
@@ -534,7 +537,7 @@ export default function HomePage() {
             ))}
           </div>
           <p className="text-center text-slate-400 text-sm mt-8">
-            Still have questions? <a href="tel:+447789602945" className="text-brand-600 font-semibold hover:underline">Call us on +44 7789 602945</a> or <Link href="/contact" className="text-brand-600 font-semibold hover:underline">send a message</Link>.
+            Still have questions? <a href="tel:+447789602945" className="text-brand-600 font-semibold hover:underline">Call us on +44 7789 602945</a>, <a href="tel:+447503494242" className="text-brand-600 font-semibold hover:underline">07503 494242</a> or <Link href="/contact" className="text-brand-600 font-semibold hover:underline">send a message</Link>.
           </p>
         </div>
       </section>
@@ -562,6 +565,9 @@ export default function HomePage() {
             </Link>
             <a href="tel:+447789602945" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/25 text-white font-bold text-lg px-8 py-4 rounded-2xl transition-all">
               <Phone size={18} /> +44 7789 602945
+            </a>
+            <a href="tel:+447503494242" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/25 text-white font-bold text-lg px-8 py-4 rounded-2xl transition-all">
+              <Phone size={18} /> 07503 494242
             </a>
           </div>
           <p className="text-white/40 text-sm">Available 24/7 · cleanwithbest@gmail.com</p>

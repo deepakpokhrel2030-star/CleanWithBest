@@ -1,4 +1,4 @@
-import { Phone, Mail, Clock, MapPin, MessageCircle } from 'lucide-react';
+import { Phone, Mail, Clock, MapPin, MessageCircle, Facebook, Instagram, Music2 } from 'lucide-react';
 import ContactForm from '@/frontend/components/ContactForm';
 import Link from 'next/link';
 
@@ -37,8 +37,9 @@ export default function ContactPage() {
               <div className="space-y-5 mb-10">
                 {[
                   { icon: Phone, title: 'Call Us', detail: '+44 7789 602945', sub: 'Available 24/7', href: 'tel:+447789602945' },
+                  { icon: Phone, title: 'Second Number', detail: '07503 494242', sub: 'Call or WhatsApp', href: 'tel:+447503494242' },
                   { icon: Mail, title: 'Email Us', detail: 'cleanwithbest@gmail.com', sub: 'We respond within 2 hours', href: 'mailto:cleanwithbest@gmail.com' },
-                  { icon: MessageCircle, title: 'Live Chat', detail: 'Chat with us online', sub: 'Available 24/7', href: '#' },
+                  { icon: MessageCircle, title: 'WhatsApp', detail: 'Message us on WhatsApp', sub: 'Available 24/7', href: 'https://wa.me/447503494242' },
                   { icon: MapPin, title: 'Our Office', detail: '12 Bishopsgate', sub: 'London EC2N 4BQ', href: '#' },
                   { icon: Clock, title: 'Availability', detail: 'Available 24/7', sub: 'We never close', href: null },
                 ].map(({ icon: Icon, title, detail, sub, href }) => (
@@ -64,6 +65,21 @@ export default function ContactPage() {
                 <h3 className="font-semibold text-slate-900 mb-3">Need a quote instead?</h3>
                 <p className="text-slate-500 text-sm mb-4">Head to our dedicated quote page for a more detailed quote request with pricing estimates.</p>
                 <Link href="/quote" className="btn-primary text-sm">Get a Free Quote →</Link>
+              </div>
+
+              <div className="mt-6 bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
+                <h3 className="font-semibold text-slate-900 mb-3">Follow CleanWithBest</h3>
+                <div className="flex flex-wrap gap-3">
+                  {[
+                    { Icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/people/Cleanwithbest/61584162025224/' },
+                    { Icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/cleanwithbest' },
+                    { Icon: Music2, label: 'TikTok', href: 'https://www.tiktok.com/@cleanwithbest' },
+                  ].map(({ Icon, label, href }) => (
+                    <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 hover:border-brand-200 hover:text-brand-700">
+                      <Icon size={16} /> {label}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -98,6 +114,7 @@ export default function ContactPage() {
           <p className="text-white/80 mb-8">Give us a call or fill in a quote request and our team will recommend the perfect cleaning solution for your home or business.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <a href="tel:+447789602945" className="btn-white">📞 Call +44 7789 602945</a>
+            <a href="tel:+447503494242" className="btn-white">📞 Call 07503 494242</a>
             <Link href="/quote" className="btn-outline">Get a Free Quote</Link>
           </div>
         </div>

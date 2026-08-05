@@ -62,7 +62,10 @@ export default function QuotePage() {
                 <a href="tel:+447789602945" className="flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
                   <Phone size={18} /> +44 7789 602945
                 </a>
-                <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
+                <a href="tel:+447503494242" className="mt-3 flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
+                  <Phone size={18} /> 07503 494242
+                </a>
+                <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
                   <MessageCircle size={18} /> WhatsApp Us
                 </a>
                 <p className="text-white/50 text-xs mt-2">Available 24/7</p>

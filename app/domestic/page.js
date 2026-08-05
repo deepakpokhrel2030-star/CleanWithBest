@@ -100,6 +100,7 @@ export default function DomesticPage() {
               <div className="flex flex-wrap gap-3">
                 <Link href="/quote" className="btn-white-lg">Book a Cleaner Now!</Link>
                 <a href="tel:+447789602945" className="btn-outline-white-lg"><Phone size={15}/> Call Us</a>
+                <a href="tel:+447503494242" className="btn-outline-white-lg"><Phone size={15}/> 07503 494242</a>
               </div>
             </div>
             <div className="hidden md:block relative">
@@ -236,6 +237,7 @@ export default function DomesticPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/quote" className="btn-white-lg">Book a Cleaner Now!</Link>
             <a href="tel:+447789602945" className="btn-outline-white-lg"><Phone size={16}/> +44 7789 602945</a>
+            <a href="tel:+447503494242" className="btn-outline-white-lg"><Phone size={16}/> 07503 494242</a>
           </div>
         </div>
       </section>

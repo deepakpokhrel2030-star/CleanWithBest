@@ -108,6 +108,7 @@ export default function CommercialPage() {
             <div className="flex flex-wrap gap-3">
               <Link href="/quote" className="btn-white">Get a Business Quote</Link>
               <a href="tel:+447789602945" className="btn-outline">Call +44 7789 602945</a>
+              <a href="tel:+447503494242" className="btn-outline">Call 07503 494242</a>
             </div>
           </div>
         </div>
@@ -208,6 +209,7 @@ export default function CommercialPage() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/quote" className="btn-white">Get a Business Quote</Link>
             <a href="tel:+447789602945" className="btn-outline">📞 +44 7789 602945</a>
+            <a href="tel:+447503494242" className="btn-outline">📞 07503 494242</a>
           </div>
         </div>
       </section>

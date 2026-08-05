@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Phone, Mail, Clock, MapPin, Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
+import { Phone, Mail, Clock, MapPin, Facebook, Instagram, Music2 } from 'lucide-react';
 
 const domesticLinks = [
   ['Regular Home Cleaning', '/domestic#regular'],
@@ -41,18 +41,18 @@ export default function Footer() {
             </p>
             <div className="space-y-2 mb-6 text-sm">
               <div className="flex items-center gap-2"><Phone size={14} className="text-brand-400" /><a href="tel:+447789602945" className="hover:text-white transition-colors">+44 7789 602945</a></div>
+              <div className="flex items-center gap-2"><Phone size={14} className="text-brand-400" /><a href="tel:+447503494242" className="hover:text-white transition-colors">07503 494242</a></div>
               <div className="flex items-center gap-2"><Mail size={14} className="text-brand-400" /><a href="mailto:cleanwithbest@gmail.com" className="hover:text-white transition-colors">cleanwithbest@gmail.com</a></div>
               <div className="flex items-center gap-2"><Clock size={14} className="text-brand-400" /><span>Available 24/7</span></div>
               <div className="flex items-center gap-2"><MapPin size={14} className="text-brand-400" /><span>12 Bishopsgate, London EC2N 4BQ</span></div>
             </div>
             <div className="flex gap-3">
               {[
-                { Icon: Facebook, label: 'Facebook' },
-                { Icon: Instagram, label: 'Instagram' },
-                { Icon: Twitter, label: 'Twitter' },
-                { Icon: Youtube, label: 'YouTube' },
-              ].map(({ Icon, label }) => (
-                <a key={label} href="#" aria-label={label}
+                { Icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/people/Cleanwithbest/61584162025224/' },
+                { Icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/cleanwithbest' },
+                { Icon: Music2, label: 'TikTok', href: 'https://www.tiktok.com/@cleanwithbest' },
+              ].map(({ Icon, label, href }) => (
+                <a key={label} href={href} aria-label={label} target="_blank" rel="noopener noreferrer"
                   className="w-9 h-9 rounded-full bg-white/8 hover:bg-brand-600 flex items-center justify-center text-slate-400 hover:text-white transition-all duration-200">
                   <Icon size={16} />
                 </a>

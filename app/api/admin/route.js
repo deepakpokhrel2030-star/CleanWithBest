@@ -3,11 +3,12 @@ import { getQuotes, getContacts, deleteQuote, deleteContact, updateQuoteStatus, 
 
 export async function POST(request) {
   try {
-    const { password, action, type, id, status } = await request.json();
+    const { username, password, action, type, id, status } = await request.json();
+    const adminUser = process.env.ADMIN_USERNAME || 'admin';
     const adminPass = process.env.ADMIN_PASSWORD || 'Admin@CleanBest2024';
 
-    if (password !== adminPass) {
-      return NextResponse.json({ success: false, error: 'Invalid password' }, { status: 401 });
+    if (username !== adminUser || password !== adminPass) {
+      return NextResponse.json({ success: false, error: 'Invalid admin login details' }, { status: 401 });
     }
 
     if (action === 'getData') {

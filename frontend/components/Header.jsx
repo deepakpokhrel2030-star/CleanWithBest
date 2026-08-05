@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Menu, X, Phone, ChevronDown, Mail } from 'lucide-react';
+import { Menu, X, Phone, ChevronDown, Mail, Facebook, Instagram, Music2 } from 'lucide-react';
 
 const nav = [
   {
@@ -101,12 +101,18 @@ export default function Header() {
             <a href="tel:+447789602945" className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Phone size={11} /> +44 7789 602945
             </a>
+            <a href="tel:+447503494242" className="flex items-center gap-1.5 hover:text-white transition-colors">
+              <Phone size={11} /> 07503 494242
+            </a>
             <a href="mailto:cleanwithbest@gmail.com" className="flex items-center gap-1.5 hover:text-white transition-colors">
               <Mail size={11} /> cleanwithbest@gmail.com
             </a>
           </div>
-          <div className="flex items-center gap-4 text-slate-400">
+          <div className="flex items-center gap-3 text-slate-400">
             <span>Available 24/7</span>
+            <a href="https://www.facebook.com/people/Cleanwithbest/61584162025224/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-white"><Facebook size={12} /></a>
+            <a href="https://www.instagram.com/cleanwithbest" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-white"><Instagram size={12} /></a>
+            <a href="https://www.tiktok.com/@cleanwithbest" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="hover:text-white"><Music2 size={12} /></a>
           </div>
         </div>
       </div>
@@ -183,6 +189,9 @@ export default function Header() {
             <a href="tel:+447789602945" className="text-sm font-semibold text-slate-500 hover:text-brand-600 transition-colors flex items-center gap-1.5">
               <Phone size={14} /> +44 7789 602945
             </a>
+            <a href="tel:+447503494242" className="text-sm font-semibold text-slate-500 hover:text-brand-600 transition-colors flex items-center gap-1.5">
+              <Phone size={14} /> 07503 494242
+            </a>
             <Link href="/quote"
               className="inline-flex items-center gap-2 bg-brand-600 text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-brand-700 transition-all shadow-sm hover:shadow-md">
               Book Now — Free Quote
@@ -240,6 +249,14 @@ export default function Header() {
               <a href="tel:+447789602945" className="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-brand-600">
                 <Phone size={15} /> +44 7789 602945
               </a>
+              <a href="tel:+447503494242" className="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-brand-600">
+                <Phone size={15} /> 07503 494242
+              </a>
+              <div className="flex items-center gap-2 px-3 py-2">
+                <a href="https://www.facebook.com/people/Cleanwithbest/61584162025224/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="rounded-lg border border-slate-200 p-2 text-slate-500 hover:text-brand-600"><Facebook size={16} /></a>
+                <a href="https://www.instagram.com/cleanwithbest" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="rounded-lg border border-slate-200 p-2 text-slate-500 hover:text-brand-600"><Instagram size={16} /></a>
+                <a href="https://www.tiktok.com/@cleanwithbest" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="rounded-lg border border-slate-200 p-2 text-slate-500 hover:text-brand-600"><Music2 size={16} /></a>
+              </div>
               <Link href="/quote" onClick={closeAll}
                 className="block text-center bg-brand-600 text-white font-bold text-sm py-3 rounded-xl hover:bg-brand-700 transition-colors">
                 Book Now — Free Quote

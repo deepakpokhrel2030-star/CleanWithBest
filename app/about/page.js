@@ -189,6 +189,9 @@ export default function AboutPage() {
                 <a href="tel:+447789602945" className="flex justify-center items-center gap-2 text-brand-600 font-semibold text-sm hover:text-brand-800 transition-colors">
                   📞 +44 7789 602945
                 </a>
+                <a href="tel:+447503494242" className="flex justify-center items-center gap-2 text-brand-600 font-semibold text-sm hover:text-brand-800 transition-colors">
+                  📞 07503 494242
+                </a>
               </div>
             </div>
           </div>
