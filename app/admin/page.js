@@ -160,7 +160,7 @@ export default function AdminPage() {
                 <table className="w-full text-sm">
                   <thead className="bg-slate-50 border-b border-slate-100">
                     <tr>
-                      {['Name', 'Contact', 'Service', 'Postcode', 'Size / Freq.', 'Date', 'Status', ''].map(h => (
+                      {['Name', 'Contact', 'Preference', 'Service', 'Postcode', 'Size / Freq.', 'Date', 'Status', ''].map(h => (
                         <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide whitespace-nowrap">{h}</th>
                       ))}
                     </tr>
@@ -170,9 +170,10 @@ export default function AdminPage() {
                       <tr key={q.id} className="hover:bg-slate-50 transition-colors">
                         <td className="px-4 py-3 font-medium text-slate-900 whitespace-nowrap">{q.firstName} {q.lastName}</td>
                         <td className="px-4 py-3 text-slate-500">
-                          <div>{q.email}</div>
-                          <div className="text-xs text-slate-400">{q.phone}</div>
+                          <a href={`tel:${q.phone}`} className="font-medium text-brand-600 hover:text-brand-800">{q.phone}</a>
+                          {q.email && <div className="text-xs text-slate-400">{q.email}</div>}
                         </td>
+                        <td className="px-4 py-3 text-slate-500 whitespace-nowrap">{q.contactPreference || 'Call'}</td>
                         <td className="px-4 py-3 text-slate-700 max-w-[160px]">
                           <div className="truncate">{q.service}</div>
                         </td>

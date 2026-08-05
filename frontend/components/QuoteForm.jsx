@@ -40,10 +40,16 @@ const FREQUENCIES = [
   { value: 'monthly',     label: 'Monthly' },
 ];
 
+const CONTACT_METHODS = [
+  { value: 'whatsapp', label: 'WhatsApp' },
+  { value: 'call', label: 'Phone Call' },
+  { value: 'either', label: 'Either is fine' },
+];
+
 const EMPTY_FORM = {
   service: '', propertyType: '', bedrooms: '', bathrooms: '', rooms: [],
   frequency: '', postcode: '', address: '', preferredDate: '',
-  firstName: '', lastName: '', email: '', phone: '', message: '',
+  firstName: '', lastName: '', email: '', phone: '', contactPreference: 'whatsapp', message: '',
 };
 
 /* ── Pill selector ── */
@@ -114,6 +120,7 @@ function SectionLabel({ num, title, subtitle }) {
 export default function QuoteForm() {
   const [form, setForm]     = useState(EMPTY_FORM);
   const [status, setStatus] = useState('idle');
+  const [submittedContact, setSubmittedContact] = useState(null);
 
   /* postcode + address lookup state */
   const [pcStatus,   setPcStatus]   = useState('idle'); // idle | loading | valid | invalid
@@ -195,14 +202,16 @@ export default function QuoteForm() {
   /* ── Submit ── */
   const handleSubmit = async e => {
     e.preventDefault();
-    if (!form.service || !form.propertyType || !form.postcode || !form.address || !form.firstName || !form.email || !form.phone) {
-      alert('Please fill in all required fields including your address.');
+    if (!form.service || !form.propertyType || !form.postcode || !form.address || !form.firstName || !form.phone || !form.contactPreference) {
+      alert('Please fill in all required fields including your phone number and preferred contact method.');
       return;
     }
     setStatus('loading');
     try {
+      const preferenceLabel = CONTACT_METHODS.find(method => method.value === form.contactPreference)?.label || form.contactPreference;
       const payload = {
         ...form,
+        contactPreference: preferenceLabel,
         rooms: form.rooms.join(', '),
         summary: `${form.propertyType} · ${form.bedrooms} bed · ${form.bathrooms} bath · ${form.rooms.length} extra rooms`,
         postcodeDistrict: pcInfo ? `${pcInfo.ward}, ${pcInfo.admin_district}` : '',
@@ -210,6 +219,7 @@ export default function QuoteForm() {
       const res  = await fetch('/api/quotes', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
       const data = await res.json();
       if (data.success) {
+        setSubmittedContact({ phone: form.phone, email: form.email, contactPreference: preferenceLabel });
         setStatus('success');
         setForm(EMPTY_FORM);
         setPcStatus('idle'); setPcInfo(null);
@@ -225,8 +235,9 @@ export default function QuoteForm() {
           <CheckCircle size={32} className="text-green-500" />
         </div>
         <h3 className="font-heading text-2xl font-bold text-slate-900 mb-2">Quote Request Sent!</h3>
-        <p className="text-slate-500 mb-2">Thank you! We'll get back to you within 2 hours with a transparent, competitive quote.</p>
-        <p className="text-slate-400 text-sm mb-6">Check your inbox at <strong>{form.email}</strong></p>
+        <p className="text-slate-500 mb-2">Thank you. We will contact you within 2 hours with a transparent quote.</p>
+        <p className="text-slate-500 text-sm mb-1">Preferred contact: <strong>{submittedContact?.contactPreference}</strong></p>
+        <p className="text-slate-400 text-sm mb-6">We will use <strong>{submittedContact?.phone}</strong>{submittedContact?.email ? `, and email ${submittedContact.email} if needed.` : '.'}</p>
         <button onClick={() => setStatus('idle')} className="btn-primary">Submit Another Quote</button>
       </div>
     );
@@ -249,7 +260,7 @@ export default function QuoteForm() {
       {/* Header */}
       <div className="bg-brand-600 px-6 py-4">
         <h3 className="font-heading font-bold text-white text-lg">Get Your Free Quote</h3>
-        <p className="text-white/70 text-xs mt-0.5">Fill in the details below — we'll respond within 2 hours</p>
+        <p className="text-white/70 text-xs mt-0.5">Leave your details and we will contact you by WhatsApp or phone call</p>
       </div>
 
       <div className="p-6 space-y-7">
@@ -428,7 +439,7 @@ export default function QuoteForm() {
 
         {/* 7 — Contact details */}
         <div>
-          <SectionLabel num={sectionNum('contact')} title="Your contact details *" subtitle="So we can send your personalised quote" />
+          <SectionLabel num={sectionNum('contact')} title="Your contact details *" subtitle="So we can contact you back by WhatsApp or phone call" />
           <div className="space-y-3">
             <div className="grid grid-cols-2 gap-3">
               <div>
@@ -441,12 +452,16 @@ export default function QuoteForm() {
               </div>
             </div>
             <div>
-              <label className="label">Email Address *</label>
-              <input type="email" value={form.email} onChange={e => set('email', e.target.value)} required placeholder="jane@example.co.uk" className="input-field" />
+              <label className="label">Phone Number / WhatsApp *</label>
+              <input type="tel" value={form.phone} onChange={e => set('phone', e.target.value)} required placeholder="07700 900000" className="input-field" />
             </div>
             <div>
-              <label className="label">Phone Number *</label>
-              <input type="tel" value={form.phone} onChange={e => set('phone', e.target.value)} required placeholder="07700 900000" className="input-field" />
+              <label className="label">How should we contact you? *</label>
+              <PillSelect options={CONTACT_METHODS} value={form.contactPreference} onChange={v => set('contactPreference', v)} />
+            </div>
+            <div>
+              <label className="label">Email Address <span className="text-slate-400 font-normal">(optional)</span></label>
+              <input type="email" value={form.email} onChange={e => set('email', e.target.value)} placeholder="jane@example.co.uk" className="input-field" />
             </div>
             <div>
               <label className="label">Additional Instructions <span className="text-slate-400 font-normal">(optional)</span></label>
@@ -473,6 +488,8 @@ export default function QuoteForm() {
             {form.frequency   && <p>🗓️ Frequency: <strong>{FREQUENCIES.find(f => f.value === form.frequency)?.label}</strong></p>}
             {form.address     && <p>📍 Address: <strong>{form.address}</strong></p>}
             {form.postcode    && <p>📮 Postcode: <strong>{form.postcode}</strong></p>}
+            {form.phone       && <p>☎ Contact: <strong>{form.phone}</strong></p>}
+            {form.contactPreference && <p>💬 Preferred reply: <strong>{CONTACT_METHODS.find(method => method.value === form.contactPreference)?.label}</strong></p>}
           </div>
         )}
 
@@ -489,7 +506,7 @@ export default function QuoteForm() {
         >
           {status === 'loading'
             ? <><Loader2 size={18} className="animate-spin" /> Sending your quote request...</>
-            : <>Get My Free Quote <ChevronRight size={18} /></>
+            : <>Send Quote Request <ChevronRight size={18} /></>
           }
         </button>
         <p className="text-center text-xs text-slate-400">

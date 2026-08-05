@@ -1,9 +1,9 @@
 import QuoteForm from '@/frontend/components/QuoteForm';
-import { CheckCircle, Phone, Clock } from 'lucide-react';
+import { CheckCircle, Phone, Clock, MessageCircle } from 'lucide-react';
 
 export const metadata = {
   title: 'Get a Free Quote',
-  description: 'Get a free, no-obligation cleaning quote from CleanWithBest. We respond within 2 hours with transparent pricing.',
+  description: 'Get a free, no-obligation cleaning quote from CleanWithBest. Leave your contact details and we respond by WhatsApp or phone call.',
 };
 
 export default function QuotePage() {
@@ -18,7 +18,7 @@ export default function QuotePage() {
               Get Your Free,<br />No-Obligation Quote
             </h1>
             <p className="text-white/75 text-lg leading-relaxed">
-              Fill in the form below and we'll get back to you within 2 hours with a transparent, competitive quote. No hidden fees. Ever.
+              Fill in the form below with your contact details and we'll get back to you by WhatsApp or phone call with a transparent quote.
             </p>
           </div>
         </div>
@@ -44,7 +44,7 @@ export default function QuotePage() {
                     [CheckCircle, '100% Satisfaction Guarantee'],
                     [CheckCircle, 'Fully Insured Cleaners'],
                     [CheckCircle, 'Top 5% Vetted Cleaners'],
-                    [Clock, 'Response Within 2 Hours'],
+                    [Clock, 'WhatsApp or Call Within 2 Hours'],
                     [CheckCircle, 'Eco-Friendly Products'],
                     [CheckCircle, 'Fair Pricing, No Hidden Fees'],
                   ].map(([Icon, label]) => (
@@ -57,10 +57,13 @@ export default function QuotePage() {
 
               {/* Call instead */}
               <div className="bg-brand-600 rounded-2xl p-6 text-white">
-                <h3 className="font-semibold text-lg mb-2">Prefer to Call?</h3>
-                <p className="text-white/75 text-sm mb-4">Speak directly with our friendly team for an instant quote.</p>
+                <h3 className="font-semibold text-lg mb-2">Prefer WhatsApp or Call?</h3>
+                <p className="text-white/75 text-sm mb-4">Leave your number in the quote form or speak directly with our team now.</p>
                 <a href="tel:+447789602945" className="flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
                   <Phone size={18} /> +44 7789 602945
+                </a>
+                <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
+                  <MessageCircle size={18} /> WhatsApp Us
                 </a>
                 <p className="text-white/50 text-xs mt-2">Available 24/7</p>
               </div>
@@ -71,7 +74,7 @@ export default function QuotePage() {
                 <div className="space-y-4">
                   {[
                     { num: '1', text: 'We review your quote request' },
-                    { num: '2', text: 'We call or email you within 2 hours' },
+                    { num: '2', text: 'We contact you by WhatsApp or phone call' },
                     { num: '3', text: 'You receive a transparent, fixed quote' },
                     { num: '4', text: 'You choose if and when to book' },
                     { num: '5', text: 'We send your dedicated cleaner!' },

@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Menu, X, Phone, ChevronDown, Mail } from 'lucide-react';
-import AccountNav from '@/frontend/components/AccountNav';
 
 const nav = [
   {
@@ -184,7 +183,6 @@ export default function Header() {
             <a href="tel:+447789602945" className="text-sm font-semibold text-slate-500 hover:text-brand-600 transition-colors flex items-center gap-1.5">
               <Phone size={14} /> +44 7789 602945
             </a>
-            <AccountNav />
             <Link href="/quote"
               className="inline-flex items-center gap-2 bg-brand-600 text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-brand-700 transition-all shadow-sm hover:shadow-md">
               Book Now — Free Quote
@@ -239,7 +237,6 @@ export default function Header() {
               ))}
             </div>
             <div className="px-4 pb-5 pt-2 border-t border-slate-100 space-y-2">
-              <AccountNav mobile onNavigate={closeAll} />
               <a href="tel:+447789602945" className="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-brand-600">
                 <Phone size={15} /> +44 7789 602945
               </a>

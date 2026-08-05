@@ -4,7 +4,7 @@ import { addQuote } from '@/backend/db';
 export async function POST(request) {
   try {
     const body = await request.json();
-    if (!body.firstName || !body.email || !body.service) {
+    if (!body.firstName || !body.phone || !body.service) {
       return NextResponse.json({ success: false, error: 'Missing required fields' }, { status: 400 });
     }
     const entry = addQuote(body);
