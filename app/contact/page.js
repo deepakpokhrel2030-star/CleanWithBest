@@ -1,5 +1,5 @@
 import { Phone, Mail, Clock, MapPin, MessageCircle } from 'lucide-react';
-import ContactForm from '@/components/ContactForm';
+import ContactForm from '@/frontend/components/ContactForm';
 import Link from 'next/link';
 
 export const metadata = {

@@ -50,3 +50,30 @@ export function updateContactStatus(id, status) {
   const list = getContacts().map(c => c.id === Number(id) ? { ...c, status } : c);
   writeJSON('contacts.json', list);
 }
+
+export function getUsers() { return readJSON('users.json'); }
+export function findUserByEmail(email) {
+  return getUsers().find(user => user.email.toLowerCase() === email.toLowerCase());
+}
+export function addUser(user) {
+  const list = getUsers();
+  const entry = { id: Date.now(), ...user, createdAt: new Date().toISOString() };
+  list.unshift(entry);
+  writeJSON('users.json', list);
+  return entry;
+}
+
+export function getSessions() { return readJSON('sessions.json'); }
+export function addSession(session) {
+  const list = getSessions().filter(item => item.userId !== session.userId);
+  const entry = { id: Date.now(), ...session, createdAt: new Date().toISOString() };
+  list.unshift(entry);
+  writeJSON('sessions.json', list);
+  return entry;
+}
+export function findSession(token) {
+  return getSessions().find(session => session.token === token);
+}
+export function deleteSession(token) {
+  writeJSON('sessions.json', getSessions().filter(session => session.token !== token));
+}

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { addQuote } from '@/lib/db';
+import { addQuote } from '@/backend/db';
 
 export async function POST(request) {
   try {

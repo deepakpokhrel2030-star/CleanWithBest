@@ -1,4 +1,4 @@
-import QuoteForm from '@/components/QuoteForm';
+import QuoteForm from '@/frontend/components/QuoteForm';
 import { CheckCircle, Phone, Clock } from 'lucide-react';
 
 export const metadata = {

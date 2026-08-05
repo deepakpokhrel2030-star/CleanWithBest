@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getQuotes, getContacts, deleteQuote, deleteContact, updateQuoteStatus, updateContactStatus } from '@/lib/db';
+import { getQuotes, getContacts, getUsers, deleteQuote, deleteContact, updateQuoteStatus, updateContactStatus } from '@/backend/db';
 
 export async function POST(request) {
   try {
@@ -11,7 +11,7 @@ export async function POST(request) {
     }
 
     if (action === 'getData') {
-      return NextResponse.json({ success: true, quotes: getQuotes(), contacts: getContacts() });
+      return NextResponse.json({ success: true, quotes: getQuotes(), contacts: getContacts(), users: getUsers().map(({ passwordHash, ...user }) => user) });
     }
 
     if (action === 'delete') {
