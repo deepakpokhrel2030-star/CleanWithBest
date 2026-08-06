@@ -127,10 +127,10 @@ export default function Chatbot() {
   return (
     <div className="fixed bottom-4 right-4 z-[70] sm:bottom-6 sm:right-6">
       {open && (
-        <div className="mb-3 flex h-[560px] w-[calc(100vw-2rem)] max-w-[400px] flex-col overflow-hidden rounded-2xl border border-cyan-100 bg-gradient-to-b from-cyan-50 via-emerald-50 to-amber-50 shadow-2xl shadow-cyan-900/15">
-          <div className="flex items-center justify-between border-b border-cyan-100 bg-gradient-to-r from-cyan-100 via-emerald-100 to-amber-100 px-4 py-3 text-slate-800">
+        <div className="animate-bestiebot-panel mb-3 flex h-[560px] w-[calc(100vw-2rem)] max-w-[400px] flex-col overflow-hidden rounded-2xl border border-cyan-100 bg-gradient-to-b from-cyan-50 via-emerald-50 to-amber-50 shadow-2xl shadow-cyan-900/15">
+          <div className="bestiebot-shine relative flex items-center justify-between overflow-hidden border-b border-cyan-100 bg-gradient-to-r from-cyan-100 via-emerald-100 to-amber-100 px-4 py-3 text-slate-800">
             <div className="flex items-center gap-2">
-              <span className="relative flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-brand-700 shadow-sm ring-1 ring-cyan-100">
+              <span className="animate-bestiebot-robot relative flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-brand-700 shadow-sm ring-1 ring-cyan-100">
                 <Bot size={22} />
                 <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-amber-300 text-[9px] font-black text-amber-900">
                   AI
@@ -138,7 +138,10 @@ export default function Chatbot() {
               </span>
               <div>
                 <p className="font-heading text-sm font-extrabold text-slate-800">BestieBot</p>
-                <p className="text-xs font-semibold text-cyan-800">CleanWithBest robot helper</p>
+                <p className="flex items-center gap-1.5 text-xs font-semibold text-cyan-800">
+                  <span className="bestiebot-status-dot h-2 w-2 rounded-full bg-emerald-500" />
+                  CleanWithBest robot helper
+                </p>
               </div>
             </div>
             <button type="button" onClick={() => setOpen(false)} className="rounded-lg p-2 text-cyan-800 hover:bg-white/70 hover:text-brand-700" aria-label="Minimise chatbot">
@@ -150,11 +153,11 @@ export default function Chatbot() {
             {visibleMessages.map((message, index) => (
               <div key={`${message.role}-${index}`} className={`flex items-end gap-2 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {message.role === 'bot' && (
-                  <span className="mb-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-100 text-cyan-800 ring-1 ring-cyan-200">
+                  <span className="animate-bestiebot-mini mb-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-100 text-cyan-800 ring-1 ring-cyan-200">
                     <Bot size={16} />
                   </span>
                 )}
-                <div className={`max-w-[82%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed shadow-sm ${
+                <div className={`animate-bestiebot-bubble max-w-[82%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed shadow-sm ${
                   message.role === 'user'
                     ? 'rounded-br-md bg-emerald-100 text-emerald-950 ring-1 ring-emerald-200'
                     : 'rounded-bl-md bg-white/90 text-slate-700 ring-1 ring-cyan-100'
@@ -172,12 +175,13 @@ export default function Chatbot() {
 
           <div className="border-t border-cyan-100 bg-white/85 p-3 backdrop-blur">
             <div className="mb-3 flex flex-wrap gap-2">
-              {SUGGESTIONS.map(suggestion => (
+              {SUGGESTIONS.map((suggestion, index) => (
                 <button
                   key={suggestion}
                   type="button"
                   onClick={() => sendMessage(suggestion)}
-                  className="rounded-full border border-cyan-100 bg-cyan-50 px-2.5 py-1.5 text-xs font-bold text-cyan-800 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-800"
+                  className="animate-bestiebot-chip rounded-full border border-cyan-100 bg-cyan-50 px-2.5 py-1.5 text-xs font-bold text-cyan-800 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-800"
+                  style={{ animationDelay: `${index * 70}ms` }}
                 >
                   {suggestion}
                 </button>
@@ -212,10 +216,12 @@ export default function Chatbot() {
       <button
         type="button"
         onClick={() => setOpen(value => !value)}
-        className="group flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-cyan-100 via-emerald-100 to-amber-100 text-brand-800 shadow-xl shadow-cyan-900/20 ring-2 ring-white transition hover:scale-105 hover:shadow-cyan-900/30"
+        className="animate-bestiebot-launcher group relative flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-cyan-100 via-emerald-100 to-amber-100 text-brand-800 shadow-xl shadow-cyan-900/20 ring-2 ring-white transition hover:scale-105 hover:shadow-cyan-900/30"
         aria-label={open ? 'Minimise chatbot' : 'Maximise chatbot'}
       >
-        {open ? <X size={25} /> : <Bot size={28} className="transition group-hover:rotate-3" />}
+        <span className="bestiebot-orbit absolute inset-0 rounded-full border border-cyan-200" />
+        <span className="bestiebot-orbit bestiebot-orbit-delay absolute inset-1 rounded-full border border-emerald-200" />
+        {open ? <X size={25} className="relative z-10" /> : <Bot size={28} className="relative z-10 transition group-hover:rotate-3" />}
       </button>
     </div>
   );
