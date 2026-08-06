@@ -55,8 +55,10 @@ export default function Header() {
             priority
             className="h-12 w-auto object-contain transition group-hover:-translate-y-0.5 sm:h-14"
           />
-          <span className="whitespace-nowrap text-xl font-black tracking-tight leading-none text-brand-800 sm:text-2xl">
-            Clean <span className="text-brand-600">With</span> Best
+          <span className="flex items-baseline whitespace-nowrap font-black tracking-tight leading-none text-brand-800">
+            <span className="text-2xl sm:text-[1.7rem]">Clean</span>
+            <span className="mx-1 text-base text-brand-500 sm:text-lg">with</span>
+            <span className="text-2xl sm:text-[1.7rem]">Best</span>
           </span>
         </Link>
 
