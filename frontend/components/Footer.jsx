@@ -25,14 +25,17 @@ export default function Footer() {
     <footer className="border-t border-slate-200 bg-white text-slate-600">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr]">
         <div>
-          <Link href="/" className="inline-flex">
+          <Link href="/" className="inline-flex items-center gap-3">
             <Image
-              src="/brand/cleanwithbest-logo.png"
+              src="/brand/cleanwithbest-mark.png"
               alt="CleanWithBest"
-              width={260}
-              height={163}
-              className="h-20 w-auto object-contain"
+              width={110}
+              height={92}
+              className="h-16 w-auto object-contain"
             />
+            <span className="font-heading text-2xl font-extrabold leading-none text-brand-800">
+              Clean<span className="text-brand-600">WithBest</span>
+            </span>
           </Link>
           <p className="mt-4 max-w-sm text-sm leading-relaxed">
             Domestic and commercial cleaning across London. Clear quote requests, simple contact options and reliable cleaning teams.

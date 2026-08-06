@@ -46,15 +46,18 @@ export default function Header() {
       </div>
 
       <div className="mx-auto flex h-20 max-w-7xl items-center gap-5 px-4">
-        <Link href="/" onClick={closeMenu} className="group flex shrink-0 items-center">
+        <Link href="/" onClick={closeMenu} className="group flex shrink-0 items-center gap-2.5">
           <Image
-            src="/brand/cleanwithbest-logo.png"
+            src="/brand/cleanwithbest-mark.png"
             alt="CleanWithBest"
-            width={220}
-            height={138}
+            width={96}
+            height={80}
             priority
-            className="h-16 w-auto object-contain transition group-hover:-translate-y-0.5"
+            className="h-12 w-auto object-contain transition group-hover:-translate-y-0.5 sm:h-14"
           />
+          <span className="font-heading text-xl font-extrabold leading-none text-brand-800 sm:text-2xl">
+            Clean<span className="text-brand-600">WithBest</span>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-1 rounded-lg bg-slate-100/80 p-1 lg:flex">
