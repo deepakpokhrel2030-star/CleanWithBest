@@ -99,19 +99,19 @@ export default function HomePage() {
           className="object-cover opacity-10"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-brand-50/80" />
-        <div className="relative mx-auto grid min-h-[560px] max-w-7xl items-start gap-10 px-4 pb-12 pt-8 lg:grid-cols-[1fr_420px] lg:pb-14 lg:pt-10">
+        <div className="relative mx-auto grid max-w-7xl items-start gap-8 px-4 pb-10 pt-6 sm:gap-10 sm:pb-12 sm:pt-8 lg:grid-cols-[1fr_420px] lg:pb-14 lg:pt-10">
           <div className="max-w-3xl">
             <div className="mb-5 inline-flex items-center gap-2 rounded-lg border border-brand-100 bg-brand-50 px-3 py-2 text-sm font-bold text-brand-700">
               <Star size={16} className="text-accent-400" />
               Professional cleaning across London
             </div>
-            <h1 className="font-heading text-4xl font-extrabold leading-tight text-slate-950 md:text-6xl">
+            <h1 className="font-heading text-3xl font-extrabold leading-tight text-slate-950 sm:text-4xl md:text-6xl">
               Cleaning services that are simple to book and easy to trust.
             </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:mt-5 sm:text-lg">
               CleanWithBest helps homes and businesses book reliable cleaners without confusion. Tell us what needs cleaning and we will contact you with a clear quote by WhatsApp or phone.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
               <Link href="/quote" className="btn-primary-lg">
                 Request a Quote <ArrowRight size={18} />
               </Link>
@@ -124,7 +124,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-2xl">
+          <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-2xl sm:p-5">
             <p className="text-sm font-bold uppercase tracking-widest text-brand-700">Get a quote in 3 steps</p>
             <div className="mt-5 space-y-4">
               {[

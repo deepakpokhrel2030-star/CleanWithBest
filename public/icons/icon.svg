@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="CleanWithBest app icon">
+  <rect width="512" height="512" rx="112" fill="#ecfeff"/>
+  <circle cx="384" cy="116" r="48" fill="#fbbf24"/>
+  <circle cx="126" cy="388" r="58" fill="#a7f3d0"/>
+  <rect x="120" y="136" width="272" height="240" rx="72" fill="#0f766e"/>
+  <path d="M170 276c42 42 130 42 172 0" fill="none" stroke="#ffffff" stroke-width="30" stroke-linecap="round"/>
+  <circle cx="204" cy="230" r="24" fill="#ffffff"/>
+  <circle cx="308" cy="230" r="24" fill="#ffffff"/>
+  <path d="M157 151l-34-42M355 151l34-42" fill="none" stroke="#0f766e" stroke-width="28" stroke-linecap="round"/>
+  <path d="M296 417c-15 15-36 22-60 22-50 0-88-35-88-84s38-84 88-84c24 0 45 8 60 22l-25 29c-9-8-20-12-33-12-27 0-47 19-47 45s20 45 47 45c13 0 25-4 34-13l24 30Z" fill="#0f766e"/>
+  <path d="M316 342h48v34h-48z" fill="#fbbf24"/>
+</svg>

@@ -30,26 +30,26 @@ export default function Header() {
   return (
     <header className={`sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur transition-shadow ${scrolled ? 'shadow-lg shadow-slate-900/5' : 'shadow-sm'}`}>
       <div className="border-b border-slate-200 bg-white text-slate-800">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2">
-          <a href="tel:+447503494242" className="inline-flex min-w-0 items-center gap-2 text-sm font-extrabold tracking-tight hover:text-brand-700 sm:text-base">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-2 sm:gap-3 sm:px-4">
+          <a href="tel:+447503494242" className="inline-flex min-w-0 items-center gap-1.5 text-xs font-extrabold tracking-tight hover:text-brand-700 sm:gap-2 sm:text-base">
             <Phone size={17} className="shrink-0 text-brand-600" />
-            <span className="truncate">Call +44 7503 494242</span>
+            <span className="truncate"><span className="sm:hidden">Call </span><span className="hidden sm:inline">Call us: </span>+44 7503 494242</span>
           </a>
           <div className="flex shrink-0 items-center gap-2">
             <a href="tel:+447789602945" className="hidden text-sm font-bold text-slate-500 hover:text-brand-700 md:inline">
               +44 7789 602945
             </a>
-            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-green-50 px-3 py-1.5 text-xs font-black text-green-700 ring-1 ring-green-200 hover:bg-green-100">
-              <MessageCircle size={14} /> WhatsApp
+            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-green-50 px-2.5 py-1.5 text-xs font-black text-green-700 ring-1 ring-green-200 hover:bg-green-100 sm:px-3">
+              <MessageCircle size={14} /> <span className="hidden min-[360px]:inline">WhatsApp</span>
             </a>
           </div>
         </div>
       </div>
 
-      <div className="mx-auto flex h-16 max-w-7xl items-center gap-5 px-4">
+      <div className="mx-auto flex h-14 max-w-7xl items-center gap-4 px-3 sm:h-16 sm:gap-5 sm:px-4">
         <Link href="/" onClick={closeMenu} className="group flex shrink-0 items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-600 font-heading text-base font-black text-white shadow-sm transition group-hover:bg-brand-700">C</span>
-          <span className="font-heading text-xl font-extrabold tracking-tight">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 font-heading text-sm font-black text-white shadow-sm transition group-hover:bg-brand-700 sm:h-10 sm:w-10 sm:text-base">C</span>
+          <span className="font-heading text-lg font-extrabold tracking-tight sm:text-xl">
             <span className="text-brand-700">Clean</span>
             <span className="text-accent-600">WithBest</span>
           </span>

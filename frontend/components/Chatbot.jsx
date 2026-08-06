@@ -191,9 +191,9 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-[70] flex max-w-[calc(100vw-2rem)] flex-col items-end sm:bottom-6 sm:right-6">
+    <div className="fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] right-3 z-[70] flex max-w-[calc(100vw-1.5rem)] flex-col items-end sm:bottom-6 sm:right-6 sm:max-w-[calc(100vw-2rem)]">
       {open && (
-        <div className="animate-bestiebot-panel relative mb-2 flex h-[540px] w-[calc(100vw-2rem)] max-w-[390px] flex-col overflow-hidden rounded-2xl border border-cyan-100 bg-gradient-to-b from-cyan-50 via-emerald-50 to-amber-50 shadow-2xl shadow-cyan-900/15">
+        <div className="animate-bestiebot-panel relative mb-2 flex h-[min(520px,calc(100dvh-7rem))] w-[calc(100vw-1.5rem)] max-w-[390px] flex-col overflow-hidden rounded-2xl border border-cyan-100 bg-gradient-to-b from-cyan-50 via-emerald-50 to-amber-50 shadow-2xl shadow-cyan-900/15 sm:h-[540px] sm:w-[calc(100vw-2rem)]">
           <span className="bestiebot-bg-bubble bestiebot-bg-bubble-one" />
           <span className="bestiebot-bg-bubble bestiebot-bg-bubble-two" />
           <span className="bestiebot-bg-bubble bestiebot-bg-bubble-three" />
@@ -218,7 +218,7 @@ export default function Chatbot() {
             </button>
           </div>
 
-          <div className="relative z-10 flex-1 space-y-4 overflow-y-auto p-4">
+          <div className="relative z-10 flex-1 space-y-3 overflow-y-auto p-3 sm:space-y-4 sm:p-4">
             {visibleMessages.map((message, index) => (
               <div key={`${message.role}-${index}`} className={`flex items-end gap-2 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {message.role === 'bot' && (
@@ -242,7 +242,7 @@ export default function Chatbot() {
             ))}
           </div>
 
-          <div className="relative z-10 border-t border-cyan-100 bg-white/85 p-3 backdrop-blur">
+          <div className="relative z-10 border-t border-cyan-100 bg-white/85 p-2.5 backdrop-blur sm:p-3">
             <div className="mb-3 flex flex-wrap gap-2">
               {SUGGESTIONS.map((suggestion, index) => (
                 <button
@@ -285,7 +285,7 @@ export default function Chatbot() {
       <button
         type="button"
         onClick={() => setOpen(value => !value)}
-        className="animate-bestiebot-launcher group relative flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-cyan-100 via-emerald-100 to-amber-100 text-brand-800 shadow-xl shadow-cyan-900/20 ring-2 ring-white transition hover:scale-105 hover:shadow-cyan-900/30"
+        className="animate-bestiebot-launcher group relative flex h-[3.75rem] w-[3.75rem] items-center justify-center rounded-full bg-gradient-to-br from-cyan-100 via-emerald-100 to-amber-100 text-brand-800 shadow-xl shadow-cyan-900/20 ring-2 ring-white transition hover:scale-105 hover:shadow-cyan-900/30 sm:h-16 sm:w-16"
         aria-label={open ? 'Minimise chatbot' : 'Maximise chatbot'}
       >
         <span className="bestiebot-orbit absolute inset-0 rounded-full border border-cyan-200" />
