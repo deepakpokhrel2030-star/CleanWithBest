@@ -9,56 +9,56 @@ export const metadata = {
 
 const services = [
   {
-    id: 'regular', emoji: '🏠', title: 'Regular Home Cleaning', price: 'From £17/hr',
+    id: 'regular', code: 'REG', title: 'Regular Home Cleaning', price: 'From £17/hr',
     tagline: 'Keep your home consistently spotless',
     desc: 'Our regular home cleaning service is perfect for busy households who want a consistently clean home without the hassle. Choose from weekly, fortnightly or monthly visits — always the same cleaner who knows your home.',
     includes: ['All surfaces dusted and wiped down', 'Kitchen worktops, sink and hob cleaned', 'Bathroom cleaned and sanitised', 'Vacuuming throughout', 'Mopping hard floors', 'Skirting boards and light switches wiped', 'Bins emptied and re-lined', 'Glass and mirrors polished'],
     popular: false,
   },
   {
-    id: 'deep', emoji: '✨', title: 'Deep Cleaning', price: 'From £179',
+    id: 'deep', code: 'DEEP', title: 'Deep Cleaning', price: 'From £179',
     tagline: 'A thorough top-to-bottom transformation',
     desc: 'Our deep cleaning service is far more thorough than a regular clean. We tackle every nook and cranny — areas that accumulate grime but are often overlooked. Perfect as a seasonal clean, before a party, or after a renovation.',
     includes: ['Everything in a regular clean, plus:', 'Inside oven, microwave and fridge', 'Inside all kitchen cupboards and drawers', 'Behind and under furniture and appliances', 'Limescale removal from all fixtures', 'Grout scrubbing in bathrooms', 'Blind and window ledge deep clean', 'Wall marks and scuff removal'],
     popular: false,
   },
   {
-    id: 'end-of-tenancy', emoji: '🔑', title: 'End of Tenancy Cleaning', price: 'From £179',
+    id: 'end-of-tenancy', code: 'TEN', title: 'End of Tenancy Cleaning', price: 'From £179',
     tagline: 'Guaranteed to get your deposit back',
     desc: 'Our end of tenancy cleaning service is designed to meet the highest landlord and letting agency standards. We follow a comprehensive checklist and guarantee our work — if the landlord isn\'t satisfied, we return and re-clean for free.',
     includes: ['Full deep clean of every room', 'Oven, hob, extractor fan degreasing', 'Inside all cupboards, wardrobes and drawers', 'Bathroom and en-suite deep sanitise', 'Interior window cleaning', 'Wall marks removed', 'Sealant and grouting cleaned', 'We follow the official tenancy deposit scheme checklist'],
     popular: true,
   },
   {
-    id: 'move', emoji: '📦', title: 'Move In / Move Out', price: 'From £179',
+    id: 'move', code: 'MOVE', title: 'Move In / Move Out', price: 'From £179',
     tagline: 'Start fresh or leave nothing behind',
     desc: 'Whether you\'re moving into a new property or leaving your current home spotless for the next residents, our move-in/move-out cleaning service ensures the property is thoroughly cleaned to a professional standard.',
     includes: ['Complete property clean throughout', 'All surfaces sanitised', 'Kitchen and bathroom deep clean', 'Floors vacuumed and mopped', 'Windows cleaned internally', 'Bins emptied and sanitised', 'Same comprehensive standard as end of tenancy', 'Certificate of cleaning available on request'],
     popular: false,
   },
   {
-    id: 'carpet', emoji: '🛋️', title: 'Carpet & Upholstery Cleaning', price: 'From £43/room',
+    id: 'carpet', code: 'CARPET', title: 'Carpet & Upholstery Cleaning', price: 'From £43/room',
     tagline: 'Revive your carpets and soft furnishings',
     desc: 'Professional hot water extraction cleaning removes deep-set stains, odors, bacteria and allergens that vacuuming alone can\'t tackle. We use professional-grade equipment to refresh carpets, rugs, sofas, chairs and curtains.',
     includes: ['Pre-treatment of all visible stains', 'Hot water extraction deep clean', 'Deodorising treatment included', 'Fabric protection spray (optional add-on)', 'Fast drying — typically 2–4 hours', 'Safe for all carpet fibre types', 'Rugs, sofas and chairs also treated'],
     popular: false,
   },
   {
-    id: 'mattress', emoji: '🛏️', title: 'Mattress Cleaning', price: 'From £23 per mattress',
+    id: 'mattress', code: 'MATT', title: 'Mattress Cleaning', price: 'From £23 per mattress',
     tagline: 'Sleep cleaner, breathe easier',
     desc: 'Your mattress can harbour dust mites, dead skin cells, sweat and bacteria — all of which affect your sleep quality and health. Our professional mattress cleaning uses steam and UV treatment to sanitise and refresh.',
     includes: ['Vacuum pre-treatment to remove debris', 'High-temperature steam sanitisation', 'UV light dust mite treatment', 'Stain spot removal treatment', 'Deodorising and freshening spray', 'Allergen reduction — great for asthma sufferers', 'All mattress sizes and types covered'],
     popular: false,
   },
   {
-    id: 'ironing', emoji: '👕', title: 'Ironing & Laundry', price: 'From £18/hr',
+    id: 'ironing', code: 'IRON', title: 'Ironing & Laundry', price: 'From £18/hr',
     tagline: 'Reclaim your weekends',
     desc: 'Our professional ironing and laundry service takes one of the most tedious household chores off your hands. We can collect, launder and iron your clothes, or simply tackle the ironing pile you\'ve been avoiding.',
     includes: ['Collection and return service available', 'All garment types accepted', 'Shirts, trousers, dresses, bedding and more', 'Hung, folded or bagged to your preference', 'Fast 24-hour turnaround available', 'Careful handling of delicate and designer items', 'Combine with a cleaning visit for extra convenience'],
     popular: false,
   },
   {
-    id: 'windows', emoji: '🪟', title: 'Window Cleaning', price: 'From £29',
+    id: 'windows', code: 'WIN', title: 'Window Cleaning', price: 'From £29',
     tagline: 'Crystal-clear views, brighter rooms',
     desc: 'Streak-free window cleaning for homes and apartments. Our cleaners use pure water technology to deliver spotless results on interior and exterior windows without harsh chemicals.',
     includes: ['Interior and exterior window cleaning', 'Window frames and sills wiped clean', 'Streak-free pure water technology', 'Ground and upper floor access', 'Conservatory roof cleaning available', 'Regular scheduled visits available'],
@@ -92,7 +92,7 @@ export default function DomesticPage() {
               <p className="text-white/72 text-lg mb-6 leading-relaxed">Regular cleaning starts from £17/hour. Deep cleans, end-of-tenancy and specialist home services are quoted clearly before we start.</p>
               <div className="mb-8 grid gap-2 sm:grid-cols-2">
                 {['100% satisfaction guaranteed', 'Background checked cleaners', 'Eco-friendly products', 'Call or WhatsApp response'].map(i => (
-                  <div key={i} className="flex items-center gap-2.5 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-white/82">
+                  <div key={i} className="flex items-center gap-2.5 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-white/80">
                     <CheckCircle size={15} className="text-accent-400" />{i}
                   </div>
                 ))}
@@ -124,17 +124,17 @@ export default function DomesticPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { emoji: '🍳', title: 'Kitchen', color: 'border-orange-200 bg-gradient-to-br from-orange-50 to-amber-50',
+              { short: 'K', title: 'Kitchen', color: 'border-orange-200 bg-gradient-to-br from-orange-50 to-amber-50',
                 tasks: ['Sanitise all worktops', 'Clean hob & oven exterior', 'Clean sink & taps', 'Wipe appliance exteriors', 'Clean inside microwave', 'Mop floor', 'Wipe cabinet doors', 'Empty & re-line bins'] },
-              { emoji: '🛏️', title: 'Bedroom', color: 'border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50',
+              { short: 'B', title: 'Bedroom', color: 'border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50',
                 tasks: ['Make beds / change linen', 'Dust all surfaces', 'Vacuum carpets / mop floors', 'Wipe mirrors', 'Clean interior windows', 'Wipe skirting boards', 'Tidy general areas', 'Vacuum under beds'] },
-              { emoji: '🚿', title: 'Bathroom', color: 'border-teal-200 bg-gradient-to-br from-teal-50 to-cyan-50',
+              { short: 'BA', title: 'Bathroom', color: 'border-teal-200 bg-gradient-to-br from-teal-50 to-cyan-50',
                 tasks: ['Sanitise toilet inside & out', 'Clean bath and shower', 'Clean sink & taps', 'Scrub tiles & remove limescale', 'Polish mirrors', 'Mop floor', 'Replace towels', 'Empty & sanitise bin'] },
-              { emoji: '🛋️', title: 'Living Room', color: 'border-purple-200 bg-gradient-to-br from-purple-50 to-pink-50',
+              { short: 'L', title: 'Living Room', color: 'border-purple-200 bg-gradient-to-br from-purple-50 to-pink-50',
                 tasks: ['Dust all surfaces & ornaments', 'Vacuum sofas & cushions', 'Vacuum carpets / mop floors', 'Wipe skirting boards & doors', 'Clean switches & sockets', 'Polish furniture', 'Clean interior windows', 'Tidy general areas'] },
-            ].map(({ emoji, title, color, tasks }) => (
+            ].map(({ short, title, color, tasks }) => (
               <div key={title} className={`rounded-lg border p-6 ${color}`}>
-                <div className="text-4xl mb-3">{emoji}</div>
+                <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-lg bg-white font-heading text-sm font-black text-brand-700 shadow-sm">{short}</div>
                 <h3 className="font-heading font-bold text-slate-900 text-lg mb-4">{title}</h3>
                 <ul className="space-y-2">
                   {tasks.map(t => <li key={t} className="checklist-item">{t}</li>)}
@@ -159,11 +159,11 @@ export default function DomesticPage() {
       {/* All services */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 space-y-16">
-          {services.map(({ id, emoji, title, price, tagline, desc, includes, popular }) => (
+          {services.map(({ id, code, title, price, tagline, desc, includes, popular }) => (
             <div key={id} id={id} className="grid md:grid-cols-2 gap-10 items-start scroll-mt-24">
               <div>
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-3xl">{emoji}</span>
+                  <span className="flex h-11 min-w-11 items-center justify-center rounded-lg bg-brand-50 px-2 font-heading text-xs font-black text-brand-700">{code}</span>
                   {popular && <span className="bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</span>}
                   <span className="price-badge">{price}</span>
                 </div>
@@ -174,7 +174,7 @@ export default function DomesticPage() {
                   <Link href="/quote" className="btn-primary text-sm">
                     Get a Quote — {price} <ArrowRight size={14} />
                   </Link>
-                  <a href="tel:+447789602945" className="text-sm font-semibold text-brand-600 hover:text-brand-800 flex items-center gap-1.5 transition-colors">
+                  <a href="tel:+447503494242" className="text-sm font-semibold text-brand-600 hover:text-brand-800 flex items-center gap-1.5 transition-colors">
                     <Phone size={13} /> Call for a Quote
                   </a>
                 </div>
@@ -197,9 +197,9 @@ export default function DomesticPage() {
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="font-heading text-2xl font-bold text-white mb-8">Why Choose Our Domestic Cleaning?</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {[['🛡️', 'Fully Insured'], ['✅', 'Vetted Staff'], ['🌿', 'Eco Products'], ['⏰', 'Flexible Hours'], ['💰', 'Fair Pricing'], ['✓', '100% Guaranteed']].map(([icon, label]) => (
+            {['Fully Insured', 'Vetted Staff', 'Eco Products', 'Flexible Hours', 'Fair Pricing', '100% Guaranteed'].map(label => (
               <div key={label} className="bg-white/10 rounded-lg py-5 px-3">
-                <div className="text-3xl mb-2">{icon}</div>
+                <CheckCircle className="mx-auto mb-2 text-accent-300" size={24} />
                 <div className="text-white text-sm font-semibold">{label}</div>
               </div>
             ))}

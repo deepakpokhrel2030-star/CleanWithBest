@@ -1,205 +1,107 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Heart, Leaf, Users, Award, CheckCircle, ArrowRight, Shield, Clock } from 'lucide-react';
+import { ArrowRight, CheckCircle, Leaf, MessageCircle, Phone, ShieldCheck, Users } from 'lucide-react';
 
 export const metadata = {
-  title: 'About Us',
-  description: 'Learn about CleanWithBest — our story, values, team and commitment to delivering the best cleaning services.',
+  title: 'About CleanWithBest',
+  description: 'Learn about CleanWithBest, a London cleaning service focused on clear quotes, reliable communication and professional cleaning.',
 };
 
-const team = [
-  { name: 'Deepak Pokhrel', role: 'Co-Founder & CEO', initials: 'DP', bio: 'Co-founded CleanWithBest with a passion for delivering exceptional cleaning services across London. Drives the vision, strategy and growth of the business.' },
-  { name: 'Krishna Prasad Sah', role: 'Co-Founder & Operations Director', initials: 'KS', bio: 'Co-founded CleanWithBest and oversees all day-to-day cleaning operations, quality control and client satisfaction across every service.' },
-  { name: 'Emma Clarke', role: 'Head of Commercial', initials: 'EC', bio: 'Manages all B2B client relationships and bespoke commercial contracts. 10 years experience in facilities management.' },
-  { name: 'Tom Patel', role: 'Training Manager', initials: 'TP', bio: 'Designs and delivers all cleaner training programs. Ensures every team member meets our exacting standards.' },
-  { name: 'Olivia Brown', role: 'Client Experience', initials: 'OB', bio: 'Dedicated to making sure every single customer interaction is exceptional. The voice of the customer internally.' },
-  { name: 'James Wilson', role: 'Head of Sustainability', initials: 'JW', bio: 'Champions our green cleaning initiatives and eco-friendly product sourcing across all operations.' },
-];
-
 const values = [
-  { icon: Heart, title: 'Customer First, Always', desc: 'Every decision we make starts with one question: is this the best thing for our customers? Your satisfaction drives everything we do.' },
-  { icon: Award, title: 'Uncompromising Quality', desc: 'We\'re not satisfied with "good enough". Our standards are sky-high and we hold every cleaner and every clean to them, without exception.' },
-  { icon: Leaf, title: 'Ethical & Sustainable', desc: 'We use eco-friendly products, pay living wages and operate with integrity. Good business means being good to people and the planet.' },
-  { icon: Users, title: 'People Matter', desc: 'Our team members are the heartbeat of our company. We invest in their training, wellbeing and fair pay because happy staff create happy customers.' },
-  { icon: Shield, title: 'Trustworthiness', desc: 'You invite us into your home or business. We take that trust seriously. Every cleaner is fully vetted, insured and held to a strict code of conduct.' },
-  { icon: Clock, title: 'Reliability', desc: 'We show up on time, every time. No excuses. Consistency and reliability are the foundations of every great cleaning relationship.' },
+  { icon: ShieldCheck, title: 'Trust first', text: 'Customers invite us into homes and workplaces, so reliability and care come first.' },
+  { icon: CheckCircle, title: 'Clear standards', text: 'We explain what is included and confirm the quote before the clean is booked.' },
+  { icon: Leaf, title: 'Better products', text: 'We can use professional cleaning products or your preferred products when requested.' },
+  { icon: Users, title: 'Respectful service', text: 'We keep communication simple, polite and practical from quote request to completion.' },
 ];
 
 export default function AboutPage() {
   return (
     <main>
-      {/* Hero */}
       <section className="bg-slate-950 py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="max-w-2xl">
-            <span className="section-tag-light">Our Story</span>
-            <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-white mb-5 leading-tight">
-              We are CleanWithBest
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 md:grid-cols-2 md:items-center">
+          <div>
+            <span className="section-tag-light">About Us</span>
+            <h1 className="font-heading text-4xl font-extrabold leading-tight text-white md:text-5xl">
+              CleanWithBest is built around clear quotes and reliable cleaning.
             </h1>
-            <p className="text-white/75 text-lg leading-relaxed">
-              A London cleaning team built around clear quotes, reliable communication and professional results.
+            <p className="mt-5 text-lg leading-relaxed text-white/72">
+              We help London homes and businesses arrange cleaning without confusion. Send the job details, choose how you want to be contacted, and we will reply with a clear quote.
             </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/quote" className="btn-white">
+                Request a Quote <ArrowRight size={16} />
+              </Link>
+              <a href="tel:+447503494242" className="btn-outline-white">
+                <Phone size={16} /> +44 7503 494242
+              </a>
+            </div>
           </div>
+          <Image
+            src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=900&q=80"
+            alt="Clean and organised modern home"
+            width={640}
+            height={460}
+            className="hidden h-[380px] w-full rounded-lg object-cover shadow-2xl md:block"
+          />
         </div>
       </section>
 
-      {/* Story */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-16 items-center mb-20">
-            <div>
-              <span className="section-tag">Our Story</span>
-              <h2 className="section-title mb-5">Built on a Belief That<br />Cleaning Can Be Done Better</h2>
-              <p className="text-slate-600 leading-relaxed mb-4">
-                CleanWithBest was founded by Deepak Pokhrel and Krishna Prasad Sah, who saw firsthand how frustrating it was to find a truly reliable, high-quality cleaning service in London. Too many providers over-promised and under-delivered — they set out to change that.
-              </p>
-              <p className="text-slate-600 leading-relaxed mb-4">
-                We started with a simple belief: that professional cleaning should be done properly, every single time. We invest in the best people, the best products and the best processes — because we believe our clients deserve nothing less.
-              </p>
-              <p className="text-slate-600 leading-relaxed mb-6">
-                Every clean is treated with the same care and attention as the first — because for our customers, it matters just as much every time.
-              </p>
-              <Link href="/quote" className="btn-primary">Work With Us <ArrowRight size={16} /></Link>
-            </div>
-            <div className="relative">
-              <Image
-                src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&q=80"
-                alt="Our cleaning team"
-                width={600}
-                height={450}
-                className="rounded-lg shadow-2xl object-cover w-full h-[400px]"
-              />
-            </div>
+      <section className="bg-white py-20">
+        <div className="mx-auto grid max-w-7xl gap-12 px-4 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <span className="section-tag">Our Approach</span>
+            <h2 className="section-title">Simple, practical and customer focused</h2>
+            <p className="mt-4 text-base leading-relaxed text-slate-600">
+              CleanWithBest was created to make professional cleaning easier to arrange. Customers should not have to search through confusing packages or chase for a reply. Our process is direct: you tell us what needs cleaning, we check the details, and we contact you by phone or WhatsApp.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-slate-600">
+              We cover domestic and commercial cleaning, from regular home cleaning to end-of-tenancy and workplace cleaning. Every quote is handled with clear communication and realistic expectations.
+            </p>
           </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            {[['Top 5%', 'Cleaners Only Hired'], ['100%', 'Satisfaction Guaranteed']].map(([num, label]) => (
-              <div key={label} className="bg-brand-50 rounded-lg p-6 text-center border border-brand-100">
-                <div className="font-heading text-3xl md:text-4xl font-extrabold text-brand-600 mb-1">{num}</div>
-                <div className="text-slate-500 text-sm font-medium">{label}</div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {values.map(({ icon: Icon, title, text }) => (
+              <div key={title} className="rounded-lg border border-slate-200 bg-slate-50 p-5">
+                <Icon className="mb-4 text-brand-700" size={24} />
+                <h3 className="font-heading text-lg font-bold text-slate-900">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">{text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Values */}
       <section className="bg-slate-50 py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-14">
-            <span className="section-tag">Our Values</span>
-            <h2 className="section-title mb-4">What We Stand For</h2>
-            <p className="text-slate-500 max-w-xl mx-auto">Our values aren't just words on a wall — they're the principles behind every decision we make and every clean we deliver.</p>
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="mb-10 max-w-2xl">
+            <span className="section-tag">How We Work</span>
+            <h2 className="section-title">A cleaner process for booking a clean</h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {values.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="bg-white rounded-lg p-6 border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <div className="w-11 h-11 bg-brand-100 rounded-lg flex items-center justify-center mb-4">
-                  <Icon size={20} className="text-brand-600" />
-                </div>
-                <h3 className="font-heading font-semibold text-slate-900 text-lg mb-2">{title}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-14">
-            <span className="section-tag">Our Team</span>
-            <h2 className="section-title mb-4">Meet the People Behind the Clean</h2>
-            <p className="text-slate-500 max-w-xl mx-auto">Our leadership team brings decades of combined experience in cleaning, hospitality and business management.</p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {team.map(({ name, role, initials, bio }) => (
-              <div key={name} className="bg-white rounded-lg p-6 border border-slate-100 shadow-sm hover:shadow-md transition-shadow text-center">
-                <div className="w-20 h-20 bg-gradient-to-br from-brand-600 to-accent-500 rounded-full flex items-center justify-center text-white font-heading font-bold text-xl mx-auto mb-4">
-                  {initials}
-                </div>
-                <h3 className="font-heading font-semibold text-slate-900 text-lg">{name}</h3>
-                <p className="text-brand-600 text-sm font-medium mb-3">{role}</p>
-                <p className="text-slate-500 text-sm leading-relaxed">{bio}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Accreditations */}
-      <section className="bg-brand-900 py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <span className="section-tag-light">Certified & Trusted</span>
-            <h2 className="section-title-light mb-3">Our Accreditations</h2>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-5">
+          <div className="grid gap-4 md:grid-cols-4">
             {[
-              { icon: '🌿', title: 'Eco-Friendly Products', sub: 'Non-toxic, safe for children & pets' },
-              { icon: '💼', title: 'Living Wage Employer', sub: 'All staff paid a fair living wage' },
-            ].map(({ icon, title, sub }) => (
-              <div key={title} className="bg-white/10 border border-white/10 rounded-lg p-5 text-center hover:bg-white/15 transition-colors">
-                <div className="text-4xl mb-3">{icon}</div>
-                <h4 className="text-white font-semibold mb-1">{title}</h4>
-                <p className="text-white/50 text-xs">{sub}</p>
+              ['1', 'You request a quote', 'Send service type, postcode and contact details.'],
+              ['2', 'We review the job', 'We check property size, service type and any special notes.'],
+              ['3', 'We contact you', 'You receive a quote by WhatsApp or phone call.'],
+              ['4', 'Cleaner attends', 'We arrange the clean for a time that works for you.'],
+            ].map(([num, title, text]) => (
+              <div key={num} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 font-bold text-white">{num}</span>
+                <h3 className="mt-4 font-heading text-lg font-bold text-slate-900">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">{text}</p>
               </div>
             ))}
-          </div>
-          <div className="mt-8 max-w-2xl mx-auto text-center">
-            <p className="text-white/60 text-sm leading-relaxed">
-              We are a proud <strong className="text-white">Living Wage Employer</strong>. All our cleaning professionals are paid a fair living wage that reflects the value of their work. We believe that ethical business starts from within.
-            </p>
           </div>
         </div>
       </section>
 
-      {/* Why choose us */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div>
-              <span className="section-tag">Our Promise</span>
-              <h2 className="section-title mb-5">The CleanWithBest Difference</h2>
-              <ul className="space-y-4">
-                {[
-                  ['Top 5% of applicants hired', 'We only recruit from the very top of the applicant pool. Less than 5% of applicants make our team.'],
-                  ['6+ months experience required', 'No beginners. Every cleaner must demonstrate proven professional experience before joining us.'],
-                  ['Full background checks', 'Every cleaner is background-checked, reference-verified and personally interviewed by our management team.'],
-                  ['Ongoing training', 'Our training never stops. Regular refresher sessions keep our team up to date with best practices and new techniques.'],
-                ].map(([title, desc]) => (
-                  <li key={title} className="flex items-start gap-3">
-                    <CheckCircle size={20} className="text-accent-600 shrink-0 mt-0.5" />
-                    <div>
-                      <span className="font-semibold text-slate-900 text-sm">{title}</span>
-                      <p className="text-slate-500 text-sm mt-0.5">{desc}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-brand-50 rounded-lg p-8 border border-brand-100">
-              <h3 className="font-heading font-bold text-xl text-slate-900 mb-6">Ready to experience the difference?</h3>
-              <p className="text-slate-600 mb-6">Get a free, no-obligation quote. We respond within 2 hours and our team is always happy to answer any questions.</p>
-              <div className="space-y-3">
-                <Link href="/quote" className="btn-primary w-full justify-center">Get a Free Quote</Link>
-                <Link href="/contact" className="btn-primary w-full justify-center bg-white text-brand-700 hover:bg-brand-50 border-2 border-brand-200">Contact Us</Link>
-                <a href="tel:+447503494242" className="flex justify-center items-center gap-2 text-brand-600 font-semibold text-sm hover:text-brand-800 transition-colors">
-                  📞 +44 7503 494242
-                </a>
-                <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="flex justify-center items-center gap-2 text-green-700 font-semibold text-sm hover:text-green-800 transition-colors">
-                  WhatsApp +44 7503 494242
-                </a>
-                <a href="tel:+447789602945" className="flex justify-center items-center gap-2 text-brand-600 font-semibold text-sm hover:text-brand-800 transition-colors">
-                  📞 +44 7789 602945
-                </a>
-                <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="flex justify-center items-center gap-2 text-green-700 font-semibold text-sm hover:text-green-800 transition-colors">
-                  WhatsApp +44 7789 602945
-                </a>
-              </div>
-            </div>
+      <section className="bg-brand-600 py-16">
+        <div className="mx-auto max-w-4xl px-4 text-center">
+          <h2 className="font-heading text-3xl font-extrabold text-white">Speak to CleanWithBest</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-white/80">Use the quote form, call us, or message on WhatsApp. We are available 24/7 for quote requests.</p>
+          <div className="mt-7 flex flex-wrap justify-center gap-3">
+            <Link href="/quote" className="btn-white">Get a Free Quote</Link>
+            <a href="tel:+447503494242" className="btn-outline-white"><Phone size={16} /> +44 7503 494242</a>
+            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline-white"><MessageCircle size={16} /> WhatsApp 7503</a>
+            <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="btn-outline-white"><MessageCircle size={16} /> WhatsApp 7789</a>
           </div>
         </div>
       </section>

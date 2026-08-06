@@ -42,14 +42,14 @@ export default function ContactForm() {
         <label className="label">Full Name *</label>
         <input name="name" value={form.name} onChange={handleChange} required placeholder="Your full name" className="input-field" />
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label className="label">Email *</label>
           <input type="email" name="email" value={form.email} onChange={handleChange} required placeholder="your@email.com" className="input-field" />
         </div>
         <div>
           <label className="label">Phone</label>
-          <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="+1 (555) 000-0000" className="input-field" />
+          <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="+44 7503 494242" className="input-field" />
         </div>
       </div>
       <div>

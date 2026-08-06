@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Building2, ShoppingBag, Utensils, Dumbbell, GraduationCap, Warehouse, Droplets, Stethoscope, CheckCircle, ArrowRight, ChevronDown } from 'lucide-react';
+import { Building2, ShoppingBag, Utensils, Dumbbell, GraduationCap, Warehouse, Droplets, Stethoscope, CheckCircle, ArrowRight, ChevronDown, Phone, MessageCircle } from 'lucide-react';
 
 export const metadata = {
   title: 'Commercial Cleaning Services',
@@ -163,15 +163,15 @@ export default function CommercialPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: '📋', title: 'Flexible Contracts', desc: 'Daily, weekly, monthly or bespoke — we design contracts around your schedule and budget.' },
-              { icon: '🔑', title: 'Key Holding', desc: 'We can hold your keys securely so we can clean out of hours with zero disruption to your business.' },
-              { icon: '📞', title: 'Dedicated Account Manager', desc: 'Every commercial client gets a dedicated point of contact who knows your business needs.' },
-              { icon: '⭐', title: 'Consistent Staff', desc: 'We assign the same cleaning team to your premises so you get consistent, reliable results every time.' },
-              { icon: '✅', title: 'Fully Insured Staff', desc: 'All our cleaning staff are fully insured for complete peace of mind. Your premises are fully protected.' },
-              { icon: '📊', title: 'Service Reports', desc: 'Regular cleaning reports and quality audits to ensure standards are always maintained.' },
-            ].map(({ icon, title, desc }) => (
+              { title: 'Flexible Contracts', desc: 'Daily, weekly, monthly or bespoke — we design contracts around your schedule and budget.' },
+              { title: 'Key Holding', desc: 'We can hold your keys securely so we can clean out of hours with zero disruption to your business.' },
+              { title: 'Dedicated Contact', desc: 'Commercial clients get a clear point of contact who understands the site requirements.' },
+              { title: 'Consistent Staff', desc: 'We aim to assign the same cleaning team to your premises for reliable results.' },
+              { title: 'Fully Insured Staff', desc: 'Cleaning staff are fully insured for peace of mind while working on your premises.' },
+              { title: 'Service Notes', desc: 'We keep cleaning requirements and quality notes clear so standards stay consistent.' },
+            ].map(({ title, desc }) => (
               <div key={title} className="bg-white rounded-lg p-6 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-                <div className="text-3xl mb-3">{icon}</div>
+                <CheckCircle className="mb-3 text-brand-600" size={24} />
                 <h3 className="font-semibold text-slate-900 mb-2">{title}</h3>
                 <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
               </div>
@@ -208,10 +208,10 @@ export default function CommercialPage() {
           <p className="text-white/80 mb-8">Get a free commercial cleaning quote. We'll respond within 2 hours.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/quote" className="btn-white">Get a Business Quote</Link>
-            <a href="tel:+447503494242" className="btn-outline">📞 +44 7503 494242</a>
-            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline">WhatsApp +44 7503 494242</a>
-            <a href="tel:+447789602945" className="btn-outline">📞 +44 7789 602945</a>
-            <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="btn-outline">WhatsApp +44 7789 602945</a>
+            <a href="tel:+447503494242" className="btn-outline-white"><Phone size={16} /> +44 7503 494242</a>
+            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline-white"><MessageCircle size={16} /> WhatsApp +44 7503 494242</a>
+            <a href="tel:+447789602945" className="btn-outline-white"><Phone size={16} /> +44 7789 602945</a>
+            <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="btn-outline-white"><MessageCircle size={16} /> WhatsApp +44 7789 602945</a>
           </div>
         </div>
       </section>

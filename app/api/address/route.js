@@ -6,7 +6,9 @@ export async function GET(request) {
 
   if (!postcode) return NextResponse.json({ addresses: [] });
 
-  const key = process.env.GETADDRESS_API_KEY || '0o4AI818EEyLkV3wutzE1Q52238';
+  const key = process.env.GETADDRESS_API_KEY;
+  if (!key) return NextResponse.json({ addresses: [] });
+
   const clean = postcode.replace(/\s/g, '').toUpperCase();
   const url = `https://api.getaddress.io/find/${clean}?api-key=${key}&expand=true`;
 
@@ -23,10 +25,6 @@ export async function GET(request) {
     if (!res.ok) {
       return NextResponse.json({
         addresses: [],
-        debug: `http_${res.status}`,
-        body: body || '(empty)',
-        postcode_sent: clean,
-        key_prefix: key.slice(0, 6),
       });
     }
 
@@ -40,7 +38,7 @@ export async function GET(request) {
       });
 
     return NextResponse.json({ addresses, count: addresses.length });
-  } catch (err) {
-    return NextResponse.json({ addresses: [], debug: 'fetch_error', error: String(err) });
+  } catch {
+    return NextResponse.json({ addresses: [] });
   }
 }

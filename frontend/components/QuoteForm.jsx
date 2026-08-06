@@ -10,26 +10,26 @@ const SERVICES = [
 ];
 
 const PROPERTY_TYPES = [
-  { value: 'flat',       label: 'Flat / Apartment', icon: '🏢' },
-  { value: 'house',      label: 'House',             icon: '🏠' },
-  { value: 'studio',     label: 'Studio',            icon: '🛋️' },
-  { value: 'commercial', label: 'Commercial',        icon: '🏗️' },
+  { value: 'flat',       label: 'Flat / Apartment' },
+  { value: 'house',      label: 'House' },
+  { value: 'studio',     label: 'Studio' },
+  { value: 'commercial', label: 'Commercial' },
 ];
 
 const BEDROOMS  = ['Studio', '1', '2', '3', '4', '5', '6+'];
 const BATHROOMS = ['1', '2', '3', '4+'];
 
 const EXTRA_ROOMS = [
-  { value: 'kitchen',      label: 'Kitchen',           icon: '🍳' },
-  { value: 'living_room',  label: 'Living Room',        icon: '🛋️' },
-  { value: 'dining_room',  label: 'Dining Room',        icon: '🍴' },
-  { value: 'hallway',      label: 'Hallway / Landing',  icon: '🚪' },
-  { value: 'conservatory', label: 'Conservatory',       icon: '🌿' },
-  { value: 'study',        label: 'Study / Office',     icon: '💼' },
-  { value: 'utility',      label: 'Utility Room',       icon: '🔧' },
-  { value: 'garage',       label: 'Garage',             icon: '🚗' },
-  { value: 'cellar',       label: 'Cellar / Basement',  icon: '⬇️' },
-  { value: 'loft',         label: 'Loft / Attic',       icon: '⬆️' },
+  { value: 'kitchen',      label: 'Kitchen' },
+  { value: 'living_room',  label: 'Living Room' },
+  { value: 'dining_room',  label: 'Dining Room' },
+  { value: 'hallway',      label: 'Hallway / Landing' },
+  { value: 'conservatory', label: 'Conservatory' },
+  { value: 'study',        label: 'Study / Office' },
+  { value: 'utility',      label: 'Utility Room' },
+  { value: 'garage',       label: 'Garage' },
+  { value: 'cellar',       label: 'Cellar / Basement' },
+  { value: 'loft',         label: 'Loft / Attic' },
 ];
 
 const FREQUENCIES = [
@@ -183,8 +183,7 @@ export default function QuoteForm() {
         setAddrList(addrData.addresses);
         setShowDropdown(true);
       } else {
-        const debugInfo = addrData.debug ? ` [${addrData.debug} | pc:${addrData.postcode_sent} | key:${addrData.key_prefix} | ${addrData.body}]` : '';
-        setAddrError(`No addresses found for this postcode. Please enter your address below.${debugInfo}`);
+        setAddrError('No addresses found for this postcode. Please enter your address below.');
       }
 
     } catch (err) {
@@ -253,6 +252,18 @@ export default function QuoteForm() {
   };
 
   const postcodeReady = form.postcode.replace(/\s/g, '').length >= 5;
+  const summaryRows = [
+    form.service && ['Service', form.service],
+    form.propertyType && ['Property', PROPERTY_TYPES.find(t => t.value === form.propertyType)?.label],
+    form.bedrooms && ['Bedrooms', form.bedrooms === 'Studio' ? 'Studio' : `${form.bedrooms} Bedroom${form.bedrooms === '1' ? '' : 's'}`],
+    form.bathrooms && ['Bathrooms', form.bathrooms],
+    form.rooms.length > 0 && ['Extra rooms', `${form.rooms.length} selected`],
+    form.frequency && ['Frequency', FREQUENCIES.find(f => f.value === form.frequency)?.label],
+    form.address && ['Address', form.address],
+    form.postcode && ['Postcode', form.postcode],
+    form.phone && ['Contact', form.phone],
+    form.contactPreference && ['Preferred reply', CONTACT_METHODS.find(method => method.value === form.contactPreference)?.label],
+  ].filter(Boolean);
 
   return (
     <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-xl overflow-hidden">
@@ -441,7 +452,7 @@ export default function QuoteForm() {
         <div>
           <SectionLabel num={sectionNum('contact')} title="Your contact details *" subtitle="So we can contact you back by WhatsApp or phone call" />
           <div className="space-y-3">
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid gap-3 sm:grid-cols-2">
               <div>
                 <label className="label">First Name *</label>
                 <input value={form.firstName} onChange={e => set('firstName', e.target.value)} required placeholder="Jane" className="input-field" />
@@ -478,18 +489,16 @@ export default function QuoteForm() {
 
         {/* Summary */}
         {(form.service || form.propertyType) && (
-          <div className="bg-slate-50 rounded-lg p-4 border border-slate-100 text-xs text-slate-600 space-y-1">
-            <p className="font-semibold text-slate-700 mb-2">Your quote summary:</p>
-            {form.service     && <p>📋 Service: <strong>{form.service}</strong></p>}
-            {form.propertyType && <p>🏠 Property: <strong>{PROPERTY_TYPES.find(t => t.value === form.propertyType)?.label}</strong></p>}
-            {form.bedrooms    && <p>🛏️ Bedrooms: <strong>{form.bedrooms === 'Studio' ? 'Studio' : `${form.bedrooms} Bedroom${form.bedrooms === '1' ? '' : 's'}`}</strong></p>}
-            {form.bathrooms   && <p>🚿 Bathrooms: <strong>{form.bathrooms}</strong></p>}
-            {form.rooms.length > 0 && <p>🏡 Extra rooms: <strong>{form.rooms.length} selected</strong></p>}
-            {form.frequency   && <p>🗓️ Frequency: <strong>{FREQUENCIES.find(f => f.value === form.frequency)?.label}</strong></p>}
-            {form.address     && <p>📍 Address: <strong>{form.address}</strong></p>}
-            {form.postcode    && <p>📮 Postcode: <strong>{form.postcode}</strong></p>}
-            {form.phone       && <p>☎ Contact: <strong>{form.phone}</strong></p>}
-            {form.contactPreference && <p>💬 Preferred reply: <strong>{CONTACT_METHODS.find(method => method.value === form.contactPreference)?.label}</strong></p>}
+          <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
+            <p className="mb-3 font-semibold text-slate-800">Quote summary</p>
+            <dl className="grid gap-2 sm:grid-cols-2">
+              {summaryRows.map(([label, value]) => (
+                <div key={label} className="min-w-0">
+                  <dt className="font-medium text-slate-500">{label}</dt>
+                  <dd className="break-words font-semibold text-slate-800">{value}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         )}
 
@@ -510,7 +519,7 @@ export default function QuoteForm() {
           }
         </button>
         <p className="text-center text-xs text-slate-400">
-          🔒 Your details are safe with us. We never share your information with third parties.
+          Your details are used only to respond to this quote request.
         </p>
       </div>
     </form>

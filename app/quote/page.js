@@ -86,23 +86,21 @@ export default function QuotePage() {
                 <p className="text-white/50 text-xs mt-2">Available 24/7</p>
               </div>
 
-              {/* Process */}
               <div className="bg-white rounded-lg p-6 border border-slate-100 shadow-sm">
-                <h3 className="font-heading font-bold text-slate-900 text-lg mb-4">What Happens Next?</h3>
-                <div className="space-y-4">
+                <h3 className="font-heading font-bold text-slate-900 text-lg mb-4">Helpful Details to Include</h3>
+                <ul className="space-y-3 text-sm text-slate-600">
                   {[
-                    { num: '1', text: 'We review your quote request' },
-                    { num: '2', text: 'We contact you by WhatsApp or phone call' },
-                    { num: '3', text: 'You receive a transparent, fixed quote' },
-                    { num: '4', text: 'You choose if and when to book' },
-                    { num: '5', text: 'We send your dedicated cleaner!' },
-                  ].map(({ num, text }) => (
-                    <div key={num} className="flex items-center gap-3">
-                      <div className="w-7 h-7 bg-brand-600 text-white text-xs font-bold rounded-full flex items-center justify-center shrink-0">{num}</div>
-                      <span className="text-sm text-slate-600">{text}</span>
-                    </div>
+                    'Property size and number of rooms',
+                    'Preferred date or time window',
+                    'Any difficult stains, access notes or parking notes',
+                    'Whether you prefer WhatsApp or a phone call',
+                  ].map(item => (
+                    <li key={item} className="flex items-start gap-2">
+                      <CheckCircle size={16} className="mt-0.5 shrink-0 text-accent-600" />
+                      <span>{item}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             </div>
           </div>

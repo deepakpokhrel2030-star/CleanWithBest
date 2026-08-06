@@ -1,108 +1,81 @@
-import { Phone, Mail, Clock, MessageCircle, Facebook, Instagram, Music2 } from 'lucide-react';
-import ContactForm from '@/frontend/components/ContactForm';
 import Link from 'next/link';
+import { Facebook, Instagram, Mail, MessageCircle, Music2, Phone } from 'lucide-react';
+import ContactForm from '@/frontend/components/ContactForm';
 
 export const metadata = {
-  title: 'Contact Us',
-  description: 'Get in touch with CleanWithBest. Call, email or fill in our contact form and we\'ll respond within 2 hours.',
+  title: 'Contact CleanWithBest',
+  description: 'Contact CleanWithBest by phone, WhatsApp, email or message form.',
 };
+
+const numbers = [
+  ['+44 7503 494242', 'tel:+447503494242', 'https://wa.me/447503494242'],
+  ['+44 7789 602945', 'tel:+447789602945', 'https://wa.me/447789602945'],
+];
 
 export default function ContactPage() {
   return (
     <main>
-      {/* Hero */}
       <section className="bg-slate-950 py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="max-w-2xl">
-            <span className="section-tag-light">Get in Touch</span>
-            <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-white mb-5 leading-tight">
-              Contact CleanWithBest
-            </h1>
-            <p className="text-white/75 text-lg leading-relaxed">
-              Call, WhatsApp, email or send a message. We will help you choose the right cleaning service.
-            </p>
-          </div>
+        <div className="mx-auto max-w-7xl px-4">
+          <span className="section-tag-light">Contact</span>
+          <h1 className="max-w-3xl font-heading text-4xl font-extrabold leading-tight text-white md:text-5xl">
+            Call, WhatsApp, email or send a message.
+          </h1>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/72">
+            We are available 24/7 for quote requests. Tell us what you need and we will help you choose the right service.
+          </p>
         </div>
       </section>
 
-      {/* Contact info + form */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-14 items-start">
-
-            {/* Left: info */}
-            <div>
-              <span className="section-tag">Contact Details</span>
-              <h2 className="section-title mb-6">Reach Us Any Way You Like</h2>
-              <div className="space-y-5 mb-10">
-                {[
-                  { icon: Phone, title: 'Call Us', detail: '+44 7503 494242', sub: 'Available 24/7', href: 'tel:+447503494242' },
-                  { icon: Phone, title: 'Second Number', detail: '+44 7789 602945', sub: 'Call or WhatsApp', href: 'tel:+447789602945' },
-                  { icon: Mail, title: 'Email Us', detail: 'cleanwithbest@gmail.com', sub: 'We respond within 2 hours', href: 'mailto:cleanwithbest@gmail.com' },
-                  { icon: MessageCircle, title: 'WhatsApp Main', detail: '+44 7503 494242', sub: 'Message us on WhatsApp', href: 'https://wa.me/447503494242' },
-                  { icon: MessageCircle, title: 'WhatsApp Second', detail: '+44 7789 602945', sub: 'Message us on WhatsApp', href: 'https://wa.me/447789602945' },
-                  { icon: Clock, title: 'Availability', detail: 'Available 24/7', sub: 'We never close', href: null },
-                ].map(({ icon: Icon, title, detail, sub, href }) => (
-                  <div key={title} className="flex items-start gap-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
-                    <div className="w-10 h-10 bg-brand-100 rounded-lg flex items-center justify-center shrink-0">
-                      <Icon size={18} className="text-brand-600" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-slate-900 text-sm">{title}</div>
-                      {href ? (
-                        <a href={href} className="text-brand-600 font-medium hover:text-brand-800 transition-colors">{detail}</a>
-                      ) : (
-                        <div className="text-slate-700 font-medium">{detail}</div>
-                      )}
-                      <div className="text-slate-400 text-xs mt-0.5">{sub}</div>
+      <section className="bg-slate-50 py-20">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="space-y-6">
+            <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 className="font-heading text-2xl font-bold text-slate-900">Contact details</h2>
+              <div className="mt-5 grid gap-3">
+                {numbers.map(([number, tel, whatsapp]) => (
+                  <div key={number} className="rounded-lg bg-slate-50 p-4">
+                    <p className="mb-3 text-lg font-extrabold text-slate-900">{number}</p>
+                    <div className="flex flex-wrap gap-2">
+                      <a href={tel} className="btn-primary px-4 py-2 text-sm"><Phone size={15} /> Call</a>
+                      <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="btn-outline px-4 py-2 text-sm"><MessageCircle size={15} /> WhatsApp</a>
                     </div>
                   </div>
                 ))}
-              </div>
-
-              {/* Quick actions */}
-              <div className="bg-brand-50 border border-brand-100 rounded-lg p-6">
-                <h3 className="font-semibold text-slate-900 mb-3">Need a quote instead?</h3>
-                <p className="text-slate-500 text-sm mb-4">Head to our dedicated quote page for a more detailed quote request with pricing estimates.</p>
-                <Link href="/quote" className="btn-primary text-sm">Get a Free Quote →</Link>
-              </div>
-
-              <div className="mt-6 bg-white border border-slate-100 rounded-lg p-6 shadow-sm">
-                <h3 className="font-semibold text-slate-900 mb-3">Follow CleanWithBest</h3>
-                <div className="flex flex-wrap gap-3">
-                  {[
-                    { Icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/people/Cleanwithbest/61584162025224/' },
-                    { Icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/cleanwithbest' },
-                    { Icon: Music2, label: 'TikTok', href: 'https://www.tiktok.com/@cleanwithbest' },
-                  ].map(({ Icon, label, href }) => (
-                    <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 hover:border-brand-200 hover:text-brand-700">
-                      <Icon size={16} /> {label}
-                    </a>
-                  ))}
-                </div>
+                <a href="mailto:cleanwithbest@gmail.com" className="flex items-center gap-3 rounded-lg bg-slate-50 p-4 font-semibold text-brand-700 hover:bg-brand-50">
+                  <Mail size={18} /> cleanwithbest@gmail.com
+                </a>
               </div>
             </div>
 
-            {/* Right: form */}
-            <div>
-              <h2 className="font-heading text-2xl font-bold text-slate-900 mb-6">Send Us a Message</h2>
-              <ContactForm />
+            <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+              <h2 className="font-heading text-xl font-bold text-slate-900">Follow us</h2>
+              <div className="mt-4 flex flex-wrap gap-3">
+                {[
+                  { Icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/people/Cleanwithbest/61584162025224/' },
+                  { Icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/cleanwithbest' },
+                  { Icon: Music2, label: 'TikTok', href: 'https://www.tiktok.com/@cleanwithbest' },
+                ].map(({ Icon, label, href }) => (
+                  <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-4 py-2 text-sm font-bold text-slate-600 hover:border-brand-200 hover:text-brand-700">
+                    <Icon size={16} /> {label}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-lg border border-brand-100 bg-brand-50 p-6">
+              <h2 className="font-heading text-xl font-bold text-slate-900">Need a quote?</h2>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">For pricing, use the quote form so we receive the service type, property details and contact preference in one place.</p>
+              <Link href="/quote" className="btn-primary mt-4">Request a Quote</Link>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* CTA */}
-      <section className="bg-brand-600 py-14">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="font-heading text-3xl font-bold text-white mb-4">Not sure what you need?</h2>
-          <p className="text-white/80 mb-8">Give us a call or fill in a quote request and our team will recommend the perfect cleaning solution for your home or business.</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a href="tel:+447503494242" className="btn-white">📞 Call +44 7503 494242</a>
-            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-white">WhatsApp +44 7503 494242</a>
-            <a href="tel:+447789602945" className="btn-white">📞 Call +44 7789 602945</a>
-            <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="btn-white">WhatsApp +44 7789 602945</a>
-            <Link href="/quote" className="btn-outline">Get a Free Quote</Link>
+          <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="font-heading text-2xl font-bold text-slate-900">Send a message</h2>
+            <p className="mt-2 text-sm leading-relaxed text-slate-500">Use this for general questions. For prices, the quote page is faster.</p>
+            <div className="mt-6">
+              <ContactForm />
+            </div>
           </div>
         </div>
       </section>
