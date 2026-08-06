@@ -81,7 +81,7 @@ export default function DomesticPage() {
   return (
     <main>
       {/* Hero */}
-      <section className="bg-slate-950 py-16 md:py-20">
+      <section className="bg-gradient-to-br from-slate-950 via-brand-900 to-slate-950 py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
@@ -89,11 +89,11 @@ export default function DomesticPage() {
               <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
                 Reliable home cleaning, priced clearly
               </h1>
-              <p className="text-white/72 text-lg mb-6 leading-relaxed">Regular cleaning starts from £17/hour. Deep cleans, end-of-tenancy and specialist home services are quoted clearly before we start.</p>
+              <p className="text-white text-lg mb-6 leading-relaxed">Regular cleaning starts from £17/hour. Deep cleans, end-of-tenancy and specialist home services are quoted clearly before we start.</p>
               <div className="mb-8 grid gap-2 sm:grid-cols-2">
                 {['100% satisfaction guaranteed', 'Background checked cleaners', 'Eco-friendly products', 'Call or WhatsApp response'].map(i => (
-                  <div key={i} className="flex items-center gap-2.5 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm font-medium text-white/80">
-                    <CheckCircle size={15} className="text-accent-400" />{i}
+                  <div key={i} className="flex items-center gap-2.5 rounded-lg border border-white/20 bg-white px-3 py-2 text-sm font-bold text-slate-900 shadow-sm">
+                    <CheckCircle size={15} className="shrink-0 text-accent-600" />{i}
                   </div>
                 ))}
               </div>
