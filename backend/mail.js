@@ -63,7 +63,7 @@ async function sendNotification({ subject, heading, intro, rows }) {
     to: NOTIFICATION_TO,
     replyTo: rows.find(([label]) => label === 'Email')?.[1] || undefined,
     subject,
-    text: `${heading}\n\n${intro}\n\nAdmin login: ${adminUrl}\n\n${textLines(rows)}`,
+    text: `${heading}\n\nHey Krishna/Deepak,\n\n${intro}\n\nAdmin login: ${adminUrl}\n\n${textLines(rows)}`,
     html: `
       <div style="font-family:Arial,sans-serif;background:#f8fafc;padding:24px;">
         <div style="max-width:640px;margin:0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
@@ -71,6 +71,7 @@ async function sendNotification({ subject, heading, intro, rows }) {
             <h1 style="margin:0;font-size:20px;">${escapeHtml(heading)}</h1>
           </div>
           <div style="padding:18px 22px;border-bottom:1px solid #e2e8f0;">
+            <p style="margin:0 0 8px;color:#0f172a;font-size:16px;font-weight:700;">Hey Krishna/Deepak,</p>
             <p style="margin:0 0 14px;color:#0f172a;font-size:16px;line-height:1.5;">${escapeHtml(intro)}</p>
             <a href="${escapeHtml(adminUrl)}" style="display:inline-block;background:#0f766e;color:#ffffff;text-decoration:none;font-weight:700;border-radius:8px;padding:11px 16px;">Open Admin Dashboard</a>
             <p style="margin:12px 0 0;color:#64748b;font-size:13px;">Admin login: ${escapeHtml(adminUrl)}</p>
