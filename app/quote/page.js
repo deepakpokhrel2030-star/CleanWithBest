@@ -83,7 +83,7 @@ export default function QuotePage() {
                 <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
                   <MessageCircle size={18} /> WhatsApp +44 7789 602945
                 </a>
-                <p className="text-white/50 text-xs mt-2">Available 24/7</p>
+                <p className="text-white/75 text-xs mt-2">Available 24/7</p>
               </div>
 
               <div className="bg-white rounded-lg p-6 border border-slate-100 shadow-sm">

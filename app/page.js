@@ -19,13 +19,6 @@ export const metadata = {
   description: 'Modern domestic and commercial cleaning across London. Request a quote and we will contact you by WhatsApp or phone.',
 };
 
-const contactLinks = [
-  { icon: Phone, label: 'Call main number', value: '+44 7503 494242', href: 'tel:+447503494242' },
-  { icon: MessageCircle, label: 'WhatsApp main number', value: '+44 7503 494242', href: 'https://wa.me/447503494242' },
-  { icon: Phone, label: 'Call second number', value: '+44 7789 602945', href: 'tel:+447789602945' },
-  { icon: MessageCircle, label: 'WhatsApp second number', value: '+44 7789 602945', href: 'https://wa.me/447789602945' },
-];
-
 const services = [
   {
     icon: Home,
@@ -152,28 +145,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto grid max-w-7xl gap-3 px-4 py-5 md:grid-cols-4">
-          {contactLinks.map(({ icon: Icon, label, value, href }) => (
-            <a
-              key={label}
-              href={href}
-              target={href.startsWith('http') ? '_blank' : undefined}
-              rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 p-4 transition hover:border-brand-200 hover:bg-brand-50"
-            >
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-brand-700">
-                <Icon size={18} />
-              </span>
-              <span>
-                <span className="block text-xs font-bold uppercase tracking-wide text-slate-400">{label}</span>
-                <span className="block text-sm font-bold text-slate-900">{value}</span>
-              </span>
-            </a>
-          ))}
-        </div>
-      </section>
-
       <section className="bg-slate-50 py-20">
         <div className="mx-auto max-w-7xl px-4">
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -234,7 +205,7 @@ export default function HomePage() {
             <div>
               <span className="section-tag-light">Why Us</span>
               <h2 className="section-title-light">Built for busy customers</h2>
-              <p className="mt-4 text-base leading-relaxed text-white/65">
+              <p className="mt-4 text-base leading-relaxed text-white/75">
                 The website, quote process and service pages are designed to make cleaning easy to understand before you contact us.
               </p>
             </div>
@@ -243,7 +214,7 @@ export default function HomePage() {
                 <div key={title} className="rounded-lg border border-white/10 bg-white/10 p-5">
                   <CheckCircle className="mb-4 text-accent-400" size={22} />
                   <h3 className="font-heading text-lg font-bold text-white">{title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/60">{text}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/75">{text}</p>
                 </div>
               ))}
             </div>

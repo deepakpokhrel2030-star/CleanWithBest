@@ -22,22 +22,6 @@ const companyLinks = [
 export default function Footer() {
   return (
     <footer className="bg-slate-950 text-slate-400">
-      <div className="border-b border-white/10 bg-brand-600">
-        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-8 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p className="font-heading text-2xl font-extrabold text-white">Need a cleaner?</p>
-            <p className="mt-1 max-w-2xl text-sm leading-relaxed text-white/75">
-              Request a quote and we will contact you by WhatsApp or phone with the next steps.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <Link href="/quote" className="btn-white">Get a Free Quote</Link>
-            <a href="tel:+447503494242" className="btn-outline-white">Call +44 7503 494242</a>
-            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline-white">WhatsApp</a>
-          </div>
-        </div>
-      </div>
-
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr]">
         <div>
           <Link href="/" className="font-heading text-2xl font-extrabold tracking-tight">
