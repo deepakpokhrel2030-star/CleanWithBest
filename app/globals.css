@@ -175,9 +175,9 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
 }
 
 .bestiebot-person-compact {
-  --bestie-scale: .62;
-  width: 28px;
-  height: 34px;
+  --bestie-scale: .78;
+  width: 30px;
+  height: 36px;
 }
 
 .bestiebot-head {

@@ -148,12 +148,12 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-[70] sm:bottom-6 sm:right-6">
+    <div className="fixed bottom-4 right-4 z-[70] flex max-w-[calc(100vw-2rem)] flex-col items-end sm:bottom-6 sm:right-6">
       {open && (
-        <div className="animate-bestiebot-panel mb-3 flex h-[560px] w-[calc(100vw-2rem)] max-w-[400px] flex-col overflow-hidden rounded-2xl border border-cyan-100 bg-gradient-to-b from-cyan-50 via-emerald-50 to-amber-50 shadow-2xl shadow-cyan-900/15">
+        <div className="animate-bestiebot-panel mb-2 flex h-[560px] w-[calc(100vw-2rem)] max-w-[400px] flex-col overflow-hidden rounded-2xl border border-cyan-100 bg-gradient-to-b from-cyan-50 via-emerald-50 to-amber-50 shadow-2xl shadow-cyan-900/15">
           <div className="bestiebot-shine relative flex items-center justify-between overflow-hidden border-b border-cyan-100 bg-gradient-to-r from-cyan-100 via-emerald-100 to-amber-100 px-4 py-3 text-slate-800">
             <div className="flex items-center gap-2">
-              <span className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-cyan-100">
+              <span className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-cyan-100">
                 <BestieBotMascot compact />
                 <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-amber-300 text-[9px] font-black text-amber-900">
                   AI
@@ -176,7 +176,7 @@ export default function Chatbot() {
             {visibleMessages.map((message, index) => (
               <div key={`${message.role}-${index}`} className={`flex items-end gap-2 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {message.role === 'bot' && (
-                  <span className="mb-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-cyan-50 ring-1 ring-cyan-200">
+                  <span className="mb-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-50 ring-1 ring-cyan-200">
                     <BestieBotMascot compact />
                   </span>
                 )}
