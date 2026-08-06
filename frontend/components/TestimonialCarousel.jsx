@@ -45,7 +45,7 @@ export default function TestimonialCarousel() {
     <div>
       <div className="grid gap-5" style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}>
         {visible.map((r, i) => (
-          <div key={`${current}-${i}`} className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col">
+          <div key={`${current}-${i}`} className="bg-white rounded-lg p-6 shadow-sm border border-slate-100 flex flex-col">
             <div className="flex items-center justify-between mb-3">
               <div className="flex gap-0.5 text-amber-400">
                 {'★'.repeat(r.rating)}

@@ -1,13 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  Phone, ArrowRight, CheckCircle, Star, Clock, Leaf,
+  Phone, Mail, ArrowRight, CheckCircle, Star, Clock, Leaf, MessageCircle,
+  Facebook, Instagram, Music2,
   Award, Users, ThumbsUp
 } from 'lucide-react';
 
 export const metadata = {
   title: 'CleanWithBest – Professional Cleaning Services',
-  description: 'Professional domestic and commercial cleaning services across London. Fully insured, satisfaction guaranteed. From £15/hr.',
+  description: 'Professional domestic and commercial cleaning services across London. Fully insured, satisfaction guaranteed. From £17/hr.',
 };
 
 /* ─────────────────── DATA ─────────────────── */
@@ -41,19 +42,19 @@ const rooms = [
 
 const pricingCards = [
   {
-    title: 'Regular Cleaning', from: 'From £15/hr', badge: 'Most Popular',
+    title: 'Regular Cleaning', from: 'From £17/hr', badge: 'Most Popular',
     desc: 'Perfect for weekly, fortnightly or monthly maintenance cleans to keep your home consistently spotless.',
     features: ['Flexible scheduling', 'Same cleaner each visit', 'Fully insured', 'All equipment supplied'],
     href: '/domestic#regular', color: 'bg-brand-600',
   },
   {
-    title: 'Deep Cleaning', from: 'From £169', badge: null,
+    title: 'Deep Cleaning', from: 'From £179', badge: null,
     desc: 'A thorough top-to-bottom clean covering every surface, inside appliances and all the areas a regular clean misses.',
     features: ['Inside oven & fridge', 'Behind appliances', 'Full bathroom deep clean', 'Limescale removal'],
     href: '/domestic#deep', color: 'bg-slate-800',
   },
   {
-    title: 'End of Tenancy', from: 'From £195', badge: 'Deposit Guaranteed',
+    title: 'End of Tenancy', from: 'From £179', badge: 'Deposit Guaranteed',
     desc: 'Comprehensive clean to landlord standards. We\'ll ensure you get your full deposit back — or we re-clean for free.',
     features: ['Landlord checklist followed', 'Deposit-back guarantee', 'Certificate on request', '8hr average clean time'],
     href: '/domestic#end-of-tenancy', color: 'bg-accent-600',
@@ -61,25 +62,25 @@ const pricingCards = [
 ];
 
 const oneOff = [
-  { title: 'Carpet Cleaning', price: 'From £65/room', icon: '🪣', href: '/domestic#carpet' },
-  { title: 'Mattress Cleaning', price: 'From £45 each', icon: '🛏️', href: '/domestic#mattress' },
-  { title: 'After Builders', price: 'From £249', icon: '🏗️', href: '/domestic#deep' },
-  { title: 'Window Cleaning', price: 'From £35', icon: '🪟', href: '/domestic#windows' },
-  { title: 'Ironing & Laundry', price: 'From £20/hr', icon: '👕', href: '/domestic#ironing' },
-  { title: 'Move In/Out', price: 'From £169', icon: '📦', href: '/domestic#move' },
+  { title: 'Carpet Cleaning', price: 'From £43/room', icon: '🪣', href: '/domestic#carpet' },
+  { title: 'Mattress Cleaning', price: 'From £23 each', icon: '🛏️', href: '/domestic#mattress' },
+  { title: 'After Builders', price: 'From £145', icon: '🏗️', href: '/domestic#deep' },
+  { title: 'Window Cleaning', price: 'From £29', icon: '🪟', href: '/domestic#windows' },
+  { title: 'Ironing & Laundry', price: 'From £18/hr', icon: '👕', href: '/domestic#ironing' },
+  { title: 'Move In/Out', price: 'From £179', icon: '📦', href: '/domestic#move' },
 ];
 
 const domesticServices = [
-  { icon: '🏠', title: 'Regular Home Cleaning', desc: 'Weekly, fortnightly or monthly — kept spotless all year round.', price: 'From £15/hr' },
-  { icon: '✨', title: 'Deep Cleaning', desc: 'Full top-to-bottom clean including inside appliances and hidden areas.', price: 'From £169' },
-  { icon: '🔑', title: 'End of Tenancy', desc: 'Deposit-back guaranteed clean to full landlord standard.', price: 'From £195', popular: true },
-  { icon: '🛋️', title: 'Carpet & Upholstery', desc: 'Steam cleaning to remove stains, odors and allergens.', price: 'From £65/room' },
+  { icon: '🏠', title: 'Regular Home Cleaning', desc: 'Weekly, fortnightly or monthly — kept spotless all year round.', price: 'From £17/hr' },
+  { icon: '✨', title: 'Deep Cleaning', desc: 'Full top-to-bottom clean including inside appliances and hidden areas.', price: 'From £179' },
+  { icon: '🔑', title: 'End of Tenancy', desc: 'Deposit-back guaranteed clean to full landlord standard.', price: 'From £179', popular: true },
+  { icon: '🛋️', title: 'Carpet & Upholstery', desc: 'Steam cleaning to remove stains, odors and allergens.', price: 'From £43/room' },
 ];
 
 const commercialServices = [
-  { icon: '🏢', title: 'Office Cleaning', desc: 'Daily or weekly office cleaning — early morning or evening slots available.', price: 'From £25/hr', popular: true },
+  { icon: '🏢', title: 'Office Cleaning', desc: 'Daily or weekly office cleaning — early morning or evening slots available.', price: 'From £21.50/hr', popular: true },
   { icon: '🍽️', title: 'Restaurant & Hospitality', desc: 'Deep kitchen cleaning and dining area sanitation to health standards.', price: 'Custom quote' },
-  { icon: '🛍️', title: 'Retail Cleaning', desc: 'Store cleaning around your trading hours, zero disruption.', price: 'From £22/hr' },
+  { icon: '🛍️', title: 'Retail Cleaning', desc: 'Store cleaning around your trading hours, zero disruption.', price: 'From £18/hr' },
   { icon: '🏋️', title: 'Gym & Fitness', desc: 'Equipment disinfection, changing rooms, studio floor cleaning.', price: 'Custom quote' },
 ];
 
@@ -113,7 +114,7 @@ const areaZones = [
 ];
 
 const faqs = [
-  { q: 'How much does cleaning cost?', a: 'Regular home cleaning starts from just £15/hr. Deep cleaning starts from £169, and end of tenancy cleaning from £195. All quotes are fixed-price with no hidden fees. Contact us for a free, personalised quote.' },
+  { q: 'How much does cleaning cost?', a: 'Regular home cleaning starts from just £17/hr. Deep cleaning starts from £179, and end of tenancy cleaning from £179. All quotes are fixed-price with no hidden fees. Contact us for a free, personalised quote.' },
   { q: 'Do I need to be home during the clean?', a: 'Not at all. Many of our customers provide a key or entry code. All our cleaners are fully vetted, insured and trustworthy. We lock up securely when done.' },
   { q: 'Do cleaners bring their own equipment and products?', a: 'Yes — we supply all professional cleaning products and equipment. If you prefer us to use your own products (e.g. for allergy reasons), just let us know in advance.' },
   { q: 'What happens if I\'m not happy with the result?', a: 'Your satisfaction is guaranteed. If you\'re not 100% happy, contact us within 24 hours and we\'ll return to re-clean the affected areas completely free of charge.' },
@@ -129,80 +130,96 @@ export default function HomePage() {
     <main>
 
       {/* ══════════ HERO ══════════ */}
-      <section className="relative flex items-center overflow-hidden bg-brand-900">
+      <section className="relative min-h-[calc(100vh-112px)] overflow-hidden bg-slate-950">
         <Image
           src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1800&q=80"
-          alt="Professional cleaning"
+          alt="Professional cleaner preparing a spotless home"
           fill priority
-          className="object-cover opacity-15"
+          className="object-cover opacity-35"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-950/95 via-brand-900/85 to-brand-800/75" />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/88 to-brand-900/45" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent" />
 
-        <div className="relative max-w-5xl mx-auto px-4 pt-10 pb-16 z-10 w-full text-center">
+        <div className="relative z-10 mx-auto grid min-h-[calc(100vh-112px)] max-w-7xl items-center gap-10 px-4 py-14 lg:grid-cols-[1fr_380px]">
           {/* Badges */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            <span className="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full">
-              ✓ 100% Satisfaction Guaranteed
-            </span>
-            <span className="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-full">
-              📍 Serving All London
-            </span>
-          </div>
-
-          <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.08] mb-5">
-            London's Most Trusted<br />
-            <span className="text-accent-400">Cleaning Service</span>
-          </h1>
-          <p className="text-xl text-white/70 font-medium mb-3 max-w-2xl mx-auto">Professional domestic &amp; commercial cleaning across all London zones.</p>
-          <p className="text-3xl font-bold text-accent-400 mb-10">
-            From just <span className="text-white">£15/hour</span> <span className="text-white/50 text-xl font-normal">— no hidden fees</span>
-          </p>
-
-          {/* Trust bullets */}
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 mb-12">
-            {['Eco-friendly cleaning products', '100% background checked staff', 'Top 5% of cleaners — rigorously vetted', '100% satisfaction guaranteed'].map(item => (
-              <span key={item} className="flex items-center gap-2 text-white/80 text-sm font-medium">
-                <span className="w-4 h-4 rounded-full bg-accent-500/25 border border-accent-500/50 flex items-center justify-center text-accent-400 text-xs flex-shrink-0">✓</span>
-                {item}
+          <div className="max-w-3xl">
+            <div className="mb-7 flex flex-wrap gap-2">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-bold text-white backdrop-blur">
+                <CheckCircle size={14} className="text-accent-400" /> 100% Satisfaction Guaranteed
               </span>
-            ))}
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-bold text-white backdrop-blur">
+                Serving homes and businesses across London
+              </span>
+            </div>
+
+            <h1 className="font-heading text-4xl font-extrabold leading-[1.06] text-white sm:text-5xl lg:text-7xl">
+              Professional cleaning that feels simple from start to finish
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg font-medium leading-relaxed text-white/76 md:text-xl">
+              Domestic, commercial, deep cleaning and end-of-tenancy services. Tell us what you need, leave your number, and we will contact you by call or WhatsApp with a clear quote.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/quote" className="btn-white-lg">
+                Get a Free Quote <ArrowRight size={18} />
+              </Link>
+              <a href="tel:+447503494242" className="btn-outline-white-lg flex items-center gap-2">
+                <Phone size={17} /> +44 7503 494242
+              </a>
+              <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline-white-lg flex items-center gap-2">
+                <MessageCircle size={17} /> WhatsApp +44 7503 494242
+              </a>
+            </div>
+
+            <div className="mt-9 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3">
+              {[
+                { label: 'Regular Cleaning', price: 'From £17/hr' },
+                { label: 'Deep Cleaning', price: 'From £179' },
+                { label: 'Office Cleaning', price: 'From £21.50/hr' },
+              ].map(({ label, price }) => (
+                <div key={label} className="rounded-lg border border-white/15 bg-white/10 px-4 py-3 backdrop-blur">
+                  <p className="text-xs font-semibold text-white/60">{label}</p>
+                  <p className="mt-1 font-heading text-lg font-bold text-white">{price}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/quote" className="btn-white-lg">
-              Get a Free Quote — 2 Min Form
-            </Link>
-            <a href="tel:+447789602945" className="btn-outline-white-lg flex items-center gap-2">
-              <Phone size={17} /> Call +44 7789 602945
-            </a>
-            <a href="tel:+447503494242" className="btn-outline-white-lg flex items-center gap-2">
-              <Phone size={17} /> Call 07503 494242
-            </a>
-          </div>
-
-          {/* Pricing teasers */}
-          <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
-            {[
-              { label: 'Regular Clean', price: 'From £15/hr' },
-              { label: 'Deep Cleaning', price: 'From £169' },
-              { label: 'End of Tenancy', price: 'From £195' },
-              { label: 'Office Cleaning', price: 'From £25/hr' },
-            ].map(({ label, price }) => (
-              <div key={label} className="bg-white/10 border border-white/15 rounded-2xl px-3 py-4 backdrop-blur-sm">
-                <p className="text-white/60 text-xs font-medium mb-1">{label}</p>
-                <p className="text-white font-bold text-base">{price}</p>
+          <div className="hidden lg:block">
+            <div className="rounded-lg border border-white/15 bg-white/12 p-5 text-white shadow-2xl backdrop-blur-md">
+              <p className="text-xs font-bold uppercase tracking-widest text-accent-300">How it works</p>
+              <div className="mt-5 space-y-4">
+                {[
+                  ['1', 'Choose the cleaning service you need.'],
+                  ['2', 'Send your postcode and contact number.'],
+                  ['3', 'We call or WhatsApp you with the quote.'],
+                ].map(([num, text]) => (
+                  <div key={num} className="flex gap-3">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent-500 text-sm font-black text-slate-950">{num}</span>
+                    <p className="text-sm leading-relaxed text-white/78">{text}</p>
+                  </div>
+                ))}
               </div>
-            ))}
+              <div className="mt-6 rounded-lg bg-white p-4 text-slate-900">
+                <p className="text-sm font-bold">Need help now?</p>
+                <a href="tel:+447503494242" className="mt-2 flex items-center gap-2 text-base font-extrabold text-brand-700">
+                  <Phone size={17} /> +44 7503 494242
+                </a>
+                <a href="mailto:cleanwithbest@gmail.com" className="mt-2 flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-brand-700">
+                  <Mail size={16} /> cleanwithbest@gmail.com
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ══════════ 7 KEY CLAIMS STRIP ══════════ */}
-      <div className="bg-brand-700 py-5 overflow-x-auto">
+      <div className="bg-white py-5 shadow-sm shadow-slate-900/5 overflow-x-auto">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between gap-6 min-w-max md:min-w-0 flex-wrap md:flex-nowrap">
             {claims.map(({ icon, label }) => (
-              <div key={label} className="flex items-center gap-2 text-white text-sm font-semibold whitespace-nowrap">
+              <div key={label} className="flex items-center gap-2 text-slate-700 text-sm font-semibold whitespace-nowrap">
                 <span className="text-base">{icon}</span>
                 <span>{label}</span>
               </div>
@@ -210,6 +227,41 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
+      {/* ══════════ CONTACT STRIP ══════════ */}
+      <section className="bg-slate-50 border-y border-slate-200">
+        <div className="mx-auto grid max-w-7xl gap-4 px-4 py-6 md:grid-cols-4">
+          {[
+            { icon: Phone, label: 'Call', value: '+44 7503 494242', href: 'tel:+447503494242' },
+            { icon: MessageCircle, label: 'WhatsApp', value: '+44 7503 494242', href: 'https://wa.me/447503494242' },
+            { icon: MessageCircle, label: 'WhatsApp', value: '+44 7789 602945', href: 'https://wa.me/447789602945' },
+            { icon: Mail, label: 'Email', value: 'cleanwithbest@gmail.com', href: 'mailto:cleanwithbest@gmail.com' },
+          ].map(({ icon: Icon, label, value, href }) => (
+            <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className="flex items-center gap-3 rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-brand-200 hover:text-brand-700">
+              <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-50 text-brand-700">
+                <Icon size={18} />
+              </span>
+              <span>
+                <span className="block text-xs font-bold uppercase tracking-wide text-slate-400">{label}</span>
+                <span className="block text-sm font-bold text-slate-800">{value}</span>
+              </span>
+            </a>
+          ))}
+          <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+            {[
+              { icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/people/Cleanwithbest/61584162025224/' },
+              { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/cleanwithbest' },
+              { icon: Music2, label: 'TikTok', href: 'https://www.tiktok.com/@cleanwithbest' },
+            ].map(({ icon: Icon, label, href }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+                className="flex h-10 flex-1 items-center justify-center rounded-lg bg-slate-50 text-slate-600 hover:bg-brand-600 hover:text-white">
+                <Icon size={18} />
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ══════════ ABOUT INTRO ══════════ */}
       <section className="py-20 max-w-7xl mx-auto px-4">
@@ -239,7 +291,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="relative">
-            <div className="rounded-3xl overflow-hidden shadow-2xl">
+            <div className="rounded-lg overflow-hidden shadow-2xl">
               <Image
                 src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=700&q=80"
                 alt="Professional cleaner"
@@ -247,7 +299,7 @@ export default function HomePage() {
                 className="object-cover w-full h-[420px]"
               />
             </div>
-            <div className="absolute -top-5 -right-5 bg-accent-500 rounded-2xl shadow-xl p-4 text-white text-center">
+            <div className="absolute -top-5 -right-5 bg-accent-500 rounded-lg shadow-xl p-4 text-white text-center">
               <div className="font-heading text-3xl font-extrabold">5%</div>
               <div className="text-xs font-semibold">Top Cleaners Only</div>
             </div>
@@ -267,7 +319,7 @@ export default function HomePage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {rooms.map(({ emoji, title, color, tasks }) => (
-              <div key={title} className={`rounded-2xl border bg-gradient-to-br ${color} p-6 hover:shadow-lg transition-all duration-300`}>
+              <div key={title} className={`rounded-lg border bg-gradient-to-br ${color} p-6 hover:shadow-lg transition-all duration-300`}>
                 <div className="text-4xl mb-3">{emoji}</div>
                 <h3 className="font-heading font-bold text-slate-900 text-lg mb-4">{title}</h3>
                 <ul className="space-y-2">
@@ -298,7 +350,7 @@ export default function HomePage() {
           {/* Main pricing cards */}
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             {pricingCards.map(({ title, from, badge, desc, features, href, color }) => (
-              <div key={title} className={`rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300`}>
+              <div key={title} className={`rounded-lg overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300`}>
                 <div className={`${color} p-6 text-white`}>
                   {badge && (
                     <span className="inline-block bg-white/20 border border-white/30 text-white text-xs font-bold px-3 py-1 rounded-full mb-3">{badge}</span>
@@ -306,7 +358,7 @@ export default function HomePage() {
                   <h3 className="font-heading text-xl font-bold mb-1">{title}</h3>
                   <div className="text-3xl font-extrabold font-heading">{from}</div>
                 </div>
-                <div className="bg-white p-6 border border-t-0 border-slate-100 rounded-b-3xl">
+                <div className="bg-white p-6 border border-t-0 border-slate-100 rounded-b-lg">
                   <p className="text-slate-500 text-sm leading-relaxed mb-4">{desc}</p>
                   <ul className="space-y-2 mb-6">
                     {features.map(f => (
@@ -316,7 +368,7 @@ export default function HomePage() {
                     ))}
                   </ul>
                   <Link href={href} className="btn-primary w-full justify-center text-sm">
-                    Book Now <ArrowRight size={14} />
+                    Get Quote <ArrowRight size={14} />
                   </Link>
                 </div>
               </div>
@@ -324,12 +376,12 @@ export default function HomePage() {
           </div>
 
           {/* One-off services grid */}
-          <div className="bg-slate-50 rounded-3xl p-8 border border-slate-100">
+          <div className="bg-slate-50 rounded-lg p-8 border border-slate-100">
             <h3 className="font-heading font-bold text-slate-900 text-xl mb-6 text-center">Other Services & Pricing</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {oneOff.map(({ title, price, icon, href }) => (
                 <Link key={title} href={href}
-                  className="bg-white rounded-2xl p-4 text-center border border-slate-100 hover:border-brand-300 hover:shadow-md transition-all duration-200 group">
+                  className="bg-white rounded-lg p-4 text-center border border-slate-100 hover:border-brand-300 hover:shadow-md transition-all duration-200 group">
                   <div className="text-2xl mb-2">{icon}</div>
                   <div className="font-semibold text-slate-900 text-xs mb-1 group-hover:text-brand-600 transition-colors">{title}</div>
                   <div className="text-brand-600 text-xs font-bold">{price}</div>
@@ -362,7 +414,7 @@ export default function HomePage() {
                 <p className="text-slate-500 text-sm leading-relaxed mb-3">{desc}</p>
                 <div className="price-badge mb-4">{price}</div>
                 <Link href="/quote" className="text-brand-600 text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Book Now <ArrowRight size={14} />
+                  Get Quote <ArrowRight size={14} />
                 </Link>
               </div>
             ))}
@@ -418,7 +470,7 @@ export default function HomePage() {
             ].map(({ num, title, desc, icon, cta, href }) => (
               <div key={num} className="text-center relative z-10">
                 <div className="w-18 h-18 mx-auto mb-5 relative">
-                  <div className="w-16 h-16 bg-white/10 border border-white/20 rounded-2xl flex items-center justify-center mx-auto">
+                  <div className="w-16 h-16 bg-white/10 border border-white/20 rounded-lg flex items-center justify-center mx-auto">
                     <span className="text-3xl">{icon}</span>
                   </div>
                   <div className="absolute -top-2 -right-2 w-7 h-7 bg-accent-500 rounded-full flex items-center justify-center text-white text-xs font-extrabold">
@@ -448,8 +500,8 @@ export default function HomePage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {guarantees.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
-                <div className="w-12 h-12 bg-brand-50 group-hover:bg-brand-100 rounded-2xl flex items-center justify-center mb-4 transition-colors">
+              <div key={title} className="bg-white rounded-lg p-6 border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                <div className="w-12 h-12 bg-brand-50 group-hover:bg-brand-100 rounded-lg flex items-center justify-center mb-4 transition-colors">
                   <Icon size={22} className="text-brand-600" />
                 </div>
                 <h3 className="font-heading font-semibold text-slate-900 text-base mb-2">{title}</h3>
@@ -469,7 +521,7 @@ export default function HomePage() {
               { icon: '🌿', title: 'Eco-Friendly Products', sub: 'Non-toxic, safe for kids & pets' },
               { icon: '💼', title: 'Living Wage Employer', sub: 'Paying all staff a fair living wage' },
             ].map(({ icon, title, sub }) => (
-              <div key={title} className="flex items-center gap-4 bg-slate-50 rounded-2xl p-5 border border-slate-100 hover:border-brand-200 hover:bg-brand-50 transition-all duration-200">
+              <div key={title} className="flex items-center gap-4 bg-slate-50 rounded-lg p-5 border border-slate-100 hover:border-brand-200 hover:bg-brand-50 transition-all duration-200">
                 <div className="text-4xl shrink-0">{icon}</div>
                 <div>
                   <h4 className="font-semibold text-slate-900 text-sm">{title}</h4>
@@ -503,7 +555,7 @@ export default function HomePage() {
                 <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">{zone}</p>
                 <div className="flex flex-wrap gap-2">
                   {areas.map(area => (
-                    <span key={area} className="bg-white border border-slate-200 text-slate-700 rounded-xl px-4 py-2 text-sm font-medium hover:bg-brand-600 hover:text-white hover:border-brand-600 cursor-default transition-all duration-200">
+                    <span key={area} className="bg-white border border-slate-200 text-slate-700 rounded-lg px-4 py-2 text-sm font-medium hover:bg-brand-600 hover:text-white hover:border-brand-600 cursor-default transition-all duration-200">
                       {area}
                     </span>
                   ))}
@@ -527,7 +579,7 @@ export default function HomePage() {
           </div>
           <div className="space-y-3">
             {faqs.map(({ q, a }) => (
-              <details key={q} className="group bg-white border border-slate-100 rounded-2xl shadow-sm overflow-hidden">
+              <details key={q} className="group bg-white border border-slate-100 rounded-lg shadow-sm overflow-hidden">
                 <summary className="flex items-center justify-between gap-4 px-6 py-4 cursor-pointer list-none select-none hover:bg-slate-50 transition-colors">
                   <span className="font-semibold text-slate-900 text-sm md:text-base">{q}</span>
                   <span className="faq-icon text-slate-400 text-xl font-thin shrink-0 w-6 h-6 flex items-center justify-center">+</span>
@@ -537,7 +589,7 @@ export default function HomePage() {
             ))}
           </div>
           <p className="text-center text-slate-400 text-sm mt-8">
-            Still have questions? <a href="tel:+447789602945" className="text-brand-600 font-semibold hover:underline">Call us on +44 7789 602945</a>, <a href="tel:+447503494242" className="text-brand-600 font-semibold hover:underline">07503 494242</a> or <Link href="/contact" className="text-brand-600 font-semibold hover:underline">send a message</Link>.
+            Still have questions? <a href="tel:+447503494242" className="text-brand-600 font-semibold hover:underline">Call us on +44 7503 494242</a>, <a href="tel:+447789602945" className="text-brand-600 font-semibold hover:underline">+44 7789 602945</a> or <Link href="/contact" className="text-brand-600 font-semibold hover:underline">send a message</Link>.
           </p>
         </div>
       </section>
@@ -560,14 +612,20 @@ export default function HomePage() {
             ))}
           </div>
           <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <Link href="/quote" className="inline-flex items-center gap-2 bg-accent-500 hover:bg-accent-600 text-white font-bold text-lg px-8 py-4 rounded-2xl transition-all shadow-lg hover:shadow-xl">
+            <Link href="/quote" className="inline-flex items-center gap-2 bg-accent-500 hover:bg-accent-600 text-white font-bold text-lg px-8 py-4 rounded-lg transition-all shadow-lg hover:shadow-xl">
               Get My Free Quote <ArrowRight size={20} />
             </Link>
-            <a href="tel:+447789602945" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/25 text-white font-bold text-lg px-8 py-4 rounded-2xl transition-all">
+            <a href="tel:+447503494242" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/25 text-white font-bold text-lg px-8 py-4 rounded-lg transition-all">
+              <Phone size={18} /> +44 7503 494242
+            </a>
+            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/25 text-white font-bold text-lg px-8 py-4 rounded-lg transition-all">
+              <MessageCircle size={18} /> WhatsApp +44 7503 494242
+            </a>
+            <a href="tel:+447789602945" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/25 text-white font-bold text-lg px-8 py-4 rounded-lg transition-all">
               <Phone size={18} /> +44 7789 602945
             </a>
-            <a href="tel:+447503494242" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/25 text-white font-bold text-lg px-8 py-4 rounded-2xl transition-all">
-              <Phone size={18} /> 07503 494242
+            <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/25 text-white font-bold text-lg px-8 py-4 rounded-lg transition-all">
+              <MessageCircle size={18} /> WhatsApp +44 7789 602945
             </a>
           </div>
           <p className="text-white/40 text-sm">Available 24/7 · cleanwithbest@gmail.com</p>

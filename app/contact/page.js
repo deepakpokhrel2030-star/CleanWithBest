@@ -1,4 +1,4 @@
-import { Phone, Mail, Clock, MapPin, MessageCircle, Facebook, Instagram, Music2 } from 'lucide-react';
+import { Phone, Mail, Clock, MessageCircle, Facebook, Instagram, Music2 } from 'lucide-react';
 import ContactForm from '@/frontend/components/ContactForm';
 import Link from 'next/link';
 
@@ -11,15 +11,15 @@ export default function ContactPage() {
   return (
     <main>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-brand-900 to-brand-700 py-20">
+      <section className="bg-slate-950 py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="max-w-2xl">
-            <span className="inline-block bg-white/15 text-white text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">Get in Touch</span>
+            <span className="section-tag-light">Get in Touch</span>
             <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-white mb-5 leading-tight">
-              We'd Love to Hear<br />From You
+              Contact CleanWithBest
             </h1>
             <p className="text-white/75 text-lg leading-relaxed">
-              Our friendly team is ready to help. Whether you have a question, need a quote or want to book a clean — we're here.
+              Call, WhatsApp, email or send a message. We will help you choose the right cleaning service.
             </p>
           </div>
         </div>
@@ -36,15 +36,15 @@ export default function ContactPage() {
               <h2 className="section-title mb-6">Reach Us Any Way You Like</h2>
               <div className="space-y-5 mb-10">
                 {[
-                  { icon: Phone, title: 'Call Us', detail: '+44 7789 602945', sub: 'Available 24/7', href: 'tel:+447789602945' },
-                  { icon: Phone, title: 'Second Number', detail: '07503 494242', sub: 'Call or WhatsApp', href: 'tel:+447503494242' },
+                  { icon: Phone, title: 'Call Us', detail: '+44 7503 494242', sub: 'Available 24/7', href: 'tel:+447503494242' },
+                  { icon: Phone, title: 'Second Number', detail: '+44 7789 602945', sub: 'Call or WhatsApp', href: 'tel:+447789602945' },
                   { icon: Mail, title: 'Email Us', detail: 'cleanwithbest@gmail.com', sub: 'We respond within 2 hours', href: 'mailto:cleanwithbest@gmail.com' },
-                  { icon: MessageCircle, title: 'WhatsApp', detail: 'Message us on WhatsApp', sub: 'Available 24/7', href: 'https://wa.me/447503494242' },
-                  { icon: MapPin, title: 'Our Office', detail: '12 Bishopsgate', sub: 'London EC2N 4BQ', href: '#' },
+                  { icon: MessageCircle, title: 'WhatsApp Main', detail: '+44 7503 494242', sub: 'Message us on WhatsApp', href: 'https://wa.me/447503494242' },
+                  { icon: MessageCircle, title: 'WhatsApp Second', detail: '+44 7789 602945', sub: 'Message us on WhatsApp', href: 'https://wa.me/447789602945' },
                   { icon: Clock, title: 'Availability', detail: 'Available 24/7', sub: 'We never close', href: null },
                 ].map(({ icon: Icon, title, detail, sub, href }) => (
-                  <div key={title} className="flex items-start gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                    <div className="w-10 h-10 bg-brand-100 rounded-xl flex items-center justify-center shrink-0">
+                  <div key={title} className="flex items-start gap-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
+                    <div className="w-10 h-10 bg-brand-100 rounded-lg flex items-center justify-center shrink-0">
                       <Icon size={18} className="text-brand-600" />
                     </div>
                     <div>
@@ -61,13 +61,13 @@ export default function ContactPage() {
               </div>
 
               {/* Quick actions */}
-              <div className="bg-brand-50 border border-brand-100 rounded-2xl p-6">
+              <div className="bg-brand-50 border border-brand-100 rounded-lg p-6">
                 <h3 className="font-semibold text-slate-900 mb-3">Need a quote instead?</h3>
                 <p className="text-slate-500 text-sm mb-4">Head to our dedicated quote page for a more detailed quote request with pricing estimates.</p>
                 <Link href="/quote" className="btn-primary text-sm">Get a Free Quote →</Link>
               </div>
 
-              <div className="mt-6 bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
+              <div className="mt-6 bg-white border border-slate-100 rounded-lg p-6 shadow-sm">
                 <h3 className="font-semibold text-slate-900 mb-3">Follow CleanWithBest</h3>
                 <div className="flex flex-wrap gap-3">
                   {[
@@ -92,29 +92,16 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Map placeholder */}
-      <section className="pb-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="bg-slate-100 rounded-2xl h-72 flex items-center justify-center border border-slate-200">
-            <div className="text-center">
-              <MapPin size={40} className="text-brand-300 mx-auto mb-3" />
-              <p className="text-slate-400 font-medium">12 Bishopsgate, London, EC2N 4BQ</p>
-              <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="text-brand-600 text-sm font-semibold mt-2 inline-block hover:underline">
-                Open in Google Maps →
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="bg-brand-600 py-14">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="font-heading text-3xl font-bold text-white mb-4">Not sure what you need?</h2>
           <p className="text-white/80 mb-8">Give us a call or fill in a quote request and our team will recommend the perfect cleaning solution for your home or business.</p>
           <div className="flex flex-wrap justify-center gap-4">
+            <a href="tel:+447503494242" className="btn-white">📞 Call +44 7503 494242</a>
+            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-white">WhatsApp +44 7503 494242</a>
             <a href="tel:+447789602945" className="btn-white">📞 Call +44 7789 602945</a>
-            <a href="tel:+447503494242" className="btn-white">📞 Call 07503 494242</a>
+            <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="btn-white">WhatsApp +44 7789 602945</a>
             <Link href="/quote" className="btn-outline">Get a Free Quote</Link>
           </div>
         </div>

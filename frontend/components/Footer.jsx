@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Phone, Mail, Clock, MapPin, Facebook, Instagram, Music2 } from 'lucide-react';
+import { Phone, Mail, Clock, MessageCircle, Facebook, Instagram, Music2 } from 'lucide-react';
 
 const domesticLinks = [
   ['Regular Home Cleaning', '/domestic#regular'],
@@ -26,7 +26,20 @@ const areas = ['Westminster', 'Chelsea', 'Kensington', 'Camden', 'Islington', 'H
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 text-slate-400">
+    <footer className="bg-slate-950 text-slate-400">
+      <div className="border-b border-white/10 bg-brand-600">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="font-heading text-2xl font-bold text-white">Need a cleaner?</p>
+            <p className="mt-1 text-sm text-white/75">Send a quote request and we will contact you by phone or WhatsApp.</p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Link href="/quote" className="btn-white">Get a Free Quote</Link>
+            <a href="tel:+447503494242" className="btn-outline-white">Call +44 7503 494242</a>
+            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline-white">WhatsApp +44 7503 494242</a>
+          </div>
+        </div>
+      </div>
       <div className="max-w-7xl mx-auto px-4 pt-16 pb-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
 
@@ -36,25 +49,27 @@ export default function Footer() {
               <span className="text-brand-400">Clean</span>
               <span className="text-accent-400">WithBest</span>
             </Link>
-            <p className="text-sm leading-relaxed mb-5 max-w-xs">
-              Professional cleaning services for homes and businesses. Trusted by thousands of satisfied customers. Fully insured, top-rated, satisfaction guaranteed.
+            <p className="text-sm leading-relaxed mb-5 max-w-sm">
+              Professional cleaning services for homes and businesses across London. Clear quotes, friendly communication, and reliable cleaners.
             </p>
-            <div className="space-y-2 mb-6 text-sm">
-              <div className="flex items-center gap-2"><Phone size={14} className="text-brand-400" /><a href="tel:+447789602945" className="hover:text-white transition-colors">+44 7789 602945</a></div>
-              <div className="flex items-center gap-2"><Phone size={14} className="text-brand-400" /><a href="tel:+447503494242" className="hover:text-white transition-colors">07503 494242</a></div>
-              <div className="flex items-center gap-2"><Mail size={14} className="text-brand-400" /><a href="mailto:cleanwithbest@gmail.com" className="hover:text-white transition-colors">cleanwithbest@gmail.com</a></div>
-              <div className="flex items-center gap-2"><Clock size={14} className="text-brand-400" /><span>Available 24/7</span></div>
-              <div className="flex items-center gap-2"><MapPin size={14} className="text-brand-400" /><span>12 Bishopsgate, London EC2N 4BQ</span></div>
+            <div className="mb-6 grid gap-2 text-sm">
+              <a href="tel:+447503494242" className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 hover:text-white transition-colors"><Phone size={14} className="text-brand-400" />+44 7503 494242</a>
+              <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 hover:text-white transition-colors"><MessageCircle size={14} className="text-brand-400" />WhatsApp +44 7503 494242</a>
+              <a href="tel:+447789602945" className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 hover:text-white transition-colors"><Phone size={14} className="text-brand-400" />+44 7789 602945</a>
+              <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 hover:text-white transition-colors"><MessageCircle size={14} className="text-brand-400" />WhatsApp +44 7789 602945</a>
+              <a href="mailto:cleanwithbest@gmail.com" className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 hover:text-white transition-colors"><Mail size={14} className="text-brand-400" />cleanwithbest@gmail.com</a>
+              <div className="flex items-center gap-2 px-3 py-1"><Clock size={14} className="text-brand-400" /><span>Available 24/7</span></div>
             </div>
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               {[
                 { Icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/people/Cleanwithbest/61584162025224/' },
                 { Icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/cleanwithbest' },
                 { Icon: Music2, label: 'TikTok', href: 'https://www.tiktok.com/@cleanwithbest' },
               ].map(({ Icon, label, href }) => (
                 <a key={label} href={href} aria-label={label} target="_blank" rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white/8 hover:bg-brand-600 flex items-center justify-center text-slate-400 hover:text-white transition-all duration-200">
+                  className="inline-flex items-center gap-2 rounded-lg bg-white/8 px-3 py-2 text-sm font-semibold text-slate-300 hover:bg-brand-600 hover:text-white transition-all duration-200">
                   <Icon size={16} />
+                  {label}
                 </a>
               ))}
             </div>

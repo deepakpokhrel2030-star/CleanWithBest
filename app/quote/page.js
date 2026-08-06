@@ -10,23 +10,35 @@ export default function QuotePage() {
   return (
     <main>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-brand-900 to-brand-700 py-20">
+      <section className="bg-slate-950 py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="max-w-2xl">
-            <span className="inline-block bg-white/15 text-white text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">Free Quote</span>
+            <span className="section-tag-light">Free Quote</span>
             <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-white mb-5 leading-tight">
-              Get Your Free,<br />No-Obligation Quote
+              Tell us what needs cleaning
             </h1>
             <p className="text-white/75 text-lg leading-relaxed">
-              Fill in the form below with your contact details and we'll get back to you by WhatsApp or phone call with a transparent quote.
+              Fill in the short form below. We will review the details and contact you by WhatsApp or phone call with a transparent quote.
             </p>
           </div>
         </div>
       </section>
 
       {/* Main */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-16 md:py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4">
+          <div className="mb-8 grid gap-4 md:grid-cols-3">
+            {[
+              { title: '1. Tell us the job', text: 'Choose the service, property type, postcode and any notes.' },
+              { title: '2. We check the details', text: 'Our team reviews the request and confirms anything unclear.' },
+              { title: '3. You get a clear quote', text: 'We contact you by WhatsApp or call with the price and earliest slot.' },
+            ].map(({ title, text }) => (
+              <div key={title} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+                <h2 className="font-heading text-base font-bold text-slate-900">{title}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-slate-500">{text}</p>
+              </div>
+            ))}
+          </div>
           <div className="grid lg:grid-cols-3 gap-12 items-start">
 
             {/* Form */}
@@ -37,7 +49,7 @@ export default function QuotePage() {
             {/* Sidebar */}
             <div className="space-y-6">
               {/* Why us */}
-              <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+              <div className="bg-white rounded-lg p-6 border border-slate-100 shadow-sm">
                 <h3 className="font-heading font-bold text-slate-900 text-lg mb-4">Why CleanWithBest?</h3>
                 <ul className="space-y-3">
                   {[
@@ -56,23 +68,26 @@ export default function QuotePage() {
               </div>
 
               {/* Call instead */}
-              <div className="bg-brand-600 rounded-2xl p-6 text-white">
+              <div className="bg-brand-600 rounded-lg p-6 text-white">
                 <h3 className="font-semibold text-lg mb-2">Prefer WhatsApp or Call?</h3>
                 <p className="text-white/75 text-sm mb-4">Leave your number in the quote form or speak directly with our team now.</p>
-                <a href="tel:+447789602945" className="flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
-                  <Phone size={18} /> +44 7789 602945
-                </a>
-                <a href="tel:+447503494242" className="mt-3 flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
-                  <Phone size={18} /> 07503 494242
+                <a href="tel:+447503494242" className="flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
+                  <Phone size={18} /> +44 7503 494242
                 </a>
                 <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
-                  <MessageCircle size={18} /> WhatsApp Us
+                  <MessageCircle size={18} /> WhatsApp +44 7503 494242
+                </a>
+                <a href="tel:+447789602945" className="mt-3 flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
+                  <Phone size={18} /> +44 7789 602945
+                </a>
+                <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
+                  <MessageCircle size={18} /> WhatsApp +44 7789 602945
                 </a>
                 <p className="text-white/50 text-xs mt-2">Available 24/7</p>
               </div>
 
               {/* Process */}
-              <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+              <div className="bg-white rounded-lg p-6 border border-slate-100 shadow-sm">
                 <h3 className="font-heading font-bold text-slate-900 text-lg mb-4">What Happens Next?</h3>
                 <div className="space-y-4">
                   {[

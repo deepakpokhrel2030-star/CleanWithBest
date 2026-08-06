@@ -176,7 +176,7 @@ ul { list-style: none; }
 
 .nav-cta { margin-left: 16px; }
 
-/* HAMBURGER */
+/* HAFully InsuredBURGER */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -482,7 +482,7 @@ ul { list-style: none; }
 .step-arrow { font-size: 24px; color: var(--blue); flex-shrink: 0; }
 
 /* ===========================
-   TESTIMONIALS
+   TESTIFully InsuredONIALS
 =========================== */
 .reviews-summary { text-align: center; margin-bottom: 48px; }
 .reviews-score {
@@ -608,7 +608,7 @@ ul { list-style: none; }
 }
 
 /* ===========================
-   QUOTE FORM
+   QUOTE FORFully Insured
 =========================== */
 .quote-grid {
   display: grid;
@@ -816,7 +816,7 @@ ul { list-style: none; }
 .back-to-top:hover { background: var(--blue-dark); transform: translateY(-3px); }
 
 /* ===========================
-   MODAL
+   Fully InsuredODAL
 =========================== */
 .modal-overlay {
   position: fixed; inset: 0;

@@ -68,7 +68,7 @@ function PillSelect({ options, value, onChange, multi = false }) {
         const ico = typeof opt === 'object' ? opt.icon : null;
         return (
           <button key={val} type="button" onClick={() => toggle(val)}
-            className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border text-sm font-medium transition-all duration-150 ${
+            className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border text-sm font-medium transition-all duration-150 ${
               isSelected(val)
                 ? 'bg-brand-600 border-brand-600 text-white shadow-sm'
                 : 'bg-white border-slate-200 text-slate-600 hover:border-brand-300 hover:text-brand-600'
@@ -90,7 +90,7 @@ function Counter({ value, onChange, options, label }) {
       <div className="flex gap-2 flex-wrap">
         {options.map(opt => (
           <button key={opt} type="button" onClick={() => onChange(opt)}
-            className={`w-12 h-12 rounded-xl border text-sm font-bold transition-all ${
+            className={`w-12 h-12 rounded-lg border text-sm font-bold transition-all ${
               value === opt
                 ? 'bg-brand-600 border-brand-600 text-white'
                 : 'bg-white border-slate-200 text-slate-700 hover:border-brand-300 hover:text-brand-600'
@@ -230,7 +230,7 @@ export default function QuoteForm() {
 
   if (status === 'success') {
     return (
-      <div className="bg-white rounded-2xl p-8 text-center shadow-xl">
+      <div className="bg-white rounded-lg p-8 text-center shadow-xl">
         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <CheckCircle size={32} className="text-green-500" />
         </div>
@@ -255,7 +255,7 @@ export default function QuoteForm() {
   const postcodeReady = form.postcode.replace(/\s/g, '').length >= 5;
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-xl overflow-hidden">
+    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-xl overflow-hidden">
 
       {/* Header */}
       <div className="bg-brand-600 px-6 py-4">
@@ -341,7 +341,7 @@ export default function QuoteForm() {
                   type="button"
                   onClick={findAddresses}
                   disabled={!postcodeReady || addrLoading}
-                  className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 disabled:bg-slate-300 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all shrink-0"
+                  className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 disabled:bg-slate-300 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-all shrink-0"
                 >
                   {addrLoading
                     ? <><Loader2 size={14} className="animate-spin" /> Searching...</>
@@ -363,7 +363,7 @@ export default function QuoteForm() {
             {showDropdown && addrList.length > 0 && (
               <div>
                 <label className="label">Select your address *</label>
-                <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm max-h-52 overflow-y-auto">
+                <div className="border border-slate-200 rounded-lg overflow-hidden shadow-sm max-h-52 overflow-y-auto">
                   <button
                     type="button"
                     onClick={() => setShowDropdown(false)}
@@ -388,7 +388,7 @@ export default function QuoteForm() {
 
             {/* Selected address display */}
             {form.address && (
-              <div className="flex items-start gap-2 bg-green-50 border border-green-200 rounded-xl px-4 py-3">
+              <div className="flex items-start gap-2 bg-green-50 border border-green-200 rounded-lg px-4 py-3">
                 <CheckCircle size={15} className="text-green-500 mt-0.5 shrink-0" />
                 <div className="flex-1">
                   <p className="text-xs font-semibold text-green-700 mb-0.5">Selected address:</p>
@@ -408,7 +408,7 @@ export default function QuoteForm() {
             {pcStatus === 'valid' && !showDropdown && !form.address && (
               <div>
                 {addrError && (
-                  <p className="text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 mb-2">
+                  <p className="text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 mb-2">
                     {addrError}
                   </p>
                 )}
@@ -478,7 +478,7 @@ export default function QuoteForm() {
 
         {/* Summary */}
         {(form.service || form.propertyType) && (
-          <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100 text-xs text-slate-600 space-y-1">
+          <div className="bg-slate-50 rounded-lg p-4 border border-slate-100 text-xs text-slate-600 space-y-1">
             <p className="font-semibold text-slate-700 mb-2">Your quote summary:</p>
             {form.service     && <p>📋 Service: <strong>{form.service}</strong></p>}
             {form.propertyType && <p>🏠 Property: <strong>{PROPERTY_TYPES.find(t => t.value === form.propertyType)?.label}</strong></p>}
@@ -494,15 +494,15 @@ export default function QuoteForm() {
         )}
 
         {status === 'error' && (
-          <p className="text-red-500 text-sm bg-red-50 border border-red-200 rounded-xl px-4 py-3">
-            Something went wrong. Please try again or call us on <strong>+44 7789 602945</strong> or <strong>07503 494242</strong>.
+          <p className="text-red-500 text-sm bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+            Something went wrong. Please try again or call us on <strong>+44 7503 494242</strong> or <strong>+44 7789 602945</strong>.
           </p>
         )}
 
         <button
           type="submit"
           disabled={status === 'loading'}
-          className="btn-primary w-full justify-center py-4 text-base rounded-xl"
+          className="btn-primary w-full justify-center py-4 text-base rounded-lg"
         >
           {status === 'loading'
             ? <><Loader2 size={18} className="animate-spin" /> Sending your quote request...</>

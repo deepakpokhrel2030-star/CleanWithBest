@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Menu, X, Phone, ChevronDown, Mail, Facebook, Instagram, Music2 } from 'lucide-react';
+import { Menu, X, Phone, ChevronDown, Mail, MessageCircle, Facebook, Instagram, Music2 } from 'lucide-react';
 
 const nav = [
   {
@@ -95,21 +95,28 @@ export default function Header() {
   return (
     <>
       {/* ── Top bar ── */}
-      <div className="bg-brand-950 text-slate-300 text-xs py-2 hidden md:block" style={{ backgroundColor: '#050e1f' }}>
+      <div className="hidden bg-slate-950 text-slate-200 md:block">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-          <div className="flex items-center gap-5">
-            <a href="tel:+447789602945" className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Phone size={11} /> +44 7789 602945
+          <div className="flex items-center gap-4 py-3">
+            <span className="text-sm font-bold uppercase tracking-wide text-accent-400">Call us today</span>
+            <a href="tel:+447503494242" className="flex items-center gap-2 text-lg font-extrabold hover:text-white transition-colors">
+              <Phone size={18} /> +44 7503 494242
             </a>
-            <a href="tel:+447503494242" className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Phone size={11} /> 07503 494242
+            <a href="tel:+447789602945" className="flex items-center gap-2 text-lg font-extrabold hover:text-white transition-colors">
+              <Phone size={18} /> +44 7789 602945
+            </a>
+            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg bg-accent-500 px-4 py-2 text-sm font-extrabold text-slate-950 hover:bg-accent-400">
+              <MessageCircle size={17} /> WhatsApp 7503
+            </a>
+            <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-white/25 px-4 py-2 text-sm font-extrabold text-white hover:bg-white/10">
+              <MessageCircle size={17} /> WhatsApp 7789
             </a>
             <a href="mailto:cleanwithbest@gmail.com" className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Mail size={11} /> cleanwithbest@gmail.com
+              <Mail size={14} /> cleanwithbest@gmail.com
             </a>
           </div>
           <div className="flex items-center gap-3 text-slate-400">
-            <span>Available 24/7</span>
+            <span className="text-slate-500">Follow us</span>
             <a href="https://www.facebook.com/people/Cleanwithbest/61584162025224/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-white"><Facebook size={12} /></a>
             <a href="https://www.instagram.com/cleanwithbest" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-white"><Instagram size={12} /></a>
             <a href="https://www.tiktok.com/@cleanwithbest" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="hover:text-white"><Music2 size={12} /></a>
@@ -120,14 +127,17 @@ export default function Header() {
       {/* ── Main header ── */}
       <header
         ref={headerRef}
-        className={`sticky top-0 z-50 bg-white transition-all duration-300 ${scrolled ? 'shadow-lg' : 'shadow-sm border-b border-slate-100'}`}
+        className={`sticky top-0 z-50 border-b border-slate-100 bg-white/95 backdrop-blur transition-all duration-300 ${scrolled ? 'shadow-lg shadow-slate-900/5' : 'shadow-sm'}`}
       >
-        <div className="max-w-7xl mx-auto px-4 flex items-center h-[68px] gap-6">
+        <div className="max-w-7xl mx-auto px-4 flex items-center h-[72px] gap-6">
 
           {/* Logo */}
-          <Link href="/" onClick={closeAll} className="font-heading text-[22px] font-extrabold tracking-tight shrink-0">
-            <span className="text-brand-600">Clean</span>
-            <span className="text-accent-600">WithBest</span>
+          <Link href="/" onClick={closeAll} className="flex items-center gap-2 font-heading text-[22px] font-extrabold tracking-tight shrink-0">
+            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-sm font-black text-white shadow-sm">C</span>
+            <span>
+              <span className="text-brand-600">Clean</span>
+              <span className="text-accent-600">WithBest</span>
+            </span>
           </Link>
 
           {/* Desktop Nav */}
@@ -147,7 +157,7 @@ export default function Header() {
                     {/* Mega dropdown */}
                     {open === item.label && (
                       <div
-                        className="absolute top-full left-0 bg-white rounded-2xl shadow-2xl border border-slate-100 pt-6 pb-5 px-5 z-50 min-w-[440px] grid grid-cols-2 gap-5"
+                        className="absolute top-full left-0 bg-white rounded-lg shadow-2xl border border-slate-100 pt-6 pb-5 px-5 z-50 min-w-[440px] grid grid-cols-2 gap-5"
                         onMouseEnter={() => handleNavEnter(item.label)}
                         onMouseLeave={handleNavLeave}
                       >
@@ -157,7 +167,7 @@ export default function Header() {
                             <div className="space-y-0.5">
                               {col.links.map(l => (
                                 <Link key={l.href} href={l.href} onClick={() => setOpen(null)}
-                                  className="flex items-center justify-between px-3 py-2 rounded-xl text-sm text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-all group">
+                                  className="flex items-center justify-between px-3 py-2 rounded-lg text-sm text-slate-600 hover:text-brand-600 hover:bg-brand-50 transition-all group">
                                   <span>{l.label}</span>
                                   {l.tag && <span className="text-xs bg-brand-100 text-brand-600 font-semibold px-2 py-0.5 rounded-full">{l.tag}</span>}
                                 </Link>
@@ -186,22 +196,22 @@ export default function Header() {
 
           {/* Desktop right */}
           <div className="hidden lg:flex items-center gap-3 ml-auto">
-            <a href="tel:+447789602945" className="text-sm font-semibold text-slate-500 hover:text-brand-600 transition-colors flex items-center gap-1.5">
-              <Phone size={14} /> +44 7789 602945
+            <a href="tel:+447503494242" className="hidden xl:inline-flex items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-base font-extrabold text-slate-800 hover:border-brand-200 hover:text-brand-700">
+              <Phone size={15} /> +44 7503 494242
             </a>
-            <a href="tel:+447503494242" className="text-sm font-semibold text-slate-500 hover:text-brand-600 transition-colors flex items-center gap-1.5">
-              <Phone size={14} /> 07503 494242
+            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="hidden xl:inline-flex items-center gap-2 rounded-lg bg-green-50 px-3 py-2 text-sm font-extrabold text-green-700 hover:bg-green-100">
+              <MessageCircle size={15} /> WhatsApp
             </a>
             <Link href="/quote"
-              className="inline-flex items-center gap-2 bg-brand-600 text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-brand-700 transition-all shadow-sm hover:shadow-md">
-              Book Now — Free Quote
+              className="inline-flex items-center gap-2 bg-brand-600 text-white text-sm font-bold px-5 py-3 rounded-lg hover:bg-brand-700 transition-all shadow-sm hover:shadow-md">
+              Get Free Quote
             </Link>
           </div>
 
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(o => !o)}
-            className="lg:hidden ml-auto p-2 rounded-xl hover:bg-slate-100 transition-colors"
+            className="lg:hidden ml-auto p-2 rounded-lg hover:bg-slate-100 transition-colors"
             aria-label="Menu"
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -210,16 +220,16 @@ export default function Header() {
 
         {/* Mobile drawer */}
         {mobileOpen && (
-          <div className="lg:hidden bg-white border-t border-slate-100 max-h-[80vh] overflow-y-auto">
+          <div className="lg:hidden bg-white border-t border-slate-100 max-h-[80vh] overflow-y-auto shadow-xl">
             <div className="px-4 py-4 space-y-1">
-              <Link href="/" onClick={closeAll} className="block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50">Home</Link>
+              <Link href="/" onClick={closeAll} className="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Home</Link>
               {nav.map(item => (
                 <div key={item.label}>
                   {item.mega ? (
                     <>
                       <button
                         onClick={() => setMobileExpanded(e => e === item.label ? null : item.label)}
-                        className="w-full flex justify-between items-center px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50"
+                        className="w-full flex justify-between items-center px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50"
                       >
                         {item.label}
                         <ChevronDown size={15} className={`text-slate-400 transition-transform ${mobileExpanded === item.label ? 'rotate-180' : ''}`} />
@@ -240,17 +250,23 @@ export default function Header() {
                       )}
                     </>
                   ) : (
-                    <Link href={item.href} onClick={closeAll} className="block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50">{item.label}</Link>
+                    <Link href={item.href} onClick={closeAll} className="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">{item.label}</Link>
                   )}
                 </div>
               ))}
             </div>
             <div className="px-4 pb-5 pt-2 border-t border-slate-100 space-y-2">
+              <a href="tel:+447503494242" className="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-brand-600">
+                <Phone size={15} /> +44 7503 494242
+              </a>
               <a href="tel:+447789602945" className="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-brand-600">
                 <Phone size={15} /> +44 7789 602945
               </a>
-              <a href="tel:+447503494242" className="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-brand-600">
-                <Phone size={15} /> 07503 494242
+              <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2.5 text-sm font-bold text-green-700">
+                <MessageCircle size={15} /> WhatsApp +44 7503 494242
+              </a>
+              <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-2.5 text-sm font-bold text-green-700">
+                <MessageCircle size={15} /> WhatsApp +44 7789 602945
               </a>
               <div className="flex items-center gap-2 px-3 py-2">
                 <a href="https://www.facebook.com/people/Cleanwithbest/61584162025224/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="rounded-lg border border-slate-200 p-2 text-slate-500 hover:text-brand-600"><Facebook size={16} /></a>
@@ -258,8 +274,8 @@ export default function Header() {
                 <a href="https://www.tiktok.com/@cleanwithbest" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="rounded-lg border border-slate-200 p-2 text-slate-500 hover:text-brand-600"><Music2 size={16} /></a>
               </div>
               <Link href="/quote" onClick={closeAll}
-                className="block text-center bg-brand-600 text-white font-bold text-sm py-3 rounded-xl hover:bg-brand-700 transition-colors">
-                Book Now — Free Quote
+                className="block text-center bg-brand-600 text-white font-bold text-sm py-3 rounded-lg hover:bg-brand-700 transition-colors">
+                Get Free Quote
               </Link>
             </div>
           </div>

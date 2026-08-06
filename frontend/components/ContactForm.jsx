@@ -27,7 +27,7 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="bg-white rounded-2xl p-8 text-center shadow-sm border border-slate-100">
+      <div className="bg-white rounded-lg p-8 text-center shadow-sm border border-slate-100">
         <CheckCircle size={52} className="text-green-500 mx-auto mb-4" />
         <h3 className="font-heading text-xl font-bold text-slate-900 mb-2">Message Sent!</h3>
         <p className="text-slate-500 mb-4">Thank you for getting in touch. We'll respond within 2 hours.</p>
@@ -37,7 +37,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-4">
+    <form onSubmit={handleSubmit} className="bg-white rounded-lg p-6 shadow-sm border border-slate-100 space-y-4">
       <div>
         <label className="label">Full Name *</label>
         <input name="name" value={form.name} onChange={handleChange} required placeholder="Your full name" className="input-field" />

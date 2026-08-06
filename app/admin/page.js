@@ -35,7 +35,7 @@ function QuoteDetailModal({ quote, onClose, onStatusChange, onDelete, deleting }
 
   return (
     <div className="fixed inset-0 z-[80] bg-slate-950/60 px-4 py-6 overflow-y-auto">
-      <div className="mx-auto max-w-3xl rounded-2xl bg-white shadow-2xl border border-slate-200">
+      <div className="mx-auto max-w-3xl rounded-lg bg-white shadow-2xl border border-slate-200">
         <div className="flex items-start justify-between gap-4 border-b border-slate-100 px-6 py-5">
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-brand-600">Quote Request</p>
@@ -49,7 +49,7 @@ function QuoteDetailModal({ quote, onClose, onStatusChange, onDelete, deleting }
 
         <div className="grid gap-6 p-6 lg:grid-cols-[1fr_280px]">
           <div className="space-y-5">
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+            <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
               <div className="mb-3 flex items-center gap-2 text-sm font-bold text-slate-900">
                 <MapPin size={16} className="text-brand-600" /> Address
               </div>
@@ -59,7 +59,7 @@ function QuoteDetailModal({ quote, onClose, onStatusChange, onDelete, deleting }
 
             <div className="grid gap-3 sm:grid-cols-2">
               {details.map(([label, value]) => (
-                <div key={label} className="rounded-xl border border-slate-200 bg-white p-4">
+                <div key={label} className="rounded-lg border border-slate-200 bg-white p-4">
                   <p className="text-xs font-bold uppercase tracking-wide text-slate-400">{label}</p>
                   <p className="mt-1 text-sm font-semibold text-slate-800">{value}</p>
                 </div>
@@ -67,7 +67,7 @@ function QuoteDetailModal({ quote, onClose, onStatusChange, onDelete, deleting }
             </div>
 
             {quote.message && (
-              <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
+              <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
                 <p className="text-xs font-bold uppercase tracking-wide text-amber-700">Customer Notes</p>
                 <p className="mt-2 text-sm leading-relaxed text-slate-700">{quote.message}</p>
               </div>
@@ -75,7 +75,7 @@ function QuoteDetailModal({ quote, onClose, onStatusChange, onDelete, deleting }
           </div>
 
           <aside className="space-y-4">
-            <div className="rounded-xl border border-slate-200 bg-white p-4">
+            <div className="rounded-lg border border-slate-200 bg-white p-4">
               <p className="text-xs font-bold uppercase tracking-wide text-slate-400">Contact Details</p>
               <div className="mt-3 space-y-2 text-sm">
                 <a href={`tel:${quote.phone}`} className="flex items-center gap-2 font-semibold text-brand-700 hover:text-brand-900">
@@ -106,7 +106,7 @@ function QuoteDetailModal({ quote, onClose, onStatusChange, onDelete, deleting }
               )}
             </div>
 
-            <div className="rounded-xl border border-slate-200 bg-white p-4">
+            <div className="rounded-lg border border-slate-200 bg-white p-4">
               <label className="label">Status</label>
               <select
                 value={quote.status}
@@ -189,8 +189,8 @@ export default function AdminPage() {
   if (!loggedIn) {
     return (
       <main className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
-        <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-sm border border-slate-100">
-          <div className="flex items-center justify-center w-14 h-14 bg-brand-100 rounded-2xl mx-auto mb-6">
+        <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-sm border border-slate-100">
+          <div className="flex items-center justify-center w-14 h-14 bg-brand-100 rounded-lg mx-auto mb-6">
             <Lock size={24} className="text-brand-600" />
           </div>
           <h1 className="font-heading text-2xl font-bold text-slate-900 text-center mb-2">Admin Login</h1>
@@ -265,8 +265,8 @@ export default function AdminPage() {
             { icon: TrendingUp, label: 'This Month', value: [...data.quotes, ...data.contacts].filter(x => new Date(x.createdAt).getMonth() === new Date().getMonth()).length, sub: 'submissions', color: 'brand' },
             { icon: FileText, label: 'New Items', value: newQuotes + newContacts, sub: 'require attention', color: 'accent' },
           ].map(({ icon: Icon, label, value, sub, color }) => (
-            <div key={label} className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${color === 'brand' ? 'bg-brand-100' : 'bg-accent-500/15'}`}>
+            <div key={label} className="bg-white rounded-lg p-5 border border-slate-100 shadow-sm">
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3 ${color === 'brand' ? 'bg-brand-100' : 'bg-accent-500/15'}`}>
                 <Icon size={18} className={color === 'brand' ? 'text-brand-600' : 'text-accent-600'} />
               </div>
               <div className="font-heading text-3xl font-bold text-slate-900">{value}</div>
@@ -279,12 +279,12 @@ export default function AdminPage() {
         {/* Tabs */}
         <div className="flex gap-2 mb-6">
           <button onClick={() => setTab('quotes')}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all ${tab === 'quotes' ? 'bg-brand-600 text-white shadow-sm' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'}`}>
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${tab === 'quotes' ? 'bg-brand-600 text-white shadow-sm' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'}`}>
             <FileText size={15} /> Quote Requests
             {newQuotes > 0 && <span className="bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">{newQuotes}</span>}
           </button>
           <button onClick={() => setTab('contacts')}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all ${tab === 'contacts' ? 'bg-brand-600 text-white shadow-sm' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'}`}>
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${tab === 'contacts' ? 'bg-brand-600 text-white shadow-sm' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'}`}>
             <MessageSquare size={15} /> Contact Messages
             {newContacts > 0 && <span className="bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">{newContacts}</span>}
           </button>
@@ -292,7 +292,7 @@ export default function AdminPage() {
 
         {/* Quotes table */}
         {tab === 'quotes' && (
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+          <div className="bg-white rounded-lg border border-slate-100 shadow-sm overflow-hidden">
             <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
               <h2 className="font-semibold text-slate-900">Quote Requests ({data.quotes.length})</h2>
             </div>
@@ -373,7 +373,7 @@ export default function AdminPage() {
 
         {/* Contacts table */}
         {tab === 'contacts' && (
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+          <div className="bg-white rounded-lg border border-slate-100 shadow-sm overflow-hidden">
             <div className="px-6 py-4 border-b border-slate-100">
               <h2 className="font-semibold text-slate-900">Contact Messages ({data.contacts.length})</h2>
             </div>

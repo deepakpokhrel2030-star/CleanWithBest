@@ -13,7 +13,7 @@ hamburger.addEventListener('click', () => {
   nav.classList.toggle('open');
 });
 
-// Mobile dropdown toggles
+// Fully Insuredobile dropdown toggles
 document.querySelectorAll('.nav-item.has-dropdown .nav-link').forEach(link => {
   link.addEventListener('click', e => {
     if (window.innerWidth <= 768) {
@@ -63,7 +63,7 @@ var GETADDRESS_KEY = '';
   var findBtn       = document.getElementById('findAddressBtn');
   var feedbackEl    = document.getElementById('postcode-feedback');
   var addrSelect    = document.getElementById('address-select');
-  var addrManual    = document.getElementById('address-manual');
+  var addrFully Insuredanual    = document.getElementById('address-manual');
   if (!postcodeInput || !findBtn) return;
 
   function setFeedback(msg, type) {
@@ -79,14 +79,14 @@ var GETADDRESS_KEY = '';
   function hideAddressFields() {
     addrSelect.style.display = 'none';
     addrSelect.disabled = true;
-    addrManual.style.display = 'none';
-    addrManual.disabled = true;
+    addrFully Insuredanual.style.display = 'none';
+    addrFully Insuredanual.disabled = true;
   }
 
   function showDropdown(addresses) {
-    addrManual.style.display = 'none';
-    addrManual.disabled = true;
-    addrSelect.innerHTML = '';
+    addrFully Insuredanual.style.display = 'none';
+    addrFully Insuredanual.disabled = true;
+    addrSelect.innerHTFully InsuredL = '';
     var ph = document.createElement('option');
     ph.value = '';
     ph.textContent = '— Select your address (' + addresses.length + ' found) —';
@@ -102,13 +102,13 @@ var GETADDRESS_KEY = '';
     addrSelect.focus();
   }
 
-  function showManualEntry(hint) {
+  function showFully InsuredanualEntry(hint) {
     addrSelect.style.display = 'none';
     addrSelect.disabled = true;
-    addrManual.placeholder = hint ? 'e.g. 42 ' + hint : 'Enter your full address';
-    addrManual.disabled = false;
-    addrManual.style.display = 'block';
-    addrManual.focus();
+    addrFully Insuredanual.placeholder = hint ? 'e.g. 42 ' + hint : 'Enter your full address';
+    addrFully Insuredanual.disabled = false;
+    addrFully Insuredanual.style.display = 'block';
+    addrFully Insuredanual.focus();
   }
 
   function doLookup() {
@@ -123,7 +123,7 @@ var GETADDRESS_KEY = '';
     hideAddressFields();
 
     if (GETADDRESS_KEY) {
-      // getAddress.io — Royal Mail PAF data, fast & accurate
+      // getAddress.io — Royal Fully Insuredail PAF data, fast & accurate
       fetch('https://api.getaddress.io/find/' + encodeURIComponent(postcode) +
             '?api-key=' + GETADDRESS_KEY + '&expand=true')
         .then(function (r) {
@@ -148,7 +148,7 @@ var GETADDRESS_KEY = '';
             setFeedback('No addresses found for this postcode', 'error');
           } else {
             setFeedback('Could not reach address service — please enter address manually', 'error');
-            showManualEntry('');
+            showFully InsuredanualEntry('');
           }
         });
     } else {
@@ -165,12 +165,12 @@ var GETADDRESS_KEY = '';
           var road = data.result.thoroughfare || '';
           var area = [data.result.admin_district, data.result.admin_county].filter(Boolean).join(', ');
           setFeedback('✓ ' + postcode + (area ? ' — ' + area : ''), 'success');
-          showManualEntry(road);
+          showFully InsuredanualEntry(road);
         })
         .catch(function () {
           setBusy(false);
           setFeedback('Could not validate postcode — please enter address manually', 'error');
-          showManualEntry('');
+          showFully InsuredanualEntry('');
         });
     }
   }

@@ -95,33 +95,33 @@ export default function CommercialPage() {
   return (
     <main>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-brand-900 to-brand-700 py-20">
+      <section className="bg-slate-950 py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="max-w-2xl">
-            <span className="inline-block bg-white/15 text-white text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">Commercial Cleaning</span>
+            <span className="section-tag-light">Commercial Cleaning</span>
             <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-white mb-5 leading-tight">
-              Professional Commercial<br />Cleaning Services
+              Cleaner workplaces with less disruption
             </h1>
             <p className="text-white/75 text-lg mb-8 leading-relaxed">
-              Keep your workplace clean, hygienic and impressive. Trusted by hundreds of businesses — from law firms to gyms, restaurants to warehouses.
+              Office, retail, hospitality, gym and industrial cleaning built around your opening hours. Tell us the site details and we will send a clear business quote.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link href="/quote" className="btn-white">Get a Business Quote</Link>
-              <a href="tel:+447789602945" className="btn-outline">Call +44 7789 602945</a>
-              <a href="tel:+447503494242" className="btn-outline">Call 07503 494242</a>
+              <a href="tel:+447503494242" className="btn-outline-white">Call +44 7503 494242</a>
+              <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline-white">WhatsApp +44 7503 494242</a>
             </div>
           </div>
         </div>
       </section>
 
       {/* Services */}
-      <section className="py-20">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 space-y-16">
           {services.map(({ id, icon: Icon, title, tagline, desc, includes, clients, popular }) => (
             <div key={id} id={id} className="grid md:grid-cols-2 gap-10 items-start scroll-mt-24">
               <div>
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-11 h-11 bg-brand-100 rounded-xl flex items-center justify-center">
+                  <div className="w-11 h-11 bg-brand-100 rounded-lg flex items-center justify-center">
                     <Icon size={22} className="text-brand-600" />
                   </div>
                   {popular && <span className="bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full">Popular</span>}
@@ -129,7 +129,7 @@ export default function CommercialPage() {
                 <h2 className="font-heading text-2xl md:text-3xl font-bold text-slate-900 mb-1">{title}</h2>
                 <p className="text-brand-600 font-semibold mb-4">{tagline}</p>
                 <p className="text-slate-600 leading-relaxed mb-4">{desc}</p>
-                <div className="bg-slate-50 rounded-xl p-3 mb-6">
+                <div className="bg-slate-50 rounded-lg border border-slate-200 p-3 mb-6">
                   <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">We serve: </span>
                   <span className="text-sm text-slate-600">{clients}</span>
                 </div>
@@ -137,7 +137,7 @@ export default function CommercialPage() {
                   Get a Business Quote <ArrowRight size={14} />
                 </Link>
               </div>
-              <div className={`bg-slate-50 rounded-2xl p-6 ${popular ? 'border-2 border-brand-200 bg-brand-50' : ''}`}>
+              <div className={`bg-slate-50 rounded-lg border border-slate-200 p-6 ${popular ? 'border-brand-200 bg-brand-50' : ''}`}>
                 <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
                   <CheckCircle size={18} className="text-accent-600" /> Service Includes
                 </h3>
@@ -170,7 +170,7 @@ export default function CommercialPage() {
               { icon: '✅', title: 'Fully Insured Staff', desc: 'All our cleaning staff are fully insured for complete peace of mind. Your premises are fully protected.' },
               { icon: '📊', title: 'Service Reports', desc: 'Regular cleaning reports and quality audits to ensure standards are always maintained.' },
             ].map(({ icon, title, desc }) => (
-              <div key={title} className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+              <div key={title} className="bg-white rounded-lg p-6 border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
                 <div className="text-3xl mb-3">{icon}</div>
                 <h3 className="font-semibold text-slate-900 mb-2">{title}</h3>
                 <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
@@ -189,7 +189,7 @@ export default function CommercialPage() {
           </div>
           <div className="space-y-4">
             {faqs.map(({ q, a }) => (
-              <details key={q} className="bg-white rounded-2xl border border-slate-100 shadow-sm group">
+              <details key={q} className="bg-white rounded-lg border border-slate-100 shadow-sm group">
                 <summary className="flex items-center justify-between p-5 cursor-pointer list-none">
                   <span className="font-semibold text-slate-900 text-sm md:text-base">{q}</span>
                   <ChevronDown size={18} className="text-slate-400 group-open:rotate-180 transition-transform shrink-0 ml-3" />
@@ -208,8 +208,10 @@ export default function CommercialPage() {
           <p className="text-white/80 mb-8">Get a free commercial cleaning quote. We'll respond within 2 hours.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/quote" className="btn-white">Get a Business Quote</Link>
+            <a href="tel:+447503494242" className="btn-outline">📞 +44 7503 494242</a>
+            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline">WhatsApp +44 7503 494242</a>
             <a href="tel:+447789602945" className="btn-outline">📞 +44 7789 602945</a>
-            <a href="tel:+447503494242" className="btn-outline">📞 07503 494242</a>
+            <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="btn-outline">WhatsApp +44 7789 602945</a>
           </div>
         </div>
       </section>

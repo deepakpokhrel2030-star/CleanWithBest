@@ -29,15 +29,15 @@ export default function AboutPage() {
   return (
     <main>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-brand-900 to-brand-700 py-20">
+      <section className="bg-slate-950 py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="max-w-2xl">
-            <span className="inline-block bg-white/15 text-white text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">Our Story</span>
+            <span className="section-tag-light">Our Story</span>
             <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-white mb-5 leading-tight">
-              We're CleanWithBest
+              We are CleanWithBest
             </h1>
             <p className="text-white/75 text-lg leading-relaxed">
-              Founded with a simple promise: to deliver cleaning services so good that customers never need to look elsewhere. That promise drives everything we do today.
+              A London cleaning team built around clear quotes, reliable communication and professional results.
             </p>
           </div>
         </div>
@@ -67,7 +67,7 @@ export default function AboutPage() {
                 alt="Our cleaning team"
                 width={600}
                 height={450}
-                className="rounded-2xl shadow-2xl object-cover w-full h-[400px]"
+                className="rounded-lg shadow-2xl object-cover w-full h-[400px]"
               />
             </div>
           </div>
@@ -75,7 +75,7 @@ export default function AboutPage() {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {[['Top 5%', 'Cleaners Only Hired'], ['100%', 'Satisfaction Guaranteed']].map(([num, label]) => (
-              <div key={label} className="bg-brand-50 rounded-2xl p-6 text-center border border-brand-100">
+              <div key={label} className="bg-brand-50 rounded-lg p-6 text-center border border-brand-100">
                 <div className="font-heading text-3xl md:text-4xl font-extrabold text-brand-600 mb-1">{num}</div>
                 <div className="text-slate-500 text-sm font-medium">{label}</div>
               </div>
@@ -94,8 +94,8 @@ export default function AboutPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {values.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                <div className="w-11 h-11 bg-brand-100 rounded-xl flex items-center justify-center mb-4">
+              <div key={title} className="bg-white rounded-lg p-6 border border-slate-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div className="w-11 h-11 bg-brand-100 rounded-lg flex items-center justify-center mb-4">
                   <Icon size={20} className="text-brand-600" />
                 </div>
                 <h3 className="font-heading font-semibold text-slate-900 text-lg mb-2">{title}</h3>
@@ -116,7 +116,7 @@ export default function AboutPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {team.map(({ name, role, initials, bio }) => (
-              <div key={name} className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-shadow text-center">
+              <div key={name} className="bg-white rounded-lg p-6 border border-slate-100 shadow-sm hover:shadow-md transition-shadow text-center">
                 <div className="w-20 h-20 bg-gradient-to-br from-brand-600 to-accent-500 rounded-full flex items-center justify-center text-white font-heading font-bold text-xl mx-auto mb-4">
                   {initials}
                 </div>
@@ -141,7 +141,7 @@ export default function AboutPage() {
               { icon: '🌿', title: 'Eco-Friendly Products', sub: 'Non-toxic, safe for children & pets' },
               { icon: '💼', title: 'Living Wage Employer', sub: 'All staff paid a fair living wage' },
             ].map(({ icon, title, sub }) => (
-              <div key={title} className="bg-white/10 border border-white/10 rounded-2xl p-5 text-center hover:bg-white/15 transition-colors">
+              <div key={title} className="bg-white/10 border border-white/10 rounded-lg p-5 text-center hover:bg-white/15 transition-colors">
                 <div className="text-4xl mb-3">{icon}</div>
                 <h4 className="text-white font-semibold mb-1">{title}</h4>
                 <p className="text-white/50 text-xs">{sub}</p>
@@ -180,17 +180,23 @@ export default function AboutPage() {
                 ))}
               </ul>
             </div>
-            <div className="bg-brand-50 rounded-2xl p-8 border border-brand-100">
+            <div className="bg-brand-50 rounded-lg p-8 border border-brand-100">
               <h3 className="font-heading font-bold text-xl text-slate-900 mb-6">Ready to experience the difference?</h3>
               <p className="text-slate-600 mb-6">Get a free, no-obligation quote. We respond within 2 hours and our team is always happy to answer any questions.</p>
               <div className="space-y-3">
                 <Link href="/quote" className="btn-primary w-full justify-center">Get a Free Quote</Link>
                 <Link href="/contact" className="btn-primary w-full justify-center bg-white text-brand-700 hover:bg-brand-50 border-2 border-brand-200">Contact Us</Link>
+                <a href="tel:+447503494242" className="flex justify-center items-center gap-2 text-brand-600 font-semibold text-sm hover:text-brand-800 transition-colors">
+                  📞 +44 7503 494242
+                </a>
+                <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="flex justify-center items-center gap-2 text-green-700 font-semibold text-sm hover:text-green-800 transition-colors">
+                  WhatsApp +44 7503 494242
+                </a>
                 <a href="tel:+447789602945" className="flex justify-center items-center gap-2 text-brand-600 font-semibold text-sm hover:text-brand-800 transition-colors">
                   📞 +44 7789 602945
                 </a>
-                <a href="tel:+447503494242" className="flex justify-center items-center gap-2 text-brand-600 font-semibold text-sm hover:text-brand-800 transition-colors">
-                  📞 07503 494242
+                <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="flex justify-center items-center gap-2 text-green-700 font-semibold text-sm hover:text-green-800 transition-colors">
+                  WhatsApp +44 7789 602945
                 </a>
               </div>
             </div>
