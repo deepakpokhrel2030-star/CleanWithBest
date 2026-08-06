@@ -231,6 +231,16 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
   50% { opacity: 1; transform: scale(1.2); }
 }
 
+@keyframes bestieSvgSpray {
+  0%, 100% { opacity: .25; transform: translate(0, 0) scale(.85); }
+  45% { opacity: 1; transform: translate(5px, -5px) scale(1.12); }
+}
+
+@keyframes bestieSvgBottle {
+  0%, 100% { transform: rotate(0deg); }
+  45% { transform: rotate(-4deg) translateY(-1px); }
+}
+
 .animate-bestiebot-launcher { animation: bestieFloat 3.2s ease-in-out infinite; }
 .animate-bestiebot-robot { animation: bestieRobotBob 2.4s ease-in-out infinite; }
 .animate-bestiebot-mini { animation: bestieRobotBob 2.8s ease-in-out infinite; }
@@ -325,6 +335,11 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
 }
 .bestiebot-svg-foot-left { animation: bestieSvgStepLeft 1.35s ease-in-out infinite; }
 .bestiebot-svg-foot-right { animation: bestieSvgStepRight 1.35s ease-in-out infinite; }
+.bestiebot-svg-bottle {
+  transform-box: fill-box;
+  transform-origin: 30% 70%;
+  animation: bestieSvgBottle 2.1s ease-in-out infinite;
+}
 .bestiebot-svg-antenna-dot,
 .bestiebot-svg-light,
 .bestiebot-svg-cheek,
@@ -336,6 +351,13 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
   animation: bestieSvgPulse 1.8s ease-in-out infinite;
 }
 .bestiebot-svg-sparkle-two { animation-delay: .42s; }
+.bestiebot-svg-spray-one,
+.bestiebot-svg-spray-two {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bestieSvgSpray 1.5s ease-in-out infinite;
+}
+.bestiebot-svg-spray-two { animation-delay: .18s; }
 
 .animate-bestiebot-panel {
   background-size: 160% 160%;
@@ -681,12 +703,15 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
   .bestiebot-svg-arm-right,
   .bestiebot-svg-hand-left,
   .bestiebot-svg-hand-right,
+  .bestiebot-svg-bottle,
   .bestiebot-svg-foot-left,
   .bestiebot-svg-foot-right,
   .bestiebot-svg-antenna-dot,
   .bestiebot-svg-light,
   .bestiebot-svg-cheek,
   .bestiebot-svg-mic,
+  .bestiebot-svg-spray-one,
+  .bestiebot-svg-spray-two,
   .bestiebot-svg-sparkle-one,
   .bestiebot-svg-sparkle-two {
     animation: none;
