@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer';
 
 const NOTIFICATION_TO = 'cleanwithbest@gmail.com';
+const DEFAULT_SITE_URL = 'https://cleanwithbest.com';
 
 function getTransporter() {
   const host = process.env.SMTP_HOST;
@@ -42,7 +43,12 @@ function textLines(rows) {
   return rows.map(([label, value]) => `${label}: ${cleanValue(value)}`).join('\n');
 }
 
-async function sendNotification({ subject, heading, rows }) {
+function getAdminUrl() {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.URL || DEFAULT_SITE_URL;
+  return `${siteUrl.replace(/\/$/, '')}/admin`;
+}
+
+async function sendNotification({ subject, heading, intro, rows }) {
   const transporter = getTransporter();
   if (!transporter) {
     console.warn('Email notification skipped: SMTP_HOST, SMTP_USER, or SMTP_PASSWORD is missing.');
@@ -50,18 +56,24 @@ async function sendNotification({ subject, heading, rows }) {
   }
 
   const from = process.env.SMTP_FROM || process.env.SMTP_USER;
+  const adminUrl = getAdminUrl();
 
   await transporter.sendMail({
     from,
     to: NOTIFICATION_TO,
     replyTo: rows.find(([label]) => label === 'Email')?.[1] || undefined,
     subject,
-    text: `${heading}\n\n${textLines(rows)}`,
+    text: `${heading}\n\n${intro}\n\nAdmin login: ${adminUrl}\n\n${textLines(rows)}`,
     html: `
       <div style="font-family:Arial,sans-serif;background:#f8fafc;padding:24px;">
         <div style="max-width:640px;margin:0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
           <div style="background:#0f766e;color:#ffffff;padding:18px 22px;">
             <h1 style="margin:0;font-size:20px;">${escapeHtml(heading)}</h1>
+          </div>
+          <div style="padding:18px 22px;border-bottom:1px solid #e2e8f0;">
+            <p style="margin:0 0 14px;color:#0f172a;font-size:16px;line-height:1.5;">${escapeHtml(intro)}</p>
+            <a href="${escapeHtml(adminUrl)}" style="display:inline-block;background:#0f766e;color:#ffffff;text-decoration:none;font-weight:700;border-radius:8px;padding:11px 16px;">Open Admin Dashboard</a>
+            <p style="margin:12px 0 0;color:#64748b;font-size:13px;">Admin login: ${escapeHtml(adminUrl)}</p>
           </div>
           <table style="width:100%;border-collapse:collapse;font-size:14px;">
             <tbody>${detailRows(rows)}</tbody>
@@ -73,9 +85,12 @@ async function sendNotification({ subject, heading, rows }) {
 }
 
 export function sendContactNotification(contact) {
+  const name = cleanValue(contact.name);
+
   return sendNotification({
-    subject: `New website message from ${cleanValue(contact.name)}`,
-    heading: 'New Contact Message',
+    subject: `New message from ${name}`,
+    heading: 'New Website Message',
+    intro: `You received a new message from ${name}. Please check the website admin dashboard.`,
     rows: [
       ['Name', contact.name],
       ['Email', contact.email],
@@ -87,9 +102,12 @@ export function sendContactNotification(contact) {
 }
 
 export function sendQuoteNotification(quote) {
+  const name = cleanValue(`${quote.firstName || ''} ${quote.lastName || ''}`.trim());
+
   return sendNotification({
-    subject: `New quote request from ${cleanValue(`${quote.firstName || ''} ${quote.lastName || ''}`.trim())}`,
+    subject: `New quote request from ${name}`,
     heading: 'New Quote Request',
+    intro: `You received a new quote request from ${name}. Please check the website admin dashboard.`,
     rows: [
       ['Name', `${quote.firstName || ''} ${quote.lastName || ''}`.trim()],
       ['Phone', quote.phone],
