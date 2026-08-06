@@ -156,7 +156,7 @@ export default function AdminPage() {
     setLoading(false);
     if (json.success) { setData(json); setLoggedIn(true); }
     else setError(json.error === 'Admin login is not configured'
-      ? 'Admin login is not configured on this deployment. Add ADMIN_USERNAME and ADMIN_PASSWORD.'
+      ? 'Admin login is not configured on this deployment. Add ADMIN_USERNAME and ADMIN_PASSWORD_HASH.'
       : 'Incorrect admin login details. Please try again.'
     );
   };

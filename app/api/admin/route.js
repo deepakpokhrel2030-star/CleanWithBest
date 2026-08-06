@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getQuotes, getContacts, deleteQuote, deleteContact, updateQuoteStatus, updateContactStatus } from '@/backend/db';
+import { verifyAdminPassword } from '@/backend/adminAuth';
+
+export const runtime = 'nodejs';
 
 export async function POST(request) {
   try {
@@ -7,13 +10,13 @@ export async function POST(request) {
     const loginUsername = String(username || '').trim();
     const loginPassword = String(password || '').trim();
     const adminUser = process.env.ADMIN_USERNAME?.trim();
-    const adminPass = process.env.ADMIN_PASSWORD?.trim();
+    const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH?.trim();
 
-    if (!adminUser || !adminPass) {
+    if (!adminUser || !adminPasswordHash) {
       return NextResponse.json({ success: false, error: 'Admin login is not configured' }, { status: 500 });
     }
 
-    if (loginUsername !== adminUser || loginPassword !== adminPass) {
+    if (loginUsername !== adminUser || !verifyAdminPassword(loginPassword, adminPasswordHash)) {
       return NextResponse.json({ success: false, error: 'Invalid admin login details' }, { status: 401 });
     }
 
