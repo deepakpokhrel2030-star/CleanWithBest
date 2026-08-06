@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
 import { addContact } from '@/backend/db';
+import { sendContactNotification } from '@/backend/mail';
+
+export const runtime = 'nodejs';
 
 export async function POST(request) {
   try {
@@ -8,6 +11,9 @@ export async function POST(request) {
       return NextResponse.json({ success: false, error: 'Missing required fields' }, { status: 400 });
     }
     const entry = await addContact(body);
+    await sendContactNotification(entry).catch(error => {
+      console.error('Contact email notification failed:', error);
+    });
     return NextResponse.json({ success: true, data: entry });
   } catch (error) {
     console.error('Contact API error:', error);
