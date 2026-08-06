@@ -1,142 +1,225 @@
 'use client';
 
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import { Send, Sparkles, X } from 'lucide-react';
+import {
+  CalendarCheck,
+  Clock,
+  Mail,
+  MessageCircle,
+  Phone,
+  PoundSterling,
+  RotateCcw,
+  Send,
+  ShieldCheck,
+  Sparkles,
+  X,
+} from 'lucide-react';
+
+const QUICK_TOPICS = [
+  { label: 'Prices', icon: PoundSterling, prompt: 'What are your cleaning prices?' },
+  { label: 'Book today', icon: CalendarCheck, prompt: 'Can I book cleaning today?' },
+  { label: 'How long?', icon: Clock, prompt: 'How long will my clean take?' },
+  { label: 'Trust', icon: ShieldCheck, prompt: 'Can I trust the cleaner?' },
+];
 
 const SUGGESTIONS = [
   'Regular cleaning price?',
-  'Can I book today?',
-  'Do you bring products?',
   'End of tenancy clean?',
+  'Do you bring products?',
+  'Can I book today?',
   'Do you clean offices?',
   'How do I contact you?',
-  'How long will it take?',
-  'Can I trust the cleaner?',
+  'Do you clean carpets?',
+  'Can I get a quote?',
 ];
+
+const FALLBACK_TOPICS = 'prices, bookings, cleaning types, timing, products, areas, pets, access, payments, complaints, contact details and quote requests';
 
 const ANSWERS = [
   {
-    keywords: ['price', 'cost', 'rate', 'rates', 'regular', 'hour', 'hourly'],
-    answer: 'Regular home cleaning starts from £17 per hour. Deep cleaning and end-of-tenancy cleaning start from £179. For an exact price, send a quote request with your property details.',
-  },
-  {
+    title: 'Greeting',
     keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening'],
-    answer: 'Hello, I am BestieBot. I can help with cleaning prices, services, booking, timing, products, areas, access, payments and contact details.',
+    answer: 'Hello, I am BestieBot. I can help with prices, services, bookings, quote details, timings, products, areas and contact options.',
   },
   {
-    keywords: ['thank', 'thanks', 'cheers', 'ok', 'okay'],
-    answer: 'You are welcome. If you want a real quote, send your details through the quote form or WhatsApp us and the team will contact you.',
+    title: 'Thanks',
+    keywords: ['thank', 'thanks', 'cheers', 'ok', 'okay', 'great'],
+    answer: 'You are welcome. If you want the team to contact you, send a quote request or message us on WhatsApp with your postcode and cleaning details.',
   },
   {
-    keywords: ['end', 'tenancy', 'landlord', 'deposit', 'move out', 'moving'],
-    answer: 'Yes, we offer end-of-tenancy and move in / move out cleaning from £179. We clean to a detailed landlord-style checklist and can discuss any special requirements before booking.',
+    title: 'Prices',
+    keywords: ['price', 'cost', 'rate', 'rates', 'regular', 'hour', 'hourly', 'how much', 'charge', 'charges'],
+    answer: 'Regular home cleaning starts from £17 per hour. Deep cleaning and end-of-tenancy cleaning start from £179. Carpet cleaning starts from £43 per room, mattress cleaning from £23 and office cleaning from £21.50 per hour.',
   },
   {
-    keywords: ['book', 'booking', 'quote', 'start', 'schedule', 'available'],
-    answer: 'To book, use the quote form and leave your contact details. We will contact you by WhatsApp or phone with the quote and available times.',
+    title: 'Quote',
+    keywords: ['quote', 'estimate', 'quotation', 'price me', 'how to get quote'],
+    answer: 'For a clear quote, send your name, phone number, postcode, property type, number of rooms, cleaning service, preferred date and any extras like oven, carpet or inside cupboards.',
   },
   {
-    keywords: ['today', 'same day', 'urgent', 'emergency', 'soon', 'tomorrow'],
-    answer: 'For urgent or same-day cleaning, WhatsApp or call us first. We will check cleaner availability and reply as quickly as possible.',
+    title: 'Booking',
+    keywords: ['book', 'booking', 'start', 'schedule', 'available', 'appointment', 'reserve'],
+    answer: 'To book, use the quote form and leave your contact details. The team will reply by WhatsApp or phone with the price and available times.',
   },
   {
-    keywords: ['time', 'how long', 'duration', 'hours', 'take'],
-    answer: 'Timing depends on property size and condition. A regular clean may take 2 to 4 hours, while deep cleaning or end-of-tenancy cleaning usually needs longer. Send details for a clearer estimate.',
+    title: 'Urgent',
+    keywords: ['today', 'same day', 'urgent', 'emergency', 'soon', 'tomorrow', 'asap', 'last minute'],
+    answer: 'For urgent or same-day cleaning, call or WhatsApp first. We will check cleaner availability and reply as quickly as possible.',
   },
   {
-    keywords: ['office', 'commercial', 'business', 'shop', 'retail', 'restaurant', 'gym'],
+    title: 'Timing',
+    keywords: ['time', 'how long', 'duration', 'hours', 'take', 'finish', 'arrival'],
+    answer: 'Timing depends on size and condition. A regular clean often takes 2 to 4 hours. Deep cleaning, end-of-tenancy and after-builders cleans usually need longer.',
+  },
+  {
+    title: 'Domestic',
+    keywords: ['home', 'house', 'flat', 'apartment', 'domestic', 'bathroom', 'kitchen', 'bedroom', 'living room', 'toilet'],
+    answer: 'Yes, we clean houses, flats and apartments. Domestic cleaning can cover kitchens, bathrooms, bedrooms, toilets, living rooms, floors, surfaces and general tidy cleaning.',
+  },
+  {
+    title: 'Deep Cleaning',
+    keywords: ['deep clean', 'deep cleaning', 'spring clean', 'detailed clean', 'one off', 'one-off', 'heavy clean'],
+    answer: 'Deep cleaning is for a more detailed clean than regular cleaning. It is useful for built-up dirt, kitchens, bathrooms, neglected areas and homes that need extra time and attention.',
+  },
+  {
+    title: 'End Of Tenancy',
+    keywords: ['end', 'tenancy', 'landlord', 'deposit', 'move out', 'moving', 'move in', 'inventory', 'letting agent'],
+    answer: 'Yes, we offer end-of-tenancy and move in / move out cleaning from £179. We clean to a detailed landlord-style checklist and can discuss special requirements before booking.',
+  },
+  {
+    title: 'Commercial',
+    keywords: ['office', 'commercial', 'business', 'shop', 'retail', 'restaurant', 'gym', 'school', 'workplace', 'clinic'],
     answer: 'Yes, we clean offices, retail spaces, restaurants, gyms and other commercial premises. Office cleaning starts from £21.50 per hour and retail cleaning starts from £18 per hour.',
   },
   {
-    keywords: ['whatsapp', 'phone', 'call', 'contact', 'number'],
-    answer: 'You can call +44 7503 494242 or +44 7789 602945. WhatsApp is available on both numbers, and email is cleanwithbest@gmail.com.',
+    title: 'Carpets And Extras',
+    keywords: ['carpet', 'rug', 'mattress', 'sofa', 'upholstery', 'window', 'ironing', 'laundry'],
+    answer: 'We offer carpet cleaning from £43 per room, mattress cleaning from £23, window cleaning from £29 and ironing/laundry from £18 per hour. Send photos or room details for clearer pricing.',
   },
   {
-    keywords: ['products', 'equipment', 'bring', 'supplies'],
-    answer: 'We can bring professional cleaning products and equipment. If you prefer us to use your own products, mention that when requesting a quote.',
+    title: 'Appliances',
+    keywords: ['oven', 'fridge', 'freezer', 'inside cupboards', 'cupboard', 'appliance', 'microwave', 'extractor'],
+    answer: 'Oven, fridge, freezer, microwave and inside-cupboard cleaning can be added. Mention each extra in your quote request so the price is clear before booking.',
   },
   {
-    keywords: ['eco', 'green', 'safe products', 'chemical', 'chemicals'],
-    answer: 'Eco-friendly cleaning products can be requested. Tell us if you need low-odour, pet-friendly or child-friendly products before the booking.',
+    title: 'Products',
+    keywords: ['products', 'equipment', 'bring', 'supplies', 'hoover', 'vacuum', 'mop', 'cloths'],
+    answer: 'We can bring professional cleaning products and equipment. If you prefer us to use your products, mention that when requesting a quote.',
   },
   {
-    keywords: ['area', 'areas', 'london', 'postcode', 'cover'],
-    answer: 'We cover homes and businesses across London. Send your postcode in the quote form and we will confirm availability for your area.',
+    title: 'Eco Products',
+    keywords: ['eco', 'green', 'safe products', 'chemical', 'chemicals', 'low odour', 'low-odour', 'non toxic', 'non-toxic'],
+    answer: 'Eco-friendly and low-odour cleaning products can be requested. Tell us about allergies, asthma, babies, children or pets before booking.',
   },
   {
-    keywords: ['carpet', 'mattress', 'window', 'ironing', 'laundry'],
-    answer: 'We also offer carpet cleaning from £43 per room, mattress cleaning from £23, window cleaning from £29, and ironing/laundry from £18 per hour.',
-  },
-  {
-    keywords: ['bathroom', 'kitchen', 'bedroom', 'living room', 'toilet'],
-    answer: 'Yes, regular home cleaning can cover kitchens, bathrooms, bedrooms, toilets, living rooms and general surfaces. Tell us the number of rooms when requesting a quote.',
-  },
-  {
-    keywords: ['insured', 'guarantee', 'safe', 'checked', 'trust'],
+    title: 'Trust',
+    keywords: ['insured', 'guarantee', 'safe', 'checked', 'trust', 'background', 'vetted', 'reliable', 'security'],
     answer: 'CleanWithBest uses vetted cleaners and offers a satisfaction guarantee. If something is not right, contact us within 24 hours so we can help.',
   },
   {
-    keywords: ['deep clean', 'deep cleaning', 'difference', 'regular clean'],
-    answer: 'Regular cleaning is for weekly or routine upkeep. Deep cleaning is more detailed and covers built-up dirt, harder-to-reach areas and heavier cleaning tasks.',
+    title: 'Access',
+    keywords: ['key', 'keys', 'access', 'not home', 'away', 'let yourself', 'entry', 'door code'],
+    answer: 'If you cannot be home, we can discuss safe access instructions before the appointment. Please do not send keys, door codes or private access details inside this chatbot.',
   },
   {
-    keywords: ['oven', 'fridge', 'inside cupboards', 'cupboard', 'appliance'],
-    answer: 'Oven, fridge and inside-cupboard cleaning can be added. Mention the exact extras in your quote request so we can price it clearly.',
-  },
-  {
-    keywords: ['payment', 'pay', 'cash', 'card', 'invoice'],
-    answer: 'Payment details are confirmed when we contact you about the booking. Commercial clients can ask about invoice options.',
-  },
-  {
-    keywords: ['pet', 'dog', 'cat', 'pets'],
+    title: 'Pets',
+    keywords: ['pet', 'dog', 'cat', 'pets', 'animal'],
     answer: 'Pet-friendly cleaning is fine. Please tell us about pets in the property and any product preferences when you request a quote.',
   },
   {
-    keywords: ['allergy', 'allergies', 'asthma', 'baby', 'child', 'children'],
-    answer: 'Please tell us about allergies, asthma, babies or children before booking. We can discuss suitable products and avoid anything you do not want used.',
+    title: 'Areas',
+    keywords: ['area', 'areas', 'london', 'postcode', 'cover', 'near me', 'location', 'zone'],
+    answer: 'We cover homes and businesses across London. Send your postcode in the quote form and we will confirm cleaner availability for your area.',
   },
   {
-    keywords: ['key', 'keys', 'access', 'not home', 'away'],
-    answer: 'If you cannot be home, we can discuss safe access instructions before the appointment. Please do not send access details in the chatbot.',
-  },
-  {
-    keywords: ['airbnb', 'short let', 'short-let', 'guest', 'checkout'],
-    answer: 'Yes, we can help with Airbnb and short-let cleaning. Share the postcode, property size, checkout time and any linen requirements in the quote form.',
-  },
-  {
-    keywords: ['after builders', 'builder', 'renovation', 'construction', 'dust'],
-    answer: 'After-builders cleaning is available by quote. It usually needs details about property size, dust level, rooms affected and whether windows or appliances need cleaning.',
-  },
-  {
-    keywords: ['cancel', 'reschedule', 'change time', 'change booking'],
-    answer: 'For cancellations or rescheduling, contact us by phone or WhatsApp as early as possible so we can adjust the cleaner schedule.',
-  },
-  {
-    keywords: ['mould', 'mold', 'stain', 'limescale', 'grease', 'hard water'],
-    answer: 'We can help with many stains, grease and limescale, but results depend on the surface and how long the mark has been there. Send photos by WhatsApp for better advice.',
-  },
-  {
+    title: 'Nearby Areas',
     keywords: ['outside london', 'essex', 'surrey', 'kent', 'hertfordshire'],
     answer: 'We mainly cover London. For nearby areas, send your postcode and we will confirm whether a cleaner is available.',
   },
   {
-    keywords: ['complaint', 'problem', 'issue', 'not happy', 'bad clean'],
+    title: 'Stains',
+    keywords: ['mould', 'mold', 'stain', 'limescale', 'grease', 'hard water', 'burnt', 'marks'],
+    answer: 'We can help with many stains, grease and limescale, but results depend on the surface and how long the mark has been there. Send photos by WhatsApp for better advice.',
+  },
+  {
+    title: 'After Builders',
+    keywords: ['after builders', 'builder', 'renovation', 'construction', 'dust', 'paint', 'plaster'],
+    answer: 'After-builders cleaning is available by quote. We usually need property size, dust level, rooms affected and whether windows, floors or appliances need special attention.',
+  },
+  {
+    title: 'Airbnb',
+    keywords: ['airbnb', 'short let', 'short-let', 'guest', 'checkout', 'check out', 'linen'],
+    answer: 'Yes, we can help with Airbnb and short-let cleaning. Share the postcode, property size, checkout time and linen requirements in the quote form.',
+  },
+  {
+    title: 'Payment',
+    keywords: ['payment', 'pay', 'cash', 'card', 'invoice', 'bank transfer', 'receipt'],
+    answer: 'Payment details are confirmed when we contact you about the booking. Commercial clients can ask about invoice options.',
+  },
+  {
+    title: 'Change Booking',
+    keywords: ['cancel', 'reschedule', 'change time', 'change booking', 'late', 'delay'],
+    answer: 'For cancellations or rescheduling, contact us by phone or WhatsApp as early as possible so we can adjust the cleaner schedule.',
+  },
+  {
+    title: 'Complaint',
+    keywords: ['complaint', 'problem', 'issue', 'not happy', 'bad clean', 'missed', 'poor'],
     answer: 'If there is a problem, contact us within 24 hours with details and photos if possible. The team will review it and help arrange the next step.',
+  },
+  {
+    title: 'Contact',
+    keywords: ['whatsapp', 'phone', 'call', 'contact', 'number', 'email', 'mail'],
+    answer: 'You can call +44 7503 494242 or +44 7789 602945. WhatsApp is available on both numbers, and email is cleanwithbest@gmail.com.',
   },
 ];
 
-function findAnswer(input) {
-  const text = input.toLowerCase();
-  const match = ANSWERS.find(item => item.keywords.some(keyword => text.includes(keyword)));
-  if (match) return match.answer;
+function normalise(text) {
+  return text.toLowerCase().replace(/[^a-z0-9£.\s-]/g, ' ').replace(/\s+/g, ' ').trim();
+}
 
-  const hasQuestion = /\?|what|when|where|why|how|can|do|does|is|are|will|please/.test(text);
+function scoreAnswer(text, item) {
+  return item.keywords.reduce((score, keyword) => {
+    if (text.includes(keyword)) return score + Math.max(2, keyword.length / 4);
+    const words = keyword.split(/\s+/);
+    return score + words.filter(word => word.length > 2 && text.includes(word)).length * 0.5;
+  }, 0);
+}
+
+function buildQuoteHint(text) {
+  const bedroomMatch = text.match(/(\d+)\s*(bed|bedroom|bedrooms)/);
+  const bathroomMatch = text.match(/(\d+)\s*(bath|bathroom|bathrooms)/);
+  const hasFlat = text.includes('flat') || text.includes('apartment');
+  const hasHouse = text.includes('house');
+
+  if (!bedroomMatch && !bathroomMatch && !hasFlat && !hasHouse) return null;
+
+  const bits = [];
+  if (bedroomMatch) bits.push(`${bedroomMatch[1]} bedroom${bedroomMatch[1] === '1' ? '' : 's'}`);
+  if (bathroomMatch) bits.push(`${bathroomMatch[1]} bathroom${bathroomMatch[1] === '1' ? '' : 's'}`);
+  if (hasFlat) bits.push('flat');
+  if (hasHouse) bits.push('house');
+
+  return `For a ${bits.join(', ')}, the final quote depends on condition, service type and extras. Regular cleaning starts from £17/hour. Send your postcode and photos if possible, and the team will confirm the price by WhatsApp or phone.`;
+}
+
+function findAnswer(input) {
+  const text = normalise(input);
+  const quoteHint = buildQuoteHint(text);
+  if (quoteHint) return quoteHint;
+
+  const ranked = ANSWERS
+    .map(item => ({ ...item, score: scoreAnswer(text, item) }))
+    .sort((a, b) => b.score - a.score);
+
+  if (ranked[0]?.score >= 2) return ranked[0].answer;
+
+  const hasQuestion = /\?|what|when|where|why|how|can|do|does|is|are|will|please|need|want/.test(input.toLowerCase());
   if (hasQuestion) {
-    return 'I may not know that exact answer yet, but I can still help you get it quickly. Send the question with your name and phone number through the quote form, or WhatsApp us, and the CleanWithBest team will reply.';
+    return `I may not know that exact answer yet, but I can still help you get it quickly. I can answer about ${FALLBACK_TOPICS}. For anything specific, send it through the quote form or WhatsApp us and the team will reply.`;
   }
 
-  return 'I can help with cleaning prices, services, booking, timing, areas, contact details, products, access, pets and payment questions. You can also request a quote and our team will contact you by WhatsApp or phone.';
+  return `I can help with ${FALLBACK_TOPICS}. Try asking "How much for a 2 bedroom flat?" or tap one of the quick buttons below.`;
 }
 
 function BestieBotMascot({ compact = false }) {
@@ -164,63 +247,134 @@ function BestieBotMascot({ compact = false }) {
   );
 }
 
+function TypingDots() {
+  return (
+    <span className="bestiebot-typing-dots" aria-label="BestieBot is typing">
+      <span />
+      <span />
+      <span />
+    </span>
+  );
+}
+
+const welcomeMessage = {
+  id: 'welcome',
+  role: 'bot',
+  text: 'Hi, I am BestieBot. Tell me what you need cleaned, your property size, or ask about prices, booking, products, trust or contact details.',
+};
+
 export default function Chatbot() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([
-    {
-      role: 'bot',
-      text: 'Hi, I am BestieBot, the CleanWithBest robot assistant. Ask me about prices, services, bookings, products or contact details.',
-    },
-  ]);
+  const [typing, setTyping] = useState(false);
+  const [messages, setMessages] = useState([welcomeMessage]);
   const inputRef = useRef(null);
+  const scrollRef = useRef(null);
+  const typingTimerRef = useRef(null);
 
-  const visibleMessages = useMemo(() => messages.slice(-8), [messages]);
+  const visibleMessages = useMemo(() => messages.slice(-12), [messages]);
+
+  useEffect(() => {
+    if (open) {
+      setTimeout(() => inputRef.current?.focus(), 120);
+    }
+  }, [open]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
+  }, [visibleMessages, typing]);
+
+  useEffect(() => () => window.clearTimeout(typingTimerRef.current), []);
+
+  const resetChat = () => {
+    window.clearTimeout(typingTimerRef.current);
+    setTyping(false);
+    setInput('');
+    setMessages([welcomeMessage]);
+  };
 
   const sendMessage = text => {
     const trimmed = text.trim();
-    if (!trimmed) return;
+    if (!trimmed || typing) return;
 
-    setMessages(current => [
-      ...current,
-      { role: 'user', text: trimmed },
-      { role: 'bot', text: findAnswer(trimmed) },
-    ]);
+    const userMessage = {
+      id: `user-${Date.now()}`,
+      role: 'user',
+      text: trimmed,
+    };
+
+    setMessages(current => [...current, userMessage]);
     setInput('');
-    setTimeout(() => inputRef.current?.focus(), 0);
+    setTyping(true);
+
+    const responseDelay = Math.min(900, Math.max(420, trimmed.length * 12));
+    typingTimerRef.current = window.setTimeout(() => {
+      setMessages(current => [
+        ...current,
+        {
+          id: `bot-${Date.now()}`,
+          role: 'bot',
+          text: findAnswer(trimmed),
+        },
+      ]);
+      setTyping(false);
+      setTimeout(() => inputRef.current?.focus(), 0);
+    }, responseDelay);
   };
 
   return (
     <div className="fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] right-3 z-[70] flex max-w-[calc(100vw-1.5rem)] flex-col items-end sm:bottom-6 sm:right-6 sm:max-w-[calc(100vw-2rem)]">
       {open && (
-        <div className="animate-bestiebot-panel relative mb-2 flex h-[min(520px,calc(100dvh-7rem))] w-[calc(100vw-1.5rem)] max-w-[390px] flex-col overflow-hidden rounded-2xl border border-cyan-100 bg-gradient-to-b from-cyan-50 via-emerald-50 to-amber-50 shadow-2xl shadow-cyan-900/15 sm:h-[540px] sm:w-[calc(100vw-2rem)]">
+        <div className="animate-bestiebot-panel relative mb-2 flex h-[min(560px,calc(100dvh-6.5rem))] w-[calc(100vw-1.5rem)] max-w-[410px] flex-col overflow-hidden rounded-2xl border border-cyan-100 bg-gradient-to-b from-cyan-50 via-emerald-50 to-amber-50 shadow-2xl shadow-cyan-900/15 sm:h-[580px] sm:w-[calc(100vw-2rem)]">
           <span className="bestiebot-bg-bubble bestiebot-bg-bubble-one" />
           <span className="bestiebot-bg-bubble bestiebot-bg-bubble-two" />
           <span className="bestiebot-bg-bubble bestiebot-bg-bubble-three" />
-          <div className="bestiebot-shine relative z-10 flex items-center justify-between overflow-hidden border-b border-cyan-100 bg-gradient-to-r from-cyan-100 via-emerald-100 to-amber-100 px-4 py-3 text-slate-800">
-            <div className="flex items-center gap-2">
-              <span className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-cyan-100">
-                <BestieBotMascot compact />
-                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-amber-300 text-[9px] font-black text-amber-900">
-                  AI
+
+          <div className="bestiebot-shine relative z-10 border-b border-cyan-100 bg-gradient-to-r from-cyan-100 via-emerald-100 to-amber-100 px-3.5 py-3 text-slate-800 sm:px-4">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex min-w-0 items-center gap-2.5">
+                <span className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-cyan-100">
+                  <BestieBotMascot compact />
+                  <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-amber-300 text-[9px] font-black text-amber-900">
+                    AI
+                  </span>
                 </span>
-              </span>
-              <div>
-                <p className="font-heading text-sm font-extrabold text-slate-800">BestieBot</p>
-                <p className="flex items-center gap-1.5 text-xs font-semibold text-cyan-800">
-                  <span className="bestiebot-status-dot h-2 w-2 rounded-full bg-emerald-500" />
-                  CleanWithBest robot helper
-                </p>
+                <div className="min-w-0">
+                  <p className="font-heading text-sm font-extrabold text-slate-800">BestieBot</p>
+                  <p className="flex items-center gap-1.5 text-xs font-semibold text-cyan-800">
+                    <span className="bestiebot-status-dot h-2 w-2 rounded-full bg-emerald-500" />
+                    Cleaning assistant online
+                  </p>
+                </div>
+              </div>
+              <div className="flex shrink-0 items-center gap-1">
+                <button type="button" onClick={resetChat} className="rounded-lg p-2 text-cyan-800 hover:bg-white/70 hover:text-brand-700" aria-label="Reset chatbot">
+                  <RotateCcw size={16} />
+                </button>
+                <button type="button" onClick={() => setOpen(false)} className="rounded-lg p-2 text-cyan-800 hover:bg-white/70 hover:text-brand-700" aria-label="Minimise chatbot">
+                  <X size={18} />
+                </button>
               </div>
             </div>
-            <button type="button" onClick={() => setOpen(false)} className="rounded-lg p-2 text-cyan-800 hover:bg-white/70 hover:text-brand-700" aria-label="Minimise chatbot">
-              <X size={18} />
-            </button>
+
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              {QUICK_TOPICS.map(({ label, icon: Icon, prompt }) => (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => sendMessage(prompt)}
+                  className="bestiebot-topic-button rounded-xl border border-white/70 bg-white/70 px-2.5 py-2 text-left text-xs font-black text-slate-700 shadow-sm hover:bg-white hover:text-brand-700"
+                >
+                  <Icon size={14} className="mb-1 text-emerald-600" />
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
 
-          <div className="relative z-10 flex-1 space-y-3 overflow-y-auto p-3 sm:space-y-4 sm:p-4">
-            {visibleMessages.map((message, index) => (
-              <div key={`${message.role}-${index}`} className={`flex items-end gap-2 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+          <div ref={scrollRef} className="relative z-10 flex-1 space-y-3 overflow-y-auto p-3 sm:space-y-4 sm:p-4">
+            {visibleMessages.map(message => (
+              <div key={message.id} className={`flex items-end gap-2 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {message.role === 'bot' && (
                   <span className="mb-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-50 ring-1 ring-cyan-200">
                     <BestieBotMascot compact />
@@ -240,22 +394,34 @@ export default function Chatbot() {
                 </div>
               </div>
             ))}
+
+            {typing && (
+              <div className="flex items-end gap-2">
+                <span className="mb-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-50 ring-1 ring-cyan-200">
+                  <BestieBotMascot compact />
+                </span>
+                <div className="animate-bestiebot-bubble rounded-2xl rounded-bl-md bg-white/90 px-3.5 py-2.5 shadow-sm ring-1 ring-cyan-100">
+                  <TypingDots />
+                </div>
+              </div>
+            )}
           </div>
 
-          <div className="relative z-10 border-t border-cyan-100 bg-white/85 p-2.5 backdrop-blur sm:p-3">
-            <div className="mb-3 flex flex-wrap gap-2">
+          <div className="relative z-10 border-t border-cyan-100 bg-white/90 p-2.5 backdrop-blur sm:p-3">
+            <div className="mb-3 flex gap-2 overflow-x-auto pb-1">
               {SUGGESTIONS.map((suggestion, index) => (
                 <button
                   key={suggestion}
                   type="button"
                   onClick={() => sendMessage(suggestion)}
-                  className="animate-bestiebot-chip rounded-full border border-cyan-100 bg-cyan-50 px-2.5 py-1.5 text-xs font-bold text-cyan-800 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-800"
-                  style={{ animationDelay: `${index * 70}ms` }}
+                  className="animate-bestiebot-chip shrink-0 rounded-full border border-cyan-100 bg-cyan-50 px-2.5 py-1.5 text-xs font-bold text-cyan-800 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-800"
+                  style={{ animationDelay: `${index * 50}ms` }}
                 >
                   {suggestion}
                 </button>
               ))}
             </div>
+
             <form
               onSubmit={event => {
                 event.preventDefault();
@@ -267,17 +433,29 @@ export default function Chatbot() {
                 ref={inputRef}
                 value={input}
                 onChange={event => setInput(event.target.value)}
-                placeholder="Ask BestieBot..."
+                placeholder="Ask about your cleaning..."
                 className="min-w-0 flex-1 rounded-xl border border-cyan-100 bg-cyan-50/60 px-3 py-2 text-sm text-slate-800 outline-none placeholder:text-cyan-700/60 focus:border-brand-500 focus:bg-white focus:ring-2 focus:ring-cyan-100"
               />
-              <button type="submit" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500 text-white hover:bg-emerald-600" aria-label="Send message">
+              <button type="submit" disabled={typing} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500 text-white hover:bg-emerald-600 disabled:cursor-not-allowed disabled:bg-slate-300" aria-label="Send message">
                 <Send size={16} />
               </button>
             </form>
-            <div className="mt-3 flex items-center justify-between gap-3 text-xs">
-              <Link href="/quote" className="font-black text-brand-700 hover:text-brand-900">Request quote</Link>
-              <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="font-black text-emerald-700 hover:text-emerald-900">WhatsApp us</a>
+
+            <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
+              <a href="tel:+447503494242" className="rounded-lg bg-slate-50 px-2 py-2 text-center font-black text-brand-700 hover:bg-brand-50">
+                <Phone size={13} className="mx-auto mb-0.5" /> Call
+              </a>
+              <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="rounded-lg bg-emerald-50 px-2 py-2 text-center font-black text-emerald-700 hover:bg-emerald-100">
+                <MessageCircle size={13} className="mx-auto mb-0.5" /> WhatsApp
+              </a>
+              <a href="mailto:cleanwithbest@gmail.com" className="rounded-lg bg-amber-50 px-2 py-2 text-center font-black text-amber-700 hover:bg-amber-100">
+                <Mail size={13} className="mx-auto mb-0.5" /> Email
+              </a>
             </div>
+
+            <Link href="/quote" className="mt-2 flex items-center justify-center rounded-xl bg-brand-600 px-3 py-2 text-sm font-black text-white hover:bg-brand-700">
+              Request a proper quote
+            </Link>
           </div>
         </div>
       )}
