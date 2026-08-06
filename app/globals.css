@@ -189,6 +189,48 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
   50% { transform: rotate(-18deg) translateY(-1px); }
 }
 
+@keyframes bestieSvgFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  40% { transform: translateY(-4px) rotate(-1.5deg); }
+  72% { transform: translateY(1px) rotate(1.5deg); }
+}
+
+@keyframes bestieSvgHead {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  45% { transform: translateY(-2px) rotate(-2deg); }
+  72% { transform: translateY(1px) rotate(2deg); }
+}
+
+@keyframes bestieSvgBlink {
+  0%, 88%, 100% { transform: scaleY(1); }
+  92%, 96% { transform: scaleY(.12); }
+}
+
+@keyframes bestieSvgWaveLeft {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-11deg) translateY(-2px); }
+}
+
+@keyframes bestieSvgWaveRight {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(12deg) translateY(-3px); }
+}
+
+@keyframes bestieSvgStepLeft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes bestieSvgStepRight {
+  0%, 100% { transform: translateY(-2px); }
+  50% { transform: translateY(1px); }
+}
+
+@keyframes bestieSvgPulse {
+  0%, 100% { opacity: .65; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
 .animate-bestiebot-launcher { animation: bestieFloat 3.2s ease-in-out infinite; }
 .animate-bestiebot-robot { animation: bestieRobotBob 2.4s ease-in-out infinite; }
 .animate-bestiebot-mini { animation: bestieRobotBob 2.8s ease-in-out infinite; }
@@ -234,6 +276,66 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
 .bestiebot-typing-dots span:nth-child(2) { animation-delay: .14s; }
 .bestiebot-typing-dots span:nth-child(3) { animation-delay: .28s; }
 
+.bestiebot-svg {
+  display: block;
+  width: 54px;
+  height: 68px;
+  overflow: visible;
+  filter: drop-shadow(0 8px 10px rgb(8 145 178 / .18));
+}
+
+.bestiebot-svg-compact {
+  width: 34px;
+  height: 43px;
+}
+
+.bestiebot-svg-hero {
+  width: 70px;
+  height: 88px;
+}
+
+.bestiebot-svg-launcher {
+  width: 68px;
+  height: 86px;
+  filter: drop-shadow(0 14px 16px rgb(8 145 178 / .24)) drop-shadow(0 1px 0 rgb(255 255 255 / .9));
+}
+
+.bestiebot-svg-body,
+.bestiebot-svg-head,
+.bestiebot-svg-sparkles {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.bestiebot-svg-body { animation: bestieSvgFloat 2.8s ease-in-out infinite; }
+.bestiebot-svg-head { animation: bestieSvgHead 2.5s ease-in-out infinite; }
+.bestiebot-svg-eye { transform-box: fill-box; transform-origin: center; animation: bestieSvgBlink 3.5s ease-in-out infinite; }
+.bestiebot-svg-eye-right { animation-delay: .08s; }
+.bestiebot-svg-arm-left,
+.bestiebot-svg-hand-left {
+  transform-box: fill-box;
+  transform-origin: 75% 25%;
+  animation: bestieSvgWaveLeft 1.45s ease-in-out infinite;
+}
+.bestiebot-svg-arm-right,
+.bestiebot-svg-hand-right {
+  transform-box: fill-box;
+  transform-origin: 25% 25%;
+  animation: bestieSvgWaveRight 1.25s ease-in-out infinite;
+}
+.bestiebot-svg-foot-left { animation: bestieSvgStepLeft 1.35s ease-in-out infinite; }
+.bestiebot-svg-foot-right { animation: bestieSvgStepRight 1.35s ease-in-out infinite; }
+.bestiebot-svg-antenna-dot,
+.bestiebot-svg-light,
+.bestiebot-svg-cheek,
+.bestiebot-svg-sparkle-one,
+.bestiebot-svg-sparkle-two {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bestieSvgPulse 1.8s ease-in-out infinite;
+}
+.bestiebot-svg-sparkle-two { animation-delay: .42s; }
+
 .animate-bestiebot-panel {
   background-size: 160% 160%;
   transform-origin: bottom right;
@@ -261,13 +363,6 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
   --bestie-scale: .9;
   width: 58px;
   height: 74px;
-}
-
-.bestiebot-person-launcher {
-  --bestie-scale: .96;
-  width: 58px;
-  height: 74px;
-  filter: drop-shadow(0 14px 14px rgb(8 145 178 / .2)) drop-shadow(0 0 0 white);
 }
 
 .bestiebot-head {
@@ -577,7 +672,21 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
   .bestiebot-foot-right,
   .bestiebot-sparkle,
   .bestiebot-bg-bubble,
-  .bestiebot-typing-dots span {
+  .bestiebot-typing-dots span,
+  .bestiebot-svg-body,
+  .bestiebot-svg-head,
+  .bestiebot-svg-eye,
+  .bestiebot-svg-arm-left,
+  .bestiebot-svg-arm-right,
+  .bestiebot-svg-hand-left,
+  .bestiebot-svg-hand-right,
+  .bestiebot-svg-foot-left,
+  .bestiebot-svg-foot-right,
+  .bestiebot-svg-antenna-dot,
+  .bestiebot-svg-light,
+  .bestiebot-svg-cheek,
+  .bestiebot-svg-sparkle-one,
+  .bestiebot-svg-sparkle-two {
     animation: none;
   }
 }

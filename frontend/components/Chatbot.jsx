@@ -224,35 +224,53 @@ function findAnswer(input) {
 
 function BestieBotMascot({ compact = false, hero = false, launcher = false }) {
   return (
-    <span className={`bestiebot-person ${compact ? 'bestiebot-person-compact' : ''} ${hero ? 'bestiebot-person-hero' : ''} ${launcher ? 'bestiebot-person-launcher' : ''}`} aria-hidden="true">
-      <span className="bestiebot-antenna">
-        <span />
-      </span>
-      <span className="bestiebot-hair bestiebot-hair-one" />
-      <span className="bestiebot-hair bestiebot-hair-two" />
-      <span className="bestiebot-ear bestiebot-ear-left" />
-      <span className="bestiebot-ear bestiebot-ear-right" />
-      <span className="bestiebot-head">
-        <span className="bestiebot-eye bestiebot-eye-left" />
-        <span className="bestiebot-eye bestiebot-eye-right" />
-        <span className="bestiebot-cheek bestiebot-cheek-left" />
-        <span className="bestiebot-cheek bestiebot-cheek-right" />
-        <span className="bestiebot-smile" />
-      </span>
-      <span className="bestiebot-neck" />
-      <span className="bestiebot-arm bestiebot-arm-left" />
-      <span className="bestiebot-arm bestiebot-arm-right" />
-      <span className="bestiebot-hand bestiebot-hand-left" />
-      <span className="bestiebot-hand bestiebot-hand-right" />
-      <span className="bestiebot-body">
-        <span className="bestiebot-heart" />
-        <span className="bestiebot-panel-light" />
-      </span>
-      <span className="bestiebot-foot bestiebot-foot-left" />
-      <span className="bestiebot-foot bestiebot-foot-right" />
-      <span className="bestiebot-sparkle bestiebot-sparkle-one" />
-      <span className="bestiebot-sparkle bestiebot-sparkle-two" />
-    </span>
+    <svg
+      className={`bestiebot-svg ${compact ? 'bestiebot-svg-compact' : ''} ${hero ? 'bestiebot-svg-hero' : ''} ${launcher ? 'bestiebot-svg-launcher' : ''}`}
+      viewBox="0 0 120 150"
+      role="img"
+      aria-label="BestieBot cleaning assistant"
+    >
+      <g className="bestiebot-svg-shadow">
+        <ellipse cx="60" cy="138" rx="34" ry="8" fill="rgb(8 145 178 / .16)" />
+      </g>
+
+      <g className="bestiebot-svg-body">
+        <path className="bestiebot-svg-arm-left" d="M36 86 C18 84 13 70 21 61" fill="none" stroke="#0f766e" strokeWidth="9" strokeLinecap="round" />
+        <path className="bestiebot-svg-arm-right" d="M84 86 C103 82 108 65 99 57" fill="none" stroke="#0f766e" strokeWidth="9" strokeLinecap="round" />
+        <circle className="bestiebot-svg-hand-left" cx="20" cy="60" r="8" fill="#fbbf24" stroke="#0f766e" strokeWidth="3" />
+        <circle className="bestiebot-svg-hand-right" cx="99" cy="57" r="8" fill="#fbbf24" stroke="#0f766e" strokeWidth="3" />
+
+        <rect x="37" y="72" width="46" height="48" rx="18" fill="#ccfbf1" stroke="#0f766e" strokeWidth="5" />
+        <path d="M42 106 C51 116 69 118 80 106" fill="none" stroke="#14b8a6" strokeWidth="5" strokeLinecap="round" />
+        <circle cx="52" cy="91" r="5" fill="#10b981" />
+        <circle cx="68" cy="91" r="5" fill="#fbbf24" />
+        <circle className="bestiebot-svg-light" cx="74" cy="103" r="4" fill="#22d3ee" />
+
+        <path className="bestiebot-svg-foot-left" d="M42 122 H56" stroke="#0f766e" strokeWidth="9" strokeLinecap="round" />
+        <path className="bestiebot-svg-foot-right" d="M65 122 H79" stroke="#0f766e" strokeWidth="9" strokeLinecap="round" />
+      </g>
+
+      <g className="bestiebot-svg-head">
+        <line x1="60" y1="23" x2="60" y2="12" stroke="#0f766e" strokeWidth="4" strokeLinecap="round" />
+        <circle className="bestiebot-svg-antenna-dot" cx="60" cy="9" r="6" fill="#fbbf24" stroke="#0f766e" strokeWidth="3" />
+        <path className="bestiebot-svg-hair-one" d="M44 25 C49 17 56 17 59 25" fill="none" stroke="#14b8a6" strokeWidth="5" strokeLinecap="round" />
+        <path className="bestiebot-svg-hair-two" d="M60 24 C66 17 73 20 75 28" fill="none" stroke="#fbbf24" strokeWidth="5" strokeLinecap="round" />
+        <circle cx="34" cy="50" r="10" fill="#99f6e4" stroke="#0f766e" strokeWidth="4" />
+        <circle cx="86" cy="50" r="10" fill="#99f6e4" stroke="#0f766e" strokeWidth="4" />
+        <rect x="32" y="28" width="56" height="48" rx="20" fill="#ffffff" stroke="#0f766e" strokeWidth="5" />
+        <path d="M38 61 C48 74 72 74 82 61" fill="#cffafe" />
+        <circle className="bestiebot-svg-eye bestiebot-svg-eye-left" cx="49" cy="49" r="5" fill="#0f766e" />
+        <circle className="bestiebot-svg-eye bestiebot-svg-eye-right" cx="71" cy="49" r="5" fill="#0f766e" />
+        <circle className="bestiebot-svg-cheek bestiebot-svg-cheek-left" cx="43" cy="60" r="4" fill="#fbbf24" />
+        <circle className="bestiebot-svg-cheek bestiebot-svg-cheek-right" cx="77" cy="60" r="4" fill="#fbbf24" />
+        <path d="M53 61 C56 66 64 66 67 61" fill="none" stroke="#0f766e" strokeWidth="4" strokeLinecap="round" />
+      </g>
+
+      <g className="bestiebot-svg-sparkles">
+        <path className="bestiebot-svg-sparkle-one" d="M24 28 L28 36 L36 40 L28 44 L24 52 L20 44 L12 40 L20 36 Z" fill="#fbbf24" />
+        <path className="bestiebot-svg-sparkle-two" d="M95 82 L98 88 L104 91 L98 94 L95 100 L92 94 L86 91 L92 88 Z" fill="#22d3ee" />
+      </g>
+    </svg>
   );
 }
 
