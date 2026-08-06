@@ -96,7 +96,7 @@ export default function AboutPage() {
 
       <section className="border-t border-slate-200 bg-white py-16">
         <div className="mx-auto max-w-4xl px-4 text-center">
-          <h2 className="font-heading text-3xl font-extrabold text-slate-950">Speak to CleanWithBest</h2>
+          <h2 className="font-heading text-3xl font-extrabold text-brand-800">Speak to CleanWithBest</h2>
           <p className="mx-auto mt-3 max-w-2xl text-slate-600">Use the quote form, call us, or message on WhatsApp. We are available 24/7 for quote requests.</p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <Link href="/quote" className="btn-primary">Get a Free Quote</Link>

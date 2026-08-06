@@ -269,7 +269,7 @@ export default function QuoteForm() {
     <form onSubmit={handleSubmit} className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-xl shadow-slate-900/10">
 
       {/* Header */}
-      <div className="bg-slate-950 px-6 py-5">
+      <div className="bg-brand-800 px-6 py-5">
         <h3 className="font-heading text-lg font-bold text-white">Get Your Free Quote</h3>
         <p className="mt-0.5 text-xs text-slate-300">Leave your details and we will contact you by WhatsApp or phone call</p>
       </div>

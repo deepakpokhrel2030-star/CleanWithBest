@@ -29,7 +29,7 @@ export default function Header() {
 
   return (
     <header className={`sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 backdrop-blur-xl transition-shadow ${scrolled ? 'shadow-lg shadow-slate-900/5' : ''}`}>
-      <div className="bg-slate-950 text-white">
+      <div className="bg-brand-800 text-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2 text-xs font-semibold">
           <a href="tel:+447503494242" className="inline-flex min-w-0 items-center gap-2 hover:text-accent-400">
             <Phone size={14} className="shrink-0 text-accent-400" />
@@ -46,11 +46,11 @@ export default function Header() {
 
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-5 px-4 sm:h-[72px]">
         <Link href="/" onClick={closeMenu} className="group flex shrink-0 items-center gap-3">
-          <span className="relative flex h-10 w-10 items-center justify-center rounded-lg bg-slate-950 text-white shadow-sm transition group-hover:-translate-y-0.5">
+          <span className="relative flex h-10 w-10 items-center justify-center rounded-lg bg-brand-700 text-white shadow-sm transition group-hover:-translate-y-0.5">
             <Sparkles size={18} className="text-accent-400" />
           </span>
           <span className="font-heading text-lg font-extrabold sm:text-xl">
-            <span className="text-slate-950">Clean</span>
+            <span className="text-brand-800">Clean</span>
             <span className="text-brand-700">WithBest</span>
           </span>
         </Link>
@@ -62,8 +62,8 @@ export default function Header() {
               href={href}
               className={`rounded-lg px-4 py-2.5 text-sm font-bold transition ${
                 isActive(href)
-                  ? 'bg-white text-slate-950 shadow-sm'
-                  : 'text-slate-600 hover:bg-white/70 hover:text-slate-950'
+                  ? 'bg-white text-brand-800 shadow-sm'
+                  : 'text-slate-600 hover:bg-white/70 hover:text-brand-800'
               }`}
             >
               {label}
@@ -72,7 +72,7 @@ export default function Header() {
         </nav>
 
         <div className="ml-auto hidden items-center gap-3 lg:flex">
-          <Link href="/about" className="text-sm font-bold text-slate-500 hover:text-slate-950">About</Link>
+          <Link href="/about" className="text-sm font-bold text-slate-500 hover:text-brand-800">About</Link>
           <Link href="/quote" className="btn-primary px-5 py-2.5">
             Get Free Quote
           </Link>

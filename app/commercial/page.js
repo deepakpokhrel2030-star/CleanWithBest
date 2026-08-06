@@ -128,7 +128,7 @@ export default function CommercialPage() {
             />
             <div className="absolute bottom-4 left-4 right-4 rounded-lg bg-white/90 p-4 shadow-lg backdrop-blur">
               <p className="text-xs font-bold uppercase text-brand-700">Business cleaning</p>
-              <p className="mt-1 text-sm font-semibold text-slate-950">Offices, retail spaces, restaurants, gyms and shared premises.</p>
+              <p className="mt-1 text-sm font-semibold text-brand-800">Offices, retail spaces, restaurants, gyms and shared premises.</p>
             </div>
           </div>
         </div>
@@ -224,7 +224,7 @@ export default function CommercialPage() {
       {/* CTA */}
       <section className="border-t border-slate-200 bg-white py-16">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="font-heading text-3xl font-bold text-slate-950 mb-4">Ready to Transform Your Workplace?</h2>
+          <h2 className="font-heading text-3xl font-bold text-brand-800 mb-4">Ready to Transform Your Workplace?</h2>
           <p className="text-slate-600 mb-8">Get a free commercial cleaning quote. We'll respond within 2 hours.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/quote" className="btn-primary">Get a Business Quote</Link>

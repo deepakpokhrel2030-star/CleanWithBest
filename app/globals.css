@@ -10,10 +10,10 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex min-w-0 max-w-full items-center justify-center gap-2 px-6 py-3 text-center bg-slate-950 text-white font-semibold rounded-lg hover:bg-brand-700 active:bg-brand-800 transition-all duration-200 shadow-sm hover:-translate-y-0.5 cursor-pointer select-none;
+    @apply inline-flex min-w-0 max-w-full items-center justify-center gap-2 px-6 py-3 text-center bg-brand-700 text-white font-semibold rounded-lg hover:bg-brand-800 active:bg-brand-900 transition-all duration-200 shadow-sm hover:-translate-y-0.5 cursor-pointer select-none;
   }
   .btn-primary-lg {
-    @apply inline-flex min-w-0 max-w-full items-center justify-center gap-2 px-8 py-4 text-center bg-slate-950 text-white text-base font-bold rounded-lg hover:bg-brand-700 active:bg-brand-800 transition-all duration-200 shadow-sm hover:-translate-y-0.5 cursor-pointer select-none;
+    @apply inline-flex min-w-0 max-w-full items-center justify-center gap-2 px-8 py-4 text-center bg-brand-700 text-white text-base font-bold rounded-lg hover:bg-brand-800 active:bg-brand-900 transition-all duration-200 shadow-sm hover:-translate-y-0.5 cursor-pointer select-none;
   }
   .btn-white {
     @apply inline-flex min-w-0 max-w-full items-center justify-center gap-2 px-6 py-3 text-center bg-white text-brand-700 font-semibold rounded-lg hover:bg-brand-50 active:bg-brand-100 transition-colors duration-200 shadow-sm cursor-pointer select-none;
@@ -71,7 +71,7 @@
     @apply min-w-0;
   }
   .hero-title {
-    @apply max-w-full break-words font-heading text-[2rem] font-extrabold leading-tight text-slate-950 sm:text-4xl md:text-6xl;
+    @apply max-w-full break-words font-heading text-[2rem] font-extrabold leading-tight text-brand-800 sm:text-4xl md:text-6xl;
   }
   .hero-copy {
     @apply mt-5 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg;

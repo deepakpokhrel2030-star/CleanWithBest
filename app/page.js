@@ -119,13 +119,13 @@ export default function HomePage() {
             />
             <div className="absolute inset-x-4 bottom-4 rounded-lg bg-white p-4 shadow-lg">
               <p className="text-xs font-bold uppercase text-brand-700">Fast quote response</p>
-              <p className="mt-1 text-sm font-semibold text-slate-950">Send the form and we will call or WhatsApp you with the next step.</p>
+              <p className="mt-1 text-sm font-semibold text-brand-800">Send the form and we will call or WhatsApp you with the next step.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="border-y border-slate-200 bg-slate-950 py-5 text-white">
+      <section className="border-y border-brand-700 bg-brand-800 py-5 text-white">
         <div className="mx-auto grid max-w-7xl gap-3 px-4 text-sm font-bold sm:grid-cols-2 lg:grid-cols-4">
           {['Regular cleaning £17/hr', 'Deep cleans from £179', 'End of tenancy from £179', '24/7 quote requests'].map(item => (
             <div key={item} className="flex items-center gap-2">
@@ -150,10 +150,10 @@ export default function HomePage() {
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {services.map(({ icon: Icon, title, price, text, href }) => (
               <Link key={title} href={href} className="service-card group">
-                <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-slate-950 text-white transition group-hover:bg-brand-700">
+                <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-brand-700 text-white transition group-hover:bg-brand-800">
                   <Icon size={22} />
                 </span>
-                <h3 className="font-heading text-lg font-bold text-slate-950">{title}</h3>
+                <h3 className="font-heading text-lg font-bold text-brand-800">{title}</h3>
                 <p className="mt-2 text-sm font-extrabold text-brand-700">{price}</p>
                 <p className="mt-3 text-sm leading-relaxed text-slate-600">{text}</p>
                 <span className="mt-5 inline-flex items-center gap-1 text-sm font-bold text-brand-700">
@@ -187,13 +187,13 @@ export default function HomePage() {
                 <div className="flex gap-5">
                   <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-white font-heading text-sm font-black text-brand-700 shadow-sm ring-1 ring-slate-200">{num}</span>
                   <div>
-                    <h3 className="font-heading text-xl font-bold text-slate-950">{title}</h3>
+                    <h3 className="font-heading text-xl font-bold text-brand-800">{title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-slate-600">{text}</p>
                   </div>
                 </div>
               </div>
             ))}
-            <div className="rounded-lg bg-slate-950 p-6 text-white">
+            <div className="rounded-lg bg-brand-800 p-6 text-white">
               <Clock3 className="mb-4 text-accent-400" size={26} />
               <h3 className="font-heading text-xl font-bold">Need it quickly?</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-300">Call or WhatsApp for the fastest response. We are available 24/7 for quote requests.</p>
@@ -209,7 +209,7 @@ export default function HomePage() {
             <h2 className="section-title">Clear starting rates</h2>
             <p className="section-sub mt-3">These are guide prices. Final quotes depend on property size, condition, access and any extra requests.</p>
             <div className="mt-6 rounded-lg border border-brand-100 bg-white p-5 shadow-sm">
-              <p className="text-lg font-extrabold text-slate-950">Regular cleaning starts at £17/hr.</p>
+              <p className="text-lg font-extrabold text-brand-800">Regular cleaning starts at £17/hr.</p>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">Send your postcode and service type for a confirmed quote.</p>
             </div>
           </div>
@@ -224,14 +224,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-slate-950 py-16 text-white">
+      <section className="relative overflow-hidden bg-brand-900 py-16 text-white">
         <Image
           src="https://images.unsplash.com/photo-1563453392212-326f5e854473?w=1600&q=80"
           alt="Professional cleaning tools arranged neatly"
           fill
           className="object-cover opacity-20"
         />
-        <div className="absolute inset-0 bg-slate-950/70" />
+        <div className="absolute inset-0 bg-brand-900/75" />
         <div className="relative mx-auto max-w-4xl px-4 text-center">
           <Mail className="mx-auto mb-4 text-accent-400" size={34} />
           <h2 className="font-heading text-3xl font-extrabold md:text-4xl">Ready to ask for a quote?</h2>

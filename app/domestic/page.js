@@ -196,7 +196,7 @@ export default function DomesticPage() {
       {/* Benefits strip */}
       <section className="bg-white py-14">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="font-heading text-2xl font-bold text-slate-950 mb-8">Why Choose Our Domestic Cleaning?</h2>
+          <h2 className="font-heading text-2xl font-bold text-brand-800 mb-8">Why Choose Our Domestic Cleaning?</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {['Fully Insured', 'Vetted Staff', 'Eco Products', 'Flexible Hours', 'Fair Pricing', '100% Guaranteed'].map(label => (
               <div key={label} className="rounded-lg border border-slate-200 bg-slate-50 py-5 px-3">
@@ -233,7 +233,7 @@ export default function DomesticPage() {
       <section className="border-t border-slate-200 bg-white py-16">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <Sparkles className="mx-auto mb-4 text-accent-600" size={30} />
-          <h2 className="font-heading text-3xl font-bold text-slate-950 mb-3">Ready for a cleaner home?</h2>
+          <h2 className="font-heading text-3xl font-bold text-brand-800 mb-3">Ready for a cleaner home?</h2>
           <p className="text-slate-600 mb-8 text-lg">Send the quote form once and we will contact you by WhatsApp or phone.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/quote" className="btn-primary-lg">Get a Home Quote</Link>

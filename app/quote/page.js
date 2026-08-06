@@ -47,7 +47,7 @@ export default function QuotePage() {
               { title: '3. You get a clear quote', text: 'We contact you by WhatsApp or call with the price and earliest slot.' },
             ].map(({ title, text }) => (
               <div key={title} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-                <h2 className="font-heading text-base font-bold text-slate-950">{title}</h2>
+                <h2 className="font-heading text-base font-bold text-brand-800">{title}</h2>
                 <p className="mt-2 text-sm leading-relaxed text-slate-500">{text}</p>
               </div>
             ))}
@@ -81,7 +81,7 @@ export default function QuotePage() {
               </div>
 
               {/* Call instead */}
-              <div className="rounded-lg bg-slate-950 p-6 text-white shadow-xl shadow-slate-900/10">
+              <div className="rounded-lg bg-brand-800 p-6 text-white shadow-xl shadow-brand-900/10">
                 <h3 className="font-semibold text-lg mb-2 text-white">Prefer WhatsApp or Call?</h3>
                 <p className="text-slate-300 text-sm mb-4">Leave your number in the quote form or speak directly with our team now.</p>
                 <a href="tel:+447503494242" className="flex items-center gap-2 font-bold text-lg text-white hover:text-accent-400 transition-colors">

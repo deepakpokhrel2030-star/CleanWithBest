@@ -34,7 +34,7 @@ function QuoteDetailModal({ quote, onClose, onStatusChange, onDelete, deleting }
   ].filter(([, value]) => value);
 
   return (
-    <div className="fixed inset-0 z-[80] bg-slate-950/60 px-4 py-6 overflow-y-auto">
+    <div className="fixed inset-0 z-[80] bg-brand-900/60 px-4 py-6 overflow-y-auto">
       <div className="mx-auto max-w-3xl rounded-lg bg-white shadow-2xl border border-slate-200">
         <div className="flex items-start justify-between gap-4 border-b border-slate-100 px-6 py-5">
           <div>
@@ -78,7 +78,7 @@ function QuoteDetailModal({ quote, onClose, onStatusChange, onDelete, deleting }
             <div className="rounded-lg border border-slate-200 bg-white p-4">
               <p className="text-xs font-bold uppercase tracking-wide text-slate-400">Contact Details</p>
               <div className="mt-3 space-y-2 text-sm">
-                <a href={`tel:${quote.phone}`} className="flex items-center gap-2 font-semibold text-brand-700 hover:text-brand-900">
+                <a href={`tel:${quote.phone}`} className="flex items-center gap-2 font-semibold text-brand-700 hover:text-brand-800">
                   <Phone size={15} /> {quote.phone}
                 </a>
                 {quote.email && (
@@ -191,13 +191,13 @@ export default function AdminPage() {
 
   if (!loggedIn) {
     return (
-      <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 px-4 py-10">
+      <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-brand-900 px-4 py-10">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(46,196,182,.20),transparent_34%),radial-gradient(circle_at_80%_10%,rgba(81,147,227,.18),transparent_30%)]" />
-        <div className="relative w-full max-w-md rounded-lg border border-white/10 bg-white p-8 shadow-2xl shadow-slate-950/30">
-          <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-slate-950">
+        <div className="relative w-full max-w-md rounded-lg border border-white/10 bg-white p-8 shadow-2xl shadow-brand-950/30">
+          <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-brand-800">
             <Lock size={24} className="text-accent-400" />
           </div>
-          <h1 className="mb-2 text-center font-heading text-2xl font-bold text-slate-950">Admin Login</h1>
+          <h1 className="mb-2 text-center font-heading text-2xl font-bold text-brand-800">Admin Login</h1>
           <p className="mb-6 text-center text-sm text-slate-500">CleanWithBest dashboard for quotes and messages.</p>
           <form onSubmit={login} className="space-y-4">
             <div>
@@ -244,13 +244,13 @@ export default function AdminPage() {
       <div className="border-b border-slate-200 bg-white px-4 py-5">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="font-heading text-2xl font-bold text-slate-950">
-              <span className="text-slate-950">Clean</span><span className="text-brand-700">WithBest</span> Admin
+            <h1 className="font-heading text-2xl font-bold text-brand-800">
+              <span className="text-brand-800">Clean</span><span className="text-brand-700">WithBest</span> Admin
             </h1>
             <p className="text-sm text-slate-500">Manage new website quote requests and contact messages.</p>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={refresh} className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-950">
+            <button onClick={refresh} className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-600 transition-colors hover:bg-slate-50 hover:text-brand-800">
               <RefreshCw size={14} /> Refresh
             </button>
             <button onClick={() => setLoggedIn(false)} className="flex items-center gap-2 rounded-lg border border-red-100 bg-red-50 px-3 py-2 text-sm font-bold text-red-600 transition-colors hover:bg-red-100">
@@ -261,7 +261,7 @@ export default function AdminPage() {
       </div>
 
       <div className="mx-auto max-w-7xl px-4 py-8">
-        <div className="mb-8 rounded-lg bg-slate-950 p-6 text-white shadow-xl shadow-slate-900/10">
+        <div className="mb-8 rounded-lg bg-brand-800 p-6 text-white shadow-xl shadow-brand-900/10">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-xs font-bold uppercase text-accent-400">Live inbox</p>
@@ -296,12 +296,12 @@ export default function AdminPage() {
         {/* Tabs */}
         <div className="mb-6 flex gap-2 rounded-lg bg-white p-1 shadow-sm ring-1 ring-slate-200">
           <button onClick={() => setTab('quotes')}
-            className={`flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all ${tab === 'quotes' ? 'bg-slate-950 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-50'}`}>
+            className={`flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all ${tab === 'quotes' ? 'bg-brand-700 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-50'}`}>
             <FileText size={15} /> Quote Requests
             {newQuotes > 0 && <span className="bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">{newQuotes}</span>}
           </button>
           <button onClick={() => setTab('contacts')}
-            className={`flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all ${tab === 'contacts' ? 'bg-slate-950 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-50'}`}>
+            className={`flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all ${tab === 'contacts' ? 'bg-brand-700 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-50'}`}>
             <MessageSquare size={15} /> Contact Messages
             {newContacts > 0 && <span className="bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">{newContacts}</span>}
           </button>
@@ -312,7 +312,7 @@ export default function AdminPage() {
           <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
             <div className="flex items-center justify-between border-b border-slate-100 px-6 py-5">
               <div>
-                <h2 className="font-heading text-lg font-bold text-slate-950">Quote Requests</h2>
+                <h2 className="font-heading text-lg font-bold text-brand-800">Quote Requests</h2>
                 <p className="text-sm text-slate-500">{data.quotes.length} total requests</p>
               </div>
             </div>
@@ -395,7 +395,7 @@ export default function AdminPage() {
         {tab === 'contacts' && (
           <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
             <div className="border-b border-slate-100 px-6 py-5">
-              <h2 className="font-heading text-lg font-bold text-slate-950">Contact Messages</h2>
+              <h2 className="font-heading text-lg font-bold text-brand-800">Contact Messages</h2>
               <p className="text-sm text-slate-500">{data.contacts.length} total messages</p>
             </div>
             {data.contacts.length === 0 ? (

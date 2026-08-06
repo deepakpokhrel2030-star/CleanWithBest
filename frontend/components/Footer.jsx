@@ -45,7 +45,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-slate-950">Services</h2>
+          <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-brand-800">Services</h2>
           <ul className="space-y-2">
             {serviceLinks.map(([label, href]) => (
               <li key={href}>
@@ -56,7 +56,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-slate-950">Pages</h2>
+          <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-brand-800">Pages</h2>
           <ul className="space-y-2">
             {companyLinks.map(([label, href]) => (
               <li key={href}>
@@ -67,7 +67,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-slate-950">Contact</h2>
+          <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-brand-800">Contact</h2>
           <div className="grid gap-2 text-sm">
             <a href="tel:+447503494242" className="flex items-center gap-2 rounded-lg bg-slate-50 px-3 py-2 hover:text-brand-700">
               <Phone size={15} className="text-brand-400" /> +44 7503 494242

@@ -69,7 +69,7 @@ export default function ContactPage() {
               />
             </div>
             <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="font-heading text-2xl font-bold text-slate-950">Best ways to reach us</h2>
+              <h2 className="font-heading text-2xl font-bold text-brand-800">Best ways to reach us</h2>
               <div className="mt-5 grid gap-3">
                 <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-primary justify-center">
                   <MessageCircle size={16} /> WhatsApp +44 7503 494242
@@ -84,7 +84,7 @@ export default function ContactPage() {
             </div>
 
             <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="font-heading text-xl font-bold text-slate-950">Social media</h2>
+              <h2 className="font-heading text-xl font-bold text-brand-800">Social media</h2>
               <div className="mt-4 flex flex-wrap gap-3">
                 {socialLinks.map(({ Icon, label, href }) => (
                   <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700" aria-label={label}>
@@ -96,7 +96,7 @@ export default function ContactPage() {
           </div>
 
           <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="font-heading text-2xl font-bold text-slate-950">Send a message</h2>
+            <h2 className="font-heading text-2xl font-bold text-brand-800">Send a message</h2>
             <p className="mt-2 text-sm leading-relaxed text-slate-500">
               Use this for questions that do not need an instant answer. For prices, the quote form gives us the right details faster.
             </p>
