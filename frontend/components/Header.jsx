@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, MessageCircle, Phone, Sparkles, X } from 'lucide-react';
+import { Menu, MessageCircle, Phone, X } from 'lucide-react';
 
 const navItems = [
   ['Home', '/'],
@@ -44,15 +45,16 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="mx-auto flex h-16 max-w-7xl items-center gap-5 px-4 sm:h-[72px]">
-        <Link href="/" onClick={closeMenu} className="group flex shrink-0 items-center gap-3">
-          <span className="relative flex h-10 w-10 items-center justify-center rounded-lg bg-brand-700 text-white shadow-sm transition group-hover:-translate-y-0.5">
-            <Sparkles size={18} className="text-accent-400" />
-          </span>
-          <span className="font-heading text-lg font-extrabold sm:text-xl">
-            <span className="text-brand-800">Clean</span>
-            <span className="text-brand-700">WithBest</span>
-          </span>
+      <div className="mx-auto flex h-20 max-w-7xl items-center gap-5 px-4">
+        <Link href="/" onClick={closeMenu} className="group flex shrink-0 items-center">
+          <Image
+            src="/brand/cleanwithbest-logo.png"
+            alt="CleanWithBest"
+            width={220}
+            height={138}
+            priority
+            className="h-16 w-auto object-contain transition group-hover:-translate-y-0.5"
+          />
         </Link>
 
         <nav className="hidden items-center gap-1 rounded-lg bg-slate-100/80 p-1 lg:flex">

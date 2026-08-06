@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Facebook, Instagram, Mail, MessageCircle, Music2, Phone } from 'lucide-react';
 
 const serviceLinks = [
@@ -24,9 +25,14 @@ export default function Footer() {
     <footer className="border-t border-slate-200 bg-white text-slate-600">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr]">
         <div>
-          <Link href="/" className="font-heading text-2xl font-extrabold tracking-tight">
-            <span className="text-brand-700">Clean</span>
-            <span className="text-accent-600">WithBest</span>
+          <Link href="/" className="inline-flex">
+            <Image
+              src="/brand/cleanwithbest-logo.png"
+              alt="CleanWithBest"
+              width={260}
+              height={163}
+              className="h-20 w-auto object-contain"
+            />
           </Link>
           <p className="mt-4 max-w-sm text-sm leading-relaxed">
             Domestic and commercial cleaning across London. Clear quote requests, simple contact options and reliable cleaning teams.
