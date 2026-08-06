@@ -17,21 +17,21 @@ const values = [
 export default function AboutPage() {
   return (
     <main>
-      <section className="bg-slate-950 py-16 md:py-20">
+      <section className="bg-white py-16 md:py-20">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 md:grid-cols-2 md:items-center">
           <div>
-            <span className="section-tag-light">About Us</span>
-            <h1 className="font-heading text-4xl font-extrabold leading-tight text-white md:text-5xl">
+            <span className="section-tag">About Us</span>
+            <h1 className="font-heading text-4xl font-extrabold leading-tight text-slate-950 md:text-5xl">
               CleanWithBest is built around clear quotes and reliable cleaning.
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-white/72">
+            <p className="mt-5 text-lg leading-relaxed text-slate-600">
               We help London homes and businesses arrange cleaning without confusion. Send the job details, choose how you want to be contacted, and we will reply with a clear quote.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/quote" className="btn-white">
+              <Link href="/quote" className="btn-primary">
                 Request a Quote <ArrowRight size={16} />
               </Link>
-              <a href="tel:+447503494242" className="btn-outline-white">
+              <a href="tel:+447503494242" className="btn-outline">
                 <Phone size={16} /> +44 7503 494242
               </a>
             </div>
@@ -93,15 +93,15 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-brand-600 py-16">
+      <section className="border-t border-slate-200 bg-white py-16">
         <div className="mx-auto max-w-4xl px-4 text-center">
-          <h2 className="font-heading text-3xl font-extrabold text-white">Speak to CleanWithBest</h2>
-          <p className="mx-auto mt-3 max-w-2xl text-white/80">Use the quote form, call us, or message on WhatsApp. We are available 24/7 for quote requests.</p>
+          <h2 className="font-heading text-3xl font-extrabold text-slate-950">Speak to CleanWithBest</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-slate-600">Use the quote form, call us, or message on WhatsApp. We are available 24/7 for quote requests.</p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
-            <Link href="/quote" className="btn-white">Get a Free Quote</Link>
-            <a href="tel:+447503494242" className="btn-outline-white"><Phone size={16} /> +44 7503 494242</a>
-            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline-white"><MessageCircle size={16} /> WhatsApp 7503</a>
-            <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="btn-outline-white"><MessageCircle size={16} /> WhatsApp 7789</a>
+            <Link href="/quote" className="btn-primary">Get a Free Quote</Link>
+            <a href="tel:+447503494242" className="btn-outline"><Phone size={16} /> +44 7503 494242</a>
+            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline"><MessageCircle size={16} /> WhatsApp 7503</a>
+            <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="btn-outline"><MessageCircle size={16} /> WhatsApp 7789</a>
           </div>
         </div>
       </section>

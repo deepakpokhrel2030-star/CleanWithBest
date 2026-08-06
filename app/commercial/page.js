@@ -95,20 +95,20 @@ export default function CommercialPage() {
   return (
     <main>
       {/* Hero */}
-      <section className="bg-slate-950 py-16 md:py-20">
+      <section className="bg-white py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="max-w-2xl">
-            <span className="section-tag-light">Commercial Cleaning</span>
-            <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-white mb-5 leading-tight">
+            <span className="section-tag">Commercial Cleaning</span>
+            <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-slate-950 mb-5 leading-tight">
               Cleaner workplaces with less disruption
             </h1>
-            <p className="text-white/75 text-lg mb-8 leading-relaxed">
+            <p className="text-slate-600 text-lg mb-8 leading-relaxed">
               Office, retail, hospitality, gym and industrial cleaning built around your opening hours. Tell us the site details and we will send a clear business quote.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link href="/quote" className="btn-white">Get a Business Quote</Link>
-              <a href="tel:+447503494242" className="btn-outline-white">Call +44 7503 494242</a>
-              <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline-white">WhatsApp +44 7503 494242</a>
+              <Link href="/quote" className="btn-primary">Get a Business Quote</Link>
+              <a href="tel:+447503494242" className="btn-outline">Call +44 7503 494242</a>
+              <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline">WhatsApp +44 7503 494242</a>
             </div>
           </div>
         </div>
@@ -202,16 +202,16 @@ export default function CommercialPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-brand-600">
+      <section className="border-t border-slate-200 bg-white py-16">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="font-heading text-3xl font-bold text-white mb-4">Ready to Transform Your Workplace?</h2>
-          <p className="text-white/80 mb-8">Get a free commercial cleaning quote. We'll respond within 2 hours.</p>
+          <h2 className="font-heading text-3xl font-bold text-slate-950 mb-4">Ready to Transform Your Workplace?</h2>
+          <p className="text-slate-600 mb-8">Get a free commercial cleaning quote. We'll respond within 2 hours.</p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/quote" className="btn-white">Get a Business Quote</Link>
-            <a href="tel:+447503494242" className="btn-outline-white"><Phone size={16} /> +44 7503 494242</a>
-            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline-white"><MessageCircle size={16} /> WhatsApp +44 7503 494242</a>
-            <a href="tel:+447789602945" className="btn-outline-white"><Phone size={16} /> +44 7789 602945</a>
-            <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="btn-outline-white"><MessageCircle size={16} /> WhatsApp +44 7789 602945</a>
+            <Link href="/quote" className="btn-primary">Get a Business Quote</Link>
+            <a href="tel:+447503494242" className="btn-outline"><Phone size={16} /> +44 7503 494242</a>
+            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline"><MessageCircle size={16} /> WhatsApp +44 7503 494242</a>
+            <a href="tel:+447789602945" className="btn-outline"><Phone size={16} /> +44 7789 602945</a>
+            <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="btn-outline"><MessageCircle size={16} /> WhatsApp +44 7789 602945</a>
           </div>
         </div>
       </section>

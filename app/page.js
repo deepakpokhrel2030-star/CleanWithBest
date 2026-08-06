@@ -90,41 +90,41 @@ const faqs = [
 export default function HomePage() {
   return (
     <main>
-      <section className="relative overflow-hidden bg-slate-950">
+      <section className="relative overflow-hidden bg-white">
         <Image
           src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1800&q=80"
           alt="Professional cleaner cleaning a bright modern home"
           fill
           priority
-          className="object-cover opacity-30"
+          className="object-cover opacity-10"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-brand-900/55" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-brand-50/80" />
         <div className="relative mx-auto grid min-h-[680px] max-w-7xl items-center gap-10 px-4 py-16 lg:grid-cols-[1fr_420px]">
           <div className="max-w-3xl">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/10 px-3 py-2 text-sm font-bold text-white">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-lg border border-brand-100 bg-brand-50 px-3 py-2 text-sm font-bold text-brand-700">
               <Star size={16} className="text-accent-400" />
               Professional cleaning across London
             </div>
-            <h1 className="font-heading text-4xl font-extrabold leading-tight text-white md:text-6xl">
+            <h1 className="font-heading text-4xl font-extrabold leading-tight text-slate-950 md:text-6xl">
               Cleaning services that are simple to book and easy to trust.
             </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/75">
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">
               CleanWithBest helps homes and businesses book reliable cleaners without confusion. Tell us what needs cleaning and we will contact you with a clear quote by WhatsApp or phone.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/quote" className="btn-white-lg">
+              <Link href="/quote" className="btn-primary-lg">
                 Request a Quote <ArrowRight size={18} />
               </Link>
-              <a href="tel:+447503494242" className="btn-outline-white-lg">
+              <a href="tel:+447503494242" className="btn-outline">
                 <Phone size={18} /> +44 7503 494242
               </a>
-              <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline-white-lg">
+              <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline">
                 <MessageCircle size={18} /> WhatsApp
               </a>
             </div>
           </div>
 
-          <div className="rounded-lg border border-white/15 bg-white p-5 shadow-2xl">
+          <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-2xl">
             <p className="text-sm font-bold uppercase tracking-widest text-brand-700">Get a quote in 3 steps</p>
             <div className="mt-5 space-y-4">
               {[
@@ -199,22 +199,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-slate-950 py-20 text-white">
+      <section className="bg-white py-20">
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
             <div>
-              <span className="section-tag-light">Why Us</span>
-              <h2 className="section-title-light">Built for busy customers</h2>
-              <p className="mt-4 text-base leading-relaxed text-white/75">
+              <span className="section-tag">Why Us</span>
+              <h2 className="section-title">Built for busy customers</h2>
+              <p className="mt-4 text-base leading-relaxed text-slate-600">
                 The website, quote process and service pages are designed to make cleaning easy to understand before you contact us.
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               {reasons.map(([title, text]) => (
-                <div key={title} className="rounded-lg border border-white/10 bg-white/10 p-5">
+                <div key={title} className="rounded-lg border border-slate-200 bg-slate-50 p-5">
                   <CheckCircle className="mb-4 text-accent-400" size={22} />
-                  <h3 className="font-heading text-lg font-bold text-white">{title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/75">{text}</p>
+                  <h3 className="font-heading text-lg font-bold text-slate-950">{title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{text}</p>
                 </div>
               ))}
             </div>
@@ -242,18 +242,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-brand-600 py-16">
+      <section className="border-t border-slate-200 bg-white py-16">
         <div className="mx-auto max-w-4xl px-4 text-center">
-          <Clock className="mx-auto mb-4 text-white" size={34} />
-          <h2 className="font-heading text-3xl font-extrabold text-white md:text-4xl">Ready to get a cleaning quote?</h2>
-          <p className="mx-auto mt-3 max-w-2xl text-white/80">
+          <Clock className="mx-auto mb-4 text-brand-600" size={34} />
+          <h2 className="font-heading text-3xl font-extrabold text-slate-950 md:text-4xl">Ready to get a cleaning quote?</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-slate-600">
             Send your details once. We will contact you by WhatsApp or phone and help you choose the right cleaning service.
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
-            <Link href="/quote" className="btn-white-lg">
+            <Link href="/quote" className="btn-primary-lg">
               Request a Quote <ArrowRight size={18} />
             </Link>
-            <a href="mailto:cleanwithbest@gmail.com" className="btn-outline-white-lg">
+            <a href="mailto:cleanwithbest@gmail.com" className="btn-outline">
               <Mail size={18} /> Email us
             </a>
           </div>

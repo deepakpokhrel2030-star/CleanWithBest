@@ -2,6 +2,7 @@ import { Inter, Poppins } from 'next/font/google';
 import './globals.css';
 import Header from '@/frontend/components/Header';
 import Footer from '@/frontend/components/Footer';
+import Chatbot from '@/frontend/components/Chatbot';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const poppins = Poppins({
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
         <Header />
         {children}
         <Footer />
+        <Chatbot />
       </body>
     </html>
   );

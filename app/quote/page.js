@@ -10,14 +10,14 @@ export default function QuotePage() {
   return (
     <main>
       {/* Hero */}
-      <section className="bg-slate-950 py-16 md:py-20">
+      <section className="bg-white py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="max-w-2xl">
-            <span className="section-tag-light">Free Quote</span>
-            <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-white mb-5 leading-tight">
+            <span className="section-tag">Free Quote</span>
+            <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-slate-950 mb-5 leading-tight">
               Tell us what needs cleaning
             </h1>
-            <p className="text-white/75 text-lg leading-relaxed">
+            <p className="text-slate-600 text-lg leading-relaxed">
               Fill in the short form below. We will review the details and contact you by WhatsApp or phone call with a transparent quote.
             </p>
           </div>
@@ -68,22 +68,22 @@ export default function QuotePage() {
               </div>
 
               {/* Call instead */}
-              <div className="bg-brand-600 rounded-lg p-6 text-white">
-                <h3 className="font-semibold text-lg mb-2">Prefer WhatsApp or Call?</h3>
-                <p className="text-white/75 text-sm mb-4">Leave your number in the quote form or speak directly with our team now.</p>
-                <a href="tel:+447503494242" className="flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
+              <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+                <h3 className="font-semibold text-lg mb-2 text-slate-950">Prefer WhatsApp or Call?</h3>
+                <p className="text-slate-600 text-sm mb-4">Leave your number in the quote form or speak directly with our team now.</p>
+                <a href="tel:+447503494242" className="flex items-center gap-2 font-bold text-lg text-brand-700 hover:text-brand-900 transition-colors">
                   <Phone size={18} /> +44 7503 494242
                 </a>
-                <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
+                <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center gap-2 font-bold text-lg text-brand-700 hover:text-brand-900 transition-colors">
                   <MessageCircle size={18} /> WhatsApp +44 7503 494242
                 </a>
-                <a href="tel:+447789602945" className="mt-3 flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
+                <a href="tel:+447789602945" className="mt-3 flex items-center gap-2 font-bold text-lg text-brand-700 hover:text-brand-900 transition-colors">
                   <Phone size={18} /> +44 7789 602945
                 </a>
-                <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center gap-2 font-bold text-lg hover:text-accent-300 transition-colors">
+                <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center gap-2 font-bold text-lg text-brand-700 hover:text-brand-900 transition-colors">
                   <MessageCircle size={18} /> WhatsApp +44 7789 602945
                 </a>
-                <p className="text-white/75 text-xs mt-2">Available 24/7</p>
+                <p className="text-slate-500 text-xs mt-2">Available 24/7</p>
               </div>
 
               <div className="bg-white rounded-lg p-6 border border-slate-100 shadow-sm">

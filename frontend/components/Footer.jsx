@@ -21,12 +21,12 @@ const companyLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-950 text-slate-400">
+    <footer className="border-t border-slate-200 bg-white text-slate-600">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr]">
         <div>
           <Link href="/" className="font-heading text-2xl font-extrabold tracking-tight">
-            <span className="text-brand-400">Clean</span>
-            <span className="text-accent-400">WithBest</span>
+            <span className="text-brand-700">Clean</span>
+            <span className="text-accent-600">WithBest</span>
           </Link>
           <p className="mt-4 max-w-sm text-sm leading-relaxed">
             Domestic and commercial cleaning across London. Clear quote requests, simple contact options and reliable cleaning teams.
@@ -37,7 +37,7 @@ export default function Footer() {
               { Icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/cleanwithbest' },
               { Icon: Music2, label: 'TikTok', href: 'https://www.tiktok.com/@cleanwithbest' },
             ].map(({ Icon, label, href }) => (
-              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-slate-300 hover:bg-brand-600 hover:text-white">
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-600 hover:bg-brand-600 hover:text-white">
                 <Icon size={17} />
               </a>
             ))}
@@ -45,50 +45,50 @@ export default function Footer() {
         </div>
 
         <div>
-          <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-white">Services</h2>
+          <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-slate-950">Services</h2>
           <ul className="space-y-2">
             {serviceLinks.map(([label, href]) => (
               <li key={href}>
-                <Link href={href} className="text-sm hover:text-white">{label}</Link>
+                <Link href={href} className="text-sm hover:text-brand-700">{label}</Link>
               </li>
             ))}
           </ul>
         </div>
 
         <div>
-          <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-white">Pages</h2>
+          <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-slate-950">Pages</h2>
           <ul className="space-y-2">
             {companyLinks.map(([label, href]) => (
               <li key={href}>
-                <Link href={href} className="text-sm hover:text-white">{label}</Link>
+                <Link href={href} className="text-sm hover:text-brand-700">{label}</Link>
               </li>
             ))}
           </ul>
         </div>
 
         <div>
-          <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-white">Contact</h2>
+          <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-slate-950">Contact</h2>
           <div className="grid gap-2 text-sm">
-            <a href="tel:+447503494242" className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 hover:text-white">
+            <a href="tel:+447503494242" className="flex items-center gap-2 rounded-lg bg-slate-50 px-3 py-2 hover:text-brand-700">
               <Phone size={15} className="text-brand-400" /> +44 7503 494242
             </a>
-            <a href="tel:+447789602945" className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 hover:text-white">
+            <a href="tel:+447789602945" className="flex items-center gap-2 rounded-lg bg-slate-50 px-3 py-2 hover:text-brand-700">
               <Phone size={15} className="text-brand-400" /> +44 7789 602945
             </a>
-            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 hover:text-white">
+            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-lg bg-slate-50 px-3 py-2 hover:text-brand-700">
               <MessageCircle size={15} className="text-brand-400" /> WhatsApp +44 7503 494242
             </a>
-            <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 hover:text-white">
+            <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-lg bg-slate-50 px-3 py-2 hover:text-brand-700">
               <MessageCircle size={15} className="text-brand-400" /> WhatsApp +44 7789 602945
             </a>
-            <a href="mailto:cleanwithbest@gmail.com" className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 hover:text-white">
+            <a href="mailto:cleanwithbest@gmail.com" className="flex items-center gap-2 rounded-lg bg-slate-50 px-3 py-2 hover:text-brand-700">
               <Mail size={15} className="text-brand-400" /> cleanwithbest@gmail.com
             </a>
           </div>
         </div>
       </div>
 
-      <div className="border-t border-white/10">
+      <div className="border-t border-slate-200">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} CleanWithBest. All rights reserved.</p>
           <p>Available 24/7 for quote requests by phone, WhatsApp or email.</p>

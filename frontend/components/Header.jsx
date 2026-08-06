@@ -29,17 +29,17 @@ export default function Header() {
 
   return (
     <header className={`sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur transition-shadow ${scrolled ? 'shadow-lg shadow-slate-900/5' : 'shadow-sm'}`}>
-      <div className="border-b border-slate-100 bg-slate-950 text-white">
+      <div className="border-b border-slate-200 bg-white text-slate-800">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2">
-          <a href="tel:+447503494242" className="inline-flex min-w-0 items-center gap-2 text-sm font-extrabold tracking-tight hover:text-accent-300 sm:text-base">
-            <Phone size={17} className="shrink-0 text-accent-400" />
+          <a href="tel:+447503494242" className="inline-flex min-w-0 items-center gap-2 text-sm font-extrabold tracking-tight hover:text-brand-700 sm:text-base">
+            <Phone size={17} className="shrink-0 text-brand-600" />
             <span className="truncate">Call +44 7503 494242</span>
           </a>
           <div className="flex shrink-0 items-center gap-2">
-            <a href="tel:+447789602945" className="hidden text-sm font-bold text-white/70 hover:text-white md:inline">
+            <a href="tel:+447789602945" className="hidden text-sm font-bold text-slate-500 hover:text-brand-700 md:inline">
               +44 7789 602945
             </a>
-            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-accent-500 px-3 py-1.5 text-xs font-black text-slate-950 hover:bg-accent-400">
+            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-green-50 px-3 py-1.5 text-xs font-black text-green-700 ring-1 ring-green-200 hover:bg-green-100">
               <MessageCircle size={14} /> WhatsApp
             </a>
           </div>

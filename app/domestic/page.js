@@ -81,25 +81,25 @@ export default function DomesticPage() {
   return (
     <main>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-slate-950 via-brand-900 to-slate-950 py-16 md:py-20">
+      <section className="bg-white py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <span className="section-tag-light">Domestic Cleaning</span>
-              <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
+              <span className="section-tag">Domestic Cleaning</span>
+              <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-slate-950 mb-4 leading-tight">
                 Reliable home cleaning, priced clearly
               </h1>
-              <p className="text-white text-lg mb-6 leading-relaxed">Regular cleaning starts from £17/hour. Deep cleans, end-of-tenancy and specialist home services are quoted clearly before we start.</p>
+              <p className="text-slate-600 text-lg mb-6 leading-relaxed">Regular cleaning starts from £17/hour. Deep cleans, end-of-tenancy and specialist home services are quoted clearly before we start.</p>
               <div className="mb-8 grid gap-2 sm:grid-cols-2">
                 {['100% satisfaction guaranteed', 'Background checked cleaners', 'Eco-friendly products', 'Call or WhatsApp response'].map(i => (
-                  <div key={i} className="flex items-center gap-2.5 rounded-lg border border-white/20 bg-white px-3 py-2 text-sm font-bold text-slate-900 shadow-sm">
+                  <div key={i} className="flex items-center gap-2.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-bold text-slate-900 shadow-sm">
                     <CheckCircle size={15} className="shrink-0 text-accent-600" />{i}
                   </div>
                 ))}
               </div>
               <div className="flex flex-wrap gap-3">
-                <Link href="/quote" className="btn-white-lg">Get a Home Quote</Link>
-                <a href="tel:+447503494242" className="btn-outline-white-lg"><Phone size={15}/> +44 7503 494242</a>
+                <Link href="/quote" className="btn-primary-lg">Get a Home Quote</Link>
+                <a href="tel:+447503494242" className="btn-outline"><Phone size={15}/> +44 7503 494242</a>
               </div>
             </div>
             <div className="hidden md:block relative">
@@ -146,11 +146,11 @@ export default function DomesticPage() {
       </section>
 
       {/* Quick price strip */}
-      <div className="bg-slate-900 py-5">
-        <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-center gap-6 text-white text-sm font-semibold">
+      <div className="border-y border-slate-200 bg-white py-5">
+        <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-center gap-6 text-slate-700 text-sm font-semibold">
           {[['Regular Clean', 'From £17/hr'], ['Deep Clean', 'From £179'], ['End of Tenancy', 'From £179'], ['Move In/Out', 'From £179'], ['Carpet Cleaning', 'From £43/room']].map(([service, price]) => (
             <span key={service} className="flex items-center gap-2">
-              <span className="text-accent-300">✓</span> {service}: <span className="text-accent-300">{price}</span>
+              <span className="text-accent-600">✓</span> {service}: <span className="text-brand-700">{price}</span>
             </span>
           ))}
         </div>
@@ -193,14 +193,14 @@ export default function DomesticPage() {
       </section>
 
       {/* Benefits strip */}
-      <section className="bg-brand-900 py-14">
+      <section className="bg-white py-14">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="font-heading text-2xl font-bold text-white mb-8">Why Choose Our Domestic Cleaning?</h2>
+          <h2 className="font-heading text-2xl font-bold text-slate-950 mb-8">Why Choose Our Domestic Cleaning?</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {['Fully Insured', 'Vetted Staff', 'Eco Products', 'Flexible Hours', 'Fair Pricing', '100% Guaranteed'].map(label => (
-              <div key={label} className="bg-white/10 rounded-lg py-5 px-3">
+              <div key={label} className="rounded-lg border border-slate-200 bg-slate-50 py-5 px-3">
                 <CheckCircle className="mx-auto mb-2 text-accent-300" size={24} />
-                <div className="text-white text-sm font-semibold">{label}</div>
+                <div className="text-slate-800 text-sm font-semibold">{label}</div>
               </div>
             ))}
           </div>
@@ -229,16 +229,16 @@ export default function DomesticPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-brand-600">
+      <section className="border-t border-slate-200 bg-white py-16">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="font-heading text-3xl font-bold text-white mb-3">Ready for a Cleaner Home?</h2>
-          <p className="text-white/80 mb-8 text-lg">Get a free, no-obligation quote. We'll respond within 2 hours.</p>
+          <h2 className="font-heading text-3xl font-bold text-slate-950 mb-3">Ready for a Cleaner Home?</h2>
+          <p className="text-slate-600 mb-8 text-lg">Get a free, no-obligation quote. We'll respond within 2 hours.</p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/quote" className="btn-white-lg">Get a Home Quote</Link>
-            <a href="tel:+447503494242" className="btn-outline-white-lg"><Phone size={16}/> +44 7503 494242</a>
-            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline-white-lg">WhatsApp +44 7503 494242</a>
-            <a href="tel:+447789602945" className="btn-outline-white-lg"><Phone size={16}/> +44 7789 602945</a>
-            <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="btn-outline-white-lg">WhatsApp +44 7789 602945</a>
+            <Link href="/quote" className="btn-primary-lg">Get a Home Quote</Link>
+            <a href="tel:+447503494242" className="btn-outline"><Phone size={16}/> +44 7503 494242</a>
+            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline">WhatsApp +44 7503 494242</a>
+            <a href="tel:+447789602945" className="btn-outline"><Phone size={16}/> +44 7789 602945</a>
+            <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="btn-outline">WhatsApp +44 7789 602945</a>
           </div>
         </div>
       </section>
