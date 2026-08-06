@@ -195,9 +195,6 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
 .animate-bestiebot-bubble { animation: bestieBubbleIn .22s ease-out both; }
 .animate-bestiebot-chip { animation: bestieChipIn .28s ease-out both; }
 .bestiebot-status-dot { animation: bestieStatus 1.8s ease-in-out infinite; }
-.bestiebot-orbit { animation: bestieOrbit 4.5s linear infinite; }
-.bestiebot-orbit-delay { animation-delay: -1.6s; }
-
 .bestiebot-topic-button {
   transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
 }
@@ -264,6 +261,13 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
   --bestie-scale: .9;
   width: 58px;
   height: 74px;
+}
+
+.bestiebot-person-launcher {
+  --bestie-scale: 1.12;
+  width: 66px;
+  height: 84px;
+  filter: drop-shadow(0 14px 14px rgb(8 145 178 / .2)) drop-shadow(0 0 0 white);
 }
 
 .bestiebot-head {
@@ -558,7 +562,6 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
   .animate-bestiebot-bubble,
   .animate-bestiebot-chip,
   .bestiebot-status-dot,
-  .bestiebot-orbit,
   .bestiebot-shine::after,
   .bestiebot-person,
   .bestiebot-antenna span,

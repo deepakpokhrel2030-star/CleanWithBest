@@ -222,9 +222,9 @@ function findAnswer(input) {
   return `I can help with ${FALLBACK_TOPICS}. Try asking "How much for a 2 bedroom flat?" or tap one of the quick buttons below.`;
 }
 
-function BestieBotMascot({ compact = false, hero = false }) {
+function BestieBotMascot({ compact = false, hero = false, launcher = false }) {
   return (
-    <span className={`bestiebot-person ${compact ? 'bestiebot-person-compact' : ''} ${hero ? 'bestiebot-person-hero' : ''}`} aria-hidden="true">
+    <span className={`bestiebot-person ${compact ? 'bestiebot-person-compact' : ''} ${hero ? 'bestiebot-person-hero' : ''} ${launcher ? 'bestiebot-person-launcher' : ''}`} aria-hidden="true">
       <span className="bestiebot-antenna">
         <span />
       </span>
@@ -475,12 +475,16 @@ export default function Chatbot() {
       <button
         type="button"
         onClick={() => setOpen(value => !value)}
-        className="animate-bestiebot-launcher group relative flex h-[4.35rem] w-[4.35rem] items-center justify-center rounded-full bg-gradient-to-br from-cyan-100 via-emerald-100 to-amber-100 text-brand-800 shadow-xl shadow-cyan-900/20 ring-2 ring-white transition hover:scale-105 hover:shadow-cyan-900/30 sm:h-20 sm:w-20"
+        className="animate-bestiebot-launcher bestiebot-launcher group relative flex h-[5.2rem] w-[4.6rem] items-center justify-center border-0 bg-transparent p-0 transition hover:scale-105 sm:h-[5.8rem] sm:w-[5rem]"
         aria-label={open ? 'Minimise chatbot' : 'Maximise chatbot'}
       >
-        <span className="bestiebot-orbit absolute inset-0 rounded-full border border-cyan-200" />
-        <span className="bestiebot-orbit bestiebot-orbit-delay absolute inset-1 rounded-full border border-emerald-200" />
-        {open ? <X size={25} className="relative z-10" /> : <BestieBotMascot />}
+        {open ? (
+          <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-cyan-800 shadow-xl shadow-cyan-900/20 ring-1 ring-cyan-100">
+            <X size={25} />
+          </span>
+        ) : (
+          <BestieBotMascot launcher />
+        )}
       </button>
     </div>
   );
