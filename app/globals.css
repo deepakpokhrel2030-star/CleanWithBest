@@ -264,9 +264,9 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
 }
 
 .bestiebot-person-launcher {
-  --bestie-scale: 1.12;
-  width: 66px;
-  height: 84px;
+  --bestie-scale: .96;
+  width: 58px;
+  height: 74px;
   filter: drop-shadow(0 14px 14px rgb(8 145 178 / .2)) drop-shadow(0 0 0 white);
 }
 

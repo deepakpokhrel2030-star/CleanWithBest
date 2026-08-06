@@ -475,7 +475,7 @@ export default function Chatbot() {
       <button
         type="button"
         onClick={() => setOpen(value => !value)}
-        className="animate-bestiebot-launcher bestiebot-launcher group relative flex h-[5.2rem] w-[4.6rem] items-center justify-center border-0 bg-transparent p-0 transition hover:scale-105 sm:h-[5.8rem] sm:w-[5rem]"
+        className="animate-bestiebot-launcher bestiebot-launcher group relative flex h-[4.45rem] w-[4rem] items-center justify-center border-0 bg-transparent p-0 transition hover:scale-105 sm:h-[4.9rem] sm:w-[4.35rem]"
         aria-label={open ? 'Minimise chatbot' : 'Maximise chatbot'}
       >
         {open ? (
