@@ -2,7 +2,7 @@
 
 import { useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import { Bot, Send, Sparkles, X } from 'lucide-react';
+import { Send, Sparkles, X } from 'lucide-react';
 
 const SUGGESTIONS = [
   'Regular cleaning price?',
@@ -98,6 +98,29 @@ function findAnswer(input) {
   return match?.answer || 'I can help with prices, services, booking, areas, contact details and cleaning questions. For anything specific, send a quote request and our team will contact you by WhatsApp or phone.';
 }
 
+function BestieBotMascot({ compact = false }) {
+  return (
+    <span className={`bestiebot-person ${compact ? 'bestiebot-person-compact' : ''}`} aria-hidden="true">
+      <span className="bestiebot-antenna">
+        <span />
+      </span>
+      <span className="bestiebot-head">
+        <span className="bestiebot-eye bestiebot-eye-left" />
+        <span className="bestiebot-eye bestiebot-eye-right" />
+        <span className="bestiebot-smile" />
+      </span>
+      <span className="bestiebot-arm bestiebot-arm-left" />
+      <span className="bestiebot-arm bestiebot-arm-right" />
+      <span className="bestiebot-body">
+        <span className="bestiebot-heart" />
+        <span className="bestiebot-panel-light" />
+      </span>
+      <span className="bestiebot-foot bestiebot-foot-left" />
+      <span className="bestiebot-foot bestiebot-foot-right" />
+    </span>
+  );
+}
+
 export default function Chatbot() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
@@ -130,8 +153,8 @@ export default function Chatbot() {
         <div className="animate-bestiebot-panel mb-3 flex h-[560px] w-[calc(100vw-2rem)] max-w-[400px] flex-col overflow-hidden rounded-2xl border border-cyan-100 bg-gradient-to-b from-cyan-50 via-emerald-50 to-amber-50 shadow-2xl shadow-cyan-900/15">
           <div className="bestiebot-shine relative flex items-center justify-between overflow-hidden border-b border-cyan-100 bg-gradient-to-r from-cyan-100 via-emerald-100 to-amber-100 px-4 py-3 text-slate-800">
             <div className="flex items-center gap-2">
-              <span className="animate-bestiebot-robot relative flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-brand-700 shadow-sm ring-1 ring-cyan-100">
-                <Bot size={22} />
+              <span className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-cyan-100">
+                <BestieBotMascot compact />
                 <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-amber-300 text-[9px] font-black text-amber-900">
                   AI
                 </span>
@@ -153,8 +176,8 @@ export default function Chatbot() {
             {visibleMessages.map((message, index) => (
               <div key={`${message.role}-${index}`} className={`flex items-end gap-2 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {message.role === 'bot' && (
-                  <span className="animate-bestiebot-mini mb-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-100 text-cyan-800 ring-1 ring-cyan-200">
-                    <Bot size={16} />
+                  <span className="mb-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-cyan-50 ring-1 ring-cyan-200">
+                    <BestieBotMascot compact />
                   </span>
                 )}
                 <div className={`animate-bestiebot-bubble max-w-[82%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed shadow-sm ${
@@ -221,7 +244,7 @@ export default function Chatbot() {
       >
         <span className="bestiebot-orbit absolute inset-0 rounded-full border border-cyan-200" />
         <span className="bestiebot-orbit bestiebot-orbit-delay absolute inset-1 rounded-full border border-emerald-200" />
-        {open ? <X size={25} className="relative z-10" /> : <Bot size={28} className="relative z-10 transition group-hover:rotate-3" />}
+        {open ? <X size={25} className="relative z-10" /> : <BestieBotMascot />}
       </button>
     </div>
   );
