@@ -65,7 +65,7 @@
     @apply relative overflow-hidden bg-white;
   }
   .page-hero-inner {
-    @apply relative mx-auto grid max-w-7xl gap-10 px-4 py-14 md:py-20 lg:grid-cols-[1fr_440px] lg:items-center;
+    @apply relative mx-auto grid max-w-7xl gap-10 px-4 pb-14 pt-8 md:pb-20 md:pt-12 lg:grid-cols-[1fr_440px] lg:items-center;
   }
   .page-hero-inner > * {
     @apply min-w-0;
