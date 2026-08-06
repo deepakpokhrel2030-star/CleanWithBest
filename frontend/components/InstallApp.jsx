@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Download, X } from 'lucide-react';
+import { CheckCircle, Download, Share, X } from 'lucide-react';
+
+const DISMISS_KEY = 'cleanwithbest-install-dismissed-v2';
 
 function isStandalone() {
   if (typeof window === 'undefined') return false;
@@ -15,7 +17,8 @@ function isIos() {
 
 export default function InstallApp() {
   const [installPrompt, setInstallPrompt] = useState(null);
-  const [showIosHelp, setShowIosHelp] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
+  const [installed, setInstalled] = useState(false);
   const [dismissed, setDismissed] = useState(true);
 
   useEffect(() => {
@@ -23,49 +26,65 @@ export default function InstallApp() {
       navigator.serviceWorker.register('/sw.js').catch(() => {});
     }
 
-    if (isStandalone() || window.localStorage.getItem('cleanwithbest-install-dismissed') === '1') {
+    if (isStandalone()) {
+      setInstalled(true);
       return;
     }
 
+    if (window.localStorage.getItem(DISMISS_KEY) !== '1') {
+      const showTimer = window.setTimeout(() => setDismissed(false), 900);
+      return () => window.clearTimeout(showTimer);
+    }
+  }, []);
+
+  useEffect(() => {
     const onPrompt = event => {
       event.preventDefault();
       setInstallPrompt(event);
       setDismissed(false);
     };
 
+    const onInstalled = () => {
+      setInstalled(true);
+      setInstallPrompt(null);
+      setDismissed(true);
+      window.localStorage.setItem(DISMISS_KEY, '1');
+    };
+
     window.addEventListener('beforeinstallprompt', onPrompt);
-
-    const iosTimer = window.setTimeout(() => {
-      if (isIos() && !isStandalone()) {
-        setShowIosHelp(true);
-        setDismissed(false);
-      }
-    }, 1800);
-
+    window.addEventListener('appinstalled', onInstalled);
     return () => {
       window.removeEventListener('beforeinstallprompt', onPrompt);
-      window.clearTimeout(iosTimer);
+      window.removeEventListener('appinstalled', onInstalled);
     };
   }, []);
 
   const close = () => {
-    window.localStorage.setItem('cleanwithbest-install-dismissed', '1');
+    window.localStorage.setItem(DISMISS_KEY, '1');
     setDismissed(true);
   };
 
   const install = async () => {
     if (installPrompt) {
       installPrompt.prompt();
-      await installPrompt.userChoice.catch(() => null);
+      const result = await installPrompt.userChoice.catch(() => null);
       setInstallPrompt(null);
-      setDismissed(true);
+      if (result?.outcome === 'accepted') {
+        setInstalled(true);
+        setDismissed(true);
+        window.localStorage.setItem(DISMISS_KEY, '1');
+      } else {
+        setShowHelp(true);
+      }
       return;
     }
 
-    setShowIosHelp(true);
+    setShowHelp(true);
   };
 
-  if (dismissed || (!installPrompt && !showIosHelp)) return null;
+  if (installed || dismissed) return null;
+
+  const ios = isIos();
 
   return (
     <div className="fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] left-3 z-[60] max-w-[calc(100vw-6.5rem)] sm:left-5">
@@ -77,7 +96,7 @@ export default function InstallApp() {
             className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-3 py-2 text-xs font-black text-white shadow-sm hover:bg-emerald-700 sm:text-sm"
           >
             <Download size={15} />
-            Install app
+            {installPrompt ? 'Install app' : 'Add app'}
           </button>
           <button
             type="button"
@@ -89,10 +108,20 @@ export default function InstallApp() {
           </button>
         </div>
 
-        {showIosHelp && !installPrompt && (
-          <p className="mt-2 max-w-[230px] text-xs leading-relaxed text-slate-600">
-            On iPhone, tap Share, then Add to Home Screen.
-          </p>
+        {showHelp && (
+          <div className="mt-2 max-w-[250px] rounded-xl bg-emerald-50 p-3 text-xs leading-relaxed text-slate-700 ring-1 ring-emerald-100">
+            {ios ? (
+              <p>
+                <Share size={13} className="mr-1 inline text-emerald-700" />
+                On iPhone, tap Share, then Add to Home Screen.
+              </p>
+            ) : (
+              <p>
+                <CheckCircle size={13} className="mr-1 inline text-emerald-700" />
+                If the prompt does not open, use your browser menu and choose Install app or Add to Home screen.
+              </p>
+            )}
+          </div>
         )}
       </div>
     </div>

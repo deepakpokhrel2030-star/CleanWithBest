@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cleanwithbest-v1';
+const CACHE_NAME = 'cleanwithbest-v2';
 const APP_SHELL = [
   '/',
   '/domestic',
