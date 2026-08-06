@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import QuoteForm from '@/frontend/components/QuoteForm';
 import { CheckCircle, Phone, Clock, MessageCircle } from 'lucide-react';
 
@@ -10,16 +11,28 @@ export default function QuotePage() {
   return (
     <main>
       {/* Hero */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="max-w-2xl">
+      <section className="page-hero">
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,#ffffff_0%,#f8fafc_55%,#ecfeff_100%)]" />
+        <div className="page-hero-inner">
+          <div className="animate-reveal-up">
             <span className="section-tag">Free Quote</span>
-            <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-slate-950 mb-5 leading-tight">
-              Tell us what needs cleaning
-            </h1>
-            <p className="text-slate-600 text-lg leading-relaxed">
+            <h1 className="hero-title">Tell us what needs cleaning.</h1>
+            <p className="hero-copy">
               Fill in the short form below. We will review the details and contact you by WhatsApp or phone call with a transparent quote.
             </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a href="tel:+447503494242" className="btn-outline"><Phone size={18} /> +44 7503 494242</a>
+              <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline"><MessageCircle size={18} /> WhatsApp</a>
+            </div>
+          </div>
+          <div className="image-panel animate-float-soft">
+            <Image
+              src="https://images.unsplash.com/photo-1563453392212-326f5e854473?w=900&q=85"
+              alt="Cleaning supplies ready for a professional clean"
+              width={720}
+              height={620}
+              className="h-[360px] w-full object-cover md:h-[460px]"
+            />
           </div>
         </div>
       </section>
@@ -33,8 +46,8 @@ export default function QuotePage() {
               { title: '2. We check the details', text: 'Our team reviews the request and confirms anything unclear.' },
               { title: '3. You get a clear quote', text: 'We contact you by WhatsApp or call with the price and earliest slot.' },
             ].map(({ title, text }) => (
-              <div key={title} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-                <h2 className="font-heading text-base font-bold text-slate-900">{title}</h2>
+              <div key={title} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                <h2 className="font-heading text-base font-bold text-slate-950">{title}</h2>
                 <p className="mt-2 text-sm leading-relaxed text-slate-500">{text}</p>
               </div>
             ))}
@@ -49,7 +62,7 @@ export default function QuotePage() {
             {/* Sidebar */}
             <div className="space-y-6">
               {/* Why us */}
-              <div className="bg-white rounded-lg p-6 border border-slate-100 shadow-sm">
+              <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
                 <h3 className="font-heading font-bold text-slate-900 text-lg mb-4">Why CleanWithBest?</h3>
                 <ul className="space-y-3">
                   {[
@@ -68,22 +81,22 @@ export default function QuotePage() {
               </div>
 
               {/* Call instead */}
-              <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-                <h3 className="font-semibold text-lg mb-2 text-slate-950">Prefer WhatsApp or Call?</h3>
-                <p className="text-slate-600 text-sm mb-4">Leave your number in the quote form or speak directly with our team now.</p>
-                <a href="tel:+447503494242" className="flex items-center gap-2 font-bold text-lg text-brand-700 hover:text-brand-900 transition-colors">
+              <div className="rounded-lg bg-slate-950 p-6 text-white shadow-xl shadow-slate-900/10">
+                <h3 className="font-semibold text-lg mb-2 text-white">Prefer WhatsApp or Call?</h3>
+                <p className="text-slate-300 text-sm mb-4">Leave your number in the quote form or speak directly with our team now.</p>
+                <a href="tel:+447503494242" className="flex items-center gap-2 font-bold text-lg text-white hover:text-accent-400 transition-colors">
                   <Phone size={18} /> +44 7503 494242
                 </a>
-                <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center gap-2 font-bold text-lg text-brand-700 hover:text-brand-900 transition-colors">
+                <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center gap-2 font-bold text-lg text-white hover:text-accent-400 transition-colors">
                   <MessageCircle size={18} /> WhatsApp +44 7503 494242
                 </a>
-                <a href="tel:+447789602945" className="mt-3 flex items-center gap-2 font-bold text-lg text-brand-700 hover:text-brand-900 transition-colors">
+                <a href="tel:+447789602945" className="mt-3 flex items-center gap-2 font-bold text-lg text-white hover:text-accent-400 transition-colors">
                   <Phone size={18} /> +44 7789 602945
                 </a>
-                <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center gap-2 font-bold text-lg text-brand-700 hover:text-brand-900 transition-colors">
+                <a href="https://wa.me/447789602945" target="_blank" rel="noopener noreferrer" className="mt-3 flex items-center gap-2 font-bold text-lg text-white hover:text-accent-400 transition-colors">
                   <MessageCircle size={18} /> WhatsApp +44 7789 602945
                 </a>
-                <p className="text-slate-500 text-xs mt-2">Available 24/7</p>
+                <p className="text-slate-400 text-xs mt-2">Available 24/7</p>
               </div>
 
               <div className="bg-white rounded-lg p-6 border border-slate-100 shadow-sm">

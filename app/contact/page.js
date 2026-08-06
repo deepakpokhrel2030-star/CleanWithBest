@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Facebook, Instagram, Mail, MessageCircle, Music2, Phone, Send } from 'lucide-react';
 import ContactForm from '@/frontend/components/ContactForm';
@@ -16,14 +17,13 @@ const socialLinks = [
 export default function ContactPage() {
   return (
     <main>
-      <section className="bg-white">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 lg:grid-cols-[1fr_420px] lg:items-center">
-          <div>
+      <section className="page-hero">
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,#ffffff_0%,#f8fafc_52%,#ecfeff_100%)]" />
+        <div className="page-hero-inner">
+          <div className="animate-reveal-up">
             <span className="section-tag">Contact</span>
-            <h1 className="max-w-3xl font-heading text-4xl font-extrabold leading-tight text-slate-950 md:text-5xl">
-              Speak to CleanWithBest.
-            </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-600">
+            <h1 className="hero-title">Call, WhatsApp, email or send a message.</h1>
+            <p className="hero-copy">
               For the fastest reply, call or WhatsApp us. For general questions, send a message and we will get back to you.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
@@ -36,7 +36,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <aside className="rounded-lg border border-slate-200 bg-slate-50 p-5 shadow-sm">
+          <aside className="rounded-lg border border-slate-200 bg-white p-5 shadow-xl shadow-slate-900/10">
             <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Quick details</p>
             <div className="mt-4 space-y-3">
               <a href="tel:+447503494242" className="flex items-center justify-between gap-4 rounded-lg bg-white p-4 font-bold text-slate-900 hover:text-brand-700">
@@ -59,6 +59,15 @@ export default function ContactPage() {
       <section className="border-y border-slate-200 bg-slate-50 py-16">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 lg:grid-cols-[380px_1fr]">
           <div className="space-y-6">
+            <div className="image-panel">
+              <Image
+                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=85"
+                alt="Cleaning products ready for home cleaning"
+                width={620}
+                height={420}
+                className="h-56 w-full object-cover"
+              />
+            </div>
             <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
               <h2 className="font-heading text-2xl font-bold text-slate-950">Best ways to reach us</h2>
               <div className="mt-5 grid gap-3">

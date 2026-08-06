@@ -191,13 +191,14 @@ export default function AdminPage() {
 
   if (!loggedIn) {
     return (
-      <main className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
-        <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-sm border border-slate-100">
-          <div className="flex items-center justify-center w-14 h-14 bg-brand-100 rounded-lg mx-auto mb-6">
-            <Lock size={24} className="text-brand-600" />
+      <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 px-4 py-10">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(46,196,182,.20),transparent_34%),radial-gradient(circle_at_80%_10%,rgba(81,147,227,.18),transparent_30%)]" />
+        <div className="relative w-full max-w-md rounded-lg border border-white/10 bg-white p-8 shadow-2xl shadow-slate-950/30">
+          <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-slate-950">
+            <Lock size={24} className="text-accent-400" />
           </div>
-          <h1 className="font-heading text-2xl font-bold text-slate-900 text-center mb-2">Admin Login</h1>
-          <p className="text-slate-400 text-sm text-center mb-6">CleanWithBest Dashboard</p>
+          <h1 className="mb-2 text-center font-heading text-2xl font-bold text-slate-950">Admin Login</h1>
+          <p className="mb-6 text-center text-sm text-slate-500">CleanWithBest dashboard for quotes and messages.</p>
           <form onSubmit={login} className="space-y-4">
             <div>
               <label className="label">Username</label>
@@ -240,26 +241,39 @@ export default function AdminPage() {
   return (
     <main className="min-h-screen bg-slate-50">
       {/* Admin header */}
-      <div className="bg-white border-b border-slate-200 px-4 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="border-b border-slate-200 bg-white px-4 py-5">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="font-heading font-bold text-slate-900 text-xl">
-              <span className="text-brand-600">Clean</span><span className="text-accent-600">WithBest</span> — Admin
+            <h1 className="font-heading text-2xl font-bold text-slate-950">
+              <span className="text-slate-950">Clean</span><span className="text-brand-700">WithBest</span> Admin
             </h1>
-            <p className="text-slate-400 text-sm">Dashboard</p>
+            <p className="text-sm text-slate-500">Manage new website quote requests and contact messages.</p>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={refresh} className="flex items-center gap-2 text-sm text-slate-500 hover:text-slate-800 transition-colors px-3 py-2 rounded-lg hover:bg-slate-100">
+            <button onClick={refresh} className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-950">
               <RefreshCw size={14} /> Refresh
             </button>
-            <button onClick={() => setLoggedIn(false)} className="flex items-center gap-2 text-sm text-red-500 hover:text-red-700 transition-colors px-3 py-2 rounded-lg hover:bg-red-50">
+            <button onClick={() => setLoggedIn(false)} className="flex items-center gap-2 rounded-lg border border-red-100 bg-red-50 px-3 py-2 text-sm font-bold text-red-600 transition-colors hover:bg-red-100">
               <LogOut size={14} /> Logout
             </button>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="mx-auto max-w-7xl px-4 py-8">
+        <div className="mb-8 rounded-lg bg-slate-950 p-6 text-white shadow-xl shadow-slate-900/10">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-xs font-bold uppercase text-accent-400">Live inbox</p>
+              <h2 className="mt-2 font-heading text-3xl font-bold">New work, all in one place</h2>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-300">Open quotes, call customers, WhatsApp them, and update each request status after contact.</p>
+            </div>
+            <div className="rounded-lg bg-white/10 px-4 py-3 text-sm font-bold ring-1 ring-white/10">
+              {newQuotes + newContacts} new items
+            </div>
+          </div>
+        </div>
+
         {/* Stats cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mb-8">
           {[
@@ -268,8 +282,8 @@ export default function AdminPage() {
             { icon: TrendingUp, label: 'This Month', value: [...data.quotes, ...data.contacts].filter(x => new Date(x.createdAt).getMonth() === new Date().getMonth()).length, sub: 'submissions', color: 'brand' },
             { icon: FileText, label: 'New Items', value: newQuotes + newContacts, sub: 'require attention', color: 'accent' },
           ].map(({ icon: Icon, label, value, sub, color }) => (
-            <div key={label} className="bg-white rounded-lg p-5 border border-slate-100 shadow-sm">
-              <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3 ${color === 'brand' ? 'bg-brand-100' : 'bg-accent-500/15'}`}>
+            <div key={label} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+              <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-lg ${color === 'brand' ? 'bg-brand-50' : 'bg-accent-500/15'}`}>
                 <Icon size={18} className={color === 'brand' ? 'text-brand-600' : 'text-accent-600'} />
               </div>
               <div className="font-heading text-3xl font-bold text-slate-900">{value}</div>
@@ -280,14 +294,14 @@ export default function AdminPage() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-2 mb-6">
+        <div className="mb-6 flex gap-2 rounded-lg bg-white p-1 shadow-sm ring-1 ring-slate-200">
           <button onClick={() => setTab('quotes')}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${tab === 'quotes' ? 'bg-brand-600 text-white shadow-sm' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'}`}>
+            className={`flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all ${tab === 'quotes' ? 'bg-slate-950 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-50'}`}>
             <FileText size={15} /> Quote Requests
             {newQuotes > 0 && <span className="bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">{newQuotes}</span>}
           </button>
           <button onClick={() => setTab('contacts')}
-            className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${tab === 'contacts' ? 'bg-brand-600 text-white shadow-sm' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'}`}>
+            className={`flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all ${tab === 'contacts' ? 'bg-slate-950 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-50'}`}>
             <MessageSquare size={15} /> Contact Messages
             {newContacts > 0 && <span className="bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">{newContacts}</span>}
           </button>
@@ -295,9 +309,12 @@ export default function AdminPage() {
 
         {/* Quotes table */}
         {tab === 'quotes' && (
-          <div className="bg-white rounded-lg border border-slate-100 shadow-sm overflow-hidden">
-            <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-              <h2 className="font-semibold text-slate-900">Quote Requests ({data.quotes.length})</h2>
+          <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+            <div className="flex items-center justify-between border-b border-slate-100 px-6 py-5">
+              <div>
+                <h2 className="font-heading text-lg font-bold text-slate-950">Quote Requests</h2>
+                <p className="text-sm text-slate-500">{data.quotes.length} total requests</p>
+              </div>
             </div>
             {data.quotes.length === 0 ? (
               <div className="py-16 text-center text-slate-400">
@@ -307,7 +324,7 @@ export default function AdminPage() {
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
-                  <thead className="bg-slate-50 border-b border-slate-100">
+                  <thead className="border-b border-slate-100 bg-slate-50">
                     <tr>
                       {['Name', 'Contact', 'Preference', 'Service', 'Postcode', 'Size / Freq.', 'Date', 'Status', ''].map(h => (
                         <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide whitespace-nowrap">{h}</th>
@@ -316,7 +333,7 @@ export default function AdminPage() {
                   </thead>
                   <tbody className="divide-y divide-slate-50">
                     {data.quotes.map(q => (
-                      <tr key={q.id} className="hover:bg-slate-50 transition-colors">
+                      <tr key={q.id} className="transition-colors hover:bg-slate-50">
                         <td className="px-4 py-3 font-medium text-slate-900 whitespace-nowrap">{q.firstName} {q.lastName}</td>
                         <td className="px-4 py-3 text-slate-500">
                           <a href={`tel:${q.phone}`} className="font-medium text-brand-600 hover:text-brand-800">{q.phone}</a>
@@ -336,7 +353,7 @@ export default function AdminPage() {
                           <select
                             value={q.status}
                             onChange={e => updateStatus('quote', q.id, e.target.value)}
-                            className="text-xs border border-slate-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-brand-500"
+                            className="rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-brand-500"
                           >
                             <option value="new">new</option>
                             <option value="viewed">viewed</option>
@@ -376,9 +393,10 @@ export default function AdminPage() {
 
         {/* Contacts table */}
         {tab === 'contacts' && (
-          <div className="bg-white rounded-lg border border-slate-100 shadow-sm overflow-hidden">
-            <div className="px-6 py-4 border-b border-slate-100">
-              <h2 className="font-semibold text-slate-900">Contact Messages ({data.contacts.length})</h2>
+          <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+            <div className="border-b border-slate-100 px-6 py-5">
+              <h2 className="font-heading text-lg font-bold text-slate-950">Contact Messages</h2>
+              <p className="text-sm text-slate-500">{data.contacts.length} total messages</p>
             </div>
             {data.contacts.length === 0 ? (
               <div className="py-16 text-center text-slate-400">
@@ -412,7 +430,7 @@ export default function AdminPage() {
                           <select
                             value={c.status}
                             onChange={e => updateStatus('contact', c.id, e.target.value)}
-                            className="text-xs border border-slate-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-1 focus:ring-brand-500"
+                            className="rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-brand-500"
                           >
                             <option value="new">new</option>
                             <option value="viewed">viewed</option>

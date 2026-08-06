@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { CheckCircle, ArrowRight, Phone, ChevronDown } from 'lucide-react';
+import { CheckCircle, ArrowRight, Phone, Sparkles } from 'lucide-react';
 
 export const metadata = {
   title: 'Domestic Cleaning Services',
@@ -81,34 +81,35 @@ export default function DomesticPage() {
   return (
     <main>
       {/* Hero */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div>
-              <span className="section-tag">Domestic Cleaning</span>
-              <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-slate-950 mb-4 leading-tight">
-                Reliable home cleaning, priced clearly
-              </h1>
-              <p className="text-slate-600 text-lg mb-6 leading-relaxed">Regular cleaning starts from £17/hour. Deep cleans, end-of-tenancy and specialist home services are quoted clearly before we start.</p>
-              <div className="mb-8 grid gap-2 sm:grid-cols-2">
-                {['100% satisfaction guaranteed', 'Background checked cleaners', 'Eco-friendly products', 'Call or WhatsApp response'].map(i => (
-                  <div key={i} className="flex items-center gap-2.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-bold text-slate-900 shadow-sm">
-                    <CheckCircle size={15} className="shrink-0 text-accent-600" />{i}
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <Link href="/quote" className="btn-primary-lg">Get a Home Quote</Link>
-                <a href="tel:+447503494242" className="btn-outline"><Phone size={15}/> +44 7503 494242</a>
-              </div>
+      <section className="page-hero">
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,#ffffff_0%,#f8fafc_50%,#ecfeff_100%)]" />
+        <div className="page-hero-inner">
+          <div className="animate-reveal-up">
+            <span className="section-tag">Domestic Cleaning</span>
+            <h1 className="hero-title">Reliable home cleaning, priced clearly.</h1>
+            <p className="hero-copy">Regular cleaning starts from £17/hour. Deep cleans, end-of-tenancy and specialist home services are quoted clearly before we start.</p>
+            <div className="mt-7 grid gap-2 sm:grid-cols-2">
+              {['Clear quote before booking', 'Vetted cleaning team', 'Products can be supplied', 'Call or WhatsApp response'].map(i => (
+                <div key={i} className="flex items-center gap-2.5 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-900 shadow-sm">
+                  <CheckCircle size={15} className="shrink-0 text-accent-600" />{i}
+                </div>
+              ))}
             </div>
-            <div className="hidden md:block relative">
-              <Image
-                src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=600&q=80"
-                alt="Home cleaning"
-                width={550} height={400}
-                className="rounded-lg object-cover w-full h-[360px] shadow-2xl"
-              />
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/quote" className="btn-primary-lg">Get a Home Quote <ArrowRight size={18} /></Link>
+              <a href="tel:+447503494242" className="btn-outline"><Phone size={15}/> +44 7503 494242</a>
+            </div>
+          </div>
+          <div className="image-panel animate-float-soft">
+            <Image
+              src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=900&q=85"
+              alt="Clean bright bedroom after domestic cleaning"
+              width={720}
+              height={760}
+              className="h-[420px] w-full object-cover md:h-[520px]"
+            />
+            <div className="absolute inset-x-4 bottom-4 grid grid-cols-3 gap-2 rounded-lg bg-white/90 p-3 text-center text-xs font-bold text-slate-700 shadow-lg backdrop-blur">
+              {['Kitchen', 'Bathroom', 'Bedrooms'].map(item => <span key={item} className="rounded-md bg-slate-50 px-2 py-2">{item}</span>)}
             </div>
           </div>
         </div>
@@ -133,7 +134,7 @@ export default function DomesticPage() {
               { short: 'L', title: 'Living Room', color: 'border-purple-200 bg-gradient-to-br from-purple-50 to-pink-50',
                 tasks: ['Dust all surfaces & ornaments', 'Vacuum sofas & cushions', 'Vacuum carpets / mop floors', 'Wipe skirting boards & doors', 'Clean switches & sockets', 'Polish furniture', 'Clean interior windows', 'Tidy general areas'] },
             ].map(({ short, title, color, tasks }) => (
-              <div key={title} className={`rounded-lg border p-6 ${color}`}>
+              <div key={title} className={`rounded-lg border p-6 transition hover:-translate-y-1 hover:shadow-lg ${color}`}>
                 <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-lg bg-white font-heading text-sm font-black text-brand-700 shadow-sm">{short}</div>
                 <h3 className="font-heading font-bold text-slate-900 text-lg mb-4">{title}</h3>
                 <ul className="space-y-2">
@@ -231,8 +232,9 @@ export default function DomesticPage() {
       {/* CTA */}
       <section className="border-t border-slate-200 bg-white py-16">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="font-heading text-3xl font-bold text-slate-950 mb-3">Ready for a Cleaner Home?</h2>
-          <p className="text-slate-600 mb-8 text-lg">Get a free, no-obligation quote. We'll respond within 2 hours.</p>
+          <Sparkles className="mx-auto mb-4 text-accent-600" size={30} />
+          <h2 className="font-heading text-3xl font-bold text-slate-950 mb-3">Ready for a cleaner home?</h2>
+          <p className="text-slate-600 mb-8 text-lg">Send the quote form once and we will contact you by WhatsApp or phone.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link href="/quote" className="btn-primary-lg">Get a Home Quote</Link>
             <a href="tel:+447503494242" className="btn-outline"><Phone size={16}/> +44 7503 494242</a>

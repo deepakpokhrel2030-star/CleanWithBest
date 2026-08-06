@@ -266,12 +266,12 @@ export default function QuoteForm() {
   ].filter(Boolean);
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-xl overflow-hidden">
+    <form onSubmit={handleSubmit} className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-xl shadow-slate-900/10">
 
       {/* Header */}
-      <div className="bg-brand-600 px-6 py-4">
-        <h3 className="font-heading font-bold text-white text-lg">Get Your Free Quote</h3>
-        <p className="text-white/70 text-xs mt-0.5">Leave your details and we will contact you by WhatsApp or phone call</p>
+      <div className="bg-slate-950 px-6 py-5">
+        <h3 className="font-heading text-lg font-bold text-white">Get Your Free Quote</h3>
+        <p className="mt-0.5 text-xs text-slate-300">Leave your details and we will contact you by WhatsApp or phone call</p>
       </div>
 
       <div className="p-6 space-y-7">

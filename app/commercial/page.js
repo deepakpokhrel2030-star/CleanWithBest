@@ -1,5 +1,6 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import { Building2, ShoppingBag, Utensils, Dumbbell, GraduationCap, Warehouse, Droplets, Stethoscope, CheckCircle, ArrowRight, ChevronDown, Phone, MessageCircle } from 'lucide-react';
+import { Building2, ShoppingBag, Utensils, Dumbbell, GraduationCap, Warehouse, Droplets, Stethoscope, CheckCircle, ArrowRight, ChevronDown, Phone, MessageCircle, Clock3 } from 'lucide-react';
 
 export const metadata = {
   title: 'Commercial Cleaning Services',
@@ -95,20 +96,39 @@ export default function CommercialPage() {
   return (
     <main>
       {/* Hero */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="max-w-2xl">
+      <section className="page-hero">
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,#ffffff_0%,#f8fafc_48%,#eef2ff_100%)]" />
+        <div className="page-hero-inner">
+          <div className="animate-reveal-up">
             <span className="section-tag">Commercial Cleaning</span>
-            <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-slate-950 mb-5 leading-tight">
-              Cleaner workplaces with less disruption
-            </h1>
-            <p className="text-slate-600 text-lg mb-8 leading-relaxed">
+            <h1 className="hero-title">Cleaner workplaces with less disruption.</h1>
+            <p className="hero-copy">
               Office, retail, hospitality, gym and industrial cleaning built around your opening hours. Tell us the site details and we will send a clear business quote.
             </p>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/quote" className="btn-primary">Get a Business Quote</Link>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/quote" className="btn-primary-lg">Get a Business Quote <ArrowRight size={18} /></Link>
               <a href="tel:+447503494242" className="btn-outline">Call +44 7503 494242</a>
               <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline">WhatsApp +44 7503 494242</a>
+            </div>
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+              {['Out-of-hours slots', 'Regular contracts', 'One-off deep cleans'].map(item => (
+                <div key={item} className="stat-pill flex items-center gap-2 text-sm font-bold text-slate-700">
+                  <Clock3 size={15} className="text-brand-600" /> {item}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="image-panel animate-float-soft">
+            <Image
+              src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=900&q=85"
+              alt="Clean modern office workspace"
+              width={720}
+              height={760}
+              className="h-[420px] w-full object-cover md:h-[520px]"
+            />
+            <div className="absolute bottom-4 left-4 right-4 rounded-lg bg-white/90 p-4 shadow-lg backdrop-blur">
+              <p className="text-xs font-bold uppercase text-brand-700">Business cleaning</p>
+              <p className="mt-1 text-sm font-semibold text-slate-950">Offices, retail spaces, restaurants, gyms and shared premises.</p>
             </div>
           </div>
         </div>
@@ -137,7 +157,7 @@ export default function CommercialPage() {
                   Get a Business Quote <ArrowRight size={14} />
                 </Link>
               </div>
-              <div className={`bg-slate-50 rounded-lg border border-slate-200 p-6 ${popular ? 'border-brand-200 bg-brand-50' : ''}`}>
+              <div className={`rounded-lg border border-slate-200 p-6 transition hover:-translate-y-1 hover:shadow-lg ${popular ? 'border-brand-200 bg-brand-50' : 'bg-slate-50'}`}>
                 <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
                   <CheckCircle size={18} className="text-accent-600" /> Service Includes
                 </h3>

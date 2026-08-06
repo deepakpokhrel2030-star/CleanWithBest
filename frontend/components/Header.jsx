@@ -3,12 +3,12 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, MessageCircle, Phone, X } from 'lucide-react';
+import { Menu, MessageCircle, Phone, Sparkles, X } from 'lucide-react';
 
 const navItems = [
+  ['Home', '/'],
   ['Domestic', '/domestic'],
   ['Commercial', '/commercial'],
-  ['About', '/about'],
   ['Contact', '/contact'],
 ];
 
@@ -28,42 +28,42 @@ export default function Header() {
   const isActive = href => pathname === href;
 
   return (
-    <header className={`sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur transition-shadow ${scrolled ? 'shadow-lg shadow-slate-900/5' : 'shadow-sm'}`}>
-      <div className="border-b border-slate-200 bg-white text-slate-800">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 py-2 sm:gap-3 sm:px-4">
-          <a href="tel:+447503494242" className="inline-flex min-w-0 items-center gap-1.5 text-xs font-extrabold tracking-tight hover:text-brand-700 sm:gap-2 sm:text-base">
-            <Phone size={17} className="shrink-0 text-brand-600" />
-            <span className="truncate"><span className="sm:hidden">Call </span><span className="hidden sm:inline">Call us: </span>+44 7503 494242</span>
+    <header className={`sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 backdrop-blur-xl transition-shadow ${scrolled ? 'shadow-lg shadow-slate-900/5' : ''}`}>
+      <div className="bg-slate-950 text-white">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2 text-xs font-semibold">
+          <a href="tel:+447503494242" className="inline-flex min-w-0 items-center gap-2 hover:text-accent-400">
+            <Phone size={14} className="shrink-0 text-accent-400" />
+            <span className="truncate">24/7 quotes: +44 7503 494242</span>
           </a>
-          <div className="flex shrink-0 items-center gap-2">
-            <a href="tel:+447789602945" className="hidden text-sm font-bold text-slate-500 hover:text-brand-700 md:inline">
-              +44 7789 602945
-            </a>
-            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-green-50 px-2.5 py-1.5 text-xs font-black text-green-700 ring-1 ring-green-200 hover:bg-green-100 sm:px-3">
-              <MessageCircle size={14} /> <span className="hidden min-[360px]:inline">WhatsApp</span>
+          <div className="hidden shrink-0 items-center gap-3 sm:flex">
+            <a href="tel:+447789602945" className="hidden hover:text-accent-400 sm:inline">+44 7789 602945</a>
+            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-white/10 px-2.5 py-1 text-white ring-1 ring-white/15 hover:bg-white/15">
+              <MessageCircle size={13} /> WhatsApp
             </a>
           </div>
         </div>
       </div>
 
-      <div className="mx-auto flex h-14 max-w-7xl items-center gap-4 px-3 sm:h-16 sm:gap-5 sm:px-4">
+      <div className="mx-auto flex h-16 max-w-7xl items-center gap-5 px-4 sm:h-[72px]">
         <Link href="/" onClick={closeMenu} className="group flex shrink-0 items-center gap-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 font-heading text-sm font-black text-white shadow-sm transition group-hover:bg-brand-700 sm:h-10 sm:w-10 sm:text-base">C</span>
-          <span className="font-heading text-lg font-extrabold tracking-tight sm:text-xl">
-            <span className="text-brand-700">Clean</span>
-            <span className="text-accent-600">WithBest</span>
+          <span className="relative flex h-10 w-10 items-center justify-center rounded-lg bg-slate-950 text-white shadow-sm transition group-hover:-translate-y-0.5">
+            <Sparkles size={18} className="text-accent-400" />
+          </span>
+          <span className="font-heading text-lg font-extrabold sm:text-xl">
+            <span className="text-slate-950">Clean</span>
+            <span className="text-brand-700">WithBest</span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-1 rounded-lg bg-slate-100/80 p-1 lg:flex">
           {navItems.map(([label, href]) => (
             <Link
               key={href}
               href={href}
               className={`rounded-lg px-4 py-2.5 text-sm font-bold transition ${
                 isActive(href)
-                  ? 'bg-brand-50 text-brand-700'
-                  : 'text-slate-600 hover:bg-slate-50 hover:text-brand-700'
+                  ? 'bg-white text-slate-950 shadow-sm'
+                  : 'text-slate-600 hover:bg-white/70 hover:text-slate-950'
               }`}
             >
               {label}
@@ -71,7 +71,8 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="ml-auto hidden items-center gap-2 lg:flex">
+        <div className="ml-auto hidden items-center gap-3 lg:flex">
+          <Link href="/about" className="text-sm font-bold text-slate-500 hover:text-slate-950">About</Link>
           <Link href="/quote" className="btn-primary px-5 py-2.5">
             Get Free Quote
           </Link>
@@ -80,7 +81,7 @@ export default function Header() {
         <button
           type="button"
           onClick={() => setMobileOpen(open => !open)}
-          className="ml-auto rounded-lg border border-slate-200 p-2 text-slate-700 lg:hidden"
+          className="ml-auto rounded-lg border border-slate-200 bg-white p-2 text-slate-700 shadow-sm lg:hidden"
           aria-label="Open menu"
         >
           {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -91,12 +92,12 @@ export default function Header() {
         <div className="border-t border-slate-200 bg-white shadow-xl lg:hidden">
           <div className="mx-auto max-w-7xl px-4 py-4">
             <div className="grid gap-1">
-              <Link href="/" onClick={closeMenu} className="rounded-lg px-3 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50">Home</Link>
               {navItems.map(([label, href]) => (
                 <Link key={href} href={href} onClick={closeMenu} className={`rounded-lg px-3 py-3 text-sm font-bold ${isActive(href) ? 'bg-brand-50 text-brand-700' : 'text-slate-700 hover:bg-slate-50'}`}>
                   {label}
                 </Link>
               ))}
+              <Link href="/about" onClick={closeMenu} className="rounded-lg px-3 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50">About</Link>
             </div>
             <div className="mt-4 grid gap-2">
               <Link href="/quote" onClick={closeMenu} className="btn-primary justify-center">

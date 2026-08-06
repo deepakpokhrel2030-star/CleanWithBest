@@ -17,18 +17,17 @@ const values = [
 export default function AboutPage() {
   return (
     <main>
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 md:grid-cols-2 md:items-center">
-          <div>
+      <section className="page-hero">
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,#ffffff_0%,#f8fafc_52%,#ecfeff_100%)]" />
+        <div className="page-hero-inner">
+          <div className="animate-reveal-up">
             <span className="section-tag">About Us</span>
-            <h1 className="font-heading text-4xl font-extrabold leading-tight text-slate-950 md:text-5xl">
-              CleanWithBest is built around clear quotes and reliable cleaning.
-            </h1>
-            <p className="mt-5 text-lg leading-relaxed text-slate-600">
+            <h1 className="hero-title">Clear quotes, reliable cleaning, simple contact.</h1>
+            <p className="hero-copy">
               We help London homes and businesses arrange cleaning without confusion. Send the job details, choose how you want to be contacted, and we will reply with a clear quote.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/quote" className="btn-primary">
+              <Link href="/quote" className="btn-primary-lg">
                 Request a Quote <ArrowRight size={16} />
               </Link>
               <a href="tel:+447503494242" className="btn-outline">
@@ -36,13 +35,15 @@ export default function AboutPage() {
               </a>
             </div>
           </div>
-          <Image
-            src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=900&q=80"
-            alt="Clean and organised modern home"
-            width={640}
-            height={460}
-            className="hidden h-[380px] w-full rounded-lg object-cover shadow-2xl md:block"
-          />
+          <div className="image-panel animate-float-soft">
+            <Image
+              src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=900&q=85"
+              alt="Clean and organised modern home"
+              width={720}
+              height={760}
+              className="h-[420px] w-full object-cover md:h-[520px]"
+            />
+          </div>
         </div>
       </section>
 
@@ -60,7 +61,7 @@ export default function AboutPage() {
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {values.map(({ icon: Icon, title, text }) => (
-              <div key={title} className="rounded-lg border border-slate-200 bg-slate-50 p-5">
+              <div key={title} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
                 <Icon className="mb-4 text-brand-700" size={24} />
                 <h3 className="font-heading text-lg font-bold text-slate-900">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">{text}</p>
@@ -83,7 +84,7 @@ export default function AboutPage() {
               ['3', 'We contact you', 'You receive a quote by WhatsApp or phone call.'],
               ['4', 'Cleaner attends', 'We arrange the clean for a time that works for you.'],
             ].map(([num, title, text]) => (
-              <div key={num} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+              <div key={num} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 font-bold text-white">{num}</span>
                 <h3 className="mt-4 font-heading text-lg font-bold text-slate-900">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">{text}</p>
