@@ -231,68 +231,56 @@ function BestieBotMascot({ compact = false, hero = false, launcher = false }) {
       aria-label="BestieBot cleaning assistant"
     >
       <defs>
-        <linearGradient id="bestieCap" x1="38" x2="91" y1="21" y2="51" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#31d3c4" />
-          <stop offset="1" stopColor="#0f766e" />
+        <linearGradient id="bestieShell" x1="31" x2="96" y1="24" y2="92" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#ffffff" />
+          <stop offset=".55" stopColor="#dbeafe" />
+          <stop offset="1" stopColor="#60a5fa" />
         </linearGradient>
-        <linearGradient id="bestieFace" x1="44" x2="86" y1="42" y2="87" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#ffe3c8" />
-          <stop offset="1" stopColor="#f7b982" />
+        <linearGradient id="bestieScreen" x1="43" x2="86" y1="48" y2="78" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#f8fafc" />
+          <stop offset="1" stopColor="#dff7ff" />
         </linearGradient>
-        <linearGradient id="bestieUniform" x1="38" x2="92" y1="83" y2="135" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#ecfffb" />
-          <stop offset=".52" stopColor="#99f6e4" />
-          <stop offset="1" stopColor="#14b8a6" />
-        </linearGradient>
-        <linearGradient id="bestieBottle" x1="93" x2="112" y1="77" y2="112" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#fef3c7" />
-          <stop offset="1" stopColor="#f2c94c" />
+        <linearGradient id="bestieBody" x1="39" x2="89" y1="83" y2="134" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#eff6ff" />
+          <stop offset=".52" stopColor="#bfdbfe" />
+          <stop offset="1" stopColor="#2b7ddd" />
         </linearGradient>
       </defs>
 
-      <ellipse className="bestiebot-svg-shadow" cx="64" cy="139" rx="33" ry="7" fill="rgb(15 118 110 / .16)" />
+      <ellipse className="bestiebot-svg-shadow" cx="64" cy="139" rx="34" ry="7" fill="rgb(19 77 150 / .18)" />
 
       <g className="bestiebot-svg-body">
-        <path className="bestiebot-svg-arm-left" d="M43 98 C30 101 24 110 20 122" fill="none" stroke="#f7b982" strokeWidth="8" strokeLinecap="round" />
-        <path className="bestiebot-svg-hand-left" d="M15 122 C18 116 25 117 27 123 C26 130 17 131 15 122 Z" fill="#ffe3c8" stroke="#0f766e" strokeWidth="3" />
+        <path className="bestiebot-svg-arm-left" d="M42 98 C29 101 23 110 20 122" fill="none" stroke="#134d96" strokeWidth="7" strokeLinecap="round" />
+        <path className="bestiebot-svg-arm-right" d="M86 98 C100 95 107 85 109 73" fill="none" stroke="#134d96" strokeWidth="7" strokeLinecap="round" />
+        <circle className="bestiebot-svg-hand-left" cx="20" cy="124" r="7" fill="#ffffff" stroke="#134d96" strokeWidth="4" />
+        <circle className="bestiebot-svg-hand-right" cx="109" cy="72" r="7" fill="#ffffff" stroke="#134d96" strokeWidth="4" />
 
-        <path className="bestiebot-svg-arm-right" d="M85 96 C96 94 102 87 104 78" fill="none" stroke="#f7b982" strokeWidth="8" strokeLinecap="round" />
-        <g className="bestiebot-svg-bottle">
-          <path d="M102 72 H113 L111 80 H104 Z" fill="#0f766e" />
-          <rect x="96" y="79" width="20" height="31" rx="7" fill="url(#bestieBottle)" stroke="#0f766e" strokeWidth="3" />
-          <path d="M101 87 H111" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" />
-          <path d="M112 75 C118 72 121 69 123 65" stroke="#0f766e" strokeWidth="3" strokeLinecap="round" />
-          <circle className="bestiebot-svg-spray-one" cx="120" cy="62" r="2" fill="#22d3ee" />
-          <circle className="bestiebot-svg-spray-two" cx="124" cy="56" r="1.8" fill="#22d3ee" />
-        </g>
-        <path className="bestiebot-svg-hand-right" d="M98 80 C100 74 107 75 109 81 C107 87 100 87 98 80 Z" fill="#ffe3c8" stroke="#0f766e" strokeWidth="3" />
+        <rect x="39" y="82" width="50" height="49" rx="18" fill="url(#bestieBody)" stroke="#134d96" strokeWidth="4" />
+        <path d="M50 98 H78" stroke="#38bdf8" strokeWidth="4" strokeLinecap="round" />
+        <path d="M52 112 H75" stroke="#facc15" strokeWidth="4" strokeLinecap="round" />
+        <circle className="bestiebot-svg-light" cx="64" cy="123" r="4.5" fill="#22c55e" />
 
-        <path d="M38 126 C41 95 49 82 64 82 C79 82 87 95 90 126 Z" fill="url(#bestieUniform)" stroke="#0f766e" strokeWidth="4" />
-        <path d="M52 86 L64 103 L77 86" fill="#ffffff" stroke="#0f766e" strokeWidth="3" strokeLinejoin="round" />
-        <path d="M64 103 V128" stroke="#0f766e" strokeWidth="3" strokeLinecap="round" opacity=".75" />
-        <circle className="bestiebot-svg-light" cx="72" cy="115" r="4" fill="#f2c94c" />
-
-        <path className="bestiebot-svg-foot-left" d="M44 134 H59" stroke="#0f766e" strokeWidth="8" strokeLinecap="round" />
-        <path className="bestiebot-svg-foot-right" d="M69 134 H84" stroke="#0f766e" strokeWidth="8" strokeLinecap="round" />
+        <path className="bestiebot-svg-foot-left" d="M45 134 H59" stroke="#134d96" strokeWidth="8" strokeLinecap="round" />
+        <path className="bestiebot-svg-foot-right" d="M69 134 H83" stroke="#134d96" strokeWidth="8" strokeLinecap="round" />
       </g>
 
       <g className="bestiebot-svg-head">
-        <path d="M41 47 C43 31 53 22 67 22 C82 22 91 34 90 51 C83 42 53 40 41 47 Z" fill="#6b3f28" />
-        <path d="M39 51 C39 35 49 27 64 27 C79 27 89 35 89 51 V63 C89 80 79 91 64 91 C49 91 39 80 39 63 Z" fill="url(#bestieFace)" stroke="#0f766e" strokeWidth="4" />
-        <path d="M35 42 C43 24 61 18 82 25 C85 27 87 30 87 34 C73 31 55 33 39 45 Z" fill="url(#bestieCap)" stroke="#0f766e" strokeWidth="4" strokeLinejoin="round" />
-        <path d="M50 31 C59 25 73 25 86 34 C79 36 61 35 43 45" fill="none" stroke="#ffffff" strokeWidth="4" strokeLinecap="round" opacity=".65" />
-        <path d="M82 34 C93 35 99 40 102 48 C92 48 82 46 75 41 Z" fill="#14b8a6" stroke="#0f766e" strokeWidth="4" strokeLinejoin="round" />
-        <path d="M37 62 C32 62 29 66 30 72 C31 78 35 82 40 81" fill="none" stroke="#0f766e" strokeWidth="4" strokeLinecap="round" />
-        <path d="M91 62 C97 62 101 67 100 74 C99 81 95 85 89 85" fill="none" stroke="#0f766e" strokeWidth="4" strokeLinecap="round" />
-        <circle cx="31" cy="72" r="6" fill="#ffffff" stroke="#14b8a6" strokeWidth="3" />
-        <circle cx="99" cy="74" r="6" fill="#ffffff" stroke="#14b8a6" strokeWidth="3" />
-        <path className="bestiebot-svg-headset" d="M99 80 C96 91 88 97 77 99" fill="none" stroke="#0f766e" strokeWidth="3.5" strokeLinecap="round" />
-        <circle className="bestiebot-svg-mic" cx="75" cy="99" r="3.4" fill="#f2c94c" stroke="#0f766e" strokeWidth="2" />
-        <circle className="bestiebot-svg-eye bestiebot-svg-eye-left" cx="55" cy="62" r="3.5" fill="#1f2937" />
-        <circle className="bestiebot-svg-eye bestiebot-svg-eye-right" cx="73" cy="62" r="3.5" fill="#1f2937" />
-        <path d="M57 73 C61 77 68 77 72 73" fill="none" stroke="#7c2d12" strokeWidth="3.4" strokeLinecap="round" />
-        <circle className="bestiebot-svg-cheek bestiebot-svg-cheek-left" cx="48" cy="70" r="3.5" fill="#f97316" opacity=".35" />
-        <circle className="bestiebot-svg-cheek bestiebot-svg-cheek-right" cx="80" cy="70" r="3.5" fill="#f97316" opacity=".35" />
+        <path className="bestiebot-svg-antenna" d="M64 27 V14" stroke="#134d96" strokeWidth="4" strokeLinecap="round" />
+        <circle className="bestiebot-svg-antenna-dot" cx="64" cy="10" r="5.5" fill="#facc15" stroke="#134d96" strokeWidth="3" />
+        <path d="M37 49 C37 31 47 23 64 23 C81 23 91 31 91 49 V65 C91 82 80 91 64 91 C48 91 37 82 37 65 Z" fill="url(#bestieShell)" stroke="#134d96" strokeWidth="4.5" />
+        <path d="M44 35 C50 29 58 27 69 28" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="round" opacity=".82" />
+        <path d="M33 57 C28 59 26 64 28 70 C29 76 32 80 37 81" fill="none" stroke="#134d96" strokeWidth="5" strokeLinecap="round" />
+        <path d="M95 57 C101 59 104 64 102 71 C101 78 97 82 91 83" fill="none" stroke="#134d96" strokeWidth="5" strokeLinecap="round" />
+        <circle cx="30" cy="69" r="7" fill="#ffffff" stroke="#2b7ddd" strokeWidth="4" />
+        <circle cx="102" cy="69" r="7" fill="#ffffff" stroke="#2b7ddd" strokeWidth="4" />
+        <path className="bestiebot-svg-headset" d="M102 76 C100 88 91 95 80 97" fill="none" stroke="#2b7ddd" strokeWidth="4" strokeLinecap="round" />
+        <circle className="bestiebot-svg-mic" cx="78" cy="97" r="3.5" fill="#facc15" stroke="#134d96" strokeWidth="2.5" />
+        <rect x="43" y="47" width="42" height="31" rx="14" fill="url(#bestieScreen)" stroke="#134d96" strokeWidth="3.5" />
+        <circle className="bestiebot-svg-eye bestiebot-svg-eye-left" cx="56" cy="62" r="4" fill="#134d96" />
+        <circle className="bestiebot-svg-eye bestiebot-svg-eye-right" cx="72" cy="62" r="4" fill="#134d96" />
+        <path d="M57 71 C60 74 68 74 71 71" fill="none" stroke="#134d96" strokeWidth="3.5" strokeLinecap="round" />
+        <circle className="bestiebot-svg-cheek bestiebot-svg-cheek-left" cx="49" cy="69" r="3" fill="#facc15" opacity=".85" />
+        <circle className="bestiebot-svg-cheek bestiebot-svg-cheek-right" cx="79" cy="69" r="3" fill="#facc15" opacity=".85" />
       </g>
 
       <g className="bestiebot-svg-sparkles">

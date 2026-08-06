@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Facebook, Instagram, Mail, MessageCircle, Music2, Phone } from 'lucide-react';
+import { Facebook, Instagram, Mail, MessageCircle, Phone } from 'lucide-react';
 
 const serviceLinks = [
   ['Regular Cleaning', '/domestic#regular'],
@@ -18,6 +18,38 @@ const companyLinks = [
   ['About', '/about'],
   ['Contact', '/contact'],
   ['Admin', '/admin'],
+];
+
+function TikTokMark({ size = 18 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" fill="none">
+      <path d="M14.3 3.4v10.2a4.9 4.9 0 1 1-4.9-4.9" stroke="#25F4EE" strokeWidth="3.1" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M15.9 3.4c.5 3 2.2 4.9 5 5.3" stroke="#FE2C55" strokeWidth="3.1" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M13.1 3.4v10.2a4.9 4.9 0 1 1-4.9-4.9" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M14.7 3.4c.5 3 2.2 4.9 5 5.3" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+const socialLinks = [
+  {
+    Icon: Facebook,
+    label: 'Facebook',
+    href: 'https://www.facebook.com/people/Cleanwithbest/61584162025224/',
+    className: 'border-[#1877F2]/20 bg-[#1877F2] text-white hover:bg-[#166FE5]',
+  },
+  {
+    Icon: Instagram,
+    label: 'Instagram',
+    href: 'https://www.instagram.com/cleanwithbest',
+    className: 'border-pink-200 bg-[linear-gradient(135deg,#F58529,#DD2A7B,#8134AF,#515BD4)] text-white hover:opacity-90',
+  },
+  {
+    Icon: TikTokMark,
+    label: 'TikTok',
+    href: 'https://www.tiktok.com/@cleanwithbest',
+    className: 'border-slate-800 bg-[#010101] text-white hover:bg-[#111111]',
+  },
 ];
 
 export default function Footer() {
@@ -38,12 +70,8 @@ export default function Footer() {
             Domestic and commercial cleaning across London. Clear quote requests, simple contact options and reliable cleaning teams.
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
-            {[
-              { Icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/people/Cleanwithbest/61584162025224/' },
-              { Icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/cleanwithbest' },
-              { Icon: Music2, label: 'TikTok', href: 'https://www.tiktok.com/@cleanwithbest' },
-            ].map(({ Icon, label, href }) => (
-              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-600 hover:bg-brand-600 hover:text-white">
+            {socialLinks.map(({ Icon, label, href, className }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className={`inline-flex h-10 w-10 items-center justify-center rounded-lg border shadow-sm transition hover:-translate-y-0.5 ${className}`}>
                 <Icon size={17} />
               </a>
             ))}
