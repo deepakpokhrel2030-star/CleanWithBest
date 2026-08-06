@@ -222,19 +222,28 @@ function findAnswer(input) {
   return `I can help with ${FALLBACK_TOPICS}. Try asking "How much for a 2 bedroom flat?" or tap one of the quick buttons below.`;
 }
 
-function BestieBotMascot({ compact = false }) {
+function BestieBotMascot({ compact = false, hero = false }) {
   return (
-    <span className={`bestiebot-person ${compact ? 'bestiebot-person-compact' : ''}`} aria-hidden="true">
+    <span className={`bestiebot-person ${compact ? 'bestiebot-person-compact' : ''} ${hero ? 'bestiebot-person-hero' : ''}`} aria-hidden="true">
       <span className="bestiebot-antenna">
         <span />
       </span>
+      <span className="bestiebot-hair bestiebot-hair-one" />
+      <span className="bestiebot-hair bestiebot-hair-two" />
+      <span className="bestiebot-ear bestiebot-ear-left" />
+      <span className="bestiebot-ear bestiebot-ear-right" />
       <span className="bestiebot-head">
         <span className="bestiebot-eye bestiebot-eye-left" />
         <span className="bestiebot-eye bestiebot-eye-right" />
+        <span className="bestiebot-cheek bestiebot-cheek-left" />
+        <span className="bestiebot-cheek bestiebot-cheek-right" />
         <span className="bestiebot-smile" />
       </span>
+      <span className="bestiebot-neck" />
       <span className="bestiebot-arm bestiebot-arm-left" />
       <span className="bestiebot-arm bestiebot-arm-right" />
+      <span className="bestiebot-hand bestiebot-hand-left" />
+      <span className="bestiebot-hand bestiebot-hand-right" />
       <span className="bestiebot-body">
         <span className="bestiebot-heart" />
         <span className="bestiebot-panel-light" />
@@ -325,25 +334,28 @@ export default function Chatbot() {
   return (
     <div className="fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] right-3 z-[70] flex max-w-[calc(100vw-1.5rem)] flex-col items-end sm:bottom-6 sm:right-6 sm:max-w-[calc(100vw-2rem)]">
       {open && (
-        <div className="animate-bestiebot-panel relative mb-2 flex h-[min(560px,calc(100dvh-6.5rem))] w-[calc(100vw-1.5rem)] max-w-[410px] flex-col overflow-hidden rounded-2xl border border-cyan-100 bg-gradient-to-b from-cyan-50 via-emerald-50 to-amber-50 shadow-2xl shadow-cyan-900/15 sm:h-[580px] sm:w-[calc(100vw-2rem)]">
+        <div className="animate-bestiebot-panel relative mb-2 flex h-[min(620px,calc(100dvh-6.5rem))] w-[calc(100vw-1.5rem)] max-w-[440px] flex-col overflow-hidden rounded-3xl border border-cyan-100 bg-gradient-to-b from-cyan-50 via-emerald-50 to-amber-50 shadow-2xl shadow-cyan-900/15 sm:h-[640px] sm:w-[calc(100vw-2rem)]">
           <span className="bestiebot-bg-bubble bestiebot-bg-bubble-one" />
           <span className="bestiebot-bg-bubble bestiebot-bg-bubble-two" />
           <span className="bestiebot-bg-bubble bestiebot-bg-bubble-three" />
 
           <div className="bestiebot-shine relative z-10 border-b border-cyan-100 bg-gradient-to-r from-cyan-100 via-emerald-100 to-amber-100 px-3.5 py-3 text-slate-800 sm:px-4">
             <div className="flex items-center justify-between gap-3">
-              <div className="flex min-w-0 items-center gap-2.5">
-                <span className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-cyan-100">
-                  <BestieBotMascot compact />
+              <div className="flex min-w-0 items-center gap-3">
+                <span className="bestiebot-portrait relative flex h-20 w-20 shrink-0 items-center justify-center rounded-3xl bg-white shadow-sm ring-1 ring-cyan-100">
+                  <BestieBotMascot hero />
                   <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-amber-300 text-[9px] font-black text-amber-900">
                     AI
                   </span>
                 </span>
                 <div className="min-w-0">
-                  <p className="font-heading text-sm font-extrabold text-slate-800">BestieBot</p>
+                  <p className="font-heading text-base font-extrabold text-slate-800">BestieBot</p>
                   <p className="flex items-center gap-1.5 text-xs font-semibold text-cyan-800">
                     <span className="bestiebot-status-dot h-2 w-2 rounded-full bg-emerald-500" />
-                    Cleaning assistant online
+                    Friendly cleaning assistant
+                  </p>
+                  <p className="mt-1 hidden text-xs font-semibold text-slate-600 min-[380px]:block">
+                    Ask anything about your clean.
                   </p>
                 </div>
               </div>
@@ -376,7 +388,7 @@ export default function Chatbot() {
             {visibleMessages.map(message => (
               <div key={message.id} className={`flex items-end gap-2 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {message.role === 'bot' && (
-                  <span className="mb-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-50 ring-1 ring-cyan-200">
+                  <span className="mb-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-cyan-50 ring-1 ring-cyan-200">
                     <BestieBotMascot compact />
                   </span>
                 )}
@@ -397,7 +409,7 @@ export default function Chatbot() {
 
             {typing && (
               <div className="flex items-end gap-2">
-                <span className="mb-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-50 ring-1 ring-cyan-200">
+                <span className="mb-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-cyan-50 ring-1 ring-cyan-200">
                   <BestieBotMascot compact />
                 </span>
                 <div className="animate-bestiebot-bubble rounded-2xl rounded-bl-md bg-white/90 px-3.5 py-2.5 shadow-sm ring-1 ring-cyan-100">
@@ -463,7 +475,7 @@ export default function Chatbot() {
       <button
         type="button"
         onClick={() => setOpen(value => !value)}
-        className="animate-bestiebot-launcher group relative flex h-[3.75rem] w-[3.75rem] items-center justify-center rounded-full bg-gradient-to-br from-cyan-100 via-emerald-100 to-amber-100 text-brand-800 shadow-xl shadow-cyan-900/20 ring-2 ring-white transition hover:scale-105 hover:shadow-cyan-900/30 sm:h-16 sm:w-16"
+        className="animate-bestiebot-launcher group relative flex h-[4.35rem] w-[4.35rem] items-center justify-center rounded-full bg-gradient-to-br from-cyan-100 via-emerald-100 to-amber-100 text-brand-800 shadow-xl shadow-cyan-900/20 ring-2 ring-white transition hover:scale-105 hover:shadow-cyan-900/30 sm:h-20 sm:w-20"
         aria-label={open ? 'Minimise chatbot' : 'Maximise chatbot'}
       >
         <span className="bestiebot-orbit absolute inset-0 rounded-full border border-cyan-200" />
