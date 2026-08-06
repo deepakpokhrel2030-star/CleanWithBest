@@ -4,14 +4,16 @@ import { getQuotes, getContacts, deleteQuote, deleteContact, updateQuoteStatus, 
 export async function POST(request) {
   try {
     const { username, password, action, type, id, status } = await request.json();
-    const adminUser = process.env.ADMIN_USERNAME;
-    const adminPass = process.env.ADMIN_PASSWORD;
+    const loginUsername = String(username || '').trim();
+    const loginPassword = String(password || '').trim();
+    const adminUser = process.env.ADMIN_USERNAME?.trim();
+    const adminPass = process.env.ADMIN_PASSWORD?.trim();
 
     if (!adminUser || !adminPass) {
       return NextResponse.json({ success: false, error: 'Admin login is not configured' }, { status: 500 });
     }
 
-    if (username !== adminUser || password !== adminPass) {
+    if (loginUsername !== adminUser || loginPassword !== adminPass) {
       return NextResponse.json({ success: false, error: 'Invalid admin login details' }, { status: 401 });
     }
 

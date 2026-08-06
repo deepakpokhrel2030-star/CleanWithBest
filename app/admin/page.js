@@ -145,7 +145,7 @@ export default function AdminPage() {
   const [deleting, setDeleting] = useState(null);
   const [selectedQuote, setSelectedQuote] = useState(null);
 
-  const adminPayload = extra => ({ username, password, ...extra });
+  const adminPayload = extra => ({ username: username.trim(), password: password.trim(), ...extra });
 
   const login = async e => {
     e.preventDefault();
@@ -155,7 +155,10 @@ export default function AdminPage() {
     const json = await res.json();
     setLoading(false);
     if (json.success) { setData(json); setLoggedIn(true); }
-    else setError('Incorrect admin login details. Please try again.');
+    else setError(json.error === 'Admin login is not configured'
+      ? 'Admin login is not configured on this deployment. Add ADMIN_USERNAME and ADMIN_PASSWORD.'
+      : 'Incorrect admin login details. Please try again.'
+    );
   };
 
   const refresh = async () => {
@@ -225,7 +228,7 @@ export default function AdminPage() {
               {loading ? 'Logging in...' : 'Login to Dashboard'}
             </button>
           </form>
-          <p className="text-center text-xs text-slate-400 mt-4">Set admin details with <code className="bg-slate-100 px-1 rounded">ADMIN_USERNAME</code> and <code className="bg-slate-100 px-1 rounded">ADMIN_PASSWORD</code>.</p>
+          <p className="text-center text-xs text-slate-400 mt-4">Use the admin username and password configured for this website.</p>
         </div>
       </main>
     );
