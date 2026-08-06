@@ -55,8 +55,8 @@ export default function Header() {
             priority
             className="h-12 w-auto object-contain transition group-hover:-translate-y-0.5 sm:h-14"
           />
-          <span className="font-heading text-xl font-extrabold leading-none text-brand-800 sm:text-2xl">
-            Clean<span className="text-brand-600">WithBest</span>
+          <span className="text-xl font-black tracking-tight leading-none text-brand-800 sm:text-2xl">
+            Clean <span className="text-brand-600">with Best</span>
           </span>
         </Link>
 
