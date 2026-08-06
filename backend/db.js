@@ -1,52 +1,111 @@
-import fs from 'fs';
-import path from 'path';
+import pg from 'pg';
 
-const DATA_DIR = path.join(process.cwd(), 'data');
+const { Pool } = pg;
 
-function ensureDir() {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+let pool;
+let ready;
+
+function getPool() {
+  if (!process.env.DATABASE_URL) {
+    throw new Error('DATABASE_URL is not configured');
+  }
+
+  if (!pool) {
+    pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false },
+    });
+  }
+
+  return pool;
 }
 
-function readJSON(file) {
-  ensureDir();
-  const fp = path.join(DATA_DIR, file);
-  if (!fs.existsSync(fp)) return [];
-  try { return JSON.parse(fs.readFileSync(fp, 'utf8')); } catch { return []; }
+async function ensureTables() {
+  if (!ready) {
+    ready = getPool().query(`
+      CREATE TABLE IF NOT EXISTS quotes (
+        id BIGSERIAL PRIMARY KEY,
+        data JSONB NOT NULL DEFAULT '{}'::jsonb,
+        status TEXT NOT NULL DEFAULT 'new',
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+
+      CREATE TABLE IF NOT EXISTS contacts (
+        id BIGSERIAL PRIMARY KEY,
+        data JSONB NOT NULL DEFAULT '{}'::jsonb,
+        status TEXT NOT NULL DEFAULT 'new',
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
+    `);
+  }
+
+  return ready;
 }
 
-function writeJSON(file, data) {
-  ensureDir();
-  fs.writeFileSync(path.join(DATA_DIR, file), JSON.stringify(data, null, 2));
+function rowToEntry(row) {
+  return {
+    id: Number(row.id),
+    ...(row.data || {}),
+    status: row.status,
+    createdAt: row.created_at?.toISOString?.() || row.created_at,
+  };
 }
 
-export function getQuotes() { return readJSON('quotes.json'); }
-export function addQuote(q) {
-  const list = getQuotes();
-  const entry = { id: Date.now(), ...q, status: 'new', createdAt: new Date().toISOString() };
-  list.unshift(entry);
-  writeJSON('quotes.json', list);
-  return entry;
+async function listEntries(table) {
+  await ensureTables();
+  const { rows } = await getPool().query(
+    `SELECT id, data, status, created_at FROM ${table} ORDER BY created_at DESC, id DESC`
+  );
+  return rows.map(rowToEntry);
 }
+
+async function addEntry(table, data) {
+  await ensureTables();
+  const { rows } = await getPool().query(
+    `INSERT INTO ${table} (data, status) VALUES ($1, 'new') RETURNING id, data, status, created_at`,
+    [data]
+  );
+  return rowToEntry(rows[0]);
+}
+
+async function deleteEntry(table, id) {
+  await ensureTables();
+  await getPool().query(`DELETE FROM ${table} WHERE id = $1`, [id]);
+}
+
+async function updateEntryStatus(table, id, status) {
+  await ensureTables();
+  await getPool().query(`UPDATE ${table} SET status = $1 WHERE id = $2`, [status, id]);
+}
+
+export function getQuotes() {
+  return listEntries('quotes');
+}
+
+export function addQuote(quote) {
+  return addEntry('quotes', quote);
+}
+
 export function deleteQuote(id) {
-  writeJSON('quotes.json', getQuotes().filter(q => q.id !== Number(id)));
-}
-export function updateQuoteStatus(id, status) {
-  const list = getQuotes().map(q => q.id === Number(id) ? { ...q, status } : q);
-  writeJSON('quotes.json', list);
+  return deleteEntry('quotes', id);
 }
 
-export function getContacts() { return readJSON('contacts.json'); }
-export function addContact(c) {
-  const list = getContacts();
-  const entry = { id: Date.now(), ...c, status: 'new', createdAt: new Date().toISOString() };
-  list.unshift(entry);
-  writeJSON('contacts.json', list);
-  return entry;
+export function updateQuoteStatus(id, status) {
+  return updateEntryStatus('quotes', id, status);
 }
+
+export function getContacts() {
+  return listEntries('contacts');
+}
+
+export function addContact(contact) {
+  return addEntry('contacts', contact);
+}
+
 export function deleteContact(id) {
-  writeJSON('contacts.json', getContacts().filter(c => c.id !== Number(id)));
+  return deleteEntry('contacts', id);
 }
+
 export function updateContactStatus(id, status) {
-  const list = getContacts().map(c => c.id === Number(id) ? { ...c, status } : c);
-  writeJSON('contacts.json', list);
+  return updateEntryStatus('contacts', id, status);
 }

@@ -7,7 +7,7 @@ export async function POST(request) {
     if (!body.name || !body.email || !body.message) {
       return NextResponse.json({ success: false, error: 'Missing required fields' }, { status: 400 });
     }
-    const entry = addContact(body);
+    const entry = await addContact(body);
     return NextResponse.json({ success: true, data: entry });
   } catch (error) {
     console.error('Contact API error:', error);
