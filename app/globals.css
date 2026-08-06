@@ -191,14 +191,14 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
 
 @keyframes bestieSvgFloat {
   0%, 100% { transform: translateY(0) rotate(0deg); }
-  40% { transform: translateY(-4px) rotate(-1.5deg); }
-  72% { transform: translateY(1px) rotate(1.5deg); }
+  45% { transform: translateY(-3px) rotate(-.8deg); }
+  72% { transform: translateY(1px) rotate(.8deg); }
 }
 
 @keyframes bestieSvgHead {
   0%, 100% { transform: translateY(0) rotate(0deg); }
-  45% { transform: translateY(-2px) rotate(-2deg); }
-  72% { transform: translateY(1px) rotate(2deg); }
+  45% { transform: translateY(-1.5px) rotate(-1deg); }
+  72% { transform: translateY(.5px) rotate(1deg); }
 }
 
 @keyframes bestieSvgBlink {
@@ -208,12 +208,12 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
 
 @keyframes bestieSvgWaveLeft {
   0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(-11deg) translateY(-2px); }
+  50% { transform: rotate(-5deg) translateY(-1px); }
 }
 
 @keyframes bestieSvgWaveRight {
   0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(12deg) translateY(-3px); }
+  50% { transform: rotate(7deg) translateY(-2px); }
 }
 
 @keyframes bestieSvgStepLeft {
@@ -278,26 +278,26 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
 
 .bestiebot-svg {
   display: block;
-  width: 54px;
-  height: 68px;
+  width: 56px;
+  height: 66px;
   overflow: visible;
-  filter: drop-shadow(0 8px 10px rgb(8 145 178 / .18));
+  filter: drop-shadow(0 9px 12px rgb(15 118 110 / .16));
 }
 
 .bestiebot-svg-compact {
-  width: 34px;
-  height: 43px;
+  width: 35px;
+  height: 41px;
 }
 
 .bestiebot-svg-hero {
-  width: 70px;
-  height: 88px;
+  width: 72px;
+  height: 84px;
 }
 
 .bestiebot-svg-launcher {
-  width: 68px;
-  height: 86px;
-  filter: drop-shadow(0 14px 16px rgb(8 145 178 / .24)) drop-shadow(0 1px 0 rgb(255 255 255 / .9));
+  width: 70px;
+  height: 82px;
+  filter: drop-shadow(0 14px 18px rgb(15 118 110 / .22)) drop-shadow(0 1px 0 rgb(255 255 255 / .9));
 }
 
 .bestiebot-svg-body,
@@ -328,6 +328,7 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
 .bestiebot-svg-antenna-dot,
 .bestiebot-svg-light,
 .bestiebot-svg-cheek,
+.bestiebot-svg-mic,
 .bestiebot-svg-sparkle-one,
 .bestiebot-svg-sparkle-two {
   transform-box: fill-box;
@@ -685,6 +686,7 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
   .bestiebot-svg-antenna-dot,
   .bestiebot-svg-light,
   .bestiebot-svg-cheek,
+  .bestiebot-svg-mic,
   .bestiebot-svg-sparkle-one,
   .bestiebot-svg-sparkle-two {
     animation: none;
