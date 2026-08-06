@@ -11,12 +11,22 @@ const SUGGESTIONS = [
   'End of tenancy clean?',
   'Do you clean offices?',
   'How do I contact you?',
+  'How long will it take?',
+  'Can I trust the cleaner?',
 ];
 
 const ANSWERS = [
   {
     keywords: ['price', 'cost', 'rate', 'rates', 'regular', 'hour', 'hourly'],
     answer: 'Regular home cleaning starts from £17 per hour. Deep cleaning and end-of-tenancy cleaning start from £179. For an exact price, send a quote request with your property details.',
+  },
+  {
+    keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening'],
+    answer: 'Hello, I am BestieBot. I can help with cleaning prices, services, booking, timing, products, areas, access, payments and contact details.',
+  },
+  {
+    keywords: ['thank', 'thanks', 'cheers', 'ok', 'okay'],
+    answer: 'You are welcome. If you want a real quote, send your details through the quote form or WhatsApp us and the team will contact you.',
   },
   {
     keywords: ['end', 'tenancy', 'landlord', 'deposit', 'move out', 'moving'],
@@ -29,6 +39,10 @@ const ANSWERS = [
   {
     keywords: ['today', 'same day', 'urgent', 'emergency', 'soon', 'tomorrow'],
     answer: 'For urgent or same-day cleaning, WhatsApp or call us first. We will check cleaner availability and reply as quickly as possible.',
+  },
+  {
+    keywords: ['time', 'how long', 'duration', 'hours', 'take'],
+    answer: 'Timing depends on property size and condition. A regular clean may take 2 to 4 hours, while deep cleaning or end-of-tenancy cleaning usually needs longer. Send details for a clearer estimate.',
   },
   {
     keywords: ['office', 'commercial', 'business', 'shop', 'retail', 'restaurant', 'gym'],
@@ -55,6 +69,10 @@ const ANSWERS = [
     answer: 'We also offer carpet cleaning from £43 per room, mattress cleaning from £23, window cleaning from £29, and ironing/laundry from £18 per hour.',
   },
   {
+    keywords: ['bathroom', 'kitchen', 'bedroom', 'living room', 'toilet'],
+    answer: 'Yes, regular home cleaning can cover kitchens, bathrooms, bedrooms, toilets, living rooms and general surfaces. Tell us the number of rooms when requesting a quote.',
+  },
+  {
     keywords: ['insured', 'guarantee', 'safe', 'checked', 'trust'],
     answer: 'CleanWithBest uses vetted cleaners and offers a satisfaction guarantee. If something is not right, contact us within 24 hours so we can help.',
   },
@@ -75,6 +93,10 @@ const ANSWERS = [
     answer: 'Pet-friendly cleaning is fine. Please tell us about pets in the property and any product preferences when you request a quote.',
   },
   {
+    keywords: ['allergy', 'allergies', 'asthma', 'baby', 'child', 'children'],
+    answer: 'Please tell us about allergies, asthma, babies or children before booking. We can discuss suitable products and avoid anything you do not want used.',
+  },
+  {
     keywords: ['key', 'keys', 'access', 'not home', 'away'],
     answer: 'If you cannot be home, we can discuss safe access instructions before the appointment. Please do not send access details in the chatbot.',
   },
@@ -90,12 +112,31 @@ const ANSWERS = [
     keywords: ['cancel', 'reschedule', 'change time', 'change booking'],
     answer: 'For cancellations or rescheduling, contact us by phone or WhatsApp as early as possible so we can adjust the cleaner schedule.',
   },
+  {
+    keywords: ['mould', 'mold', 'stain', 'limescale', 'grease', 'hard water'],
+    answer: 'We can help with many stains, grease and limescale, but results depend on the surface and how long the mark has been there. Send photos by WhatsApp for better advice.',
+  },
+  {
+    keywords: ['outside london', 'essex', 'surrey', 'kent', 'hertfordshire'],
+    answer: 'We mainly cover London. For nearby areas, send your postcode and we will confirm whether a cleaner is available.',
+  },
+  {
+    keywords: ['complaint', 'problem', 'issue', 'not happy', 'bad clean'],
+    answer: 'If there is a problem, contact us within 24 hours with details and photos if possible. The team will review it and help arrange the next step.',
+  },
 ];
 
 function findAnswer(input) {
   const text = input.toLowerCase();
   const match = ANSWERS.find(item => item.keywords.some(keyword => text.includes(keyword)));
-  return match?.answer || 'I can help with prices, services, booking, areas, contact details and cleaning questions. For anything specific, send a quote request and our team will contact you by WhatsApp or phone.';
+  if (match) return match.answer;
+
+  const hasQuestion = /\?|what|when|where|why|how|can|do|does|is|are|will|please/.test(text);
+  if (hasQuestion) {
+    return 'I may not know that exact answer yet, but I can still help you get it quickly. Send the question with your name and phone number through the quote form, or WhatsApp us, and the CleanWithBest team will reply.';
+  }
+
+  return 'I can help with cleaning prices, services, booking, timing, areas, contact details, products, access, pets and payment questions. You can also request a quote and our team will contact you by WhatsApp or phone.';
 }
 
 function BestieBotMascot({ compact = false }) {
@@ -117,6 +158,8 @@ function BestieBotMascot({ compact = false }) {
       </span>
       <span className="bestiebot-foot bestiebot-foot-left" />
       <span className="bestiebot-foot bestiebot-foot-right" />
+      <span className="bestiebot-sparkle bestiebot-sparkle-one" />
+      <span className="bestiebot-sparkle bestiebot-sparkle-two" />
     </span>
   );
 }
@@ -150,8 +193,11 @@ export default function Chatbot() {
   return (
     <div className="fixed bottom-4 right-4 z-[70] flex max-w-[calc(100vw-2rem)] flex-col items-end sm:bottom-6 sm:right-6">
       {open && (
-        <div className="animate-bestiebot-panel mb-2 flex h-[560px] w-[calc(100vw-2rem)] max-w-[400px] flex-col overflow-hidden rounded-2xl border border-cyan-100 bg-gradient-to-b from-cyan-50 via-emerald-50 to-amber-50 shadow-2xl shadow-cyan-900/15">
-          <div className="bestiebot-shine relative flex items-center justify-between overflow-hidden border-b border-cyan-100 bg-gradient-to-r from-cyan-100 via-emerald-100 to-amber-100 px-4 py-3 text-slate-800">
+        <div className="animate-bestiebot-panel relative mb-2 flex h-[540px] w-[calc(100vw-2rem)] max-w-[390px] flex-col overflow-hidden rounded-2xl border border-cyan-100 bg-gradient-to-b from-cyan-50 via-emerald-50 to-amber-50 shadow-2xl shadow-cyan-900/15">
+          <span className="bestiebot-bg-bubble bestiebot-bg-bubble-one" />
+          <span className="bestiebot-bg-bubble bestiebot-bg-bubble-two" />
+          <span className="bestiebot-bg-bubble bestiebot-bg-bubble-three" />
+          <div className="bestiebot-shine relative z-10 flex items-center justify-between overflow-hidden border-b border-cyan-100 bg-gradient-to-r from-cyan-100 via-emerald-100 to-amber-100 px-4 py-3 text-slate-800">
             <div className="flex items-center gap-2">
               <span className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-cyan-100">
                 <BestieBotMascot compact />
@@ -172,7 +218,7 @@ export default function Chatbot() {
             </button>
           </div>
 
-          <div className="flex-1 space-y-4 overflow-y-auto p-4">
+          <div className="relative z-10 flex-1 space-y-4 overflow-y-auto p-4">
             {visibleMessages.map((message, index) => (
               <div key={`${message.role}-${index}`} className={`flex items-end gap-2 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {message.role === 'bot' && (
@@ -196,7 +242,7 @@ export default function Chatbot() {
             ))}
           </div>
 
-          <div className="border-t border-cyan-100 bg-white/85 p-3 backdrop-blur">
+          <div className="relative z-10 border-t border-cyan-100 bg-white/85 p-3 backdrop-blur">
             <div className="mb-3 flex flex-wrap gap-2">
               {SUGGESTIONS.map((suggestion, index) => (
                 <button

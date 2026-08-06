@@ -99,7 +99,7 @@ export default function HomePage() {
           className="object-cover opacity-10"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-brand-50/80" />
-        <div className="relative mx-auto grid min-h-[680px] max-w-7xl items-center gap-10 px-4 py-16 lg:grid-cols-[1fr_420px]">
+        <div className="relative mx-auto grid min-h-[560px] max-w-7xl items-start gap-10 px-4 pb-12 pt-8 lg:grid-cols-[1fr_420px] lg:pb-14 lg:pt-10">
           <div className="max-w-3xl">
             <div className="mb-5 inline-flex items-center gap-2 rounded-lg border border-brand-100 bg-brand-50 px-3 py-2 text-sm font-bold text-brand-700">
               <Star size={16} className="text-accent-400" />

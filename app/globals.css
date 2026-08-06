@@ -153,7 +153,21 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
   50% { transform: translateX(-50%) scale(1.16); box-shadow: 0 0 0 5px rgb(251 191 36 / 0); }
 }
 
-.animate-bestiebot-panel { animation: bestiePanelIn .28s ease-out both; transform-origin: bottom right; }
+@keyframes bestieSparkle {
+  0%, 100% { opacity: .35; transform: scale(.75) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.15) rotate(45deg); }
+}
+
+@keyframes bestieBubbleDrift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: .55; }
+  50% { transform: translate3d(var(--bubble-x, 8px), var(--bubble-y, -14px), 0) scale(1.08); opacity: .9; }
+}
+
+@keyframes bestiePanelGlow {
+  0%, 100% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+}
+
 .animate-bestiebot-launcher { animation: bestieFloat 3.2s ease-in-out infinite; }
 .animate-bestiebot-robot { animation: bestieRobotBob 2.4s ease-in-out infinite; }
 .animate-bestiebot-mini { animation: bestieRobotBob 2.8s ease-in-out infinite; }
@@ -162,6 +176,12 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
 .bestiebot-status-dot { animation: bestieStatus 1.8s ease-in-out infinite; }
 .bestiebot-orbit { animation: bestieOrbit 4.5s linear infinite; }
 .bestiebot-orbit-delay { animation-delay: -1.6s; }
+
+.animate-bestiebot-panel {
+  background-size: 160% 160%;
+  transform-origin: bottom right;
+  animation: bestiePanelIn .28s ease-out both, bestiePanelGlow 8s ease-in-out infinite;
+}
 
 .bestiebot-person {
   --bestie-scale: 1;
@@ -310,6 +330,70 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
   animation: bestieStepRight 1.2s ease-in-out infinite;
 }
 
+.bestiebot-sparkle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: rgb(251 191 36);
+  clip-path: polygon(50% 0, 61% 36%, 100% 50%, 61% 64%, 50% 100%, 39% 64%, 0 50%, 39% 36%);
+  animation: bestieSparkle 1.7s ease-in-out infinite;
+}
+
+.bestiebot-sparkle-one {
+  right: 1px;
+  top: 11px;
+}
+
+.bestiebot-sparkle-two {
+  left: 0;
+  top: 19px;
+  background: rgb(34 211 238);
+  animation-delay: .55s;
+}
+
+.bestiebot-bg-bubble {
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+  filter: blur(.1px);
+  z-index: 0;
+}
+
+.bestiebot-bg-bubble-one {
+  --bubble-x: 10px;
+  --bubble-y: -18px;
+  right: 18px;
+  top: 72px;
+  width: 58px;
+  height: 58px;
+  background: rgb(34 211 238 / .18);
+  animation: bestieBubbleDrift 5.4s ease-in-out infinite;
+}
+
+.bestiebot-bg-bubble-two {
+  --bubble-x: -12px;
+  --bubble-y: 14px;
+  left: 18px;
+  top: 170px;
+  width: 42px;
+  height: 42px;
+  background: rgb(16 185 129 / .16);
+  animation: bestieBubbleDrift 6.2s ease-in-out infinite;
+  animation-delay: -1.4s;
+}
+
+.bestiebot-bg-bubble-three {
+  --bubble-x: 8px;
+  --bubble-y: 12px;
+  right: 44px;
+  bottom: 118px;
+  width: 34px;
+  height: 34px;
+  background: rgb(251 191 36 / .2);
+  animation: bestieBubbleDrift 4.8s ease-in-out infinite;
+  animation-delay: -.8s;
+}
+
 .bestiebot-shine::after {
   content: '';
   position: absolute;
@@ -336,7 +420,9 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
   .bestiebot-arm-left,
   .bestiebot-arm-right,
   .bestiebot-foot-left,
-  .bestiebot-foot-right {
+  .bestiebot-foot-right,
+  .bestiebot-sparkle,
+  .bestiebot-bg-bubble {
     animation: none;
   }
 }
