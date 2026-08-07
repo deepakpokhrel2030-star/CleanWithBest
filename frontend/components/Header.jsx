@@ -22,6 +22,7 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileGroup, setMobileGroup] = useState(null);
+  const [openGroup, setOpenGroup] = useState(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -33,9 +34,15 @@ export default function Header() {
   const closeMenu = () => {
     setMobileOpen(false);
     setMobileGroup(null);
+    setOpenGroup(null);
   };
   const isActive = href => pathname === href;
   const isServiceActive = group => pathname === group.href || group.items.some(item => pathname === `/services/${item.slug}`);
+  const navLinkClass = active => `border-b-2 py-6 text-sm font-bold transition ${
+    active
+      ? 'border-brand-700 text-brand-800'
+      : 'border-transparent text-slate-600 hover:border-brand-200 hover:text-brand-800'
+  }`;
 
   return (
     <header className={`sticky top-0 z-50 border-b border-slate-200 bg-white transition-shadow ${scrolled ? 'shadow-md shadow-slate-900/5' : ''}`}>
@@ -74,23 +81,32 @@ export default function Header() {
         <nav className="hidden items-center gap-7 lg:flex">
           <Link
             href="/"
-            className={`text-sm font-bold transition ${isActive('/') ? 'text-brand-800' : 'text-slate-600 hover:text-brand-800'}`}
+            onClick={closeMenu}
+            className={navLinkClass(isActive('/'))}
           >
             Home
           </Link>
           {serviceGroups.map(group => (
-            <div key={group.label} className="group relative">
+            <div
+              key={group.label}
+              className="relative"
+              onMouseEnter={() => setOpenGroup(group.label)}
+              onMouseLeave={() => setOpenGroup(null)}
+            >
               <Link
                 href={group.href}
-                className={`inline-flex items-center gap-1.5 py-6 text-sm font-bold transition ${
-                  isServiceActive(group) ? 'text-brand-800' : 'text-slate-600 hover:text-brand-800'
-                }`}
+                onClick={closeMenu}
+                className={`inline-flex items-center gap-1.5 ${navLinkClass(isServiceActive(group))}`}
               >
-                {group.label} <ChevronDown size={15} className="transition group-hover:rotate-180" />
+                {group.label} <ChevronDown size={15} className={`transition ${openGroup === group.label ? 'rotate-180' : ''}`} />
               </Link>
-              <div className="invisible absolute left-1/2 top-full z-50 w-[520px] -translate-x-1/2 translate-y-2 rounded-xl border border-slate-200 bg-white p-3 opacity-0 shadow-2xl shadow-slate-900/12 transition group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+              <div className={`absolute left-1/2 top-full z-50 w-[520px] -translate-x-1/2 rounded-xl border border-slate-200 bg-white p-3 shadow-2xl shadow-slate-900/12 transition ${
+                openGroup === group.label
+                  ? 'visible translate-y-0 opacity-100'
+                  : 'invisible translate-y-2 opacity-0'
+              }`}>
                 <div className="mb-2 flex items-center justify-between px-2">
-                  <Link href={group.href} className="text-sm font-extrabold text-brand-800 hover:text-brand-600">
+                  <Link href={group.href} onClick={closeMenu} className="text-sm font-extrabold text-brand-800 hover:text-brand-600">
                     View all {group.label.toLowerCase()}
                   </Link>
                   <span className="text-xs font-bold uppercase text-slate-400">{group.items.length} services</span>
@@ -100,6 +116,7 @@ export default function Header() {
                     <Link
                       key={item.slug}
                       href={`/services/${item.slug}`}
+                      onClick={closeMenu}
                       className="rounded-lg px-3 py-2.5 transition hover:bg-brand-50"
                     >
                       <span className="block text-sm font-bold text-slate-900">{item.shortTitle}</span>
@@ -114,11 +131,8 @@ export default function Header() {
             <Link
               key={href}
               href={href}
-              className={`text-sm font-bold transition ${
-                isActive(href)
-                  ? 'text-brand-800'
-                  : 'text-slate-600 hover:text-brand-800'
-              }`}
+              onClick={closeMenu}
+              className={navLinkClass(isActive(href))}
             >
               {label}
             </Link>
