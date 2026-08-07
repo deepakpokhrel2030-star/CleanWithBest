@@ -10,6 +10,7 @@ const navItems = [
   ['Home', '/'],
   ['Domestic', '/domestic'],
   ['Commercial', '/commercial'],
+  ['About', '/about'],
   ['Contact', '/contact'],
 ];
 
@@ -29,23 +30,8 @@ export default function Header() {
   const isActive = href => pathname === href;
 
   return (
-    <header className={`sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 backdrop-blur-xl transition-shadow ${scrolled ? 'shadow-lg shadow-slate-900/5' : ''}`}>
-      <div className="bg-brand-800 text-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2 text-xs font-semibold">
-          <a href="tel:+447503494242" className="inline-flex min-w-0 items-center gap-2 hover:text-accent-400">
-            <Phone size={14} className="shrink-0 text-accent-400" />
-            <span className="truncate">24/7 quotes: +44 7503 494242</span>
-          </a>
-          <div className="hidden shrink-0 items-center gap-3 sm:flex">
-            <a href="tel:+447789602945" className="hidden hover:text-accent-400 sm:inline">+44 7789 602945</a>
-            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-white/10 px-2.5 py-1 text-white ring-1 ring-white/15 hover:bg-white/15">
-              <MessageCircle size={13} /> WhatsApp
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div className="mx-auto flex h-20 max-w-7xl items-center gap-5 px-4">
+    <header className={`sticky top-0 z-50 border-b border-slate-200 bg-white transition-shadow ${scrolled ? 'shadow-md shadow-slate-900/5' : ''}`}>
+      <div className="mx-auto flex h-[72px] max-w-7xl items-center gap-6 px-4">
         <Link href="/" onClick={closeMenu} className="group flex shrink-0 items-center gap-2.5">
           <Image
             src="/brand/cleanwithbest-mark.png"
@@ -53,24 +39,24 @@ export default function Header() {
             width={96}
             height={80}
             priority
-            className="h-12 w-auto object-contain transition group-hover:-translate-y-0.5 sm:h-14"
+            className="h-11 w-auto object-contain transition group-hover:-translate-y-0.5 sm:h-12"
           />
           <span className="flex items-baseline whitespace-nowrap font-black tracking-tight leading-none text-brand-800">
-            <span className="text-2xl sm:text-[1.7rem]">Clean</span>
-            <span className="mx-1 text-base text-brand-500 sm:text-lg">with</span>
-            <span className="text-2xl sm:text-[1.7rem]">Best</span>
+            <span className="text-xl sm:text-2xl">Clean</span>
+            <span className="mx-1 text-sm text-brand-500 sm:text-base">with</span>
+            <span className="text-xl sm:text-2xl">Best</span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 rounded-lg bg-slate-100/80 p-1 lg:flex">
+        <nav className="hidden items-center gap-7 lg:flex">
           {navItems.map(([label, href]) => (
             <Link
               key={href}
               href={href}
-              className={`rounded-lg px-4 py-2.5 text-sm font-bold transition ${
+              className={`text-sm font-bold transition ${
                 isActive(href)
-                  ? 'bg-white text-brand-800 shadow-sm'
-                  : 'text-slate-600 hover:bg-white/70 hover:text-brand-800'
+                  ? 'text-brand-800'
+                  : 'text-slate-600 hover:text-brand-800'
               }`}
             >
               {label}
@@ -78,8 +64,13 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="ml-auto hidden items-center gap-3 lg:flex">
-          <Link href="/about" className="text-sm font-bold text-slate-500 hover:text-brand-800">About</Link>
+        <div className="ml-auto hidden items-center gap-4 lg:flex">
+          <a href="tel:+447503494242" className="inline-flex items-center gap-2 text-sm font-extrabold text-brand-800 hover:text-brand-600">
+            <Phone size={16} className="text-accent-600" /> +44 7503 494242
+          </a>
+          <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-brand-100 px-3 py-2 text-sm font-bold text-brand-700 hover:bg-brand-50">
+            <MessageCircle size={16} /> WhatsApp
+          </a>
           <Link href="/quote" className="btn-primary px-5 py-2.5">
             Get Free Quote
           </Link>
@@ -104,7 +95,6 @@ export default function Header() {
                   {label}
                 </Link>
               ))}
-              <Link href="/about" onClick={closeMenu} className="rounded-lg px-3 py-3 text-sm font-bold text-slate-700 hover:bg-slate-50">About</Link>
             </div>
             <div className="mt-4 grid gap-2">
               <Link href="/quote" onClick={closeMenu} className="btn-primary justify-center">

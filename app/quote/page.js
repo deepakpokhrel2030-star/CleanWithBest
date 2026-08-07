@@ -1,6 +1,5 @@
-import Image from 'next/image';
 import QuoteForm from '@/frontend/components/QuoteForm';
-import { CheckCircle, Phone, Clock, MessageCircle } from 'lucide-react';
+import { CheckCircle, Phone, Clock, MessageCircle, Sparkles } from 'lucide-react';
 
 export const metadata = {
   title: 'Get a Free Quote',
@@ -10,37 +9,26 @@ export const metadata = {
 export default function QuotePage() {
   return (
     <main>
-      {/* Hero */}
       <section className="page-hero">
         <div className="absolute inset-0 bg-[linear-gradient(115deg,#ffffff_0%,#f8fafc_55%,#ecfeff_100%)]" />
-        <div className="page-hero-inner">
-          <div className="animate-reveal-up">
-            <span className="section-tag">Free Quote</span>
+        <div className="relative mx-auto max-w-7xl px-4 pb-8 pt-4 md:pb-10 md:pt-6">
+          <div className="max-w-4xl animate-reveal-up">
+            <span className="section-tag"><Sparkles size={14} className="text-accent-600" /> Free quote</span>
             <h1 className="hero-title">Tell us what needs cleaning.</h1>
             <p className="hero-copy">
-              Fill in the short form below. We will review the details and contact you by WhatsApp or phone call with a transparent quote.
+              Send your details and we will contact you by WhatsApp or phone with a clear price before booking.
             </p>
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="mt-5 flex flex-wrap gap-3">
               <a href="tel:+447503494242" className="btn-outline"><Phone size={18} /> +44 7503 494242</a>
               <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline"><MessageCircle size={18} /> WhatsApp</a>
             </div>
           </div>
-          <div className="image-panel animate-float-soft">
-            <Image
-              src="https://images.unsplash.com/photo-1563453392212-326f5e854473?w=900&q=85"
-              alt="Cleaning supplies ready for a professional clean"
-              width={720}
-              height={620}
-              className="h-[360px] w-full object-cover md:h-[460px]"
-            />
-          </div>
         </div>
       </section>
 
-      {/* Main */}
-      <section className="py-16 md:py-20 bg-slate-50">
+      <section className="bg-slate-50 py-8 md:py-12">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="mb-8 grid gap-4 md:grid-cols-3">
+          <div className="mb-6 grid gap-4 md:grid-cols-3">
             {[
               { title: '1. Tell us the job', text: 'Choose the service, property type, postcode and any notes.' },
               { title: '2. We check the details', text: 'Our team reviews the request and confirms anything unclear.' },
@@ -52,7 +40,7 @@ export default function QuotePage() {
               </div>
             ))}
           </div>
-          <div className="grid lg:grid-cols-3 gap-12 items-start">
+          <div className="grid gap-8 lg:grid-cols-3 lg:items-start">
 
             {/* Form */}
             <div className="lg:col-span-2">
