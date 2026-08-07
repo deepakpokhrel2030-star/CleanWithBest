@@ -9,56 +9,56 @@ export const metadata = {
 
 const services = [
   {
-    id: 'regular', code: 'REG', title: 'Regular Home Cleaning', price: 'From £17/hr',
+    id: 'regular', slug: 'regular-home-cleaning', code: 'REG', title: 'Regular Home Cleaning', price: 'From £17/hr',
     tagline: 'Keep your home consistently spotless',
     desc: 'Our regular home cleaning service is perfect for busy households who want a consistently clean home without the hassle. Choose from weekly, fortnightly or monthly visits — always the same cleaner who knows your home.',
     includes: ['All surfaces dusted and wiped down', 'Kitchen worktops, sink and hob cleaned', 'Bathroom cleaned and sanitised', 'Vacuuming throughout', 'Mopping hard floors', 'Skirting boards and light switches wiped', 'Bins emptied and re-lined', 'Glass and mirrors polished'],
     popular: false,
   },
   {
-    id: 'deep', code: 'DEEP', title: 'Deep Cleaning', price: 'From £179',
+    id: 'deep', slug: 'deep-cleaning', code: 'DEEP', title: 'Deep Cleaning', price: 'From £179',
     tagline: 'A thorough top-to-bottom transformation',
     desc: 'Our deep cleaning service is far more thorough than a regular clean. We tackle every nook and cranny — areas that accumulate grime but are often overlooked. Perfect as a seasonal clean, before a party, or after a renovation.',
     includes: ['Everything in a regular clean, plus:', 'Inside oven, microwave and fridge', 'Inside all kitchen cupboards and drawers', 'Behind and under furniture and appliances', 'Limescale removal from all fixtures', 'Grout scrubbing in bathrooms', 'Blind and window ledge deep clean', 'Wall marks and scuff removal'],
     popular: false,
   },
   {
-    id: 'end-of-tenancy', code: 'TEN', title: 'End of Tenancy Cleaning', price: 'From £179',
+    id: 'end-of-tenancy', slug: 'end-of-tenancy-cleaning', code: 'TEN', title: 'End of Tenancy Cleaning', price: 'From £179',
     tagline: 'Guaranteed to get your deposit back',
     desc: 'Our end of tenancy cleaning service is designed to meet the highest landlord and letting agency standards. We follow a comprehensive checklist and guarantee our work — if the landlord isn\'t satisfied, we return and re-clean for free.',
     includes: ['Full deep clean of every room', 'Oven, hob, extractor fan degreasing', 'Inside all cupboards, wardrobes and drawers', 'Bathroom and en-suite deep sanitise', 'Interior window cleaning', 'Wall marks removed', 'Sealant and grouting cleaned', 'We follow the official tenancy deposit scheme checklist'],
     popular: true,
   },
   {
-    id: 'move', code: 'MOVE', title: 'Move In / Move Out', price: 'From £179',
+    id: 'move', slug: 'move-in-move-out-cleaning', code: 'MOVE', title: 'Move In / Move Out', price: 'From £179',
     tagline: 'Start fresh or leave nothing behind',
     desc: 'Whether you\'re moving into a new property or leaving your current home spotless for the next residents, our move-in/move-out cleaning service ensures the property is thoroughly cleaned to a professional standard.',
     includes: ['Complete property clean throughout', 'All surfaces sanitised', 'Kitchen and bathroom deep clean', 'Floors vacuumed and mopped', 'Windows cleaned internally', 'Bins emptied and sanitised', 'Same comprehensive standard as end of tenancy', 'Certificate of cleaning available on request'],
     popular: false,
   },
   {
-    id: 'carpet', code: 'CARPET', title: 'Carpet & Upholstery Cleaning', price: 'From £43/room',
+    id: 'carpet', slug: 'carpet-upholstery-cleaning', code: 'CARPET', title: 'Carpet & Upholstery Cleaning', price: 'From £43/room',
     tagline: 'Revive your carpets and soft furnishings',
     desc: 'Professional hot water extraction cleaning removes deep-set stains, odors, bacteria and allergens that vacuuming alone can\'t tackle. We use professional-grade equipment to refresh carpets, rugs, sofas, chairs and curtains.',
     includes: ['Pre-treatment of all visible stains', 'Hot water extraction deep clean', 'Deodorising treatment included', 'Fabric protection spray (optional add-on)', 'Fast drying — typically 2–4 hours', 'Safe for all carpet fibre types', 'Rugs, sofas and chairs also treated'],
     popular: false,
   },
   {
-    id: 'mattress', code: 'MATT', title: 'Mattress Cleaning', price: 'From £23 per mattress',
+    id: 'mattress', slug: 'mattress-cleaning', code: 'MATT', title: 'Mattress Cleaning', price: 'From £23 per mattress',
     tagline: 'Sleep cleaner, breathe easier',
     desc: 'Your mattress can harbour dust mites, dead skin cells, sweat and bacteria — all of which affect your sleep quality and health. Our professional mattress cleaning uses steam and UV treatment to sanitise and refresh.',
     includes: ['Vacuum pre-treatment to remove debris', 'High-temperature steam sanitisation', 'UV light dust mite treatment', 'Stain spot removal treatment', 'Deodorising and freshening spray', 'Allergen reduction — great for asthma sufferers', 'All mattress sizes and types covered'],
     popular: false,
   },
   {
-    id: 'ironing', code: 'IRON', title: 'Ironing & Laundry', price: 'From £18/hr',
+    id: 'ironing', slug: 'ironing-laundry', code: 'IRON', title: 'Ironing & Laundry', price: 'From £18/hr',
     tagline: 'Reclaim your weekends',
     desc: 'Our professional ironing and laundry service takes one of the most tedious household chores off your hands. We can collect, launder and iron your clothes, or simply tackle the ironing pile you\'ve been avoiding.',
     includes: ['Collection and return service available', 'All garment types accepted', 'Shirts, trousers, dresses, bedding and more', 'Hung, folded or bagged to your preference', 'Fast 24-hour turnaround available', 'Careful handling of delicate and designer items', 'Combine with a cleaning visit for extra convenience'],
     popular: false,
   },
   {
-    id: 'windows', code: 'WIN', title: 'Window Cleaning', price: 'From £29',
+    id: 'windows', slug: 'window-cleaning', code: 'WIN', title: 'Window Cleaning', price: 'From £29',
     tagline: 'Crystal-clear views, brighter rooms',
     desc: 'Streak-free window cleaning for homes and apartments. Our cleaners use pure water technology to deliver spotless results on interior and exterior windows without harsh chemicals.',
     includes: ['Interior and exterior window cleaning', 'Window frames and sills wiped clean', 'Streak-free pure water technology', 'Ground and upper floor access', 'Conservatory roof cleaning available', 'Regular scheduled visits available'],
@@ -149,10 +149,10 @@ export default function DomesticPage() {
       {/* Quick price strip */}
       <div className="border-y border-slate-200 bg-white py-5">
         <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-center gap-6 text-slate-700 text-sm font-semibold">
-          {[['Regular Clean', 'From £17/hr'], ['Deep Clean', 'From £179'], ['End of Tenancy', 'From £179'], ['Move In/Out', 'From £179'], ['Carpet Cleaning', 'From £43/room']].map(([service, price]) => (
-            <span key={service} className="flex items-center gap-2">
-              <span className="text-accent-600">✓</span> {service}: <span className="text-brand-700">{price}</span>
-            </span>
+          {services.slice(0, 5).map(({ slug, title, price }) => (
+            <Link key={slug} href={`/services/${slug}`} className="flex items-center gap-2 rounded-md px-2 py-1 transition hover:bg-brand-50 hover:text-brand-800">
+              <span className="text-accent-600">✓</span> {title}: <span className="text-brand-700">{price}</span>
+            </Link>
           ))}
         </div>
       </div>
@@ -160,18 +160,24 @@ export default function DomesticPage() {
       {/* All services */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 space-y-16">
-          {services.map(({ id, code, title, price, tagline, desc, includes, popular }) => (
+          {services.map(({ id, slug, code, title, price, tagline, desc, includes, popular }) => (
             <div key={id} id={id} className="grid md:grid-cols-2 gap-10 items-start scroll-mt-24">
               <div>
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="flex h-11 min-w-11 items-center justify-center rounded-lg bg-brand-50 px-2 font-heading text-xs font-black text-brand-700">{code}</span>
+                  <Link href={`/services/${slug}`} aria-label={`View ${title}`} className="flex h-11 min-w-11 items-center justify-center rounded-lg bg-brand-50 px-2 font-heading text-xs font-black text-brand-700 transition hover:bg-brand-100">{code}</Link>
                   {popular && <span className="bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</span>}
                   <span className="price-badge">{price}</span>
                 </div>
-                <h2 className="font-heading text-2xl md:text-3xl font-bold text-slate-900 mb-1">{title}</h2>
+                <Link href={`/services/${slug}`} className="group inline-flex items-center gap-2">
+                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-slate-900 mb-1 group-hover:text-brand-700">{title}</h2>
+                  <ArrowRight size={18} className="mb-1 text-brand-500 opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
+                </Link>
                 <p className="text-brand-600 font-semibold mb-4">{tagline}</p>
                 <p className="text-slate-600 leading-relaxed mb-6 text-sm md:text-base">{desc}</p>
                 <div className="flex flex-wrap gap-3">
+                  <Link href={`/services/${slug}`} className="btn-outline text-sm">
+                    View Service Page <ArrowRight size={14} />
+                  </Link>
                   <Link href="/quote" className="btn-primary text-sm">
                     Get a Quote — {price} <ArrowRight size={14} />
                   </Link>
