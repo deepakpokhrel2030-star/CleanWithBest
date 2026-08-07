@@ -1,15 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Facebook, Instagram, Mail, MessageCircle, Phone } from 'lucide-react';
+import { commercialServices, domesticServices } from '@/frontend/lib/services';
 
 const serviceLinks = [
-  ['Regular Cleaning', '/domestic#regular'],
-  ['Deep Cleaning', '/domestic#deep'],
-  ['End of Tenancy', '/domestic#end-of-tenancy'],
-  ['Carpet Cleaning', '/domestic#carpet'],
-  ['Office Cleaning', '/commercial#office'],
-  ['Retail Cleaning', '/commercial#retail'],
-];
+  ...domesticServices.slice(0, 4),
+  ...commercialServices.slice(0, 2),
+].map(service => [service.shortTitle, `/services/${service.slug}`]);
 
 const companyLinks = [
   ['Home', '/'],

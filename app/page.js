@@ -25,28 +25,28 @@ const services = [
     title: 'Regular home cleaning',
     price: 'From £17/hr',
     text: 'A reliable weekly, fortnightly or monthly clean for the rooms you use every day.',
-    href: '/domestic#regular',
+    href: '/services/regular-home-cleaning',
   },
   {
     icon: Sparkles,
     title: 'Deep cleaning',
     price: 'From £179',
     text: 'More time, more detail and a proper reset for kitchens, bathrooms and living spaces.',
-    href: '/domestic#deep',
+    href: '/services/deep-cleaning',
   },
   {
     icon: ShieldCheck,
     title: 'End of tenancy',
     price: 'From £179',
     text: 'A detailed clean for move-outs, landlords, tenants and letting agents.',
-    href: '/domestic#end-of-tenancy',
+    href: '/services/end-of-tenancy-cleaning',
   },
   {
     icon: Building2,
     title: 'Commercial cleaning',
     price: 'From £18/hr',
     text: 'Offices, retail, restaurants, gyms and shared workspaces cleaned around your hours.',
-    href: '/commercial',
+    href: '/services/office-cleaning',
   },
 ];
 
