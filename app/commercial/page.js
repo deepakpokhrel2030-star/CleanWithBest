@@ -10,6 +10,7 @@ export const metadata = {
 const services = [
   {
     id: 'office',
+    slug: 'office-cleaning',
     icon: Building2,
     title: 'Office Cleaning',
     tagline: 'A cleaner office means a more productive team',
@@ -20,6 +21,7 @@ const services = [
   },
   {
     id: 'retail',
+    slug: 'retail-cleaning',
     icon: ShoppingBag,
     title: 'Retail Cleaning',
     tagline: 'First impressions start with a clean store',
@@ -29,6 +31,7 @@ const services = [
   },
   {
     id: 'restaurant',
+    slug: 'restaurant-hospitality-cleaning',
     icon: Utensils,
     title: 'Restaurant & Hospitality',
     tagline: 'Meet health standards with confidence',
@@ -39,6 +42,7 @@ const services = [
   },
   {
     id: 'gym',
+    slug: 'gym-fitness-cleaning',
     icon: Dumbbell,
     title: 'Gym & Fitness Centers',
     tagline: 'Keep your members safe and motivated',
@@ -48,6 +52,7 @@ const services = [
   },
   {
     id: 'school',
+    slug: 'school-education-cleaning',
     icon: GraduationCap,
     title: 'School & Education',
     tagline: 'Safe, hygienic environments for learning',
@@ -57,6 +62,7 @@ const services = [
   },
   {
     id: 'warehouse',
+    slug: 'warehouse-industrial-cleaning',
     icon: Warehouse,
     title: 'Warehouse & Industrial',
     tagline: 'Heavy-duty cleaning for large-scale facilities',
@@ -66,6 +72,7 @@ const services = [
   },
   {
     id: 'washroom',
+    slug: 'washroom-services',
     icon: Droplets,
     title: 'Washroom Services',
     tagline: 'Complete washroom hygiene management',
@@ -75,6 +82,7 @@ const services = [
   },
   {
     id: 'medical',
+    slug: 'medical-healthcare-cleaning',
     icon: Stethoscope,
     title: 'Medical & Healthcare',
     tagline: 'Infection-control grade cleaning',
@@ -137,25 +145,33 @@ export default function CommercialPage() {
       {/* Services */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 space-y-16">
-          {services.map(({ id, icon: Icon, title, tagline, desc, includes, clients, popular }) => (
+          {services.map(({ id, slug, icon: Icon, title, tagline, desc, includes, clients, popular }) => (
             <div key={id} id={id} className="grid md:grid-cols-2 gap-10 items-start scroll-mt-24">
               <div>
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-11 h-11 bg-brand-100 rounded-lg flex items-center justify-center">
+                  <Link href={`/services/${slug}`} aria-label={`View ${title}`} className="w-11 h-11 bg-brand-100 rounded-lg flex items-center justify-center transition hover:bg-brand-200">
                     <Icon size={22} className="text-brand-600" />
-                  </div>
+                  </Link>
                   {popular && <span className="bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full">Popular</span>}
                 </div>
-                <h2 className="font-heading text-2xl md:text-3xl font-bold text-slate-900 mb-1">{title}</h2>
+                <Link href={`/services/${slug}`} className="group inline-flex items-center gap-2">
+                  <h2 className="font-heading text-2xl md:text-3xl font-bold text-slate-900 mb-1 group-hover:text-brand-700">{title}</h2>
+                  <ArrowRight size={18} className="mb-1 text-brand-500 opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
+                </Link>
                 <p className="text-brand-600 font-semibold mb-4">{tagline}</p>
                 <p className="text-slate-600 leading-relaxed mb-4">{desc}</p>
                 <div className="bg-slate-50 rounded-lg border border-slate-200 p-3 mb-6">
                   <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">We serve: </span>
                   <span className="text-sm text-slate-600">{clients}</span>
                 </div>
-                <Link href="/quote" className="btn-primary text-sm px-5 py-2.5">
+                <div className="flex flex-wrap gap-3">
+                  <Link href={`/services/${slug}`} className="btn-outline text-sm px-5 py-2.5">
+                    View Service Page <ArrowRight size={14} />
+                  </Link>
+                  <Link href="/quote" className="btn-primary text-sm px-5 py-2.5">
                   Get a Business Quote <ArrowRight size={14} />
-                </Link>
+                  </Link>
+                </div>
               </div>
               <div className={`rounded-lg border border-slate-200 p-6 transition hover:-translate-y-1 hover:shadow-lg ${popular ? 'border-brand-200 bg-brand-50' : 'bg-slate-50'}`}>
                 <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">

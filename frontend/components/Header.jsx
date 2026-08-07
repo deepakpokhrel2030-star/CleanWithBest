@@ -79,13 +79,6 @@ export default function Header() {
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
-          <Link
-            href="/"
-            onClick={closeMenu}
-            className={navLinkClass(isActive('/'))}
-          >
-            Home
-          </Link>
           {serviceGroups.map(group => (
             <div
               key={group.label}
@@ -159,9 +152,6 @@ export default function Header() {
         <div className="border-t border-slate-200 bg-white shadow-xl lg:hidden">
           <div className="mx-auto max-w-7xl px-4 py-4">
             <div className="grid gap-1">
-              <Link href="/" onClick={closeMenu} className={`rounded-lg px-3 py-3 text-sm font-bold ${isActive('/') ? 'bg-brand-50 text-brand-700' : 'text-slate-700 hover:bg-slate-50'}`}>
-                Home
-              </Link>
               {serviceGroups.map(group => (
                 <div key={group.label} className="rounded-lg border border-slate-100">
                   <button
