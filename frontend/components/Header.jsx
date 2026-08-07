@@ -39,6 +39,21 @@ export default function Header() {
 
   return (
     <header className={`sticky top-0 z-50 border-b border-slate-200 bg-white transition-shadow ${scrolled ? 'shadow-md shadow-slate-900/5' : ''}`}>
+      <div className="bg-brand-800 text-white">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2 text-xs font-semibold">
+          <a href="tel:+447503494242" className="inline-flex min-w-0 items-center gap-2 hover:text-accent-400">
+            <Phone size={14} className="shrink-0 text-accent-400" />
+            <span className="truncate">24/7 quotes: +44 7503 494242</span>
+          </a>
+          <div className="hidden shrink-0 items-center gap-3 sm:flex">
+            <a href="tel:+447789602945" className="hover:text-accent-400">+44 7789 602945</a>
+            <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-white/10 px-2.5 py-1 text-white ring-1 ring-white/15 hover:bg-white/15">
+              <MessageCircle size={13} /> WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div className="mx-auto flex h-[72px] max-w-7xl items-center gap-6 px-4">
         <Link href="/" onClick={closeMenu} className="group flex shrink-0 items-center gap-2.5">
           <Image
@@ -111,12 +126,6 @@ export default function Header() {
         </nav>
 
         <div className="ml-auto hidden items-center gap-4 lg:flex">
-          <a href="tel:+447503494242" className="inline-flex items-center gap-2 text-sm font-extrabold text-brand-800 hover:text-brand-600">
-            <Phone size={16} className="text-accent-600" /> +44 7503 494242
-          </a>
-          <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-brand-100 px-3 py-2 text-sm font-bold text-brand-700 hover:bg-brand-50">
-            <MessageCircle size={16} /> WhatsApp
-          </a>
           <Link href="/quote" className="btn-primary px-5 py-2.5">
             Get Free Quote
           </Link>
