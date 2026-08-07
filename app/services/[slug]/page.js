@@ -28,7 +28,7 @@ export default function ServicePage({ params }) {
   return (
     <main className="bg-white">
       <section className="relative overflow-hidden bg-[linear-gradient(115deg,#ffffff_0%,#f8fafc_48%,#ecfeff_100%)]">
-        <div className="mx-auto max-w-7xl px-4 pb-12 pt-5 md:pb-16 md:pt-8">
+        <div className="mx-auto max-w-7xl px-4 pb-9 pt-4 md:pb-12 md:pt-6">
           <div className="grid gap-8 lg:grid-cols-[1fr_380px] lg:items-start">
             <div>
               <span className="section-tag">
@@ -61,7 +61,7 @@ export default function ServicePage({ params }) {
         </div>
       </section>
 
-      <section className="bg-slate-50 py-14">
+      <section className="bg-slate-50 py-10 md:py-12">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 lg:grid-cols-[1fr_360px]">
           <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
             <span className="section-tag">Included</span>
@@ -97,7 +97,7 @@ export default function ServicePage({ params }) {
         </div>
       </section>
 
-      <section className="py-14">
+      <section className="py-10 md:py-12">
         <div className="mx-auto max-w-7xl px-4">
           <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>

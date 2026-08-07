@@ -88,7 +88,7 @@ export default function HomePage() {
             <p className="hero-copy">
               Request a quote once and CleanWithBest will contact you by WhatsApp or phone. Regular cleaning starts from £17/hour, with clear prices for deep cleans, tenancy cleans and business cleaning.
             </p>
-            <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap">
+            <div className="mt-6 grid gap-3 sm:flex sm:flex-wrap">
               <Link href="/quote" className="btn-primary-lg w-full sm:w-auto">
                 Request a Quote <ArrowRight size={18} />
               </Link>
@@ -99,7 +99,7 @@ export default function HomePage() {
                 <MessageCircle size={18} /> WhatsApp
               </a>
             </div>
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {trust.map(item => (
                 <div key={item} className="flex items-center gap-2 text-sm font-bold text-slate-700">
                   <CheckCircle size={16} className="text-accent-600" /> {item}
@@ -135,7 +135,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="soft-section py-20">
+      <section className="soft-section py-14 md:py-16">
         <div className="mx-auto max-w-7xl px-4">
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
@@ -165,7 +165,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white py-20">
+      <section className="bg-white py-14 md:py-16">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <div className="lg:sticky lg:top-32">
             <span className="section-tag">How it works</span>
@@ -202,7 +202,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-slate-50 py-20">
+      <section className="bg-slate-50 py-14 md:py-16">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <span className="section-tag">Prices</span>
@@ -224,7 +224,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-brand-900 py-16 text-white">
+      <section className="relative overflow-hidden bg-brand-900 py-12 md:py-14 text-white">
         <Image
           src="https://images.unsplash.com/photo-1563453392212-326f5e854473?w=1600&q=80"
           alt="Professional cleaning tools arranged neatly"

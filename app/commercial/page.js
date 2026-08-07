@@ -113,12 +113,12 @@ export default function CommercialPage() {
             <p className="hero-copy">
               Office, retail, hospitality, gym and industrial cleaning built around your opening hours. Tell us the site details and we will send a clear business quote.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/quote" className="btn-primary-lg">Get a Business Quote <ArrowRight size={18} /></Link>
               <a href="tel:+447503494242" className="btn-outline">Call +44 7503 494242</a>
               <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline">WhatsApp +44 7503 494242</a>
             </div>
-            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+            <div className="mt-6 grid gap-3 sm:grid-cols-3">
               {['Out-of-hours slots', 'Regular contracts', 'One-off deep cleans'].map(item => (
                 <div key={item} className="stat-pill flex items-center gap-2 text-sm font-bold text-slate-700">
                   <Clock3 size={15} className="text-brand-600" /> {item}
@@ -143,8 +143,8 @@ export default function CommercialPage() {
       </section>
 
       {/* Services */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 space-y-16">
+      <section className="py-14 md:py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 space-y-10 md:space-y-12">
           {services.map(({ id, slug, icon: Icon, title, tagline, desc, includes, clients, popular }) => (
             <div key={id} id={id} className="grid md:grid-cols-2 gap-10 items-start scroll-mt-24">
               <div>
@@ -191,7 +191,7 @@ export default function CommercialPage() {
       </section>
 
       {/* Why us for business */}
-      <section className="bg-slate-50 py-16">
+      <section className="bg-slate-50 py-12 md:py-14">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <span className="section-tag">Business Benefits</span>
@@ -217,7 +217,7 @@ export default function CommercialPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-20">
+      <section className="py-14 md:py-16">
         <div className="max-w-3xl mx-auto px-4">
           <div className="text-center mb-12">
             <span className="section-tag">FAQs</span>
@@ -238,7 +238,7 @@ export default function CommercialPage() {
       </section>
 
       {/* CTA */}
-      <section className="border-t border-slate-200 bg-white py-16">
+      <section className="border-t border-slate-200 bg-white py-12 md:py-14">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="font-heading text-3xl font-bold text-brand-800 mb-4">Ready to Transform Your Workplace?</h2>
           <p className="text-slate-600 mb-8">Get a free commercial cleaning quote. We'll respond within 2 hours.</p>

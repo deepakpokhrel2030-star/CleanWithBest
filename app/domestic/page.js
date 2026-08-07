@@ -95,7 +95,7 @@ export default function DomesticPage() {
                 </div>
               ))}
             </div>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/quote" className="btn-primary-lg">Get a Home Quote <ArrowRight size={18} /></Link>
               <a href="tel:+447503494242" className="btn-outline"><Phone size={15}/> +44 7503 494242</a>
             </div>
@@ -116,9 +116,9 @@ export default function DomesticPage() {
       </section>
 
       {/* Room-by-room */}
-      <section className="py-20 bg-white">
+      <section className="py-14 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-14">
+          <div className="text-center mb-10">
             <span className="section-tag">What We Clean</span>
             <h2 className="section-title mb-4">Room-by-Room Cleaning Checklist</h2>
             <p className="text-slate-500 max-w-xl mx-auto">Here's exactly what our cleaners cover in every room during a standard regular clean.</p>
@@ -158,8 +158,8 @@ export default function DomesticPage() {
       </div>
 
       {/* All services */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 space-y-16">
+      <section className="py-14 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 space-y-10 md:space-y-12">
           {services.map(({ id, slug, code, title, price, tagline, desc, includes, popular }) => (
             <div key={id} id={id} className="grid md:grid-cols-2 gap-10 items-start scroll-mt-24">
               <div>
@@ -200,7 +200,7 @@ export default function DomesticPage() {
       </section>
 
       {/* Benefits strip */}
-      <section className="bg-white py-14">
+      <section className="bg-white py-10 md:py-12">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="font-heading text-2xl font-bold text-brand-800 mb-8">Why Choose Our Domestic Cleaning?</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -215,7 +215,7 @@ export default function DomesticPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-14 md:py-16 bg-slate-50">
         <div className="max-w-3xl mx-auto px-4">
           <div className="text-center mb-12">
             <span className="section-tag">FAQs</span>
@@ -236,7 +236,7 @@ export default function DomesticPage() {
       </section>
 
       {/* CTA */}
-      <section className="border-t border-slate-200 bg-white py-16">
+      <section className="border-t border-slate-200 bg-white py-12 md:py-14">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <Sparkles className="mx-auto mb-4 text-accent-600" size={30} />
           <h2 className="font-heading text-3xl font-bold text-brand-800 mb-3">Ready for a cleaner home?</h2>

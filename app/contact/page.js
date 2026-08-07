@@ -82,7 +82,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="border-y border-slate-200 bg-slate-50 py-16">
+      <section className="border-y border-slate-200 bg-slate-50 py-10 md:py-12">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 lg:grid-cols-[380px_1fr]">
           <div className="space-y-6">
             <div className="image-panel">

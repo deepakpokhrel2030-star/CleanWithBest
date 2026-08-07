@@ -26,7 +26,7 @@ export default function AboutPage() {
             <p className="hero-copy">
               We help London homes and businesses arrange cleaning without confusion. Send the job details, choose how you want to be contacted, and we will reply with a clear quote.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/quote" className="btn-primary-lg">
                 Request a Quote <ArrowRight size={16} />
               </Link>
@@ -47,8 +47,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-white py-20">
-        <div className="mx-auto grid max-w-7xl gap-12 px-4 lg:grid-cols-[0.9fr_1.1fr]">
+      <section className="bg-white py-14 md:py-16">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <span className="section-tag">Our Approach</span>
             <h2 className="section-title">Simple, practical and customer focused</h2>
@@ -71,7 +71,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-slate-50 py-20">
+      <section className="bg-slate-50 py-14 md:py-16">
         <div className="mx-auto max-w-7xl px-4">
           <div className="mb-10 max-w-2xl">
             <span className="section-tag">How We Work</span>
@@ -94,7 +94,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-t border-slate-200 bg-white py-16">
+      <section className="border-t border-slate-200 bg-white py-12 md:py-14">
         <div className="mx-auto max-w-4xl px-4 text-center">
           <h2 className="font-heading text-3xl font-extrabold text-brand-800">Speak to CleanWithBest</h2>
           <p className="mx-auto mt-3 max-w-2xl text-slate-600">Use the quote form, call us, or message on WhatsApp. We are available 24/7 for quote requests.</p>
