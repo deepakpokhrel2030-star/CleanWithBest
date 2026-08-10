@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Lock, LogOut, Trash2, RefreshCw, FileText, MessageSquare, TrendingUp, Eye, EyeOff, Phone, Mail, MapPin, X } from 'lucide-react';
+import { Lock, LogOut, Trash2, RefreshCw, FileText, MessageSquare, TrendingUp, Eye, EyeOff, Phone, Mail, MapPin, X, Package, Plus, Save, Edit3 } from 'lucide-react';
 
 function Badge({ status }) {
   const colors = { new: 'bg-green-100 text-green-700', viewed: 'bg-blue-100 text-blue-700', contacted: 'bg-purple-100 text-purple-700' };
@@ -16,6 +16,17 @@ function whatsappNumber(phone = '') {
   if (digits.startsWith('0')) return `44${digits.slice(1)}`;
   return digits;
 }
+
+const emptyProductForm = {
+  id: null,
+  name: '',
+  price: '',
+  category: '',
+  description: '',
+  imageUrl: '',
+  stock: '',
+  status: 'active',
+};
 
 function QuoteDetailModal({ quote, onClose, onStatusChange, onDelete, deleting }) {
   if (!quote) return null;
@@ -140,10 +151,13 @@ export default function AdminPage() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState({ quotes: [], contacts: [] });
+  const [data, setData] = useState({ quotes: [], contacts: [], products: [] });
   const [tab, setTab] = useState('quotes');
   const [deleting, setDeleting] = useState(null);
   const [selectedQuote, setSelectedQuote] = useState(null);
+  const [productForm, setProductForm] = useState(emptyProductForm);
+  const [savingProduct, setSavingProduct] = useState(false);
+  const [productError, setProductError] = useState('');
 
   const adminPayload = extra => ({ username: username.trim(), password: password.trim(), ...extra });
 
@@ -188,6 +202,59 @@ export default function AdminPage() {
 
   const updateQuoteStatus = (id, status) => updateStatus('quote', id, status);
   const deleteQuote = id => deleteEntry('quote', id);
+
+  const resetProductForm = () => {
+    setProductForm(emptyProductForm);
+    setProductError('');
+  };
+
+  const editProduct = product => {
+    setProductForm({
+      id: product.id,
+      name: product.name || '',
+      price: product.price || '',
+      category: product.category || '',
+      description: product.description || '',
+      imageUrl: product.imageUrl || '',
+      stock: product.stock || '',
+      status: product.status === 'inactive' ? 'inactive' : 'active',
+    });
+    setProductError('');
+  };
+
+  const saveProduct = async e => {
+    e.preventDefault();
+    setSavingProduct(true);
+    setProductError('');
+
+    const res = await fetch('/api/admin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(adminPayload({
+        action: 'saveProduct',
+        id: productForm.id,
+        status: productForm.status,
+        product: {
+          name: productForm.name,
+          price: productForm.price,
+          category: productForm.category,
+          description: productForm.description,
+          imageUrl: productForm.imageUrl,
+          stock: productForm.stock,
+        },
+      })),
+    });
+    const json = await res.json();
+    setSavingProduct(false);
+
+    if (!json.success) {
+      setProductError(json.error || 'Could not save product.');
+      return;
+    }
+
+    resetProductForm();
+    await refresh();
+  };
 
   if (!loggedIn) {
     return (
@@ -237,6 +304,7 @@ export default function AdminPage() {
 
   const newQuotes = data.quotes.filter(q => q.status === 'new').length;
   const newContacts = data.contacts.filter(c => c.status === 'new').length;
+  const activeProducts = data.products.filter(product => product.status === 'active').length;
 
   return (
     <main className="min-h-screen bg-slate-50">
@@ -247,7 +315,7 @@ export default function AdminPage() {
             <h1 className="font-heading text-2xl font-bold text-brand-800">
               <span className="text-brand-800">Clean</span><span className="text-brand-700">WithBest</span> Admin
             </h1>
-            <p className="text-sm text-slate-500">Manage new website quote requests and contact messages.</p>
+            <p className="text-sm text-slate-500">Manage website quote requests, contact messages and cleaning products.</p>
           </div>
           <div className="flex items-center gap-3">
             <button onClick={refresh} className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-600 transition-colors hover:bg-slate-50 hover:text-brand-800">
@@ -266,7 +334,7 @@ export default function AdminPage() {
             <div>
               <p className="text-xs font-bold uppercase text-accent-400">Live inbox</p>
               <h2 className="mt-2 font-heading text-3xl font-bold">New work, all in one place</h2>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-300">Open quotes, call customers, WhatsApp them, and update each request status after contact.</p>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-300">Open quotes, call customers, WhatsApp them, and keep your cleaning product shop up to date.</p>
             </div>
             <div className="rounded-lg bg-white/10 px-4 py-3 text-sm font-bold ring-1 ring-white/10">
               {newQuotes + newContacts} new items
@@ -279,8 +347,8 @@ export default function AdminPage() {
           {[
             { icon: FileText, label: 'Total Quotes', value: data.quotes.length, sub: `${newQuotes} new`, color: 'brand' },
             { icon: MessageSquare, label: 'Total Messages', value: data.contacts.length, sub: `${newContacts} new`, color: 'accent' },
-            { icon: TrendingUp, label: 'This Month', value: [...data.quotes, ...data.contacts].filter(x => new Date(x.createdAt).getMonth() === new Date().getMonth()).length, sub: 'submissions', color: 'brand' },
-            { icon: FileText, label: 'New Items', value: newQuotes + newContacts, sub: 'require attention', color: 'accent' },
+            { icon: Package, label: 'Products', value: data.products.length, sub: `${activeProducts} active`, color: 'brand' },
+            { icon: TrendingUp, label: 'This Month', value: [...data.quotes, ...data.contacts].filter(x => new Date(x.createdAt).getMonth() === new Date().getMonth()).length, sub: 'submissions', color: 'accent' },
           ].map(({ icon: Icon, label, value, sub, color }) => (
             <div key={label} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
               <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-lg ${color === 'brand' ? 'bg-brand-50' : 'bg-accent-500/15'}`}>
@@ -304,6 +372,11 @@ export default function AdminPage() {
             className={`flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all ${tab === 'contacts' ? 'bg-brand-700 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-50'}`}>
             <MessageSquare size={15} /> Contact Messages
             {newContacts > 0 && <span className="bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">{newContacts}</span>}
+          </button>
+          <button onClick={() => setTab('products')}
+            className={`flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all ${tab === 'products' ? 'bg-brand-700 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-50'}`}>
+            <Package size={15} /> Products
+            {activeProducts > 0 && <span className="bg-accent-500 text-white text-xs min-w-5 h-5 rounded-full flex items-center justify-center px-1">{activeProducts}</span>}
           </button>
         </div>
 
@@ -452,6 +525,166 @@ export default function AdminPage() {
                 </table>
               </div>
             )}
+          </div>
+        )}
+
+        {/* Products manager */}
+        {tab === 'products' && (
+          <div className="grid gap-6 lg:grid-cols-[380px_1fr]">
+            <form onSubmit={saveProduct} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+              <div className="mb-5 flex items-start justify-between gap-3">
+                <div>
+                  <h2 className="font-heading text-lg font-bold text-brand-800">
+                    {productForm.id ? 'Edit Product' : 'Add Product'}
+                  </h2>
+                  <p className="text-sm text-slate-500">Active products appear on the public products page.</p>
+                </div>
+                <button type="button" onClick={resetProductForm} className="rounded-lg border border-slate-200 p-2 text-slate-500 hover:bg-slate-50" aria-label="Clear product form">
+                  <Plus size={16} className="rotate-45" />
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="label">Product name</label>
+                  <input
+                    value={productForm.name}
+                    onChange={e => setProductForm(form => ({ ...form, name: e.target.value }))}
+                    placeholder="e.g. Multi-surface cleaner"
+                    className="input-field"
+                    required
+                  />
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+                  <div>
+                    <label className="label">Price</label>
+                    <input
+                      value={productForm.price}
+                      onChange={e => setProductForm(form => ({ ...form, price: e.target.value }))}
+                      placeholder="e.g. £9.99"
+                      className="input-field"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="label">Category</label>
+                    <input
+                      value={productForm.category}
+                      onChange={e => setProductForm(form => ({ ...form, category: e.target.value }))}
+                      placeholder="e.g. Kitchen"
+                      className="input-field"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="label">Description</label>
+                  <textarea
+                    value={productForm.description}
+                    onChange={e => setProductForm(form => ({ ...form, description: e.target.value }))}
+                    placeholder="Short product details"
+                    rows={4}
+                    className="input-field resize-none"
+                  />
+                </div>
+                <div>
+                  <label className="label">Image URL</label>
+                  <input
+                    value={productForm.imageUrl}
+                    onChange={e => setProductForm(form => ({ ...form, imageUrl: e.target.value }))}
+                    placeholder="https://..."
+                    className="input-field"
+                  />
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+                  <div>
+                    <label className="label">Stock note</label>
+                    <input
+                      value={productForm.stock}
+                      onChange={e => setProductForm(form => ({ ...form, stock: e.target.value }))}
+                      placeholder="e.g. In stock"
+                      className="input-field"
+                    />
+                  </div>
+                  <div>
+                    <label className="label">Status</label>
+                    <select
+                      value={productForm.status}
+                      onChange={e => setProductForm(form => ({ ...form, status: e.target.value }))}
+                      className="input-field"
+                    >
+                      <option value="active">active</option>
+                      <option value="inactive">inactive</option>
+                    </select>
+                  </div>
+                </div>
+                {productError && <p className="text-sm font-semibold text-red-500">{productError}</p>}
+                <button type="submit" disabled={savingProduct} className="btn-primary w-full">
+                  <Save size={16} /> {savingProduct ? 'Saving...' : productForm.id ? 'Save Changes' : 'Add Product'}
+                </button>
+              </div>
+            </form>
+
+            <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+              <div className="flex items-center justify-between border-b border-slate-100 px-6 py-5">
+                <div>
+                  <h2 className="font-heading text-lg font-bold text-brand-800">Products</h2>
+                  <p className="text-sm text-slate-500">{data.products.length} total products</p>
+                </div>
+              </div>
+              {data.products.length === 0 ? (
+                <div className="py-16 text-center text-slate-400">
+                  <Package size={40} className="mx-auto mb-3 opacity-30" />
+                  <p>No products added yet.</p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead className="border-b border-slate-100 bg-slate-50">
+                      <tr>
+                        {['Product', 'Price', 'Category', 'Stock', 'Status', ''].map(h => (
+                          <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide whitespace-nowrap">{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-50">
+                      {data.products.map(product => (
+                        <tr key={product.id} className="transition-colors hover:bg-slate-50">
+                          <td className="px-4 py-3">
+                            <div className="font-semibold text-slate-900">{product.name}</div>
+                            {product.description && <div className="mt-1 max-w-xs truncate text-xs text-slate-400">{product.description}</div>}
+                          </td>
+                          <td className="px-4 py-3 font-bold text-brand-700 whitespace-nowrap">{product.price}</td>
+                          <td className="px-4 py-3 text-slate-500 whitespace-nowrap">{product.category || '—'}</td>
+                          <td className="px-4 py-3 text-slate-500 whitespace-nowrap">{product.stock || '—'}</td>
+                          <td className="px-4 py-3">
+                            <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${product.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'}`}>
+                              {product.status}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3">
+                            <div className="flex items-center gap-2">
+                              <button
+                                onClick={() => editProduct(product)}
+                                className="inline-flex items-center gap-1 rounded-lg bg-brand-50 px-2.5 py-1.5 text-xs font-bold text-brand-700 hover:bg-brand-100"
+                              >
+                                <Edit3 size={14} /> Edit
+                              </button>
+                              <button
+                                onClick={() => deleteEntry('product', product.id)}
+                                disabled={deleting === product.id}
+                                className="text-red-400 hover:text-red-600 transition-colors p-1 rounded hover:bg-red-50"
+                              >
+                                <Trash2 size={14} />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>

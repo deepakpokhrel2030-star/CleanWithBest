@@ -36,6 +36,13 @@ async function ensureTables() {
         status TEXT NOT NULL DEFAULT 'new',
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
+
+      CREATE TABLE IF NOT EXISTS products (
+        id BIGSERIAL PRIMARY KEY,
+        data JSONB NOT NULL DEFAULT '{}'::jsonb,
+        status TEXT NOT NULL DEFAULT 'active',
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
     `);
   }
 
@@ -59,11 +66,11 @@ async function listEntries(table) {
   return rows.map(rowToEntry);
 }
 
-async function addEntry(table, data) {
+async function addEntry(table, data, status = 'new') {
   await ensureTables();
   const { rows } = await getPool().query(
-    `INSERT INTO ${table} (data, status) VALUES ($1, 'new') RETURNING id, data, status, created_at`,
-    [data]
+    `INSERT INTO ${table} (data, status) VALUES ($1, $2) RETURNING id, data, status, created_at`,
+    [data, status]
   );
   return rowToEntry(rows[0]);
 }
@@ -76,6 +83,15 @@ async function deleteEntry(table, id) {
 async function updateEntryStatus(table, id, status) {
   await ensureTables();
   await getPool().query(`UPDATE ${table} SET status = $1 WHERE id = $2`, [status, id]);
+}
+
+async function updateEntry(table, id, data, status) {
+  await ensureTables();
+  const { rows } = await getPool().query(
+    `UPDATE ${table} SET data = $1, status = $2 WHERE id = $3 RETURNING id, data, status, created_at`,
+    [data, status, id]
+  );
+  return rows[0] ? rowToEntry(rows[0]) : null;
 }
 
 export function getQuotes() {
@@ -108,4 +124,21 @@ export function deleteContact(id) {
 
 export function updateContactStatus(id, status) {
   return updateEntryStatus('contacts', id, status);
+}
+
+export function getProducts({ includeInactive = false } = {}) {
+  if (includeInactive) return listEntries('products');
+  return listEntries('products').then(products => products.filter(product => product.status === 'active'));
+}
+
+export function addProduct(product, status = 'active') {
+  return addEntry('products', product, status);
+}
+
+export function updateProduct(id, product, status = 'active') {
+  return updateEntry('products', id, product, status);
+}
+
+export function deleteProduct(id) {
+  return deleteEntry('products', id);
 }
