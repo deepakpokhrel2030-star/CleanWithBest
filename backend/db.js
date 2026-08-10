@@ -154,6 +154,15 @@ export function getOrders() {
   return listEntries('orders');
 }
 
+export async function getOrderById(id) {
+  await ensureTables();
+  const { rows } = await getPool().query(
+    `SELECT id, data, status, created_at FROM orders WHERE id = $1`,
+    [id]
+  );
+  return rows[0] ? rowToEntry(rows[0]) : null;
+}
+
 export function addOrder(order, status = 'pending_payment') {
   return addEntry('orders', order, status);
 }

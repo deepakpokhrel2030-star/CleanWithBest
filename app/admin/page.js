@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Lock, LogOut, Trash2, RefreshCw, FileText, MessageSquare, TrendingUp, Eye, EyeOff, Phone, Mail, MapPin, X, Package, Plus, Save, Edit3, ShoppingBag } from 'lucide-react';
+import { Lock, LogOut, Trash2, RefreshCw, FileText, MessageSquare, TrendingUp, Eye, EyeOff, Phone, Mail, MapPin, X, Package, Plus, Save, Edit3, ShoppingBag, Upload, ImageOff } from 'lucide-react';
 
 function Badge({ status }) {
   const colors = { new: 'bg-green-100 text-green-700', viewed: 'bg-blue-100 text-blue-700', contacted: 'bg-purple-100 text-purple-700' };
@@ -162,6 +162,7 @@ export default function AdminPage() {
   const [productForm, setProductForm] = useState(emptyProductForm);
   const [savingProduct, setSavingProduct] = useState(false);
   const [productError, setProductError] = useState('');
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const adminPayload = extra => ({ username: username.trim(), password: password.trim(), ...extra });
 
@@ -258,6 +259,31 @@ export default function AdminPage() {
 
     resetProductForm();
     await refresh();
+  };
+
+  const uploadProductImage = async file => {
+    if (!file) return;
+    setProductError('');
+    setUploadingImage(true);
+
+    const body = new FormData();
+    body.append('username', username.trim());
+    body.append('password', password.trim());
+    body.append('file', file);
+
+    try {
+      const res = await fetch('/api/admin/upload', { method: 'POST', body });
+      const json = await res.json();
+      if (!json.success) {
+        setProductError(json.error || 'Could not upload image.');
+        return;
+      }
+      setProductForm(form => ({ ...form, imageUrl: json.url }));
+    } catch {
+      setProductError('Could not upload image. Please try again.');
+    } finally {
+      setUploadingImage(false);
+    }
   };
 
   if (!loggedIn) {
@@ -677,12 +703,36 @@ export default function AdminPage() {
                   />
                 </div>
                 <div>
-                  <label className="label">Image URL</label>
+                  <label className="label">Product image</label>
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
+                      {productForm.imageUrl ? (
+                        <img src={productForm.imageUrl} alt="Product preview" className="h-full w-full object-cover" />
+                      ) : (
+                        <ImageOff size={22} className="text-slate-300" />
+                      )}
+                    </div>
+                    <label className="inline-flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg border border-dashed border-slate-300 px-4 py-3 text-sm font-bold text-slate-600 hover:border-brand-400 hover:bg-brand-50 hover:text-brand-700">
+                      <Upload size={16} />
+                      {uploadingImage ? 'Uploading...' : 'Upload image'}
+                      <input
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp,image/gif"
+                        className="hidden"
+                        disabled={uploadingImage}
+                        onChange={e => {
+                          const file = e.target.files?.[0];
+                          uploadProductImage(file);
+                          e.target.value = '';
+                        }}
+                      />
+                    </label>
+                  </div>
                   <input
                     value={productForm.imageUrl}
                     onChange={e => setProductForm(form => ({ ...form, imageUrl: e.target.value }))}
-                    placeholder="https://..."
-                    className="input-field"
+                    placeholder="or paste an image link (https://...)"
+                    className="input-field mt-2"
                   />
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">

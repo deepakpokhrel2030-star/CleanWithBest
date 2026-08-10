@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import { NextResponse } from 'next/server';
 import { getOrders, updateOrder } from '@/backend/db';
+import { sendOrderConfirmationEmail } from '@/backend/mail';
 
 export const runtime = 'nodejs';
 
@@ -40,7 +41,7 @@ export async function POST(request) {
         const orders = await getOrders();
         const order = orders.find(item => String(item.id) === String(orderId));
         if (order) {
-          await updateOrder(orderId, {
+          const updatedOrder = await updateOrder(orderId, {
             items: order.items || [],
             subtotal: order.subtotal,
             shipping: order.shipping,
@@ -50,6 +51,12 @@ export async function POST(request) {
             customer: session.customer_details || null,
             delivery: session.shipping_details || null,
           }, 'paid');
+
+          if (updatedOrder) {
+            sendOrderConfirmationEmail(updatedOrder).catch(error => {
+              console.error('Order confirmation email failed:', error);
+            });
+          }
         }
       }
     }

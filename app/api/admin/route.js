@@ -4,6 +4,7 @@ import {
   getContacts,
   getProducts,
   getOrders,
+  getOrderById,
   addProduct,
   updateProduct,
   deleteProduct,
@@ -15,6 +16,7 @@ import {
   updateContactStatus,
 } from '@/backend/db';
 import { verifyAdminPassword } from '@/backend/adminAuth';
+import { sendOrderStatusEmail } from '@/backend/mail';
 
 export const runtime = 'nodejs';
 
@@ -80,7 +82,15 @@ export async function POST(request) {
     if (action === 'updateStatus') {
       if (type === 'quote') await updateQuoteStatus(id, status);
       if (type === 'contact') await updateContactStatus(id, status);
-      if (type === 'order') await updateOrderStatus(id, status);
+      if (type === 'order') {
+        await updateOrderStatus(id, status);
+        const order = await getOrderById(id);
+        if (order) {
+          sendOrderStatusEmail(order, status).catch(error => {
+            console.error('Order status email failed:', error);
+          });
+        }
+      }
       return NextResponse.json({ success: true });
     }
 
