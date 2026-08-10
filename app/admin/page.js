@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Lock, LogOut, Trash2, RefreshCw, FileText, MessageSquare, TrendingUp, Eye, EyeOff, Phone, Mail, MapPin, X, Package, Plus, Save, Edit3 } from 'lucide-react';
+import { Lock, LogOut, Trash2, RefreshCw, FileText, MessageSquare, TrendingUp, Eye, EyeOff, Phone, Mail, MapPin, X, Package, Plus, Save, Edit3, ShoppingBag } from 'lucide-react';
 
 function Badge({ status }) {
   const colors = { new: 'bg-green-100 text-green-700', viewed: 'bg-blue-100 text-blue-700', contacted: 'bg-purple-100 text-purple-700' };
@@ -9,6 +9,10 @@ function Badge({ status }) {
 
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+}
+
+function formatMoney(pence = 0) {
+  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(Number(pence || 0) / 100);
 }
 
 function whatsappNumber(phone = '') {
@@ -151,7 +155,7 @@ export default function AdminPage() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState({ quotes: [], contacts: [], products: [] });
+  const [data, setData] = useState({ quotes: [], contacts: [], products: [], orders: [] });
   const [tab, setTab] = useState('quotes');
   const [deleting, setDeleting] = useState(null);
   const [selectedQuote, setSelectedQuote] = useState(null);
@@ -305,6 +309,7 @@ export default function AdminPage() {
   const newQuotes = data.quotes.filter(q => q.status === 'new').length;
   const newContacts = data.contacts.filter(c => c.status === 'new').length;
   const activeProducts = data.products.filter(product => product.status === 'active').length;
+  const openOrders = data.orders.filter(order => order.status !== 'fulfilled' && order.status !== 'cancelled').length;
 
   return (
     <main className="min-h-screen bg-slate-50">
@@ -337,7 +342,7 @@ export default function AdminPage() {
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-300">Open quotes, call customers, WhatsApp them, and keep your cleaning product shop up to date.</p>
             </div>
             <div className="rounded-lg bg-white/10 px-4 py-3 text-sm font-bold ring-1 ring-white/10">
-              {newQuotes + newContacts} new items
+              {newQuotes + newContacts + openOrders} open items
             </div>
           </div>
         </div>
@@ -348,7 +353,7 @@ export default function AdminPage() {
             { icon: FileText, label: 'Total Quotes', value: data.quotes.length, sub: `${newQuotes} new`, color: 'brand' },
             { icon: MessageSquare, label: 'Total Messages', value: data.contacts.length, sub: `${newContacts} new`, color: 'accent' },
             { icon: Package, label: 'Products', value: data.products.length, sub: `${activeProducts} active`, color: 'brand' },
-            { icon: TrendingUp, label: 'This Month', value: [...data.quotes, ...data.contacts].filter(x => new Date(x.createdAt).getMonth() === new Date().getMonth()).length, sub: 'submissions', color: 'accent' },
+            { icon: ShoppingBag, label: 'Orders', value: data.orders.length, sub: `${openOrders} open`, color: 'accent' },
           ].map(({ icon: Icon, label, value, sub, color }) => (
             <div key={label} className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
               <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-lg ${color === 'brand' ? 'bg-brand-50' : 'bg-accent-500/15'}`}>
@@ -377,6 +382,11 @@ export default function AdminPage() {
             className={`flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all ${tab === 'products' ? 'bg-brand-700 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-50'}`}>
             <Package size={15} /> Products
             {activeProducts > 0 && <span className="bg-accent-500 text-white text-xs min-w-5 h-5 rounded-full flex items-center justify-center px-1">{activeProducts}</span>}
+          </button>
+          <button onClick={() => setTab('orders')}
+            className={`flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all ${tab === 'orders' ? 'bg-brand-700 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-50'}`}>
+            <ShoppingBag size={15} /> Orders
+            {openOrders > 0 && <span className="bg-red-500 text-white text-xs min-w-5 h-5 rounded-full flex items-center justify-center px-1">{openOrders}</span>}
           </button>
         </div>
 
@@ -514,6 +524,86 @@ export default function AdminPage() {
                           <button
                             onClick={() => deleteEntry('contact', c.id)}
                             disabled={deleting === c.id}
+                            className="text-red-400 hover:text-red-600 transition-colors p-1 rounded hover:bg-red-50"
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Orders table */}
+        {tab === 'orders' && (
+          <div className="overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm">
+            <div className="border-b border-slate-100 px-6 py-5">
+              <h2 className="font-heading text-lg font-bold text-brand-800">Shop Orders</h2>
+              <p className="text-sm text-slate-500">{data.orders.length} total orders</p>
+            </div>
+            {data.orders.length === 0 ? (
+              <div className="py-16 text-center text-slate-400">
+                <ShoppingBag size={40} className="mx-auto mb-3 opacity-30" />
+                <p>No shop orders yet.</p>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead className="border-b border-slate-100 bg-slate-50">
+                    <tr>
+                      {['Order', 'Items', 'Customer / Delivery', 'Total', 'Date', 'Status', ''].map(h => (
+                        <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide whitespace-nowrap">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-50">
+                    {data.orders.map(order => (
+                      <tr key={order.id} className="transition-colors hover:bg-slate-50">
+                        <td className="px-4 py-3 font-bold text-slate-900 whitespace-nowrap">#{order.id}</td>
+                        <td className="px-4 py-3 text-slate-600">
+                          <div className="max-w-sm space-y-1">
+                            {(order.items || []).map(item => (
+                              <div key={`${order.id}-${item.id}`} className="text-xs">
+                                <span className="font-semibold text-slate-800">{item.quantity}x {item.name}</span>
+                                <span className="ml-1 text-slate-400">{item.price}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </td>
+                        <td className="px-4 py-3 text-slate-500">
+                          {order.customer?.email && <div className="font-semibold text-slate-700">{order.customer.email}</div>}
+                          {order.customer?.name && <div className="text-xs text-slate-500">{order.customer.name}</div>}
+                          {order.delivery?.address && (
+                            <div className="mt-1 max-w-xs text-xs text-slate-400">
+                              {[order.delivery.address.line1, order.delivery.address.city, order.delivery.address.postal_code].filter(Boolean).join(', ')}
+                            </div>
+                          )}
+                          <div className="mt-1 text-xs font-semibold text-brand-700">{order.shipping ? `${formatMoney(order.shipping)} delivery` : 'Free UK delivery'}</div>
+                        </td>
+                        <td className="px-4 py-3 font-extrabold text-brand-700 whitespace-nowrap">{formatMoney(order.total)}</td>
+                        <td className="px-4 py-3 text-slate-400 text-xs whitespace-nowrap">{formatDate(order.createdAt)}</td>
+                        <td className="px-4 py-3">
+                          <select
+                            value={order.status}
+                            onChange={e => updateStatus('order', order.id, e.target.value)}
+                            className="rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-brand-500"
+                          >
+                            <option value="pending_payment">pending_payment</option>
+                            <option value="paid">paid</option>
+                            <option value="packing">packing</option>
+                            <option value="shipped">shipped</option>
+                            <option value="fulfilled">fulfilled</option>
+                            <option value="cancelled">cancelled</option>
+                          </select>
+                        </td>
+                        <td className="px-4 py-3">
+                          <button
+                            onClick={() => deleteEntry('order', order.id)}
+                            disabled={deleting === order.id}
                             className="text-red-400 hover:text-red-600 transition-colors p-1 rounded hover:bg-red-50"
                           >
                             <Trash2 size={14} />

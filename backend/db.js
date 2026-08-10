@@ -43,6 +43,13 @@ async function ensureTables() {
         status TEXT NOT NULL DEFAULT 'active',
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
+
+      CREATE TABLE IF NOT EXISTS orders (
+        id BIGSERIAL PRIMARY KEY,
+        data JSONB NOT NULL DEFAULT '{}'::jsonb,
+        status TEXT NOT NULL DEFAULT 'pending_payment',
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      );
     `);
   }
 
@@ -141,4 +148,24 @@ export function updateProduct(id, product, status = 'active') {
 
 export function deleteProduct(id) {
   return deleteEntry('products', id);
+}
+
+export function getOrders() {
+  return listEntries('orders');
+}
+
+export function addOrder(order, status = 'pending_payment') {
+  return addEntry('orders', order, status);
+}
+
+export function updateOrderStatus(id, status) {
+  return updateEntryStatus('orders', id, status);
+}
+
+export function updateOrder(id, order, status = 'pending_payment') {
+  return updateEntry('orders', id, order, status);
+}
+
+export function deleteOrder(id) {
+  return deleteEntry('orders', id);
 }

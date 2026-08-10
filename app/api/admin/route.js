@@ -3,11 +3,14 @@ import {
   getQuotes,
   getContacts,
   getProducts,
+  getOrders,
   addProduct,
   updateProduct,
   deleteProduct,
+  deleteOrder,
   deleteQuote,
   deleteContact,
+  updateOrderStatus,
   updateQuoteStatus,
   updateContactStatus,
 } from '@/backend/db';
@@ -43,12 +46,13 @@ export async function POST(request) {
     }
 
     if (action === 'getData') {
-      const [quotes, contacts, products] = await Promise.all([
+      const [quotes, contacts, products, orders] = await Promise.all([
         getQuotes(),
         getContacts(),
         getProducts({ includeInactive: true }),
+        getOrders(),
       ]);
-      return NextResponse.json({ success: true, quotes, contacts, products });
+      return NextResponse.json({ success: true, quotes, contacts, products, orders });
     }
 
     if (action === 'saveProduct') {
@@ -69,12 +73,14 @@ export async function POST(request) {
       if (type === 'quote') await deleteQuote(id);
       if (type === 'contact') await deleteContact(id);
       if (type === 'product') await deleteProduct(id);
+      if (type === 'order') await deleteOrder(id);
       return NextResponse.json({ success: true });
     }
 
     if (action === 'updateStatus') {
       if (type === 'quote') await updateQuoteStatus(id, status);
       if (type === 'contact') await updateContactStatus(id, status);
+      if (type === 'order') await updateOrderStatus(id, status);
       return NextResponse.json({ success: true });
     }
 
