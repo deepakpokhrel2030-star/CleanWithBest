@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronDown, Menu, MessageCircle, Phone, X } from 'lucide-react';
 import { commercialServices, domesticServices } from '@/frontend/lib/services';
+import { socialLinks } from '@/frontend/lib/social';
 
 const navItems = [
   ['About', '/about'],
@@ -53,10 +54,23 @@ export default function Header() {
             <span className="truncate">24/7 quotes: +44 7503 494242</span>
           </a>
           <div className="hidden shrink-0 items-center gap-3 sm:flex">
-            <a href="tel:+447789602945" className="hover:text-accent-400">+44 7789 602945</a>
             <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-white/10 px-2.5 py-1 text-white ring-1 ring-white/15 hover:bg-white/15">
               <MessageCircle size={13} /> WhatsApp
             </a>
+            <div className="flex items-center gap-1.5 border-l border-white/15 pl-3">
+              {socialLinks.map(({ Icon, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-6 w-6 items-center justify-center rounded-md bg-white/10 text-white ring-1 ring-white/15 hover:bg-white/20"
+                >
+                  <Icon size={12} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
