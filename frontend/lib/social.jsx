@@ -1,25 +1,36 @@
-import { Facebook, Instagram } from 'lucide-react';
-
-export function TikTokMark({ size = 18 }) {
+function FacebookMark({ size = 18 }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" fill="none">
-      <path d="M14.3 3.4v10.2a4.9 4.9 0 1 1-4.9-4.9" stroke="#25F4EE" strokeWidth="3.1" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M15.9 3.4c.5 3 2.2 4.9 5 5.3" stroke="#FE2C55" strokeWidth="3.1" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M13.1 3.4v10.2a4.9 4.9 0 1 1-4.9-4.9" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M14.7 3.4c.5 3 2.2 4.9 5 5.3" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+      <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.716-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
+    </svg>
+  );
+}
+
+function InstagramMark({ size = 18 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+    </svg>
+  );
+}
+
+function TikTokMark({ size = 18 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+      <path d="M16.6 5.82c-1.001-.941-1.55-2.257-1.55-3.82h-3.44v14.42c0 1.786-1.451 3.24-3.24 3.24-1.786 0-3.24-1.454-3.24-3.24s1.454-3.24 3.24-3.24c.309 0 .606.045.888.126V9.85a6.72 6.72 0 0 0-.888-.06C4.85 9.79 2 12.64 2 16.06s2.85 6.27 6.37 6.27 6.37-2.85 6.37-6.27V9.02a8.29 8.29 0 0 0 4.83 1.55V7.13a4.85 4.85 0 0 1-3-1.31z" />
     </svg>
   );
 }
 
 export const socialLinks = [
   {
-    Icon: Facebook,
+    Icon: FacebookMark,
     label: 'Facebook',
     href: 'https://www.facebook.com/people/Cleanwithbest/61584162025224/',
     className: 'border-[#1877F2]/20 bg-[#1877F2] text-white hover:bg-[#166FE5]',
   },
   {
-    Icon: Instagram,
+    Icon: InstagramMark,
     label: 'Instagram',
     href: 'https://www.instagram.com/cleanwithbest',
     className: 'border-pink-200 bg-[linear-gradient(135deg,#F58529,#DD2A7B,#8134AF,#515BD4)] text-white hover:opacity-90',
