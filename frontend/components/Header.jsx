@@ -8,7 +8,6 @@ import { ChevronDown, Menu, MessageCircle, Phone, X } from 'lucide-react';
 import { commercialServices, domesticServices } from '@/frontend/lib/services';
 
 const navItems = [
-  ['Shop', '/shop'],
   ['About', '/about'],
   ['Contact', '/contact'],
 ];
