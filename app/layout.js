@@ -1,7 +1,6 @@
 import { Inter, Poppins } from 'next/font/google';
 import './globals.css';
-import Header from '@/frontend/components/Header';
-import Footer from '@/frontend/components/Footer';
+import SiteChrome from '@/frontend/components/SiteChrome';
 import Chatbot from '@/frontend/components/Chatbot';
 import InstallApp from '@/frontend/components/InstallApp';
 
@@ -45,9 +44,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body className="font-sans">
-        <Header />
-        {children}
-        <Footer />
+        <SiteChrome>{children}</SiteChrome>
         <InstallApp />
         <Chatbot />
       </body>
