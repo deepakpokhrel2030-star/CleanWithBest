@@ -52,6 +52,7 @@ export default function Header() {
             <Phone size={14} className="shrink-0 text-accent-400" />
             <span className="truncate">24/7 quotes: +44 7503 494242</span>
           </a>
+          <span className="hidden truncate text-accent-300 md:block">Hotel Cleaning Contracts &bull; Airbnb Cleaning</span>
           <div className="hidden shrink-0 items-center gap-3 sm:flex">
             <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-md bg-white/10 px-2.5 py-1 text-white ring-1 ring-white/15 hover:bg-white/15">
               <MessageCircle size={13} /> WhatsApp
@@ -90,6 +91,10 @@ export default function Header() {
             <span className="text-xl sm:text-2xl">Best</span>
           </span>
         </Link>
+
+        <span className="hidden shrink-0 whitespace-nowrap rounded-full border border-brand-100 bg-brand-50 px-3 py-1.5 text-xs font-bold text-brand-700 xl:inline-flex">
+          Hotel Cleaning Contracts &bull; Airbnb Cleaning
+        </span>
 
         <nav className="hidden items-center gap-7 lg:flex">
           {serviceGroups.map(group => (

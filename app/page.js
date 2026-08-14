@@ -85,7 +85,7 @@ export default function HomePage() {
         <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-brand-300/20 blur-3xl" />
         <div className="page-hero-inner">
           <div className="animate-reveal-up">
-            <span className="section-tag"><Star size={14} className="text-accent-500" /> London cleaning service</span>
+            <span className="section-tag"><Star size={14} className="text-accent-500" /> Hotel Cleaning Contracts &bull; Airbnb Cleaning</span>
             <h1 className="hero-title">Continuous cleaning for hotels, Airbnb and businesses.</h1>
             <p className="hero-copy">
               Request a quote once and CleanWithBest will contact you by WhatsApp or phone. Hotel and Airbnb continuous cleaning starts from £20/hour, with clear hourly prices for recurring contracts and business cleaning.
