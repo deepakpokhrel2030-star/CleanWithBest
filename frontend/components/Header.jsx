@@ -94,10 +94,6 @@ export default function Header() {
           </span>
         </Link>
 
-        <span className="hidden shrink-0 whitespace-nowrap rounded-full border border-brand-100 bg-brand-50 px-3 py-1.5 text-xs font-bold text-brand-700 xl:inline-flex">
-          Hotel Cleaning Contracts &bull; Airbnb Cleaning
-        </span>
-
         <nav className="hidden items-center gap-7 lg:flex">
           <Link
             href={primaryLink[1]}
