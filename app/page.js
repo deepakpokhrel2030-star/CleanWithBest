@@ -5,7 +5,6 @@ import {
   Building2,
   CheckCircle,
   Clock3,
-  Globe,
   Hotel,
   Mail,
   MessageCircle,
@@ -15,6 +14,7 @@ import {
   Sparkles,
   Star,
 } from 'lucide-react';
+import FreeWebsiteOffer from '@/frontend/components/FreeWebsiteOffer';
 
 export const metadata = {
   title: 'CleanWithBest - Hotel, Airbnb & Business Cleaning',
@@ -226,29 +226,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white py-14 md:py-16">
-        <div className="mx-auto max-w-4xl px-4 text-center">
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="section-tag"><Globe size={14} className="text-accent-500" /> IT Services</span>
-            <span className="inline-flex items-center rounded-full bg-amber-100 px-3 py-1 text-xs font-black uppercase tracking-wide text-amber-800">Limited Offer</span>
-          </div>
-          <h2 className="section-title mt-3">Run a hotel or rent out flats? Get a free website.</h2>
-          <p className="section-sub mx-auto mt-3 max-w-2xl">
-            Give us your full cleaning contract and we will build you a website — <strong className="text-brand-800">free of charge</strong>. We can also take over your ongoing IT if you want it, as a separate paid service — check <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 hover:underline">UjyaaloIT.com</a> for details. Sign your hotel, Airbnb or flats up for our continuous cleaning service to get started, while this offer lasts.
-          </p>
-          <p className="mx-auto mt-3 max-w-2xl text-xs font-semibold text-slate-500">
-            Only the website build is free. Ongoing IT takeover / support is a separate paid service, not included.
-          </p>
-          <div className="mt-7 flex flex-wrap justify-center gap-3">
-            <Link href="/quote" className="btn-primary-lg">
-              Sign Up My Property <ArrowRight size={18} />
-            </Link>
-            <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="btn-outline">
-              Visit UjyaaloIT.com
-            </a>
-          </div>
-        </div>
-      </section>
+      <FreeWebsiteOffer />
 
       <section className="relative overflow-hidden bg-brand-900 py-12 md:py-14 text-white">
         <Image

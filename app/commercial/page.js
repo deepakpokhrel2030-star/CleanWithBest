@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Building2, ShoppingBag, Utensils, Dumbbell, GraduationCap, Warehouse, Droplets, Stethoscope, Hotel, Repeat, CheckCircle, ArrowRight, ChevronDown, Phone, MessageCircle, Clock3, Globe } from 'lucide-react';
+import { Building2, ShoppingBag, Utensils, Dumbbell, GraduationCap, Warehouse, Droplets, Stethoscope, Hotel, Repeat, CheckCircle, ArrowRight, ChevronDown, Phone, MessageCircle, Clock3 } from 'lucide-react';
+import FreeWebsiteOffer from '@/frontend/components/FreeWebsiteOffer';
 
 export const metadata = {
   title: 'Hotel, Airbnb & Business Cleaning Services',
@@ -271,24 +272,7 @@ export default function CommercialPage() {
         </div>
       </section>
 
-      {/* IT services / free website */}
-      <section className="bg-slate-50 py-12 md:py-14">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <Globe className="mx-auto mb-3 text-brand-600" size={28} />
-          <span className="inline-flex items-center rounded-full bg-amber-100 px-3 py-1 text-xs font-black uppercase tracking-wide text-amber-800">Limited Offer</span>
-          <h2 className="font-heading text-2xl md:text-3xl font-bold text-brand-800 mb-3 mt-3">Run a hotel or rent out flats? Get a free website.</h2>
-          <p className="text-slate-600 mb-2">
-            Give us your full cleaning contract and we will build you a website — <strong className="text-brand-800">free of charge</strong>. We can also take over your ongoing IT if you want it, as a separate paid service — check <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 hover:underline">UjyaaloIT.com</a> for details. Sign your hotel, Airbnb or flats up for our continuous cleaning service to get started, while this offer lasts.
-          </p>
-          <p className="mb-6 text-xs font-semibold text-slate-500">
-            Only the website build is free. Ongoing IT takeover / support is a separate paid service, not included.
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/quote" className="btn-primary">Sign Up My Property</Link>
-            <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="btn-outline">Visit UjyaaloIT.com</a>
-          </div>
-        </div>
-      </section>
+      <FreeWebsiteOffer />
 
       {/* CTA */}
       <section className="border-t border-slate-200 bg-white py-12 md:py-14">
