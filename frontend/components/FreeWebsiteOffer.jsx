@@ -18,7 +18,7 @@ function OfferCard({ className }) {
             Run a hotel or rent out flats? Get a free website.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-slate-600">
-            Give us your full cleaning contract and we will build you a website — <strong className="text-brand-800">100% free of charge</strong>. Want us to take over your ongoing IT too? That's available as a separate paid service — <strong className="text-brand-800">UjyaaloIT.com</strong> is the best place for all your IT-related work.
+            Give us your full cleaning contract and we will build you a website — <strong className="text-brand-800">100% free of charge</strong>. Want us to take over your ongoing IT too? That's available as a separate paid service — <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 underline hover:text-brand-900">UjyaaloIT.com</a> is the best place for all your IT-related work.
           </p>
 
           <div className="mx-auto mt-5 max-w-xl rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-xs font-bold text-amber-800">
@@ -54,7 +54,7 @@ function OfferBanner({ className }) {
             Run a hotel or rent out flats? Get a free website.
           </h2>
           <p className="mt-4 max-w-xl text-slate-200">
-            Give us your full cleaning contract and we will build you a website — <strong className="text-white">100% free of charge</strong>. Want us to take over your ongoing IT too? That's available as a separate paid service — <strong className="text-white">UjyaaloIT.com</strong> is the best place for all your IT-related work.
+            Give us your full cleaning contract and we will build you a website — <strong className="text-white">100% free of charge</strong>. Want us to take over your ongoing IT too? That's available as a separate paid service — <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-bold text-white underline hover:text-amber-200">UjyaaloIT.com</a> is the best place for all your IT-related work.
           </p>
           <div className="mt-5 max-w-xl rounded-lg border border-white/15 bg-white/10 px-4 py-3 text-xs font-bold text-amber-200 backdrop-blur">
             Only the website build is free. Ongoing IT takeover / support is a separate paid service, not included.
