@@ -135,7 +135,7 @@ const ANSWERS = [
   {
     title: 'IT Services',
     keywords: ['it services', 'website', 'web design', 'free website', 'ujyaalo', 'ujyaaloit', 'web developer', 'build a website'],
-    answer: 'Yes. Give us your hotel, Airbnb or flats\' cleaning service and we will build you a website for free, then keep looking after your IT ongoing, through our partner UjyaaloIT.com (ujyaaloit.com).',
+    answer: 'Yes, for a limited time. Give us your full hotel, Airbnb or flats cleaning contract and we will build you a website for free, and we can take over your IT too. Check UjyaaloIT.com (ujyaaloit.com) for details.',
   },
   {
     title: 'Payment',

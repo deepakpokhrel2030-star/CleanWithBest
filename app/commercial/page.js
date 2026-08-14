@@ -16,7 +16,7 @@ const services = [
     tagline: 'Ongoing turnover cleaning, not a one-off visit',
     price: 'From £20/hr (min. 5 hrs per booking)',
     desc: 'Built for hotels, Airbnb hosts and serviced apartments that need cleaning on a continuous, ongoing basis rather than a single visit. We turn rooms around fast between guests and can also run full housekeeping for an entire hotel.',
-    includes: ['Guest changeover / turnover cleaning', 'Fresh linen and bed making', 'Bathroom deep sanitising between stays', 'Kitchen and communal area reset', 'Full hotel housekeeping contracts available', 'Flexible early-checkout and same-day slots', 'Free property website + ongoing IT support when you sign up (via UjyaaloIT.com)'],
+    includes: ['Guest changeover / turnover cleaning', 'Fresh linen and bed making', 'Bathroom deep sanitising between stays', 'Kitchen and communal area reset', 'Full hotel housekeeping contracts available', 'Flexible early-checkout and same-day slots', 'Limited offer: free website + we take over your IT (via UjyaaloIT.com) on a full cleaning contract'],
     clients: 'Hotels, Airbnb hosts, serviced apartments, guest houses, B&Bs',
     popular: true,
   },
@@ -125,7 +125,7 @@ const services = [
 
 const faqs = [
   { q: 'Do you offer continuous cleaning for hotels and Airbnb?', a: 'Yes. Hotel and Airbnb cleaning starts from £20/hour with a 5-hour minimum per booking, and covers ongoing guest turnovers rather than a single visit. We can also run full housekeeping for an entire hotel.' },
-  { q: 'Do you really build a free website for hotels and flats?', a: 'Yes. If you give us your hotel, Airbnb or flats’ cleaning service, we build you a property website for free, and keep looking after your IT ongoing, through our partner, UjyaaloIT.com.' },
+  { q: 'Do you really build a free website for hotels and flats?', a: 'Yes, for a limited time. Give us your full hotel, Airbnb or flats cleaning contract and we build you a property website for free, and can take over your IT too, through our partner UjyaaloIT.com — check the site for details.' },
   { q: 'Can you clean outside of business hours?', a: 'Absolutely. We offer early morning, evening and weekend cleaning slots to ensure zero disruption to your business operations. We\'ll work around your schedule entirely.' },
   { q: 'Do you provide the cleaning equipment and products?', a: 'Yes, we supply all professional cleaning equipment and products. We can also use your preferred products if required for compliance or environmental reasons.' },
   { q: 'Can I get a regular contract rather than one-off cleans?', a: 'Yes — most of our commercial clients opt for ongoing regular contracts (daily, 3x week, weekly etc.). This ensures consistent standards and preferential pricing.' },
@@ -274,10 +274,11 @@ export default function CommercialPage() {
       {/* IT services / free website */}
       <section className="bg-slate-50 py-12 md:py-14">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <Globe className="mx-auto mb-4 text-brand-600" size={28} />
-          <h2 className="font-heading text-2xl md:text-3xl font-bold text-brand-800 mb-3">Run a hotel or rent out flats? Get a free website.</h2>
+          <Globe className="mx-auto mb-3 text-brand-600" size={28} />
+          <span className="inline-flex items-center rounded-full bg-amber-100 px-3 py-1 text-xs font-black uppercase tracking-wide text-amber-800">Limited Offer</span>
+          <h2 className="font-heading text-2xl md:text-3xl font-bold text-brand-800 mb-3 mt-3">Run a hotel or rent out flats? Get a free website.</h2>
           <p className="text-slate-600 mb-6">
-            Give us your cleaning service and we will build you a website for free — and keep looking after your IT ongoing, through our partner <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 hover:underline">UjyaaloIT.com</a>. Sign your hotel, Airbnb or flats up for our continuous cleaning service to get started.
+            Give us your full cleaning contract and we will build you a website for free — and we can take over your IT too. Check <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 hover:underline">UjyaaloIT.com</a> for details. Sign your hotel, Airbnb or flats up for our continuous cleaning service to get started, while this offer lasts.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/quote" className="btn-primary">Sign Up My Property</Link>

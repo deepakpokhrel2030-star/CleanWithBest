@@ -228,10 +228,13 @@ export default function HomePage() {
 
       <section className="bg-white py-14 md:py-16">
         <div className="mx-auto max-w-4xl px-4 text-center">
-          <span className="section-tag"><Globe size={14} className="text-accent-500" /> IT Services</span>
-          <h2 className="section-title">Run a hotel or rent out flats? Get a free website.</h2>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <span className="section-tag"><Globe size={14} className="text-accent-500" /> IT Services</span>
+            <span className="inline-flex items-center rounded-full bg-amber-100 px-3 py-1 text-xs font-black uppercase tracking-wide text-amber-800">Limited Offer</span>
+          </div>
+          <h2 className="section-title mt-3">Run a hotel or rent out flats? Get a free website.</h2>
           <p className="section-sub mx-auto mt-3 max-w-2xl">
-            Give us your cleaning service and we will build you a website for free — and keep looking after your IT ongoing, through our partner <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 hover:underline">UjyaaloIT.com</a>. Sign your hotel, Airbnb or flats up for our continuous cleaning service to get started.
+            Give us your full cleaning contract and we will build you a website for free — and we can take over your IT too. Check <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 hover:underline">UjyaaloIT.com</a> for details. Sign your hotel, Airbnb or flats up for our continuous cleaning service to get started, while this offer lasts.
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <Link href="/quote" className="btn-primary-lg">
