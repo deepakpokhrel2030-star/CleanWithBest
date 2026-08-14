@@ -226,7 +226,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <FreeWebsiteOffer />
+      <FreeWebsiteOffer variant="banner" />
 
       <section className="relative overflow-hidden bg-brand-900 py-12 md:py-14 text-white">
         <Image
