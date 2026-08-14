@@ -9,6 +9,7 @@ import { commercialServices } from '@/frontend/lib/services';
 import { socialLinks } from '@/frontend/lib/social';
 
 const navItems = [
+  ['Airbnb', '/services/hotel-airbnb-cleaning'],
   ['About', '/about'],
   ['Contact', '/contact'],
 ];
