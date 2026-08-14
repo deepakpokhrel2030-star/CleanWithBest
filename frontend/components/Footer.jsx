@@ -1,18 +1,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Mail, MessageCircle, Phone } from 'lucide-react';
-import { commercialServices, domesticServices } from '@/frontend/lib/services';
+import { commercialServices } from '@/frontend/lib/services';
 import { socialLinks } from '@/frontend/lib/social';
 
-const serviceLinks = [
-  ...domesticServices.slice(0, 4),
-  ...commercialServices.slice(0, 2),
-].map(service => [service.shortTitle, `/services/${service.slug}`]);
+const serviceLinks = commercialServices
+  .slice(0, 6)
+  .map(service => [service.shortTitle, `/services/${service.slug}`]);
 
 const companyLinks = [
   ['Home', '/'],
-  ['Domestic', '/domestic'],
-  ['Commercial', '/commercial'],
+  ['Services', '/commercial'],
   ['About', '/about'],
   ['Contact', '/contact'],
   ['Admin', '/admin'],
@@ -33,7 +31,7 @@ export default function Footer() {
             />
           </Link>
           <p className="mt-4 max-w-sm text-sm leading-relaxed">
-            Domestic and commercial cleaning across London. Clear quote requests, simple contact options and reliable cleaning teams.
+            Hotel, Airbnb, recurring contract and business cleaning across London. Clear quote requests, simple contact options and reliable cleaning teams.
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
             {socialLinks.map(({ Icon, label, href, className }) => (
@@ -91,7 +89,10 @@ export default function Footer() {
       <div className="border-t border-slate-200">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} CleanWithBest. All rights reserved.</p>
-          <p>Available 24/7 for quote requests by phone, WhatsApp or email.</p>
+          <p>
+            Available 24/7 for quote requests by phone, WhatsApp or email. IT services by{' '}
+            <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-semibold hover:text-brand-700">UjyaaloIT.com</a>.
+          </p>
         </div>
       </div>
     </footer>

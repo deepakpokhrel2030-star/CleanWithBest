@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 const values = [
-  { icon: ShieldCheck, title: 'Trust first', text: 'Customers invite us into homes and workplaces, so reliability and care come first.' },
+  { icon: ShieldCheck, title: 'Trust first', text: 'Customers invite us into hotels, guest properties and workplaces, so reliability and care come first.' },
   { icon: CheckCircle, title: 'Clear standards', text: 'We explain what is included and confirm the quote before the clean is booked.' },
   { icon: Leaf, title: 'Better products', text: 'We can use professional cleaning products or your preferred products when requested.' },
   { icon: Users, title: 'Respectful service', text: 'We keep communication simple, polite and practical from quote request to completion.' },
@@ -24,7 +24,7 @@ export default function AboutPage() {
             <span className="section-tag">About Us</span>
             <h1 className="hero-title">Clear quotes, reliable cleaning, simple contact.</h1>
             <p className="hero-copy">
-              We help London homes and businesses arrange cleaning without confusion. Send the job details, choose how you want to be contacted, and we will reply with a clear quote.
+              We help London hotels, Airbnb hosts and businesses arrange continuous cleaning without confusion. Send the job details, choose how you want to be contacted, and we will reply with a clear quote.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/quote" className="btn-primary-lg">
@@ -38,7 +38,7 @@ export default function AboutPage() {
           <div className="image-panel animate-float-soft">
             <Image
               src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=900&q=85"
-              alt="Clean and organised modern home"
+              alt="Clean and organised hotel room"
               width={720}
               height={760}
               className="h-[420px] w-full object-cover md:h-[520px]"
@@ -56,7 +56,10 @@ export default function AboutPage() {
               CleanWithBest was created to make professional cleaning easier to arrange. Customers should not have to search through confusing packages or chase for a reply. Our process is direct: you tell us what needs cleaning, we check the details, and we contact you by phone or WhatsApp.
             </p>
             <p className="mt-4 text-base leading-relaxed text-slate-600">
-              We cover domestic and commercial cleaning, from regular home cleaning to end-of-tenancy and workplace cleaning. Every quote is handled with clear communication and realistic expectations.
+              We specialise in continuous cleaning for hotels, Airbnb, serviced apartments and businesses — recurring contracts and ongoing turnover cleaning, not one-off house cleans. Every quote is handled with clear communication and realistic expectations, and every hourly rate starts at £20/hour.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-slate-600">
+              We also offer IT services through <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 hover:underline">UjyaaloIT.com</a>. Sign your hotel, Airbnb or flats up for our continuous cleaning service and we will build you a website for free.
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">

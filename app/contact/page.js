@@ -88,7 +88,7 @@ export default function ContactPage() {
             <div className="image-panel">
               <Image
                 src="https://images.unsplash.com/photo-1563453392212-326f5e854473?w=700&q=85"
-                alt="Professional cleaning products ready for home cleaning"
+                alt="Professional cleaning products ready for hotel and business cleaning"
                 width={620}
                 height={420}
                 className="h-56 w-full object-cover"

@@ -13,8 +13,8 @@ const poppins = Poppins({
 
 export const metadata = {
   title: { default: 'CleanWithBest – Professional Cleaning Services', template: '%s | CleanWithBest' },
-  description: 'CleanWithBest offers top-rated domestic and commercial cleaning services. Fully insured, background-checked cleaners, 100% satisfaction guarantee.',
-  keywords: ['cleaning services', 'domestic cleaning', 'commercial cleaning', 'deep cleaning', 'end of tenancy'],
+  description: 'CleanWithBest offers continuous cleaning for hotels, Airbnb, serviced apartments and businesses, from £20/hour. Fully insured, background-checked cleaners, 100% satisfaction guarantee.',
+  keywords: ['hotel cleaning', 'Airbnb cleaning', 'serviced apartment cleaning', 'commercial cleaning', 'recurring contract cleaning', 'office cleaning'],
   manifest: '/manifest.webmanifest',
   applicationName: 'CleanWithBest',
   appleWebApp: {

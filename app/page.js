@@ -5,60 +5,62 @@ import {
   Building2,
   CheckCircle,
   Clock3,
-  Home,
+  Globe,
+  Hotel,
   Mail,
   MessageCircle,
   Phone,
-  ShieldCheck,
+  Repeat,
+  Utensils,
   Sparkles,
   Star,
 } from 'lucide-react';
 
 export const metadata = {
-  title: 'CleanWithBest - Professional Cleaning Services',
-  description: 'Modern domestic and commercial cleaning across London. Request a quote and we will contact you by WhatsApp or phone.',
+  title: 'CleanWithBest - Hotel, Airbnb & Business Cleaning',
+  description: 'Continuous cleaning for hotels, Airbnb and businesses across London, from £20/hour. Request a quote and we will contact you by WhatsApp or phone.',
 };
 
 const services = [
   {
-    icon: Home,
-    title: 'Regular home cleaning',
-    price: 'From £17/hr',
-    text: 'A reliable weekly, fortnightly or monthly clean for the rooms you use every day.',
-    href: '/services/regular-home-cleaning',
+    icon: Hotel,
+    title: 'Hotel & Airbnb cleaning',
+    price: 'From £20/hr (min. 5 hrs)',
+    text: 'Continuous turnover cleaning for hotels, Airbnb and serviced apartments — we can run full housekeeping for an entire hotel.',
+    href: '/services/hotel-airbnb-cleaning',
   },
   {
-    icon: Sparkles,
-    title: 'Deep cleaning',
-    price: 'From £179',
-    text: 'More time, more detail and a proper reset for kitchens, bathrooms and living spaces.',
-    href: '/services/deep-cleaning',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'End of tenancy',
-    price: 'From £179',
-    text: 'A detailed clean for move-outs, landlords, tenants and letting agents.',
-    href: '/services/end-of-tenancy-cleaning',
+    icon: Repeat,
+    title: 'Recurring & contract cleaning',
+    price: 'From £20/hr',
+    text: 'Daily, weekly or fortnightly contract cleaning for any business, with consistent standards on every visit.',
+    href: '/services/recurring-contract-cleaning',
   },
   {
     icon: Building2,
-    title: 'Commercial cleaning',
-    price: 'From £18/hr',
-    text: 'Offices, retail, restaurants, gyms and shared workspaces cleaned around your hours.',
+    title: 'Office cleaning',
+    price: 'From £21.50/hr',
+    text: 'Desks, washrooms, kitchens and common areas cleaned around your working hours.',
     href: '/services/office-cleaning',
+  },
+  {
+    icon: Utensils,
+    title: 'Restaurant & hospitality',
+    price: 'From £20/hr',
+    text: 'Food-safe cleaning for restaurants, cafes, bars and hospitality venues.',
+    href: '/services/restaurant-hospitality-cleaning',
   },
 ];
 
 const prices = [
-  ['Regular cleaning', '£17/hr'],
-  ['Deep cleaning', 'from £179'],
-  ['End of tenancy', 'from £179'],
-  ['Move in / move out', 'from £179'],
-  ['Carpet cleaning', 'from £43/room'],
-  ['Mattress cleaning', 'from £23'],
+  ['Hotel & Airbnb cleaning', 'from £20/hr (min. 5 hrs)'],
+  ['Recurring & contract cleaning', 'from £20/hr'],
   ['Office cleaning', 'from £21.50/hr'],
-  ['Retail cleaning', 'from £18/hr'],
+  ['Retail cleaning', 'from £20/hr'],
+  ['Restaurant & hospitality', 'from £20/hr'],
+  ['Gym & fitness', 'from £20/hr'],
+  ['School & education', 'from £20/hr'],
+  ['Warehouse & industrial', 'from £20/hr'],
 ];
 
 const process = [
@@ -70,7 +72,7 @@ const process = [
 const trust = [
   'Available 24/7 for quote requests',
   'Clear prices before booking',
-  'Domestic and commercial teams',
+  'Hotel, Airbnb & business teams',
   'WhatsApp and phone response',
 ];
 
@@ -84,9 +86,9 @@ export default function HomePage() {
         <div className="page-hero-inner">
           <div className="animate-reveal-up">
             <span className="section-tag"><Star size={14} className="text-accent-500" /> London cleaning service</span>
-            <h1 className="hero-title">Cleaning made simple for homes and workplaces.</h1>
+            <h1 className="hero-title">Continuous cleaning for hotels, Airbnb and businesses.</h1>
             <p className="hero-copy">
-              Request a quote once and CleanWithBest will contact you by WhatsApp or phone. Regular cleaning starts from £17/hour, with clear prices for deep cleans, tenancy cleans and business cleaning.
+              Request a quote once and CleanWithBest will contact you by WhatsApp or phone. Hotel and Airbnb continuous cleaning starts from £20/hour, with clear hourly prices for recurring contracts and business cleaning.
             </p>
             <div className="mt-6 grid gap-3 sm:flex sm:flex-wrap">
               <Link href="/quote" className="btn-primary-lg w-full sm:w-auto">
@@ -111,7 +113,7 @@ export default function HomePage() {
           <div className="image-panel animate-float-soft">
             <Image
               src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1000&q=85"
-              alt="Professional cleaner working in a bright home"
+              alt="Professional cleaner at work in a hotel room"
               width={720}
               height={820}
               priority
@@ -127,7 +129,7 @@ export default function HomePage() {
 
       <section className="border-y border-brand-700 bg-brand-800 py-5 text-white">
         <div className="mx-auto grid max-w-7xl gap-3 px-4 text-sm font-bold sm:grid-cols-2 lg:grid-cols-4">
-          {['Regular cleaning £17/hr', 'Deep cleans from £179', 'End of tenancy from £179', '24/7 quote requests'].map(item => (
+          {['Hotel & Airbnb from £20/hr', 'Recurring cleaning from £20/hr', 'Office cleaning from £21.50/hr', '24/7 quote requests'].map(item => (
             <div key={item} className="flex items-center gap-2">
               <Sparkles size={15} className="text-accent-400" /> {item}
             </div>
@@ -174,7 +176,7 @@ export default function HomePage() {
             <div className="mt-6 image-panel">
               <Image
                 src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=900&q=85"
-                alt="Cleaner using professional cleaning cloth in a bright home"
+                alt="Cleaner using professional cleaning cloth in a hotel room"
                 width={720}
                 height={430}
                 className="h-72 w-full object-cover"
@@ -209,7 +211,7 @@ export default function HomePage() {
             <h2 className="section-title">Clear starting rates</h2>
             <p className="section-sub mt-3">These are guide prices. Final quotes depend on property size, condition, access and any extra requests.</p>
             <div className="mt-6 rounded-lg border border-brand-100 bg-white p-5 shadow-sm">
-              <p className="text-lg font-extrabold text-brand-800">Regular cleaning starts at £17/hr.</p>
+              <p className="text-lg font-extrabold text-brand-800">Hotel &amp; Airbnb cleaning starts at £20/hr (min. 5 hrs).</p>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">Send your postcode and service type for a confirmed quote.</p>
             </div>
           </div>
@@ -220,6 +222,24 @@ export default function HomePage() {
                 <span className="text-sm font-extrabold text-brand-700">{price}</span>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-14 md:py-16">
+        <div className="mx-auto max-w-4xl px-4 text-center">
+          <span className="section-tag"><Globe size={14} className="text-accent-500" /> IT Services</span>
+          <h2 className="section-title">Run a hotel or rent out flats? Get a free website.</h2>
+          <p className="section-sub mx-auto mt-3 max-w-2xl">
+            We also offer IT services through <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 hover:underline">UjyaaloIT.com</a>. Sign your hotel, Airbnb or flats up for our continuous cleaning service, and we will build you a website for free as part of the package.
+          </p>
+          <div className="mt-7 flex flex-wrap justify-center gap-3">
+            <Link href="/quote" className="btn-primary-lg">
+              Sign Up My Property <ArrowRight size={18} />
+            </Link>
+            <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="btn-outline">
+              Visit UjyaaloIT.com
+            </a>
           </div>
         </div>
       </section>

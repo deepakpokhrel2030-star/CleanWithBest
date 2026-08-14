@@ -1,19 +1,43 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Building2, ShoppingBag, Utensils, Dumbbell, GraduationCap, Warehouse, Droplets, Stethoscope, CheckCircle, ArrowRight, ChevronDown, Phone, MessageCircle, Clock3 } from 'lucide-react';
+import { Building2, ShoppingBag, Utensils, Dumbbell, GraduationCap, Warehouse, Droplets, Stethoscope, Hotel, Repeat, CheckCircle, ArrowRight, ChevronDown, Phone, MessageCircle, Clock3, Globe } from 'lucide-react';
 
 export const metadata = {
-  title: 'Commercial Cleaning Services',
-  description: 'Professional commercial cleaning for offices, retail, restaurants, gyms, schools and more. Flexible scheduling, fully insured.',
+  title: 'Hotel, Airbnb & Business Cleaning Services',
+  description: 'Continuous cleaning for hotels, Airbnb, recurring contracts, offices, retail, restaurants, gyms, schools and more, from £20/hour. Flexible scheduling, fully insured.',
 };
 
 const services = [
+  {
+    id: 'hotel',
+    slug: 'hotel-airbnb-cleaning',
+    icon: Hotel,
+    title: 'Hotel & Airbnb Continuous Cleaning',
+    tagline: 'Ongoing turnover cleaning, not a one-off visit',
+    price: 'From £20/hr (min. 5 hrs per booking)',
+    desc: 'Built for hotels, Airbnb hosts and serviced apartments that need cleaning on a continuous, ongoing basis rather than a single visit. We turn rooms around fast between guests and can also run full housekeeping for an entire hotel.',
+    includes: ['Guest changeover / turnover cleaning', 'Fresh linen and bed making', 'Bathroom deep sanitising between stays', 'Kitchen and communal area reset', 'Full hotel housekeeping contracts available', 'Flexible early-checkout and same-day slots', 'Free property website when you sign up (via UjyaaloIT.com)'],
+    clients: 'Hotels, Airbnb hosts, serviced apartments, guest houses, B&Bs',
+    popular: true,
+  },
+  {
+    id: 'recurring',
+    slug: 'recurring-contract-cleaning',
+    icon: Repeat,
+    title: 'Recurring & Contract Cleaning',
+    tagline: 'Ongoing cleaning on a schedule that suits your business',
+    price: 'From £20/hr',
+    desc: 'Daily, weekly or fortnightly contract cleaning for any business that wants consistent standards without booking a one-off visit each time. We assign a consistent team and keep a clear schedule.',
+    includes: ['Daily, weekly or fortnightly visits', 'Same team assigned where possible', 'Scheduled around your opening hours', 'Consistent standards, checked regularly', 'Flexible contract length', 'Key holding available'],
+    clients: 'Any business that wants ongoing, scheduled cleaning',
+  },
   {
     id: 'office',
     slug: 'office-cleaning',
     icon: Building2,
     title: 'Office Cleaning',
     tagline: 'A cleaner office means a more productive team',
+    price: 'From £21.50/hr',
     desc: 'We provide professional, reliable office cleaning services tailored to your business. Our trained cleaners work around your schedule — early morning, evening or weekends — ensuring zero disruption to your operations.',
     includes: ['Desks, chairs and workstation sanitising', 'Kitchen and breakroom cleaning', 'Toilet and washroom hygiene', 'Reception and common area maintenance', 'Bin emptying and recycling management', 'Carpet vacuuming and hard floor mopping', 'Window ledges and internal glass'],
     clients: 'Law firms, tech companies, media agencies, studios, accountancy practices',
@@ -25,6 +49,7 @@ const services = [
     icon: ShoppingBag,
     title: 'Retail Cleaning',
     tagline: 'First impressions start with a clean store',
+    price: 'From £20/hr',
     desc: 'Your retail environment reflects your brand. We keep your store sparkling clean and welcoming for customers, working around your opening hours to ensure minimal disruption to your business.',
     includes: ['Sales floor vacuuming and mopping', 'Fitting room and changing area hygiene', 'Window and glass display cleaning', 'Counter and display sanitising', 'Staff areas and breakrooms', 'Toilet facilities', 'Entrance and exit areas'],
     clients: 'Clothing stores, supermarkets, pharmacies, beauty salons, showrooms',
@@ -35,6 +60,7 @@ const services = [
     icon: Utensils,
     title: 'Restaurant & Hospitality',
     tagline: 'Meet health standards with confidence',
+    price: 'From £20/hr',
     desc: 'Food-service businesses require the highest hygiene standards. Our specialist cleaning teams are trained in food-safe cleaning protocols to keep your kitchen and dining areas compliant and spotless.',
     includes: ['Deep kitchen and commercial oven cleaning', 'Grease trap and exhaust hood degreasing', 'Walk-in fridge and freezer cleaning', 'Dining area sanitising between services', 'Bar and counter deep clean', 'Floor scrubbing and anti-slip treatment', 'Health inspection ready'],
     clients: 'Restaurants, cafes, bars, hotels, catering facilities, food courts',
@@ -46,6 +72,7 @@ const services = [
     icon: Dumbbell,
     title: 'Gym & Fitness Centers',
     tagline: 'Keep your members safe and motivated',
+    price: 'From £20/hr',
     desc: 'Gyms are high-traffic environments where bacteria and viruses spread quickly. Our specialist gym cleaning service ensures all equipment, changing rooms and communal areas are properly disinfected and sanitised.',
     includes: ['All gym equipment wiping and disinfection', 'Changing room and locker hygiene', 'Shower and toilet sanitising', 'Reception and lounge areas', 'Studio floor cleaning and disinfection', 'Pool deck cleaning (where applicable)', 'High-touch surface focus'],
     clients: 'Gyms, fitness studios, swimming pools, sports centers, yoga studios',
@@ -56,6 +83,7 @@ const services = [
     icon: GraduationCap,
     title: 'School & Education',
     tagline: 'Safe, hygienic environments for learning',
+    price: 'From £20/hr',
     desc: 'Schools and educational facilities require careful, thorough cleaning with child-safe products. Our fully vetted staff hold the necessary checks to work in educational settings.',
     includes: ['Classrooms, labs and workshops', 'Corridor and staircase cleaning', 'Canteen and kitchen hygiene', 'Toilet blocks and changing rooms', 'Sports halls and gymnasiums', 'Library and computer suite cleaning', 'Child-safe, non-toxic products only'],
     clients: 'Primary schools, secondary schools, colleges, universities, nurseries',
@@ -66,6 +94,7 @@ const services = [
     icon: Warehouse,
     title: 'Warehouse & Industrial',
     tagline: 'Heavy-duty cleaning for large-scale facilities',
+    price: 'From £20/hr',
     desc: 'Industrial and warehouse environments require specialist cleaning equipment and expertise. Our teams are trained in high-access cleaning, industrial machinery cleaning and large-scale floor maintenance.',
     includes: ['Industrial floor scrubbing and polishing', 'High-access and racking cleaning', 'Machinery and equipment degreasing', 'Loading bay and dock areas', 'Welfare facilities and offices', 'Spillage cleaning and response', 'Pressure washing services'],
     clients: 'Warehouses, factories, manufacturing plants, distribution centers',
@@ -76,6 +105,7 @@ const services = [
     icon: Droplets,
     title: 'Washroom Services',
     tagline: 'Complete washroom hygiene management',
+    price: 'From £20/hr',
     desc: 'We provide full washroom hygiene services including regular deep cleaning, consumables management and specialist sanitary services. Everything your washrooms need to remain clean, hygienic and fully stocked.',
     includes: ['Regular deep cleaning and sanitising', 'Consumables (soap, paper, sanitiser)', 'Air freshener and odor control units', 'Sanitary disposal services', 'Urinal descaling and hygiene treatment', 'Mirror and fixture polishing', 'Regular service visits scheduled to your needs'],
     clients: 'All commercial premises with shared washroom facilities',
@@ -86,6 +116,7 @@ const services = [
     icon: Stethoscope,
     title: 'Medical & Healthcare',
     tagline: 'Infection-control grade cleaning',
+    price: 'From £20/hr',
     desc: 'Healthcare facilities demand the highest standards of hygiene. Our specialist medical cleaning teams are trained in infection-control procedures, using NHS-approved products and techniques.',
     includes: ['Clinical area cleaning to infection-control standards', 'Terminal cleaning of consulting rooms', 'Waiting room and reception hygiene', 'Medical equipment surface sanitising', 'Decontamination services', 'Waste disposal and biohazard protocols', 'CQC-compliant cleaning procedures'],
     clients: 'Dental practices, GP surgeries, clinics, care homes, opticians',
@@ -93,6 +124,8 @@ const services = [
 ];
 
 const faqs = [
+  { q: 'Do you offer continuous cleaning for hotels and Airbnb?', a: 'Yes. Hotel and Airbnb cleaning starts from £20/hour with a 5-hour minimum per booking, and covers ongoing guest turnovers rather than a single visit. We can also run full housekeeping for an entire hotel.' },
+  { q: 'Do you really build a free website for hotels and flats?', a: 'Yes. If you sign your hotel, Airbnb or flats up for our continuous cleaning service, we build you a property website for free through our IT services partner, UjyaaloIT.com.' },
   { q: 'Can you clean outside of business hours?', a: 'Absolutely. We offer early morning, evening and weekend cleaning slots to ensure zero disruption to your business operations. We\'ll work around your schedule entirely.' },
   { q: 'Do you provide the cleaning equipment and products?', a: 'Yes, we supply all professional cleaning equipment and products. We can also use your preferred products if required for compliance or environmental reasons.' },
   { q: 'Can I get a regular contract rather than one-off cleans?', a: 'Yes — most of our commercial clients opt for ongoing regular contracts (daily, 3x week, weekly etc.). This ensures consistent standards and preferential pricing.' },
@@ -108,10 +141,10 @@ export default function CommercialPage() {
         <div className="absolute inset-0 bg-[linear-gradient(115deg,#ffffff_0%,#f8fafc_48%,#eef2ff_100%)]" />
         <div className="page-hero-inner">
           <div className="animate-reveal-up">
-            <span className="section-tag">Commercial Cleaning</span>
-            <h1 className="hero-title">Cleaner workplaces with less disruption.</h1>
+            <span className="section-tag">Hotel, Airbnb & Business Cleaning</span>
+            <h1 className="hero-title">Continuous cleaning, minimum £20/hour.</h1>
             <p className="hero-copy">
-              Office, retail, hospitality, gym and industrial cleaning built around your opening hours. Tell us the site details and we will send a clear business quote.
+              Hotel and Airbnb continuous cleaning from £20/hour, plus recurring contracts, office, retail, hospitality, gym and industrial cleaning built around your opening hours. Tell us the site details and we will send a clear business quote.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/quote" className="btn-primary-lg">Get a Business Quote <ArrowRight size={18} /></Link>
@@ -119,7 +152,7 @@ export default function CommercialPage() {
               <a href="https://wa.me/447503494242" target="_blank" rel="noopener noreferrer" className="btn-outline">WhatsApp +44 7503 494242</a>
             </div>
             <div className="mt-6 grid gap-3 sm:grid-cols-3">
-              {['Out-of-hours slots', 'Regular contracts', 'One-off deep cleans'].map(item => (
+              {['Out-of-hours slots', 'Recurring contracts', 'Hotel & Airbnb turnovers'].map(item => (
                 <div key={item} className="stat-pill flex items-center gap-2 text-sm font-bold text-slate-700">
                   <Clock3 size={15} className="text-brand-600" /> {item}
                 </div>
@@ -136,7 +169,7 @@ export default function CommercialPage() {
             />
             <div className="absolute bottom-4 left-4 right-4 rounded-lg bg-white/90 p-4 shadow-lg backdrop-blur">
               <p className="text-xs font-bold uppercase text-brand-700">Business cleaning</p>
-              <p className="mt-1 text-sm font-semibold text-brand-800">Offices, retail spaces, restaurants, gyms and shared premises.</p>
+              <p className="mt-1 text-sm font-semibold text-brand-800">Hotels, Airbnb, offices, retail, restaurants, gyms and shared premises.</p>
             </div>
           </div>
         </div>
@@ -145,7 +178,7 @@ export default function CommercialPage() {
       {/* Services */}
       <section className="py-14 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 space-y-10 md:space-y-12">
-          {services.map(({ id, slug, icon: Icon, title, tagline, desc, includes, clients, popular }) => (
+          {services.map(({ id, slug, icon: Icon, title, tagline, desc, includes, clients, popular, price }) => (
             <div key={id} id={id} className="grid md:grid-cols-2 gap-10 items-start scroll-mt-24">
               <div>
                 <div className="flex items-center gap-3 mb-3">
@@ -153,6 +186,7 @@ export default function CommercialPage() {
                     <Icon size={22} className="text-brand-600" />
                   </Link>
                   {popular && <span className="bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full">Popular</span>}
+                  {price && <span className="price-badge">{price}</span>}
                 </div>
                 <Link href={`/services/${slug}`} className="group inline-flex items-center gap-2">
                   <h2 className="font-heading text-2xl md:text-3xl font-bold text-slate-900 mb-1 group-hover:text-brand-700">{title}</h2>
@@ -233,6 +267,21 @@ export default function CommercialPage() {
                 <div className="px-5 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-50 pt-3">{a}</div>
               </details>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* IT services / free website */}
+      <section className="bg-slate-50 py-12 md:py-14">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <Globe className="mx-auto mb-4 text-brand-600" size={28} />
+          <h2 className="font-heading text-2xl md:text-3xl font-bold text-brand-800 mb-3">Run a hotel or rent out flats? Get a free website.</h2>
+          <p className="text-slate-600 mb-6">
+            We also offer IT services through <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 hover:underline">UjyaaloIT.com</a>. Sign your hotel, Airbnb or flats up for our continuous cleaning service and we will build you a website for free as part of the package.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link href="/quote" className="btn-primary">Sign Up My Property</Link>
+            <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="btn-outline">Visit UjyaaloIT.com</a>
           </div>
         </div>
       </section>

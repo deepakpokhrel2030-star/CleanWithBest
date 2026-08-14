@@ -1,7 +1,6 @@
-const CACHE_NAME = 'cleanwithbest-v2';
+const CACHE_NAME = 'cleanwithbest-v3';
 const APP_SHELL = [
   '/',
-  '/domestic',
   '/commercial',
   '/about',
   '/contact',

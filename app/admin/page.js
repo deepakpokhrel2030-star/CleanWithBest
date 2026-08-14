@@ -38,9 +38,9 @@ function QuoteDetailModal({ quote, onClose, onStatusChange, onDelete, deleting }
   const details = [
     ['Service', quote.service],
     ['Property type', quote.propertyType],
-    ['Bedrooms', quote.bedrooms],
+    ['Rooms / units', quote.bedrooms],
     ['Bathrooms', quote.bathrooms],
-    ['Extra rooms', quote.rooms],
+    ['Extra areas', quote.rooms],
     ['Frequency', quote.frequency],
     ['Preferred date', quote.preferredDate],
     ['Postcode', quote.postcode],

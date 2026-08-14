@@ -1,7 +1,7 @@
 {
   "name": "CleanWithBest",
   "short_name": "CleanWithBest",
-  "description": "Book domestic and commercial cleaning services across London.",
+  "description": "Book continuous cleaning for hotels, Airbnb and businesses across London.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

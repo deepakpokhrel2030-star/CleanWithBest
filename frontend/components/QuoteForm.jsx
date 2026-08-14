@@ -4,40 +4,41 @@ import { CheckCircle, Loader2, ChevronRight, MapPin, Search } from 'lucide-react
 
 /* ── Data ── */
 const SERVICES = [
-  'Regular Cleaning', 'Deep Cleaning', 'End of Tenancy',
-  'Move In / Move Out', 'Carpet & Upholstery', 'Mattress Cleaning',
-  'Ironing & Laundry', 'Window Cleaning', 'Office Cleaning', 'Other',
+  'Hotel & Airbnb Cleaning', 'Recurring / Contract Cleaning', 'Office Cleaning',
+  'Retail Cleaning', 'Restaurant & Hospitality', 'Gym & Fitness',
+  'School & Education', 'Warehouse & Industrial', 'Washroom Services',
+  'Medical & Healthcare', 'Other',
 ];
 
 const PROPERTY_TYPES = [
-  { value: 'flat',       label: 'Flat / Apartment' },
-  { value: 'house',      label: 'House' },
-  { value: 'studio',     label: 'Studio' },
-  { value: 'commercial', label: 'Commercial' },
+  { value: 'hotel',    label: 'Hotel' },
+  { value: 'airbnb',   label: 'Airbnb / Serviced Apartment' },
+  { value: 'business', label: 'Office / Retail / Other Business' },
 ];
 
-const BEDROOMS  = ['Studio', '1', '2', '3', '4', '5', '6+'];
-const BATHROOMS = ['1', '2', '3', '4+'];
+const ROOM_COUNTS = ['1', '2', '3', '4', '5', '10+', '20+', '50+'];
+const BATHROOMS   = ['1', '2', '3', '4+'];
 
 const EXTRA_ROOMS = [
-  { value: 'kitchen',      label: 'Kitchen' },
-  { value: 'living_room',  label: 'Living Room' },
-  { value: 'dining_room',  label: 'Dining Room' },
-  { value: 'hallway',      label: 'Hallway / Landing' },
-  { value: 'conservatory', label: 'Conservatory' },
-  { value: 'study',        label: 'Study / Office' },
-  { value: 'utility',      label: 'Utility Room' },
-  { value: 'garage',       label: 'Garage' },
-  { value: 'cellar',       label: 'Cellar / Basement' },
-  { value: 'loft',         label: 'Loft / Attic' },
+  { value: 'guest_rooms', label: 'Guest Rooms' },
+  { value: 'reception',   label: 'Reception / Lobby' },
+  { value: 'kitchen',     label: 'Kitchen' },
+  { value: 'dining',      label: 'Dining / Restaurant Area' },
+  { value: 'communal',    label: 'Communal / Common Areas' },
+  { value: 'laundry',     label: 'Laundry Room' },
+  { value: 'office',      label: 'Office Areas' },
+  { value: 'corridors',   label: 'Corridors / Stairwells' },
+  { value: 'washrooms',   label: 'Washrooms / Toilets' },
+  { value: 'outdoor',     label: 'Outdoor / Entrance' },
 ];
 
 const FREQUENCIES = [
-  { value: 'one_off',     label: 'One-Off' },
+  { value: 'daily',       label: 'Daily' },
   { value: 'weekly',      label: 'Weekly' },
   { value: 'fortnightly', label: 'Fortnightly' },
   { value: 'every3weeks', label: 'Every 3 Weeks' },
   { value: 'monthly',     label: 'Monthly' },
+  { value: 'one_off',     label: 'One-Off' },
 ];
 
 const CONTACT_METHODS = [
@@ -212,7 +213,7 @@ export default function QuoteForm() {
         ...form,
         contactPreference: preferenceLabel,
         rooms: form.rooms.join(', '),
-        summary: `${form.propertyType} · ${form.bedrooms} bed · ${form.bathrooms} bath · ${form.rooms.length} extra rooms`,
+        summary: `${form.propertyType} · ${form.bedrooms} rooms · ${form.bathrooms} bath · ${form.rooms.length} extra areas`,
         postcodeDistrict: pcInfo ? `${pcInfo.ward}, ${pcInfo.admin_district}` : '',
       };
       const res  = await fetch('/api/quotes', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
@@ -243,11 +244,11 @@ export default function QuoteForm() {
   }
 
   const sectionNum = (n) => {
-    const isResidential = form.propertyType && form.propertyType !== 'commercial';
-    if (n === 'rooms')   return isResidential ? '4' : '3';
-    if (n === 'freq')    return isResidential ? '5' : (form.propertyType ? '4' : '3');
-    if (n === 'addr')    return isResidential ? '6' : (form.propertyType ? '5' : '4');
-    if (n === 'contact') return isResidential ? '7' : (form.propertyType ? '6' : '5');
+    const showRoomCount = form.propertyType === 'hotel' || form.propertyType === 'airbnb';
+    if (n === 'rooms')   return showRoomCount ? '4' : '3';
+    if (n === 'freq')    return showRoomCount ? '5' : (form.propertyType ? '4' : '3');
+    if (n === 'addr')    return showRoomCount ? '6' : (form.propertyType ? '5' : '4');
+    if (n === 'contact') return showRoomCount ? '7' : (form.propertyType ? '6' : '5');
     return n;
   };
 
@@ -255,7 +256,7 @@ export default function QuoteForm() {
   const summaryRows = [
     form.service && ['Service', form.service],
     form.propertyType && ['Property', PROPERTY_TYPES.find(t => t.value === form.propertyType)?.label],
-    form.bedrooms && ['Bedrooms', form.bedrooms === 'Studio' ? 'Studio' : `${form.bedrooms} Bedroom${form.bedrooms === '1' ? '' : 's'}`],
+    form.bedrooms && ['Rooms / Units', `${form.bedrooms} Room${form.bedrooms === '1' ? '' : 's'}`],
     form.bathrooms && ['Bathrooms', form.bathrooms],
     form.rooms.length > 0 && ['Extra rooms', `${form.rooms.length} selected`],
     form.frequency && ['Frequency', FREQUENCIES.find(f => f.value === form.frequency)?.label],
@@ -288,12 +289,12 @@ export default function QuoteForm() {
           <PillSelect options={PROPERTY_TYPES} value={form.propertyType} onChange={v => set('propertyType', v)} />
         </div>
 
-        {/* 3 — Bedrooms & Bathrooms */}
-        {form.propertyType && form.propertyType !== 'commercial' && (
+        {/* 3 — Rooms & Bathrooms */}
+        {(form.propertyType === 'hotel' || form.propertyType === 'airbnb') && (
           <div className="pb-6 border-b border-slate-100">
-            <SectionLabel num="3" title="Property size" subtitle="How many bedrooms and bathrooms?" />
+            <SectionLabel num="3" title="Property size" subtitle="How many rooms and bathrooms?" />
             <div className="grid sm:grid-cols-2 gap-5">
-              <Counter label="Bedrooms *" options={BEDROOMS} value={form.bedrooms} onChange={v => set('bedrooms', v)} />
+              <Counter label="Rooms / Units *" options={ROOM_COUNTS} value={form.bedrooms} onChange={v => set('bedrooms', v)} />
               <Counter label="Bathrooms / Ensuites *" options={BATHROOMS} value={form.bathrooms} onChange={v => set('bathrooms', v)} />
             </div>
           </div>
@@ -302,11 +303,11 @@ export default function QuoteForm() {
         {/* 4 — Extra rooms */}
         {form.propertyType && (
           <div className="pb-6 border-b border-slate-100">
-            <SectionLabel num={sectionNum('rooms')} title="Which rooms need cleaning?" subtitle="Tick all rooms that require attention" />
+            <SectionLabel num={sectionNum('rooms')} title="Which areas need cleaning?" subtitle="Tick all areas that require attention" />
             <PillSelect options={EXTRA_ROOMS} value={form.rooms} onChange={v => set('rooms', v)} multi />
             {form.rooms.length > 0 && (
               <p className="text-xs text-brand-600 font-medium mt-3">
-                ✓ {form.rooms.length} room{form.rooms.length > 1 ? 's' : ''} selected:{' '}
+                ✓ {form.rooms.length} area{form.rooms.length > 1 ? 's' : ''} selected:{' '}
                 {form.rooms.map(r => EXTRA_ROOMS.find(x => x.value === r)?.label).join(', ')}
               </p>
             )}
@@ -480,7 +481,7 @@ export default function QuoteForm() {
                 value={form.message}
                 onChange={e => set('message', e.target.value)}
                 rows={3}
-                placeholder="Any special instructions, access notes, pets in the property..."
+                placeholder="Any special instructions, access notes, check-in/checkout times..."
                 className="input-field resize-none"
               />
             </div>

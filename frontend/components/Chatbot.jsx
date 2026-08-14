@@ -24,17 +24,17 @@ const QUICK_TOPICS = [
 ];
 
 const SUGGESTIONS = [
-  'Regular cleaning price?',
-  'End of tenancy clean?',
+  'Hotel & Airbnb cleaning price?',
+  'Recurring contract cleaning?',
   'Do you bring products?',
   'Can I book today?',
   'Do you clean offices?',
-  'How do I contact you?',
-  'Do you clean carpets?',
+  'Free website for my hotel?',
+  'What is the minimum booking?',
   'Can I get a quote?',
 ];
 
-const FALLBACK_TOPICS = 'prices, bookings, cleaning types, timing, products, areas, pets, access, payments, complaints, contact details and quote requests';
+const FALLBACK_TOPICS = 'prices, bookings, cleaning types, timing, products, areas, access, payments, complaints, contact details and quote requests';
 
 const ANSWERS = [
   {
@@ -49,13 +49,13 @@ const ANSWERS = [
   },
   {
     title: 'Prices',
-    keywords: ['price', 'cost', 'rate', 'rates', 'regular', 'hour', 'hourly', 'how much', 'charge', 'charges'],
-    answer: 'Regular home cleaning starts from £17 per hour. Deep cleaning and end-of-tenancy cleaning start from £179. Carpet cleaning starts from £43 per room, mattress cleaning from £23 and office cleaning from £21.50 per hour.',
+    keywords: ['price', 'cost', 'rate', 'rates', 'hour', 'hourly', 'how much', 'charge', 'charges', 'minimum'],
+    answer: 'Every service starts from a minimum of £20 per hour. Hotel and Airbnb continuous cleaning starts from £20 per hour with a 5-hour minimum per booking. Office cleaning starts from £21.50 per hour, and recurring contract cleaning starts from £20 per hour.',
   },
   {
     title: 'Quote',
     keywords: ['quote', 'estimate', 'quotation', 'price me', 'how to get quote'],
-    answer: 'For a clear quote, send your name, phone number, postcode, property type, number of rooms, cleaning service, preferred date and any extras like oven, carpet or inside cupboards.',
+    answer: 'For a clear quote, send your name, phone number, postcode, property type (hotel, Airbnb or business), number of rooms, cleaning service, how often you need us, and preferred start date.',
   },
   {
     title: 'Booking',
@@ -70,37 +70,22 @@ const ANSWERS = [
   {
     title: 'Timing',
     keywords: ['time', 'how long', 'duration', 'hours', 'take', 'finish', 'arrival'],
-    answer: 'Timing depends on size and condition. A regular clean often takes 2 to 4 hours. Deep cleaning, end-of-tenancy and after-builders cleans usually need longer.',
+    answer: 'Timing depends on the property and booking. Hotel and Airbnb turnovers usually run a 5-hour minimum per visit, while business and recurring contracts are scheduled around your opening hours.',
   },
   {
-    title: 'Domestic',
-    keywords: ['home', 'house', 'flat', 'apartment', 'domestic', 'bathroom', 'kitchen', 'bedroom', 'living room', 'toilet'],
-    answer: 'Yes, we clean houses, flats and apartments. Domestic cleaning can cover kitchens, bathrooms, bedrooms, toilets, living rooms, floors, surfaces and general tidy cleaning.',
-  },
-  {
-    title: 'Deep Cleaning',
-    keywords: ['deep clean', 'deep cleaning', 'spring clean', 'detailed clean', 'one off', 'one-off', 'heavy clean'],
-    answer: 'Deep cleaning is for a more detailed clean than regular cleaning. It is useful for built-up dirt, kitchens, bathrooms, neglected areas and homes that need extra time and attention.',
-  },
-  {
-    title: 'End Of Tenancy',
-    keywords: ['end', 'tenancy', 'landlord', 'deposit', 'move out', 'moving', 'move in', 'inventory', 'letting agent'],
-    answer: 'Yes, we offer end-of-tenancy and move in / move out cleaning from £179. We clean to a detailed landlord-style checklist and can discuss special requirements before booking.',
+    title: 'Business Only',
+    keywords: ['home', 'house', 'flat', 'apartment', 'domestic', 'residential', 'my house', 'my flat'],
+    answer: 'We no longer offer one-off house cleaning. We focus on continuous cleaning for hotels, Airbnb and serviced apartments, plus recurring contract and business cleaning — all from a £20/hour minimum.',
   },
   {
     title: 'Commercial',
-    keywords: ['office', 'commercial', 'business', 'shop', 'retail', 'restaurant', 'gym', 'school', 'workplace', 'clinic'],
-    answer: 'Yes, we clean offices, retail spaces, restaurants, gyms and other commercial premises. Office cleaning starts from £21.50 per hour and retail cleaning starts from £18 per hour.',
+    keywords: ['office', 'commercial', 'business', 'shop', 'retail', 'restaurant', 'gym', 'school', 'workplace', 'clinic', 'warehouse', 'washroom'],
+    answer: 'Yes, we clean offices, retail spaces, restaurants, gyms, schools, warehouses and other commercial premises. Office cleaning starts from £21.50 per hour, and every other business service starts from £20 per hour.',
   },
   {
-    title: 'Carpets And Extras',
-    keywords: ['carpet', 'rug', 'mattress', 'sofa', 'upholstery', 'window', 'ironing', 'laundry'],
-    answer: 'We offer carpet cleaning from £43 per room, mattress cleaning from £23, window cleaning from £29 and ironing/laundry from £18 per hour. Send photos or room details for clearer pricing.',
-  },
-  {
-    title: 'Appliances',
-    keywords: ['oven', 'fridge', 'freezer', 'inside cupboards', 'cupboard', 'appliance', 'microwave', 'extractor'],
-    answer: 'Oven, fridge, freezer, microwave and inside-cupboard cleaning can be added. Mention each extra in your quote request so the price is clear before booking.',
+    title: 'Recurring Contracts',
+    keywords: ['recurring', 'contract', 'ongoing', 'daily', 'weekly', 'fortnightly', 'schedule cleaning'],
+    answer: 'Yes, recurring and contract cleaning is one of our core services — daily, weekly or fortnightly visits from £20 per hour, with a consistent team assigned where possible.',
   },
   {
     title: 'Products',
@@ -110,7 +95,7 @@ const ANSWERS = [
   {
     title: 'Eco Products',
     keywords: ['eco', 'green', 'safe products', 'chemical', 'chemicals', 'low odour', 'low-odour', 'non toxic', 'non-toxic'],
-    answer: 'Eco-friendly and low-odour cleaning products can be requested. Tell us about allergies, asthma, babies, children or pets before booking.',
+    answer: 'Eco-friendly and low-odour cleaning products can be requested. Tell us about any allergy or compliance requirements before booking.',
   },
   {
     title: 'Trust',
@@ -123,14 +108,9 @@ const ANSWERS = [
     answer: 'If you cannot be home, we can discuss safe access instructions before the appointment. Please do not send keys, door codes or private access details inside this chatbot.',
   },
   {
-    title: 'Pets',
-    keywords: ['pet', 'dog', 'cat', 'pets', 'animal'],
-    answer: 'Pet-friendly cleaning is fine. Please tell us about pets in the property and any product preferences when you request a quote.',
-  },
-  {
     title: 'Areas',
     keywords: ['area', 'areas', 'london', 'postcode', 'cover', 'near me', 'location', 'zone'],
-    answer: 'We cover homes and businesses across London. Send your postcode in the quote form and we will confirm cleaner availability for your area.',
+    answer: 'We cover hotels, Airbnb properties and businesses across London. Send your postcode in the quote form and we will confirm cleaner availability for your area.',
   },
   {
     title: 'Nearby Areas',
@@ -149,8 +129,13 @@ const ANSWERS = [
   },
   {
     title: 'Airbnb',
-    keywords: ['airbnb', 'short let', 'short-let', 'guest', 'checkout', 'check out', 'linen'],
-    answer: 'Yes, we can help with Airbnb and short-let cleaning. Share the postcode, property size, checkout time and linen requirements in the quote form.',
+    keywords: ['airbnb', 'short let', 'short-let', 'guest', 'checkout', 'check out', 'linen', 'hotel', 'hotels', 'serviced apartment', 'turnover', 'housekeeping'],
+    answer: 'Yes, we offer continuous cleaning for hotels, Airbnb and serviced apartments, not just one-off visits — built for back-to-back guest turnovers. Pricing starts from £20 per hour with a 5-hour minimum, and we can also run full housekeeping for an entire hotel. Share the postcode, property size, checkout time and linen requirements in the quote form.',
+  },
+  {
+    title: 'IT Services',
+    keywords: ['it services', 'website', 'web design', 'free website', 'ujyaalo', 'ujyaaloit', 'web developer', 'build a website'],
+    answer: 'Yes, we also offer IT services through UjyaaloIT.com (ujyaaloit.com). If you sign your hotel, Airbnb or flats up for our continuous cleaning service, we will build you a website for free as part of the package.',
   },
   {
     title: 'Payment',
@@ -186,27 +171,8 @@ function scoreAnswer(text, item) {
   }, 0);
 }
 
-function buildQuoteHint(text) {
-  const bedroomMatch = text.match(/(\d+)\s*(bed|bedroom|bedrooms)/);
-  const bathroomMatch = text.match(/(\d+)\s*(bath|bathroom|bathrooms)/);
-  const hasFlat = text.includes('flat') || text.includes('apartment');
-  const hasHouse = text.includes('house');
-
-  if (!bedroomMatch && !bathroomMatch && !hasFlat && !hasHouse) return null;
-
-  const bits = [];
-  if (bedroomMatch) bits.push(`${bedroomMatch[1]} bedroom${bedroomMatch[1] === '1' ? '' : 's'}`);
-  if (bathroomMatch) bits.push(`${bathroomMatch[1]} bathroom${bathroomMatch[1] === '1' ? '' : 's'}`);
-  if (hasFlat) bits.push('flat');
-  if (hasHouse) bits.push('house');
-
-  return `For a ${bits.join(', ')}, the final quote depends on condition, service type and extras. Regular cleaning starts from £17/hour. Send your postcode and photos if possible, and the team will confirm the price by WhatsApp or phone.`;
-}
-
 function findAnswer(input) {
   const text = normalise(input);
-  const quoteHint = buildQuoteHint(text);
-  if (quoteHint) return quoteHint;
 
   const ranked = ANSWERS
     .map(item => ({ ...item, score: scoreAnswer(text, item) }))
@@ -219,7 +185,7 @@ function findAnswer(input) {
     return `I may not know that exact answer yet, but I can still help you get it quickly. I can answer about ${FALLBACK_TOPICS}. For anything specific, send it through the quote form or WhatsApp us and the team will reply.`;
   }
 
-  return `I can help with ${FALLBACK_TOPICS}. Try asking "How much for a 2 bedroom flat?" or tap one of the quick buttons below.`;
+  return `I can help with ${FALLBACK_TOPICS}. Try asking "How much for a 10-room hotel?" or tap one of the quick buttons below.`;
 }
 
 function BestieBotMascot({ compact = false, hero = false, launcher = false }) {
@@ -300,7 +266,7 @@ function TypingDots() {
 const welcomeMessage = {
   id: 'welcome',
   role: 'bot',
-  text: 'Hi, I am BestieBot. Tell me what you need cleaned, your property size, or ask about prices, booking, products, trust or contact details.',
+  text: 'Hi, I am BestieBot. Tell me about your hotel, Airbnb or business, or ask about prices, booking, products, trust or contact details.',
 };
 
 export default function Chatbot() {

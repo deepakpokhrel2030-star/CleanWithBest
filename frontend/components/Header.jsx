@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronDown, Menu, MessageCircle, Phone, X } from 'lucide-react';
-import { commercialServices, domesticServices } from '@/frontend/lib/services';
+import { commercialServices } from '@/frontend/lib/services';
 import { socialLinks } from '@/frontend/lib/social';
 
 const navItems = [
@@ -14,8 +14,7 @@ const navItems = [
 ];
 
 const serviceGroups = [
-  { label: 'Domestic', href: '/domestic', items: domesticServices },
-  { label: 'Commercial', href: '/commercial', items: commercialServices },
+  { label: 'Services', href: '/commercial', items: commercialServices },
 ];
 
 export default function Header() {

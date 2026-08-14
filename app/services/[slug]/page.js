@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowRight, CheckCircle, MessageCircle, Phone, Sparkles } from 'lucide-react';
-import { allServices, commercialServices, domesticServices, getServiceBySlug } from '@/frontend/lib/services';
+import { allServices, commercialServices, getServiceBySlug } from '@/frontend/lib/services';
 
 export function generateStaticParams() {
   return allServices.map(service => ({ slug: service.slug }));
@@ -21,7 +21,7 @@ export default function ServicePage({ params }) {
   const service = getServiceBySlug(params.slug);
   if (!service) notFound();
 
-  const related = (service.category === 'Domestic' ? domesticServices : commercialServices)
+  const related = commercialServices
     .filter(item => item.slug !== service.slug)
     .slice(0, 6);
 
