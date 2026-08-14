@@ -41,7 +41,7 @@ function OfferCard({ className }) {
 
 function OfferBanner({ className }) {
   return (
-    <section className={`relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 py-14 text-white md:py-16 ${className}`}>
+    <section className={`relative overflow-hidden bg-gradient-to-br from-amber-800 via-brand-900 to-brand-950 py-14 text-white md:py-16 ${className}`}>
       <div className="absolute -left-16 -top-16 h-56 w-56 rounded-full bg-accent-500/20 blur-3xl" />
       <div className="absolute -right-16 -bottom-16 h-64 w-64 rounded-full bg-amber-400/15 blur-3xl" />
 

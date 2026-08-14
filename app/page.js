@@ -228,7 +228,7 @@ export default function HomePage() {
 
       <FreeWebsiteOffer variant="banner" />
 
-      <section className="relative overflow-hidden bg-brand-900 py-12 md:py-14 text-white">
+      <section className="relative overflow-hidden border-t border-white/10 bg-brand-900 py-12 md:py-14 text-white">
         <Image
           src="https://images.unsplash.com/photo-1563453392212-326f5e854473?w=1600&q=80"
           alt="Professional cleaning tools arranged neatly"
