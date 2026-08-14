@@ -39,7 +39,7 @@ export default function Header() {
     setOpenGroup(null);
   };
   const isActive = href => pathname === href;
-  const isServiceActive = group => pathname === group.href || group.items.some(item => pathname === `/services/${item.slug}`);
+  const isServiceActive = group => pathname === group.href || group.items.some(item => item.slug !== 'hotel-airbnb-cleaning' && pathname === `/services/${item.slug}`);
   const navLinkClass = active => `border-b-2 py-6 text-sm font-bold transition ${
     active
       ? 'border-brand-700 text-brand-800'
