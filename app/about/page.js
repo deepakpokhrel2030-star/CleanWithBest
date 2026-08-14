@@ -59,7 +59,7 @@ export default function AboutPage() {
               We specialise in continuous cleaning for hotels, Airbnb, serviced apartments and businesses — recurring contracts and ongoing turnover cleaning, not one-off house cleans. Every quote is handled with clear communication and realistic expectations, and every hourly rate starts at £20/hour.
             </p>
             <p className="mt-4 text-base leading-relaxed text-slate-600">
-              For a limited time: give us your full cleaning contract and we will build you a website for free, and we can take over your IT too. Check <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 hover:underline">UjyaaloIT.com</a> for details, and sign your hotel, Airbnb or flats up for our continuous cleaning service to get started.
+              For a limited time: give us your full cleaning contract and we will build you a website — free of charge. Only the website build is free; if you also want us to take over your ongoing IT, that is a separate paid service through our partner <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 hover:underline">UjyaaloIT.com</a> — check the site for details, and sign your hotel, Airbnb or flats up for our continuous cleaning service to get started.
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
