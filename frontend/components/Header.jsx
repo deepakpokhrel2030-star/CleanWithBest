@@ -8,8 +8,9 @@ import { ChevronDown, Menu, MessageCircle, Phone, X } from 'lucide-react';
 import { commercialServices } from '@/frontend/lib/services';
 import { socialLinks } from '@/frontend/lib/social';
 
+const primaryLink = ['Hotel & Airbnb', '/services/hotel-airbnb-cleaning'];
+
 const navItems = [
-  ['Airbnb', '/services/hotel-airbnb-cleaning'],
   ['About', '/about'],
   ['Contact', '/contact'],
 ];
@@ -98,6 +99,13 @@ export default function Header() {
         </span>
 
         <nav className="hidden items-center gap-7 lg:flex">
+          <Link
+            href={primaryLink[1]}
+            onClick={closeMenu}
+            className={navLinkClass(isActive(primaryLink[1]))}
+          >
+            {primaryLink[0]}
+          </Link>
           {serviceGroups.map(group => (
             <div
               key={group.label}
@@ -171,6 +179,13 @@ export default function Header() {
         <div className="border-t border-slate-200 bg-white shadow-xl lg:hidden">
           <div className="mx-auto max-w-7xl px-4 py-4">
             <div className="grid gap-1">
+              <Link
+                href={primaryLink[1]}
+                onClick={closeMenu}
+                className={`rounded-lg px-3 py-3 text-sm font-bold ${isActive(primaryLink[1]) ? 'bg-brand-50 text-brand-700' : 'text-slate-700 hover:bg-slate-50'}`}
+              >
+                {primaryLink[0]}
+              </Link>
               {serviceGroups.map(group => (
                 <div key={group.label} className="rounded-lg border border-slate-100">
                   <button
