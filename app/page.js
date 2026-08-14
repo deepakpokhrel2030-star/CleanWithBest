@@ -231,7 +231,7 @@ export default function HomePage() {
           <span className="section-tag"><Globe size={14} className="text-accent-500" /> IT Services</span>
           <h2 className="section-title">Run a hotel or rent out flats? Get a free website.</h2>
           <p className="section-sub mx-auto mt-3 max-w-2xl">
-            We also offer IT services through <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 hover:underline">UjyaaloIT.com</a>. Sign your hotel, Airbnb or flats up for our continuous cleaning service, and we will build you a website for free as part of the package.
+            Give us your cleaning service and we will build you a website for free — and keep looking after your IT ongoing, through our partner <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 hover:underline">UjyaaloIT.com</a>. Sign your hotel, Airbnb or flats up for our continuous cleaning service to get started.
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <Link href="/quote" className="btn-primary-lg">

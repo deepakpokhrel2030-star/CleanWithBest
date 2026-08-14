@@ -16,7 +16,7 @@ const services = [
     tagline: 'Ongoing turnover cleaning, not a one-off visit',
     price: 'From £20/hr (min. 5 hrs per booking)',
     desc: 'Built for hotels, Airbnb hosts and serviced apartments that need cleaning on a continuous, ongoing basis rather than a single visit. We turn rooms around fast between guests and can also run full housekeeping for an entire hotel.',
-    includes: ['Guest changeover / turnover cleaning', 'Fresh linen and bed making', 'Bathroom deep sanitising between stays', 'Kitchen and communal area reset', 'Full hotel housekeeping contracts available', 'Flexible early-checkout and same-day slots', 'Free property website when you sign up (via UjyaaloIT.com)'],
+    includes: ['Guest changeover / turnover cleaning', 'Fresh linen and bed making', 'Bathroom deep sanitising between stays', 'Kitchen and communal area reset', 'Full hotel housekeeping contracts available', 'Flexible early-checkout and same-day slots', 'Free property website + ongoing IT support when you sign up (via UjyaaloIT.com)'],
     clients: 'Hotels, Airbnb hosts, serviced apartments, guest houses, B&Bs',
     popular: true,
   },
@@ -125,7 +125,7 @@ const services = [
 
 const faqs = [
   { q: 'Do you offer continuous cleaning for hotels and Airbnb?', a: 'Yes. Hotel and Airbnb cleaning starts from £20/hour with a 5-hour minimum per booking, and covers ongoing guest turnovers rather than a single visit. We can also run full housekeeping for an entire hotel.' },
-  { q: 'Do you really build a free website for hotels and flats?', a: 'Yes. If you sign your hotel, Airbnb or flats up for our continuous cleaning service, we build you a property website for free through our IT services partner, UjyaaloIT.com.' },
+  { q: 'Do you really build a free website for hotels and flats?', a: 'Yes. If you give us your hotel, Airbnb or flats’ cleaning service, we build you a property website for free, and keep looking after your IT ongoing, through our partner, UjyaaloIT.com.' },
   { q: 'Can you clean outside of business hours?', a: 'Absolutely. We offer early morning, evening and weekend cleaning slots to ensure zero disruption to your business operations. We\'ll work around your schedule entirely.' },
   { q: 'Do you provide the cleaning equipment and products?', a: 'Yes, we supply all professional cleaning equipment and products. We can also use your preferred products if required for compliance or environmental reasons.' },
   { q: 'Can I get a regular contract rather than one-off cleans?', a: 'Yes — most of our commercial clients opt for ongoing regular contracts (daily, 3x week, weekly etc.). This ensures consistent standards and preferential pricing.' },
@@ -277,7 +277,7 @@ export default function CommercialPage() {
           <Globe className="mx-auto mb-4 text-brand-600" size={28} />
           <h2 className="font-heading text-2xl md:text-3xl font-bold text-brand-800 mb-3">Run a hotel or rent out flats? Get a free website.</h2>
           <p className="text-slate-600 mb-6">
-            We also offer IT services through <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 hover:underline">UjyaaloIT.com</a>. Sign your hotel, Airbnb or flats up for our continuous cleaning service and we will build you a website for free as part of the package.
+            Give us your cleaning service and we will build you a website for free — and keep looking after your IT ongoing, through our partner <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-bold text-brand-700 hover:underline">UjyaaloIT.com</a>. Sign your hotel, Airbnb or flats up for our continuous cleaning service to get started.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/quote" className="btn-primary">Sign Up My Property</Link>

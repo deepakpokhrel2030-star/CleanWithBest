@@ -135,7 +135,7 @@ const ANSWERS = [
   {
     title: 'IT Services',
     keywords: ['it services', 'website', 'web design', 'free website', 'ujyaalo', 'ujyaaloit', 'web developer', 'build a website'],
-    answer: 'Yes, we also offer IT services through UjyaaloIT.com (ujyaaloit.com). If you sign your hotel, Airbnb or flats up for our continuous cleaning service, we will build you a website for free as part of the package.',
+    answer: 'Yes. Give us your hotel, Airbnb or flats\' cleaning service and we will build you a website for free, then keep looking after your IT ongoing, through our partner UjyaaloIT.com (ujyaaloit.com).',
   },
   {
     title: 'Payment',

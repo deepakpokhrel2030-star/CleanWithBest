@@ -90,7 +90,7 @@ export default function Footer() {
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} CleanWithBest. All rights reserved.</p>
           <p>
-            Available 24/7 for quote requests by phone, WhatsApp or email. IT services by{' '}
+            Available 24/7 for quote requests by phone, WhatsApp or email. Free website + ongoing IT support with our partner{' '}
             <a href="https://ujyaaloit.com" target="_blank" rel="noopener noreferrer" className="font-semibold hover:text-brand-700">UjyaaloIT.com</a>.
           </p>
         </div>
