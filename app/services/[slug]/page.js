@@ -2,10 +2,12 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowRight, CheckCircle, MessageCircle, Phone, Sparkles } from 'lucide-react';
 import { allServices, commercialServices, getServiceBySlug } from '@/frontend/lib/services';
-import FreeWebsiteOffer from '@/frontend/components/FreeWebsiteOffer';
 
+// hotel-airbnb-cleaning has its own dedicated page at app/services/hotel-airbnb-cleaning/page.js
 export function generateStaticParams() {
-  return allServices.map(service => ({ slug: service.slug }));
+  return allServices
+    .filter(service => service.slug !== 'hotel-airbnb-cleaning')
+    .map(service => ({ slug: service.slug }));
 }
 
 export function generateMetadata({ params }) {
@@ -97,8 +99,6 @@ export default function ServicePage({ params }) {
           </aside>
         </div>
       </section>
-
-      {service.slug === 'hotel-airbnb-cleaning' && <FreeWebsiteOffer />}
 
       <section className="py-10 md:py-12">
         <div className="mx-auto max-w-7xl px-4">
