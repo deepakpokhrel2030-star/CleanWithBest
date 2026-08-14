@@ -41,9 +41,9 @@ function OfferCard({ className }) {
 
 function OfferBanner({ className }) {
   return (
-    <section className={`relative overflow-hidden bg-gradient-to-br from-amber-800 via-brand-900 to-brand-950 py-14 text-white md:py-16 ${className}`}>
-      <div className="absolute -left-16 -top-16 h-56 w-56 rounded-full bg-accent-500/20 blur-3xl" />
-      <div className="absolute -right-16 -bottom-16 h-64 w-64 rounded-full bg-amber-400/15 blur-3xl" />
+    <section className={`relative overflow-hidden bg-gradient-to-br from-amber-900 via-orange-950 to-slate-900 py-14 text-white md:py-16 ${className}`}>
+      <div className="absolute -left-16 -top-16 h-56 w-56 rounded-full bg-amber-400/20 blur-3xl" />
+      <div className="absolute -right-16 -bottom-16 h-64 w-64 rounded-full bg-accent-500/20 blur-3xl" />
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 md:grid-cols-[1.3fr_0.7fr]">
         <div>
@@ -70,8 +70,8 @@ function OfferBanner({ className }) {
         </div>
 
         <div className="hidden justify-self-center md:flex">
-          <div className="relative flex h-48 w-48 -rotate-6 flex-col items-center justify-center rounded-full border-4 border-dashed border-amber-300/70 bg-white/5 text-center shadow-2xl shadow-black/20 backdrop-blur">
-            <Globe className="mb-1 text-amber-300" size={26} />
+          <div className="relative flex h-48 w-48 -rotate-6 flex-col items-center justify-center rounded-full border-4 border-dashed border-accent-400/70 bg-white/5 text-center shadow-2xl shadow-black/20 backdrop-blur">
+            <Globe className="mb-1 text-accent-400" size={26} />
             <span className="font-heading text-4xl font-black leading-none text-white">FREE</span>
             <span className="mt-1 text-xs font-bold uppercase tracking-wide text-slate-200">Website Build</span>
           </div>
