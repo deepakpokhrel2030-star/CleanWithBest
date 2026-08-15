@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
+  Bot,
   CalendarCheck,
   Clock,
   Mail,
@@ -188,69 +189,8 @@ function findAnswer(input) {
   return `I can help with ${FALLBACK_TOPICS}. Try asking "How much for a 10-room hotel?" or tap one of the quick buttons below.`;
 }
 
-function BestieBotMascot({ compact = false, hero = false, launcher = false }) {
-  return (
-    <svg
-      className={`bestiebot-svg ${compact ? 'bestiebot-svg-compact' : ''} ${hero ? 'bestiebot-svg-hero' : ''} ${launcher ? 'bestiebot-svg-launcher' : ''}`}
-      viewBox="0 0 128 150"
-      role="img"
-      aria-label="BestieBot cleaning assistant"
-    >
-      <defs>
-        <linearGradient id="bestieShell" x1="30" x2="98" y1="21" y2="92" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#ffffff" />
-          <stop offset=".52" stopColor="#e0f2fe" />
-          <stop offset="1" stopColor="#2b7ddd" />
-        </linearGradient>
-        <linearGradient id="bestieScreen" x1="37" x2="91" y1="46" y2="79" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#f8ffff" />
-          <stop offset="1" stopColor="#bff4ff" />
-        </linearGradient>
-        <linearGradient id="bestieBody" x1="42" x2="86" y1="84" y2="132" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#dff7ff" />
-          <stop offset="1" stopColor="#38bdf8" />
-        </linearGradient>
-      </defs>
-
-      <ellipse className="bestiebot-svg-shadow" cx="64" cy="139" rx="34" ry="7" fill="rgb(19 77 150 / .16)" />
-
-      <g className="bestiebot-svg-body">
-        <path className="bestiebot-svg-arm-left" d="M42 103 C31 106 25 113 22 123" fill="none" stroke="#134d96" strokeWidth="7" strokeLinecap="round" />
-        <path className="bestiebot-svg-arm-right" d="M86 103 C98 101 105 94 109 83" fill="none" stroke="#134d96" strokeWidth="7" strokeLinecap="round" />
-        <circle className="bestiebot-svg-hand-left" cx="21" cy="124" r="7" fill="#f8ffff" stroke="#134d96" strokeWidth="4" />
-        <circle className="bestiebot-svg-hand-right" cx="110" cy="82" r="7" fill="#f8ffff" stroke="#134d96" strokeWidth="4" />
-
-        <rect x="40" y="84" width="48" height="48" rx="17" fill="url(#bestieBody)" stroke="#134d96" strokeWidth="4.5" />
-        <path d="M53 101 H75" stroke="#ffffff" strokeWidth="4.5" strokeLinecap="round" opacity=".95" />
-        <circle className="bestiebot-svg-light" cx="64" cy="119" r="5" fill="#facc15" stroke="#134d96" strokeWidth="2.5" />
-
-        <path className="bestiebot-svg-foot-left" d="M45 135 H59" stroke="#134d96" strokeWidth="8" strokeLinecap="round" />
-        <path className="bestiebot-svg-foot-right" d="M69 135 H83" stroke="#134d96" strokeWidth="8" strokeLinecap="round" />
-      </g>
-
-      <g className="bestiebot-svg-head">
-        <path className="bestiebot-svg-antenna" d="M64 26 V14" stroke="#134d96" strokeWidth="4.5" strokeLinecap="round" />
-        <circle className="bestiebot-svg-antenna-dot" cx="64" cy="10" r="6" fill="#facc15" stroke="#134d96" strokeWidth="3" />
-        <rect x="32" y="27" width="64" height="62" rx="22" fill="url(#bestieShell)" stroke="#134d96" strokeWidth="5" />
-        <path d="M43 38 C49 33 57 31 68 31" fill="none" stroke="#ffffff" strokeWidth="5.5" strokeLinecap="round" opacity=".9" />
-        <rect x="40" y="47" width="48" height="30" rx="14" fill="url(#bestieScreen)" stroke="#134d96" strokeWidth="4" />
-        <circle className="bestiebot-svg-eye bestiebot-svg-eye-left" cx="55" cy="62" r="4.5" fill="#134d96" />
-        <circle className="bestiebot-svg-eye bestiebot-svg-eye-right" cx="73" cy="62" r="4.5" fill="#134d96" />
-        <path d="M57 71 C61 74 67 74 71 71" fill="none" stroke="#134d96" strokeWidth="3.5" strokeLinecap="round" />
-        <circle className="bestiebot-svg-cheek bestiebot-svg-cheek-left" cx="47" cy="68" r="3.2" fill="#facc15" opacity=".9" />
-        <circle className="bestiebot-svg-cheek bestiebot-svg-cheek-right" cx="81" cy="68" r="3.2" fill="#facc15" opacity=".9" />
-        <rect x="23" y="54" width="12" height="20" rx="6" fill="#f8ffff" stroke="#134d96" strokeWidth="4" />
-        <rect x="93" y="54" width="12" height="20" rx="6" fill="#f8ffff" stroke="#134d96" strokeWidth="4" />
-        <path className="bestiebot-svg-headset" d="M102 73 C100 85 91 92 79 94" fill="none" stroke="#2b7ddd" strokeWidth="4" strokeLinecap="round" />
-        <circle className="bestiebot-svg-mic" cx="77" cy="94" r="4" fill="#facc15" stroke="#134d96" strokeWidth="2.5" />
-      </g>
-
-      <g className="bestiebot-svg-sparkles">
-        <path className="bestiebot-svg-sparkle-one" d="M17 39 L20 45 L26 48 L20 51 L17 57 L14 51 L8 48 L14 45 Z" fill="#facc15" />
-        <path className="bestiebot-svg-sparkle-two" d="M106 103 L109 108 L114 111 L109 114 L106 119 L103 114 L98 111 L103 108 Z" fill="#38bdf8" />
-      </g>
-    </svg>
-  );
+function BotAvatar({ size = 18, className = '' }) {
+  return <Bot size={size} className={`text-brand-700 ${className}`} strokeWidth={2.25} />;
 }
 
 function TypingDots() {
@@ -339,8 +279,8 @@ export default function Chatbot() {
           <div className="bestiebot-shine relative z-10 border-b border-cyan-100 bg-gradient-to-r from-cyan-100 via-emerald-100 to-amber-100 px-3.5 py-3 text-slate-800 sm:px-4">
             <div className="flex items-center justify-between gap-3">
               <div className="flex min-w-0 items-center gap-3">
-                <span className="bestiebot-portrait relative flex h-20 w-20 shrink-0 items-center justify-center rounded-3xl bg-white shadow-sm ring-1 ring-cyan-100">
-                  <BestieBotMascot hero />
+                <span className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-50 shadow-sm ring-1 ring-cyan-100">
+                  <BotAvatar size={30} />
                   <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-amber-300 text-[9px] font-black text-amber-900">
                     AI
                   </span>
@@ -386,7 +326,7 @@ export default function Chatbot() {
               <div key={message.id} className={`flex items-end gap-2 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {message.role === 'bot' && (
                   <span className="mb-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-cyan-50 ring-1 ring-cyan-200">
-                    <BestieBotMascot compact />
+                    <BotAvatar size={18} />
                   </span>
                 )}
                 <div className={`animate-bestiebot-bubble max-w-[82%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed shadow-sm ${
@@ -407,7 +347,7 @@ export default function Chatbot() {
             {typing && (
               <div className="flex items-end gap-2">
                 <span className="mb-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-cyan-50 ring-1 ring-cyan-200">
-                  <BestieBotMascot compact />
+                  <BotAvatar size={18} />
                 </span>
                 <div className="animate-bestiebot-bubble rounded-2xl rounded-bl-md bg-white/90 px-3.5 py-2.5 shadow-sm ring-1 ring-cyan-100">
                   <TypingDots />
@@ -472,15 +412,14 @@ export default function Chatbot() {
       <button
         type="button"
         onClick={() => setOpen(value => !value)}
-        className="animate-bestiebot-launcher bestiebot-launcher group relative flex h-[4.45rem] w-[4rem] items-center justify-center border-0 bg-transparent p-0 transition hover:scale-105 sm:h-[4.9rem] sm:w-[4.35rem]"
+        className="animate-bestiebot-launcher group relative flex h-14 w-14 items-center justify-center rounded-full bg-brand-700 text-white shadow-xl shadow-brand-900/30 ring-4 ring-white transition hover:-translate-y-0.5 hover:bg-brand-800 sm:h-16 sm:w-16"
         aria-label={open ? 'Minimise chatbot' : 'Maximise chatbot'}
       >
-        {open ? (
-          <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-cyan-800 shadow-xl shadow-cyan-900/20 ring-1 ring-cyan-100">
-            <X size={25} />
+        {open ? <X size={26} /> : <MessageCircle size={26} />}
+        {!open && (
+          <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500 ring-2 ring-white">
+            <span className="bestiebot-status-dot h-1.5 w-1.5 rounded-full bg-white" />
           </span>
-        ) : (
-          <BestieBotMascot launcher />
         )}
       </button>
     </div>
