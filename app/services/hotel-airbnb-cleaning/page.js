@@ -155,6 +155,8 @@ export default function HotelAirbnbCleaningPage() {
         </div>
       </section>
 
+      <FreeWebsiteOffer size="large" />
+
       {/* What is continuous cleaning */}
       <section className="bg-white py-14 md:py-16">
         <div className="mx-auto max-w-7xl px-4">
@@ -267,8 +269,6 @@ export default function HotelAirbnbCleaningPage() {
           </div>
         </div>
       </section>
-
-      <FreeWebsiteOffer />
 
       {/* FAQ */}
       <section className="bg-white py-14 md:py-16">

@@ -137,7 +137,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <FreeWebsiteOffer />
+      <FreeWebsiteOffer size="compact" />
 
       <section className="soft-section py-14 md:py-16">
         <div className="mx-auto max-w-7xl px-4">
