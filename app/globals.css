@@ -265,6 +265,43 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
   pointer-events: none;
 }
 
+@keyframes botAvatarFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  45% { transform: translateY(-2.5px) rotate(-1.5deg); }
+  72% { transform: translateY(1px) rotate(1.5deg); }
+}
+
+@keyframes botBlink {
+  0%, 88%, 100% { transform: scaleY(1); }
+  92%, 96% { transform: scaleY(.15); }
+}
+
+@keyframes botAntennaPulse {
+  0%, 100% { opacity: .8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.25); }
+}
+
+.bot-avatar-float {
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 3px 5px rgb(19 77 150 / .18));
+  animation: botAvatarFloat 3s ease-in-out infinite;
+}
+
+.bot-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: botBlink 4.2s ease-in-out infinite;
+}
+
+.bot-eye-right { animation-delay: .1s; }
+
+.bot-antenna-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: botAntennaPulse 2.2s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-bestiebot-panel,
   .animate-bestiebot-launcher,
@@ -273,7 +310,10 @@ details[open] summary .faq-icon { transform: rotate(45deg); }
   .bestiebot-status-dot,
   .bestiebot-shine::after,
   .bestiebot-bg-bubble,
-  .bestiebot-typing-dots span {
+  .bestiebot-typing-dots span,
+  .bot-avatar-float,
+  .bot-eye,
+  .bot-antenna-dot {
     animation: none;
   }
 }

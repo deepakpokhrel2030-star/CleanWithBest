@@ -1,9 +1,8 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
-  Bot,
   CalendarCheck,
   Clock,
   Mail,
@@ -189,8 +188,44 @@ function findAnswer(input) {
   return `I can help with ${FALLBACK_TOPICS}. Try asking "How much for a 10-room hotel?" or tap one of the quick buttons below.`;
 }
 
-function BotAvatar({ size = 18, className = '' }) {
-  return <Bot size={size} className={`text-brand-700 ${className}`} strokeWidth={2.25} />;
+function BotAvatar({ size = 22, light = false, className = '' }) {
+  const uid = useId();
+  const gradId = `botShell-${uid}`;
+  const shellStart = light ? '#ffffff' : '#5193e3';
+  const shellEnd = light ? '#dbeafe' : '#134d96';
+  const visor = light ? '#134d96' : '#ffffff';
+  const eye = light ? '#ffffff' : '#134d96';
+  const stroke = light ? '#134d96' : 'none';
+
+  return (
+    <svg
+      className={`bot-avatar-float ${className}`}
+      width={size}
+      height={size * (66 / 64)}
+      viewBox="0 0 64 66"
+      role="img"
+      aria-label="BestieBot cleaning assistant"
+    >
+      <defs>
+        <linearGradient id={gradId} x1="8" x2="56" y1="8" y2="56" gradientUnits="userSpaceOnUse">
+          <stop stopColor={shellStart} />
+          <stop offset="1" stopColor={shellEnd} />
+        </linearGradient>
+      </defs>
+
+      <line x1="32" y1="12" x2="32" y2="4" stroke={light ? '#ffffff' : '#134d96'} strokeWidth="2.5" strokeLinecap="round" />
+      <circle className="bot-antenna-dot" cx="32" cy="3.2" r="3.1" fill="#facc15" />
+
+      <rect x="3" y="26" width="7" height="13" rx="3.5" fill={`url(#${gradId})`} stroke={stroke} strokeWidth={light ? 1.2 : 0} />
+      <rect x="54" y="26" width="7" height="13" rx="3.5" fill={`url(#${gradId})`} stroke={stroke} strokeWidth={light ? 1.2 : 0} />
+
+      <rect x="8" y="12" width="48" height="42" rx="16" fill={`url(#${gradId})`} stroke={stroke} strokeWidth={light ? 1.4 : 0} />
+      <rect x="15" y="22" width="34" height="21" rx="10.5" fill={visor} />
+      <circle className="bot-eye" cx="24" cy="32" r="3.4" fill={eye} />
+      <circle className="bot-eye bot-eye-right" cx="40" cy="32" r="3.4" fill={eye} />
+      <path d="M23 39.5 Q32 43.5 41 39.5" fill="none" stroke={eye} strokeWidth="2" strokeLinecap="round" opacity=".7" />
+    </svg>
+  );
 }
 
 function TypingDots() {
@@ -421,7 +456,7 @@ export default function Chatbot() {
           className="animate-bestiebot-launcher group relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-600 to-brand-800 text-white shadow-xl shadow-brand-900/30 ring-1 ring-white/25 transition hover:-translate-y-1 hover:shadow-2xl sm:h-16 sm:w-16"
           aria-label={open ? 'Minimise chatbot' : 'Maximise chatbot'}
         >
-          {open ? <X size={26} /> : <Bot size={28} />}
+          {open ? <X size={26} /> : <BotAvatar size={34} light />}
           {!open && (
             <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 ring-2 ring-white">
               <span className="bestiebot-status-dot h-1.5 w-1.5 rounded-full bg-white" />
