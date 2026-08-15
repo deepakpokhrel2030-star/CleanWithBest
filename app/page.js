@@ -137,6 +137,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <FreeWebsiteOffer />
+
       <section className="soft-section py-14 md:py-16">
         <div className="mx-auto max-w-7xl px-4">
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -225,8 +227,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <FreeWebsiteOffer />
 
       <section className="relative overflow-hidden bg-brand-900 py-12 md:py-14 text-white">
         <Image
