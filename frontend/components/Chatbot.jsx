@@ -409,19 +409,26 @@ export default function Chatbot() {
         </div>
       )}
 
-      <button
-        type="button"
-        onClick={() => setOpen(value => !value)}
-        className="animate-bestiebot-launcher group relative flex h-14 w-14 items-center justify-center rounded-full bg-brand-700 text-white shadow-xl shadow-brand-900/30 ring-4 ring-white transition hover:-translate-y-0.5 hover:bg-brand-800 sm:h-16 sm:w-16"
-        aria-label={open ? 'Minimise chatbot' : 'Maximise chatbot'}
-      >
-        {open ? <X size={26} /> : <MessageCircle size={26} />}
+      <div className="flex items-center gap-2.5">
         {!open && (
-          <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500 ring-2 ring-white">
-            <span className="bestiebot-status-dot h-1.5 w-1.5 rounded-full bg-white" />
+          <span className="hidden rounded-xl bg-white px-3.5 py-2.5 text-xs font-black text-brand-800 shadow-lg ring-1 ring-slate-200 sm:block">
+            Chat with us
           </span>
         )}
-      </button>
+        <button
+          type="button"
+          onClick={() => setOpen(value => !value)}
+          className="animate-bestiebot-launcher group relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-600 to-brand-800 text-white shadow-xl shadow-brand-900/30 ring-1 ring-white/25 transition hover:-translate-y-1 hover:shadow-2xl sm:h-16 sm:w-16"
+          aria-label={open ? 'Minimise chatbot' : 'Maximise chatbot'}
+        >
+          {open ? <X size={26} /> : <Bot size={28} />}
+          {!open && (
+            <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 ring-2 ring-white">
+              <span className="bestiebot-status-dot h-1.5 w-1.5 rounded-full bg-white" />
+            </span>
+          )}
+        </button>
+      </div>
     </div>
   );
 }
